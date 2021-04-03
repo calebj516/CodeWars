@@ -1,25 +1,16 @@
-// Quarter of the year
+// Generate range of integers - 4-3-21
 
-// Given a month as an integer from 1 to 12, return to which quarter of the year it belongs as an integer number.
+// Implement a function named generateRange(min, max, step), which takes three arguments and generates a range of integers from min to max, with the step. The first integer is the minimum value, the second is the maximum of the range and the third is the step. (min < max)
 
-// For example: month 2 (February), is part of the first quarter; month 6 (June), is part of the second quarter; and month 11 (November), is part of the fourth quarter.
+// generateRange(2, 10, 2) // should return array of [2,4,6,8,10]
+// generateRange(1, 10, 3) // should return array of [1,4,7,10]
 
-const quarterOf = (month) => {
-  let quarter = 0;
+function generateRange(min, max, step) {
+  let arr = [];
 
-  if (month > 9) {
-    quarter = 4;
-  } else if (month > 6) {
-    quarter = 3;
-  } else if (month > 3) {
-    quarter = 2;
-  } else {
-    quarter = 1;
+  for (let i = min; i <= max; i += step) {
+    arr.push(i);
   }
 
-  return quarter;
-};
-
-console.log(quarterOf(3));
-console.log(quarterOf(8));
-console.log(quarterOf(11));
+  return arr;
+}
