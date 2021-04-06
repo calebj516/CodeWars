@@ -1,16 +1,18 @@
-// Generate range of integers - 4-3-21
+// Pre-FizzBuzz Workout #1
 
-// Implement a function named generateRange(min, max, step), which takes three arguments and generates a range of integers from min to max, with the step. The first integer is the minimum value, the second is the maximum of the range and the third is the step. (min < max)
+// This is the first step to understanding FizzBuzz.
 
-// generateRange(2, 10, 2) // should return array of [2,4,6,8,10]
-// generateRange(1, 10, 3) // should return array of [1,4,7,10]
+// Your inputs: a positive integer, n, greater than or equal to one. n is provided, you have NO CONTROL over its value.
 
-function generateRange(min, max, step) {
+// Your expected output is an array of positive integers from 1 to n (inclusive)
+// Your job is to write an algorithm that gets you from the input to the output.
+
+const preFizz = (n) => {
   let arr = [];
-
-  for (let i = min; i <= max; i += step) {
+  for (let i = 1; i <= n; i++) {
     arr.push(i);
   }
-
   return arr;
-}
+};
+
+console.log(preFizz(10));
