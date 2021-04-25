@@ -1,14 +1,31 @@
-// There's a "3 for 2" (or "2+1" if you like) offer on mangoes. For a given quantity and price (per mango), calculate the total cost of the mangoes.
+// Reverse FizzBuzz
 
-// mango(3, 3) ==> 6    # 2 mangoes for 3 = 6; +1 mango for free
-// mango(9, 5) ==> 30   # 6 mangoes for 5 = 30; +3 mangoes for free
+// Traditionally in FizzBuzz, multiples of 3 are replaced by "Fizz" and multiples of 5 are replaced by "Buzz". But we could also play FizzBuzz with any other integer pair [n, m] whose multiples are replaced with Fizz and Buzz.
 
-const mango = (quantity, price) => {
-  const discount = Math.floor(quantity / 3);
-  return (quantity - discount) * price;
-};
+// For a sequence of numbers, Fizzes, Buzzes and FizzBuzzes, find the numbers whose multiples are being replaced by Fizz and Buzz. Return them as an array [n, m]
 
-// First we calculate the number of mangos that are free by dividing the quantity by 3.
-// Math.floor returns the largest integer less than or equal the result of quantity / 3. This comes in handy for results that have a remainder.
-// Ex: 14 / 3 = 4.6667, math.floor changes this to 4.
-// Finally, we subtract the free mango(s) from the quantity and multiply by the price.
+// The Fizz and Buzz numbers will always be integers between 1 and 50, and the sequence will have a maximum length of 100. The Fizz and Buzz numbers might be equal, and might be equal to 1.
+
+function reverseFizzBuzz(array) {
+  let arr = [];
+
+  if (array.indexOf("Fizz") !== -1 && array.indexOf("Buzz") !== -1) {
+    let n = array.indexOf("Fizz") + 1;
+    let m = array.indexOf("Buzz") + 1;
+    arr.push(n);
+    arr.push(m);
+    return arr;
+  } else if (array.indexOf("Fizz") === -1 && array.indexOf("Buzz") === -1) {
+    let n = array.indexOf("FizzBuzz") + 1;
+    let m = n;
+    arr.push(n);
+    arr.push(m);
+    return arr;
+  } else if (array.indexOf("Fizz") !== -1 && array.indexOf("Buzz") === -1) {
+    let n = array.indexOf("Fizz") + 1;
+    let m = array.indexOf("FizzBuzz") + 1;
+    arr.push(n);
+    arr.push(m);
+    return arr;
+  }
+}
