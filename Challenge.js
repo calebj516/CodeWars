@@ -1,31 +1,25 @@
-// Reverse FizzBuzz
+// Alan Partridge II - Apple Turnover Challenge
 
-// Traditionally in FizzBuzz, multiples of 3 are replaced by "Fizz" and multiples of 5 are replaced by "Buzz". But we could also play FizzBuzz with any other integer pair [n, m] whose multiples are replaced with Fizz and Buzz.
+// Instructions:
 
-// For a sequence of numbers, Fizzes, Buzzes and FizzBuzzes, find the numbers whose multiples are being replaced by Fizz and Buzz. Return them as an array [n, m]
+// As a treat, I'll let you read part of the script from a classic 'I'm Alan Partridge episode:
 
-// The Fizz and Buzz numbers will always be integers between 1 and 50, and the sequence will have a maximum length of 100. The Fizz and Buzz numbers might be equal, and might be equal to 1.
+// Lynn: Alan, there’s that teacher chap.
+// Alan: Michael, if he hits me, will you hit him first?
+// Michael: No, he’s a customer. I cannot hit customers. I’ve been told. I’ll go and get some stock.
+// Alan: Yeah, chicken stock.
+// Phil: Hello Alan.
+// Alan: Lynn, hand me an apple pie. And remove yourself from the theatre of conflict.
+// Lynn: What do you mean?
+// Alan: Go and stand by the yakults. The temperature inside this apple turnover is 1,000 degrees. If I squeeze it, a jet of molten Bramley apple is going to squirt out. Could go your way, could go mine. Either way, one of us is going down.
 
-function reverseFizzBuzz(array) {
-  let arr = [];
+// Alan is known for referring to the temperature of the apple turnover as 'Hotter than the sun!'. According to space.com the temperature of the sun's corona is 2,000,000 degrees C, but we will ignore the science for now.
 
-  if (array.indexOf("Fizz") !== -1 && array.indexOf("Buzz") !== -1) {
-    let n = array.indexOf("Fizz") + 1;
-    let m = array.indexOf("Buzz") + 1;
-    arr.push(n);
-    arr.push(m);
-    return arr;
-  } else if (array.indexOf("Fizz") === -1 && array.indexOf("Buzz") === -1) {
-    let n = array.indexOf("FizzBuzz") + 1;
-    let m = n;
-    arr.push(n);
-    arr.push(m);
-    return arr;
-  } else if (array.indexOf("Fizz") !== -1 && array.indexOf("Buzz") === -1) {
-    let n = array.indexOf("Fizz") + 1;
-    let m = array.indexOf("FizzBuzz") + 1;
-    arr.push(n);
-    arr.push(m);
-    return arr;
+// Your job is simple, if (x) squared is more than 1000, return 'It's hotter than the sun!!', else, return 'Help yourself to a honeycomb Yorkie for the glovebox.'.
+
+function apple(x) {
+  if (Math.pow(x, 2) > 1000) {
+    return "It's hotter than the sun!!";
   }
+  return "Help yourself to a honeycomb Yorkie for the glovebox.";
 }
