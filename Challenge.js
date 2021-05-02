@@ -1,25 +1,53 @@
-// Alan Partridge II - Apple Turnover Challenge
+// Alan Partridge I - Partridge Watch (7 kyu)
 
-// Instructions:
+// To celebrate today's launch of my Hero's new book: Alan Partridge: Nomad, We have a new series of kata arranged around the great man himself.
 
-// As a treat, I'll let you read part of the script from a classic 'I'm Alan Partridge episode:
+// Given an array of terms, if any of those terms relate to Alan Partridge, return Mine's a Pint!
 
-// Lynn: Alan, there’s that teacher chap.
-// Alan: Michael, if he hits me, will you hit him first?
-// Michael: No, he’s a customer. I cannot hit customers. I’ve been told. I’ll go and get some stock.
-// Alan: Yeah, chicken stock.
-// Phil: Hello Alan.
-// Alan: Lynn, hand me an apple pie. And remove yourself from the theatre of conflict.
-// Lynn: What do you mean?
-// Alan: Go and stand by the yakults. The temperature inside this apple turnover is 1,000 degrees. If I squeeze it, a jet of molten Bramley apple is going to squirt out. Could go your way, could go mine. Either way, one of us is going down.
+// The number of ! after the t should be determined by the number of Alan related terms you find in the provided array (x). The related terms are:
 
-// Alan is known for referring to the temperature of the apple turnover as 'Hotter than the sun!'. According to space.com the temperature of the sun's corona is 2,000,000 degrees C, but we will ignore the science for now.
+// Partridge
+// PearTree
+// Chat
+// Dan
+// Toblerone
+// Lynn
+// AlphaPapa
+// Nomad
 
-// Your job is simple, if (x) squared is more than 1000, return 'It's hotter than the sun!!', else, return 'Help yourself to a honeycomb Yorkie for the glovebox.'.
+// If you don't find any related terms, return 'Lynn, I've pierced my foot on a spike!!'
 
-function apple(x) {
-  if (Math.pow(x, 2) > 1000) {
-    return "It's hotter than the sun!!";
+// All Hail King Partridge
+
+const part = (x) => {
+  let count = 0; // variable to contain the number of related terms
+  // This first loop loops through x to determine the number of related terms
+  for (let i = 0; i < x.length; i++) {
+    if (
+      x[i] === "Partridge" ||
+      x[i] === "PearTree" ||
+      x[i] === "Chat" ||
+      x[i] === "Dan" ||
+      x[i] === "Toblerone" ||
+      x[i] === "Lynn" ||
+      x[i] === "AlphaPapa" ||
+      x[i] === "Nomad"
+    ) {
+      count++;
+    }
   }
-  return "Help yourself to a honeycomb Yorkie for the glovebox.";
-}
+  // If there are any related terms, add an exclamation point for each one and include with the statement from the instructions.
+  // Otherwise, return the statement from the instructions.
+  if (count > 0) {
+    let exclamationPointsArr = [];
+    for (let i = 0; i < count; i++) {
+      exclamationPointsArr.push("!");
+    }
+    let exclamationPoints = exclamationPointsArr.join("");
+    return `Mine's a Pint${exclamationPoints}`;
+  } else {
+    return "Lynn, I've pierced my foot on a spike!!";
+  }
+};
+
+console.log(part(["Grouse", "Partridge", "Pheasant"]));
