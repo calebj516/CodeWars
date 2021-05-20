@@ -1,32 +1,44 @@
-// Small enough? - Beginner Challenge (7 kyu)
+// "Last Survivor" Challenge - 7 kyu
 
-// Instructions:
+// Instructions
 
-// You will be given an array and a limit value. You must check that all values in the array are below or equal to the limit value. If they are, return true. Else, return false.
+// You are given a string of letters and an array of numbers.
+// The numbers indicate positions of letters that must be removed, in order, starting from the beginning of the array.
+// After each removal the size of the string decreases (there is no empty space).
+// Return the only letter left.
 
-// You can assume all values in the array are numbers.
+// Example:
 
-const smallEnough = (a, limit) => {
-  // Declare variable to keep track of if an element is true
-  let flag = false;
-  // This do while loop loops through the array.
-  // If an element is greater than the limit, go ahead and return false.
-  // Otherwise, proceed to the next element and set the flag to true.
-  // If the loop exits we know that all elements have passed the test.
+// let str = "zbk", arr = [0, 1]
+//     str = "bk", arr = [1]
+//     str = "b", arr = []
+//     return 'b'
+
+function lastSurvivor(letters, coords) {
+  letters = letters.split("");
   let i = 0;
-  do {
-    if (a[i] > limit) {
-      return false;
-    } else {
-      i++;
-      flag = true;
-    }
-  } while (i < a.length);
-  return flag;
-};
+  while (i < coords.length) {
+    letters.splice(coords[i], 1);
+    i++;
+  }
+  return letters.join();
+}
 
 // Tests
-console.log(smallEnough([66, 101], 200)); // true
-console.log(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100)); // false
-console.log(smallEnough([101, 45, 75, 105, 99, 107], 107)); // true
-console.log(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120)); // true
+
+console.log(lastSurvivor("abc", [1, 1])); // returns 'a'
+console.log(lastSurvivor("kbc", [0, 1])); // returns 'b'
+console.log(lastSurvivor("zbk", [2, 1])); // returns 'z'
+console.log(lastSurvivor("c", [])); // returns 'c'
+console.log(
+  lastSurvivor(
+    "foiflxtpicahhkqjswjuyhmypkrdbwnmwbrrvdycqespfvdviucjoyvskltqaqirtjqulprjjoaiagobpftywabqjdmiofpsr",
+    [
+      8, 59, 52, 93, 21, 40, 88, 85, 59, 10, 82, 18, 74, 59, 51, 47, 75, 49, 23,
+      56, 1, 33, 39, 33, 34, 44, 25, 0, 51, 25, 36, 32, 57, 10, 57, 12, 51, 55,
+      24, 55, 31, 49, 6, 15, 10, 48, 27, 29, 38, 30, 35, 42, 23, 32, 9, 39, 39,
+      36, 8, 29, 2, 33, 14, 3, 13, 25, 9, 25, 18, 10, 1, 2, 20, 8, 2, 11, 5, 7,
+      0, 10, 10, 8, 12, 3, 5, 1, 7, 7, 5, 1, 4, 0, 4, 0, 0, 1,
+    ]
+  )
+); // returns 'd'
