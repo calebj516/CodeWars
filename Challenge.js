@@ -1,44 +1,44 @@
-// "Last Survivor" Challenge - 7 kyu
+// "Last Survivors Ep.2" Challenge - 7 kyu
 
 // Instructions
 
-// You are given a string of letters and an array of numbers.
-// The numbers indicate positions of letters that must be removed, in order, starting from the beginning of the array.
-// After each removal the size of the string decreases (there is no empty space).
-// Return the only letter left.
+// Substitute two equal letters by the next letter of the alphabet (two letters convert to one):
+
+// "aa" => "b", "bb" => "c", .. "zz" => "a".
+// The equal letters do not have to be adjacent.
+// Repeat this operation until there are no possible substitutions left.
+// Return a string.
 
 // Example:
 
-// let str = "zbk", arr = [0, 1]
-//     str = "bk", arr = [1]
-//     str = "b", arr = []
-//     return 'b'
+// let str = "zzzab"
+//     str = "azab"
+//     str = "bzb"
+//     str = "cz"
+// return "cz"
+// Notes
+// The order of letters in the result is not important.
+// The letters "zz" transform into "a".
+// There will only be lowercase letters.
 
-function lastSurvivor(letters, coords) {
-  letters = letters.split("");
-  let i = 0;
-  while (i < coords.length) {
-    letters.splice(coords[i], 1);
-    i++;
+// My code below
+
+function lastSurvivors(str) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
+  alphabet = alphabet.split("");
+  // console.log(alphabet);
+  let arr = str.split("");
+  let char = str[0];
+  let letter, result;
+  for (let i = 0; i < arr.length; i++) {
+    let char = arr[i];
+    // Does the character show up again in str?
+    if (arr.includes(char, i + 1)) {
+      letter = alphabet[alphabet.indexOf(char) + 1];
+    }
   }
-  return letters.join();
+  console.log(letter);
 }
 
 // Tests
-
-console.log(lastSurvivor("abc", [1, 1])); // returns 'a'
-console.log(lastSurvivor("kbc", [0, 1])); // returns 'b'
-console.log(lastSurvivor("zbk", [2, 1])); // returns 'z'
-console.log(lastSurvivor("c", [])); // returns 'c'
-console.log(
-  lastSurvivor(
-    "foiflxtpicahhkqjswjuyhmypkrdbwnmwbrrvdycqespfvdviucjoyvskltqaqirtjqulprjjoaiagobpftywabqjdmiofpsr",
-    [
-      8, 59, 52, 93, 21, 40, 88, 85, 59, 10, 82, 18, 74, 59, 51, 47, 75, 49, 23,
-      56, 1, 33, 39, 33, 34, 44, 25, 0, 51, 25, 36, 32, 57, 10, 57, 12, 51, 55,
-      24, 55, 31, 49, 6, 15, 10, 48, 27, 29, 38, 30, 35, 42, 23, 32, 9, 39, 39,
-      36, 8, 29, 2, 33, 14, 3, 13, 25, 9, 25, 18, 10, 1, 2, 20, 8, 2, 11, 5, 7,
-      0, 10, 10, 8, 12, 3, 5, 1, 7, 7, 5, 1, 4, 0, 4, 0, 0, 1,
-    ]
-  )
-); // returns 'd'
+lastSurvivors("bbz");
