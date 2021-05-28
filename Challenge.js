@@ -1,44 +1,29 @@
-// "Last Survivors Ep.2" Challenge - 7 kyu
+// Odd or Even? (7 kyu)
 
-// Instructions
+// Task:
+// Given a list of integers, determine whether the sum of its elements is odd or even.
 
-// Substitute two equal letters by the next letter of the alphabet (two letters convert to one):
+// Give your answer as a string matching "odd" or "even".
 
-// "aa" => "b", "bb" => "c", .. "zz" => "a".
-// The equal letters do not have to be adjacent.
-// Repeat this operation until there are no possible substitutions left.
-// Return a string.
+// If the input array is empty consider it as: [0] (array with a zero).
 
-// Example:
-
-// let str = "zzzab"
-//     str = "azab"
-//     str = "bzb"
-//     str = "cz"
-// return "cz"
-// Notes
-// The order of letters in the result is not important.
-// The letters "zz" transform into "a".
-// There will only be lowercase letters.
-
-// My code below
-
-function lastSurvivors(str) {
-  let alphabet = "abcdefghijklmnopqrstuvwxyz";
-  alphabet = alphabet.split("");
-  // console.log(alphabet);
-  let arr = str.split("");
-  let char = str[0];
-  let letter, result;
-  for (let i = 0; i < arr.length; i++) {
-    let char = arr[i];
-    // Does the character show up again in str?
-    if (arr.includes(char, i + 1)) {
-      letter = alphabet[alphabet.indexOf(char) + 1];
+const oddOrEven = (intList) => {
+  if (intList === []) {
+    return 0;
+  } else {
+    let sum = 0;
+    for (let i = 0; i < intList.length; i++) {
+      sum += intList[i];
+    }
+    if (sum % 2 === 0) {
+      return "even";
+    } else {
+      return "odd";
     }
   }
-  console.log(letter);
-}
+};
 
 // Tests
-lastSurvivors("bbz");
+
+console.log(oddOrEven([0, 1, 4])); // odd
+console.log(oddOrEven([0, 1, 4, 1])); // even
