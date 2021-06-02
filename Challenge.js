@@ -1,29 +1,43 @@
-// Odd or Even? (7 kyu)
+// Simple Fun #265: The Janitor And His Mop: 6 kyu
 
-// Task:
-// Given a list of integers, determine whether the sum of its elements is odd or even.
+// Task
+// In one city it is allowed to write words on the buildings walls. The local janitor, however, doesn't approve of it at all. Every night he vandalizes the writings by erasing all occurrences of some letter. Since the janitor is quite lazy, he wants to do this with just one swipe of his mop.
 
-// Give your answer as a string matching "odd" or "even".
+// Given a word, find the minimum width of the mop required to erase each of the letters.
 
-// If the input array is empty consider it as: [0] (array with a zero).
+// Input/Output
+// [input] string word
 
-const oddOrEven = (intList) => {
-  if (intList === []) {
-    return [0];
-  } else {
-    let sum = 0;
-    for (let i = 0; i < intList.length; i++) {
-      sum += intList[i];
-    }
-    if (sum % 2 === 0) {
-      return "even";
-    } else {
-      return "odd";
-    }
-  }
-};
+// A word consisting of only lowercase English letters.
 
-// Tests
+// 5 ≤ word.length ≤ 50
 
-console.log(oddOrEven([0, 1, 4])); // odd
-console.log(oddOrEven([0, 1, 4, 1])); // even
+// [output] an integer array
+
+// An array of length 26. The first element is the minimum width of the mop to erase letter 'a', the second - letter 'b' etc.
+
+// Example
+// For word = "abacaba", the output should be:
+
+// [7, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+// (26 elements altogether)
+
+// First element 7 means: from first "a" to last "a" need a width of 7.
+
+// First element 5 means: from first "b" to last "b" need a width of 5.
+
+// First element 1 means: from first "c" to last "c" need a width of 1.
+
+// Code below
+
+function theJanitor(word) {
+  return [..."abcdefghijklmnopqrstuvwxyz"].map((l) => {
+    let a = word.indexOf(l),
+      b = word.lastIndexOf(l);
+    return a === -1 ? 0 : b - a + 1;
+  });
+}
+
+// Tests below
+console.log(theJanitor("abacaba"));
