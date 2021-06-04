@@ -1,43 +1,17 @@
-// Simple Fun #265: The Janitor And His Mop: 6 kyu
+// Power of Two Challenge (7 kyu)
 
-// Task
-// In one city it is allowed to write words on the buildings walls. The local janitor, however, doesn't approve of it at all. Every night he vandalizes the writings by erasing all occurrences of some letter. Since the janitor is quite lazy, he wants to do this with just one swipe of his mop.
+// Complete the function power_of_two/powerOfTwo (or equivalent, depending on your language) that determines if a given non-negative integer is a power of two. From the corresponding Wikipedia entry:
 
-// Given a word, find the minimum width of the mop required to erase each of the letters.
+// a power of two is a number of the form 2n where n is an integer, i.e. the result of exponentiation with number two as the base and integer n as the exponent.
 
-// Input/Output
-// [input] string word
+// You may assume the input is always valid.
 
-// A word consisting of only lowercase English letters.
+// My code is below
 
-// 5 ≤ word.length ≤ 50
+const isPowerOfTwo = (n) => (Number.isInteger(Math.log2(n)) ? true : false);
 
-// [output] an integer array
+// Tests
 
-// An array of length 26. The first element is the minimum width of the mop to erase letter 'a', the second - letter 'b' etc.
-
-// Example
-// For word = "abacaba", the output should be:
-
-// [7, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-// (26 elements altogether)
-
-// First element 7 means: from first "a" to last "a" need a width of 7.
-
-// First element 5 means: from first "b" to last "b" need a width of 5.
-
-// First element 1 means: from first "c" to last "c" need a width of 1.
-
-// Code below
-
-function theJanitor(word) {
-  return [..."abcdefghijklmnopqrstuvwxyz"].map((l) => {
-    let a = word.indexOf(l),
-      b = word.lastIndexOf(l);
-    return a === -1 ? 0 : b - a + 1;
-  });
-}
-
-// Tests below
-console.log(theJanitor("abacaba"));
+console.log(isPowerOfTwo(2)); // true
+console.log(isPowerOfTwo(4096)); // true
+console.log(isPowerOfTwo(5)); // false
