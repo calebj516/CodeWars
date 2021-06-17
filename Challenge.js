@@ -1,17 +1,35 @@
-// Power of Two Challenge (7 kyu)
+// Highest and Lowest Challenge - 7 kyu
 
-// Complete the function power_of_two/powerOfTwo (or equivalent, depending on your language) that determines if a given non-negative integer is a power of two. From the corresponding Wikipedia entry:
+// In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
 
-// a power of two is a number of the form 2n where n is an integer, i.e. the result of exponentiation with number two as the base and integer n as the exponent.
+// Example:
 
-// You may assume the input is always valid.
+// highAndLow("1 2 3 4 5");  // return "5 1"
+// highAndLow("1 2 -3 4 5"); // return "5 -3"
+// highAndLow("1 9 3 4 -5"); // return "9 -5"
+// Notes:
 
-// My code is below
+// All numbers are valid Int32, no need to validate them.
+// There will always be at least one number in the input string.
+// Output string must be two numbers separated by a single space, and highest number is first.
 
-const isPowerOfTwo = (n) => (Number.isInteger(Math.log2(n)) ? true : false);
+// My code below
+
+function highAndLow(numbers) {
+  if (numbers) {
+    let numArr = numbers.split(" ");
+    // Sort array in ascending order
+    numArr.sort((a, b) => a - b);
+    // Determine maximum value
+    let max = numArr[numArr.length - 1];
+    // Determine minimum value
+    let min = numArr[0];
+    return `${max} ${min}`;
+  }
+  return "Invalid input, please try again with some numbers!";
+}
 
 // Tests
-
-console.log(isPowerOfTwo(2)); // true
-console.log(isPowerOfTwo(4096)); // true
-console.log(isPowerOfTwo(5)); // false
+console.log(highAndLow("5 4 3 2 1")); // return "5 1"
+console.log(highAndLow("1 2 -3 4 5")); // return "5 -3"
+console.log(highAndLow("")); // return invalid
