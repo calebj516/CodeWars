@@ -1,35 +1,47 @@
-// Highest and Lowest Challenge - 7 kyu
+// Challenge: Triangle area (7 kyu)
 
-// In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+// Task:
+
+// Calculate area of given triangle. Create a function t_area that will take a string which will represent triangle, find area of the triangle, one space will be equal to one length unit. The smallest triangle will have one length unit.
+
+// Hints
+
+// Ignore dots.
 
 // Example:
 
-// highAndLow("1 2 3 4 5");  // return "5 1"
-// highAndLow("1 2 -3 4 5"); // return "5 -3"
-// highAndLow("1 9 3 4 -5"); // return "9 -5"
-// Notes:
+// .
+// .      .
+// .      .       .      ---> should return 2.0
 
-// All numbers are valid Int32, no need to validate them.
-// There will always be at least one number in the input string.
-// Output string must be two numbers separated by a single space, and highest number is first.
+// .
+// .      .
+// .      .       .
+// .      .       .      .      ---> should return 4.5
 
-// My code below
+// My code:
 
-function highAndLow(numbers) {
-  if (numbers) {
-    let numArr = numbers.split(" ");
-    // Sort array in ascending order
-    numArr.sort((a, b) => a - b);
-    // Determine maximum value
-    let max = numArr[numArr.length - 1];
-    // Determine minimum value
-    let min = numArr[0];
-    return `${max} ${min}`;
+function tArea(tStr) {
+  // Read tStr into an array.
+  let triangleArr = tStr.split("");
+  // Count the number of newline characters, excluding the first and last
+  let count = 0;
+  for (let i = 1; i < triangleArr.length - 1; i++) {
+    if (triangleArr[i] === "\n") {
+      count++;
+    }
   }
-  return "Invalid input, please try again with some numbers!";
+  // Calculate the area
+  let triangleArea = (count * count) / 2;
+  return triangleArea;
 }
 
 // Tests
-console.log(highAndLow("5 4 3 2 1")); // return "5 1"
-console.log(highAndLow("1 2 -3 4 5")); // return "5 -3"
-console.log(highAndLow("")); // return invalid
+
+console.log(tArea("\n.\n. .\n")); // return 0.5
+console.log(tArea("\n.\n. .\n. . .\n")); // return 2
+console.log(
+  tArea(
+    "\n.\n. .\n. . .\n. . . .\n. . . . .\n. . . . . .\n. . . . . . .\n. . . . . . . .\n. . . . . . . . .\n"
+  )
+); // return 32
