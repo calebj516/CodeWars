@@ -1,47 +1,43 @@
-// Challenge: Triangle area (7 kyu)
+// Challenge: Break camelCase (6 kyu)
 
-// Task:
+// Description:
+// Complete the solution so that the function will break up camel casing, using a space between words.
 
-// Calculate area of given triangle. Create a function t_area that will take a string which will represent triangle, find area of the triangle, one space will be equal to one length unit. The smallest triangle will have one length unit.
+// Example
+// "camelCasing"  =>  "camel Casing"
+// "identifier"   =>  "identifier"
+// ""             =>  ""
 
-// Hints
+// My Code Below
 
-// Ignore dots.
-
-// Example:
-
-// .
-// .      .
-// .      .       .      ---> should return 2.0
-
-// .
-// .      .
-// .      .       .
-// .      .       .      .      ---> should return 4.5
-
-// My code:
-
-function tArea(tStr) {
-  // Read tStr into an array.
-  let triangleArr = tStr.split("");
-  // Count the number of newline characters, excluding the first and last
-  let count = 0;
-  for (let i = 1; i < triangleArr.length - 1; i++) {
-    if (triangleArr[i] === "\n") {
-      count++;
+// complete the function
+function solution(string) {
+  let arr = string.split("");
+  let pos = [];
+  // Use regular expression to test each character
+  for (let i = 0; i < arr.length; i++) {
+    if (/[A-Z]/.test(arr[i])) {
+      pos.push(i);
     }
   }
-  // Calculate the area
-  let triangleArea = (count * count) / 2;
-  return triangleArea;
+  // Splice method used on line 33 throws off positioning of index.
+  // This loop will add to each element the index of the element (not including the first one) to fix this.
+  if (pos.length >= 2) {
+    for (let i = 1; i < pos.length; i++) {
+      pos[i] += i;
+    }
+  }
+  // See comments on lines 23 and 24.
+  if (pos !== []) {
+    for (let i = 0; i < pos.length; i++) {
+      arr.splice(pos[i], 0, " ");
+    }
+  }
+  // Return a string by using the join method.
+  return arr.join("");
 }
 
-// Tests
+// Tests below
 
-console.log(tArea("\n.\n. .\n")); // return 0.5
-console.log(tArea("\n.\n. .\n. . .\n")); // return 2
-console.log(
-  tArea(
-    "\n.\n. .\n. . .\n. . . .\n. . . . .\n. . . . . .\n. . . . . . .\n. . . . . . . .\n. . . . . . . . .\n"
-  )
-); // return 32
+console.log(solution("camelCaseTest")); // result should be: camel Case Test
+console.log(solution("oneGiantTastyBurger")); // result should be: one Giant Tasty Burger
