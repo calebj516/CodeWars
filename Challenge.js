@@ -1,43 +1,29 @@
-// Challenge: Break camelCase (6 kyu)
+// Challenge: Summing a number's digits (7 kyu)
 
-// Description:
-// Complete the solution so that the function will break up camel casing, using a space between words.
+// Write a function named sumDigits which takes a number as input and returns the sum of the absolute value of each of the number's decimal digits. For example:
 
-// Example
-// "camelCasing"  =>  "camel Casing"
-// "identifier"   =>  "identifier"
-// ""             =>  ""
+//   sumDigits(10);  // Returns 1
+//   sumDigits(99);  // Returns 18
+//   sumDigits(-32); // Returns 5
+// Let's assume that all numbers in the input will be integer values.
 
 // My Code Below
 
-// complete the function
-function solution(string) {
-  let arr = string.split("");
-  let pos = [];
-  // Use regular expression to test each character
-  for (let i = 0; i < arr.length; i++) {
-    if (/[A-Z]/.test(arr[i])) {
-      pos.push(i);
-    }
+function sumDigits(number) {
+  // turn number into an array containing the absolute value of each number
+  let numbers = String(Math.abs(number)).split("");
+  // declare variable that will contain the sum of each number
+  let sum = 0;
+  // loop through the array, summing up each number
+  for (let i = 0; i < numbers.length; i++) {
+    sum += Number(numbers[i]);
   }
-  // Splice method used on line 33 throws off positioning of index.
-  // This loop will add to each element the index of the element (not including the first one) to fix this.
-  if (pos.length >= 2) {
-    for (let i = 1; i < pos.length; i++) {
-      pos[i] += i;
-    }
-  }
-  // See comments on lines 23 and 24.
-  if (pos !== []) {
-    for (let i = 0; i < pos.length; i++) {
-      arr.splice(pos[i], 0, " ");
-    }
-  }
-  // Return a string by using the join method.
-  return arr.join("");
+  // return the sum
+  return sum;
 }
 
 // Tests below
 
-console.log(solution("camelCaseTest")); // result should be: camel Case Test
-console.log(solution("oneGiantTastyBurger")); // result should be: one Giant Tasty Burger
+console.log(sumDigits(10)); // Returns 1
+console.log(sumDigits(99)); // Returns 18
+console.log(sumDigits(-32)); // Returns 5
