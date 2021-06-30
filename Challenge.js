@@ -1,44 +1,31 @@
-// Challenge: Categorize New Member (7 kyu)
+// Challenge: String ends with? (7 kyu)
 
-// The Western Suburbs Croquet Club has two categories of membership, Senior and Open. They would like your help with an application form that will tell prospective members which category they will be placed.
+// Instructions:
 
-// To be a senior, a member must be at least 55 years old and have a handicap greater than 7. In this croquet club, handicaps range from -2 to +26; the better the player the lower the handicap.
+// Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
 
-// Input
-// Input will consist of a list of lists containing two items each. Each list contains information for a single potential member. Information consists of an integer for the person's age and an integer for the person's handicap.
+// Examples:
 
-// Note for F#: The input will be of (int list list) which is a List<List>
-
-// Example Input
-// [[18, 20],[45, 2],[61, 12],[37, 6],[21, 21],[78, 9]]
-// Output
-// Output will consist of a list of string values (in Haskell: Open or Senior) stating whether the respective member is to be placed in the senior or open category.
-
-// Example Output
-// ["Open", "Open", "Senior", "Open", "Open", "Senior"]
+// solution('abc', 'bc') // returns true
+// solution('abc', 'd') // returns false
 
 // My Code Below
 
-const openOrSenior = (data) => {
-  let result = [];
-  for (let i = 0; i < data.length; i++) {
-    // We are looking at index 0 and 1 for each element in data
-    data[i][0] >= 55 && data[i][1] > 7
-      ? result.push("Senior")
-      : result.push("Open");
+function solution(str, ending) {
+  // Turn str and ending into arrays and reverse them
+  let strArr = str.split("").reverse();
+  let endingArr = ending.split("").reverse();
+  // loop through strArr, reversed, up to the length of endingArr
+  for (let i = 0; i < endingArr.length; i++) {
+    if (endingArr[i] !== strArr[i]) {
+      return false;
+    }
   }
-  return result;
-};
+  return true;
+}
 
 // Tests below
 
-console.log(
-  openOrSenior([
-    [18, 20],
-    [45, 2],
-    [61, 12],
-    [37, 6],
-    [21, 21],
-    [78, 9],
-  ])
-); // Returns ["Open", "Open", "Senior", "Open", "Open", "Senior"]
+console.log(solution("abc", "bc")); // returns true
+console.log(solution("abc", "d")); // returns false
+console.log(solution("Codewars", "wars")); // returns true
