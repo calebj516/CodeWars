@@ -1,92 +1,32 @@
-// Challenge: Give Me A Diamond (6 kyu)
+// Challenge: IQ Test (6 kyu)
 
 // Instructions:
 
-// Jamie is a programmer, and James' girlfriend. She likes diamonds, and wants a diamond string from James. Since James doesn't know how to make this happen, he needs your help.
+// Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number.
 
-// Task
-// You need to return a string that looks like a diamond shape when printed on the screen, using asterisk (*) characters. Trailing spaces should be removed, and every line must be terminated with a newline character (\n).
+// ! Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)
 
-// Return null/nil/None/... if the input is an even number or negative, as it is not possible to print a diamond of even or negative size.
+// Examples:
+// iqTest("2 4 7 8 10") => 3 // Third number is odd, while the rest of the numbers are even
 
-// Examples
-// A size 3 diamond:
-
-//  *
-// ***
-//  *
-// ...which would appear as a string of " *\n***\n *\n"
-
-// A size 5 diamond:
-
-//   *
-//  ***
-// *****
-//  ***
-//   *
-// ...that is:
-
-// "  *\n ***\n*****\n ***\n  *\n"
+// iqTest("1 2 1 1") => 2 // Second number is even, while the rest of the numbers are odd
 
 // My code below:
 
-function diamond(n) {
-  // Declare an array to hold the results
-  let result = [];
-  // If n is odd or less than zero, return null
-  if (n % 2 === 0 || n <= 0) {
-    return null;
-    // Otherwise, proceed with the challenge since n is odd.
-  } else {
-    let asterisk = "*";
-    let space = " ";
-    let count = 0;
-    let i = 1;
-    let num = n;
-    // This while loop counts the number of times it takes to get to 1 from n.
-    // This will be used to determine the number of spaces to add in front of the newline character.
-    while (num > 1) {
-      num -= 2;
-      count += 1;
-    }
-    // This while loop adds spaces and asterisks up to n
-    while (i < n) {
-      result.push(space.repeat(count) + asterisk.repeat(i) + "\n");
-      i += 2;
-      count -= 1;
-    }
-    // This while loop adds spaces and asterisks down from n to 1
-    while (i >= 1) {
-      result.push(space.repeat(count) + asterisk.repeat(i) + "\n");
-      i -= 2;
-      count += 1;
-    }
-    // Return string
-    return result.join("");
-  }
+function iqTest(numbers) {
+  // create an array with numbers
+  let nums = numbers.split(" ");
+  // test each element in the array, determining if the number is even or odd
+  const evenOrOdd = nums.map((n) => (n % 2 === 0 ? "Even" : "Odd"));
+  // Determine which element is different from the rest and return its position
+  let evenCount = 0;
+  let oddCount = 0;
+  evenOrOdd.map((n) => (n === "Even" ? evenCount++ : oddCount++));
+  // Return index of Even or Odd, depending on which one's count is equal to 1. Then add 1 to the index based on the instructions for this challenge.
+  return evenOrOdd.indexOf(evenCount === 1 ? "Even" : "Odd") + 1;
 }
 
 // Tests below
+console.log(iqTest("2 4 7 8 10")); // Return 3. Third number is odd, while the rest of the numbers are even
 
-console.log(diamond(3));
-// returns:
-//  *
-// ***
-//  *
-console.log(diamond(5));
-// returns:
-//   *
-//  ***
-// *****
-//  ***
-//   *
-console.log(diamond(7));
-// returns:
-//   *
-//  ***
-// *****
-//*******
-// *****
-//  ***
-//   *
-console.log(diamond(8)); // returns null
+console.log(iqTest("1 2 1 1")); // Return 2. Second number is even, while the rest of the numbers are odd
