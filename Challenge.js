@@ -1,29 +1,37 @@
-// Challenge: Complementary DNA (7 kyu)
+// Challenge: Anagram Detector (7 kyu)
 
 // Instructions:
 
-// Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the "instructions" for the development and functioning of living organisms.
+// An anagram is the result of rearranging the letters of a word to produce a new word (see wikipedia).
 
-// If you want to know more http://en.wikipedia.org/wiki/DNA
+// Note: anagrams are case insensitive
 
-// In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+// Complete the function to return true if the two arguments given are anagrams of each other; return false otherwise.
 
-// More similar exercise are found here http://rosalind.info/problems/list-view/ (source)
+// Examples
+// "foefet" is an anagram of "toffee"
 
-// DNAStrand ("ATTGC") // return "TAACG"
-
-// DNAStrand ("GTAT") // return "CATA"
+// "Buckethead" is an anagram of "DeathCubeK"
 
 // My code below:
 
-const DNAStrand = (dna) => {
-  return dna
-    .split("") // turn dna into an array
-    .map((el) => (el === "A" ? "T" : el === "T" ? "A" : el === "G" ? "C" : "G")) // nested ternary determines which letters are chosen
-    .join(""); // turn dna back into a string
+const isAnagram = (test, original) => {
+  // first, change the characters in test and original to lowercase.
+  // second, split the string into an array.
+  // third, sort the array. This will arrange the array's contents in alphabetical order.
+  // fourth, join the array's elements into a string.
+  // lastly, compare both test and original.
+  return (
+    test.toLowerCase().split("").sort().join("") ===
+    original.toLowerCase().split("").sort().join("")
+  );
 };
 
 // Tests below:
 
-console.log(DNAStrand("ATTGC")); // return "TAACG"
-console.log(DNAStrand("GTAT")); // return "CATA"
+console.log(isAnagram("foefet", "toffee")); // returns true
+console.log(isAnagram("Buckethead", "DeathCubeK")); // returns true
+console.log(isAnagram("Twoo", "WooT")); // returns true
+console.log(isAnagram("dumble", "bumble")); // returns false
+console.log(isAnagram("ound", "round")); // returns false
+console.log(isAnagram("apple", "pale")); // returns false
