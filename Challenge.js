@@ -1,37 +1,30 @@
-// Challenge: Anagram Detector (7 kyu)
+// Challenge: The Coupon Code (7 kyu)
 
 // Instructions:
 
-// An anagram is the result of rearranging the letters of a word to produce a new word (see wikipedia).
+// Story
+// Your online store likes to give out coupons for special occasions. Some customers try to cheat the system by entering invalid codes or using expired coupons.
 
-// Note: anagrams are case insensitive
+// Task
+// Your mission:
+// Write a function called checkCoupon which verifies that a coupon code is valid and not expired.
 
-// Complete the function to return true if the two arguments given are anagrams of each other; return false otherwise.
+// A coupon is no more valid on the day AFTER the expiration date. All dates will be passed as strings in this format: "MONTH DATE, YEAR".
 
-// Examples
-// "foefet" is an anagram of "toffee"
-
-// "Buckethead" is an anagram of "DeathCubeK"
+// Examples:
+// checkCoupon("123", "123", "July 9, 2015", "July 9, 2015")  ===  true
+// checkCoupon("123", "123", "July 9, 2015", "July 2, 2015")  ===  false
 
 // My code below:
 
-const isAnagram = (test, original) => {
-  // first, change the characters in test and original to lowercase.
-  // second, split the string into an array.
-  // third, sort the array. This will arrange the array's contents in alphabetical order.
-  // fourth, join the array's elements into a string.
-  // lastly, compare both test and original.
-  return (
-    test.toLowerCase().split("").sort().join("") ===
-    original.toLowerCase().split("").sort().join("")
-  );
+const checkCoupon = (enteredCode, correctCode, currentDate, expirationDate) => {
+  return enteredCode !== correctCode ||
+    Date.parse(currentDate) > Date.parse(expirationDate)
+    ? false
+    : true;
 };
 
 // Tests below:
 
-console.log(isAnagram("foefet", "toffee")); // returns true
-console.log(isAnagram("Buckethead", "DeathCubeK")); // returns true
-console.log(isAnagram("Twoo", "WooT")); // returns true
-console.log(isAnagram("dumble", "bumble")); // returns false
-console.log(isAnagram("ound", "round")); // returns false
-console.log(isAnagram("apple", "pale")); // returns false
+console.log(checkCoupon("123", "123", "July 9, 2015", "July 9, 2015")); // true
+console.log(checkCoupon("123", "123", "July 9, 2015", "July 2, 2015")); // false
