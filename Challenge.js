@@ -1,30 +1,28 @@
-// Challenge: Replace With Alphabet Position (6 kyu)
+// Challenge: Delete occurrences of an element if it occurs more than n times (JavaScript) (6 kyu)
 
 // Instructions:
 
-// In this kata you are required to, given a string, replace every letter with its position in the alphabet.
+// Enough is enough!
+// Alice and Bob were on a holiday. Both of them took many pictures of the places they've been, and now they want to show Charlie their entire collection. However, Charlie doesn't like these sessions, since the motive usually repeats. He isn't fond of seeing the Eiffel tower 40 times. He tells them that he will only sit during the session if they show the same motive at most N times. Luckily, Alice and Bob are able to encode the motive as a number. Can you help them to remove numbers such that their list contains each number only up to N times, without changing the order?
 
-// If anything in the text isn't a letter, ignore it and don't return it.
-
-// "a" = 1, "b" = 2, etc.
-
-// Example
-// alphabetPosition("The sunset sets at twelve o' clock.")
-// Should return "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11" (as a string)
+// Task
+// Given a list lst and a number N, create a new list that contains each number of lst at most N times without reordering. For example if N = 2, and the input is [1,2,3,1,2,1,2,3], you take [1,2,3,1,2], drop the next [1,2] since this would lead to 1 and 2 being in the result 3 times, and then take 3, which leads to [1,2,3,1,2,3].
 
 // My code below:
 
-function alphabetPosition(text) {
-  // Remove all non-alphabet characters from text, and split into an array.
-  let textArr = text.replace(/[^a-zA-Z]/g, "").split("");
-  // Create an array containing the alphabet to use in the return statement
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-  // We know that textArr only contains alplhabetic characters. So, return the index of each character plus one (to offset the index starting at 0, not 1) in a string.
-  return textArr
-    .map((char) => alphabet.indexOf(char.toLowerCase()) + 1)
-    .join(" ");
+function deleteNth(arr, n) {
+  new_arr = [];
+  arr.forEach((element) => {
+    // If the length of the array returned by filter is less than n, push the element to new arr
+    // i === element will be false, resulting in its length being less than n, until i is present in new_arr n times
+    if (new_arr.filter((i) => i === element).length < n) {
+      new_arr.push(element);
+    }
+  });
+  return new_arr;
 }
 
 // Tests below:
 
-console.log(alphabetPosition("The sunset sets at twelve o' clock.")); // "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"
+console.log(deleteNth([1, 1, 1, 1], 2)); // return [1,1]
+console.log(deleteNth([20, 37, 20, 21], 1)); // return [20,37,21]
