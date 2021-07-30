@@ -1,28 +1,47 @@
-// Challenge: Delete occurrences of an element if it occurs more than n times (JavaScript) (6 kyu)
+// Challenge: Highest Rank Number in an Array (6 kyu)
 
 // Instructions:
 
-// Enough is enough!
-// Alice and Bob were on a holiday. Both of them took many pictures of the places they've been, and now they want to show Charlie their entire collection. However, Charlie doesn't like these sessions, since the motive usually repeats. He isn't fond of seeing the Eiffel tower 40 times. He tells them that he will only sit during the session if they show the same motive at most N times. Luckily, Alice and Bob are able to encode the motive as a number. Can you help them to remove numbers such that their list contains each number only up to N times, without changing the order?
+// Complete the method which returns the number which is most frequent in the given input array. If there is a tie for most frequent number, return the largest number among them.
 
-// Task
-// Given a list lst and a number N, create a new list that contains each number of lst at most N times without reordering. For example if N = 2, and the input is [1,2,3,1,2,1,2,3], you take [1,2,3,1,2], drop the next [1,2] since this would lead to 1 and 2 being in the result 3 times, and then take 3, which leads to [1,2,3,1,2,3].
+// Note: no empty arrays will be given.
+
+// Examples
+// [12, 10, 8, 12, 7, 6, 4, 10, 12]              -->  12
+// [12, 10, 8, 12, 7, 6, 4, 10, 12, 10]          -->  12
+// [12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10]  -->   3
 
 // My code below:
 
-function deleteNth(arr, n) {
-  new_arr = [];
-  arr.forEach((element) => {
-    // If the length of the array returned by filter is less than n, push the element to new arr
-    // i === element will be false, resulting in its length being less than n, until i is present in new_arr n times
-    if (new_arr.filter((i) => i === element).length < n) {
-      new_arr.push(element);
+function highestRank(arr) {
+  let mf = 1; // most frequent set to 1 because each element in the array appears once.
+  let m = 0; // this is a counter to track the number of appearances
+  let item; // this will hold the most frequent element
+  for (
+    // first for loop iterates over each element in arr
+    let i = 0;
+    i < arr.length;
+    i++
+  ) {
+    for (
+      // second for loop compares each element in arr to current value of arr[i]
+      let j = i;
+      j < arr.length;
+      j++
+    ) {
+      if (arr[i] == arr[j]) m++; // if the element in arr[i] appears again, increment the counter
+      if (mf < m) {
+        mf = m; // if counter m is greater than most frequent, assign value of m to most frequent.
+        item = arr[i]; // the current value of arr[i] being compared to each value in arr is the most frequent.
+      }
     }
-  });
-  return new_arr;
+    m = 0; // reset counter to 0, increment to next element in arr (first for loop), and compare it to each element (second for loop).
+  }
+  return item; // at the end of the day item will hold the most frequent number; return it.
 }
 
 // Tests below:
 
-console.log(deleteNth([1, 1, 1, 1], 2)); // return [1,1]
-console.log(deleteNth([20, 37, 20, 21], 1)); // return [20,37,21]
+console.log(highestRank([12, 10, 8, 12, 7, 6, 4, 10, 12])); // 12
+console.log(highestRank([12, 10, 8, 12, 7, 6, 4, 10, 12, 10])); // 12
+console.log(highestRank([12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10])); // 3
