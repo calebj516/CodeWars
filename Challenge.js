@@ -1,47 +1,43 @@
-// Challenge: Data Reverse (6 kyu)
+// Challenge: Extract the domain name from a URL (5 kyu)
 
 // Instructions:
 
-// A stream of data is received and needs to be reversed.
+// Write a function that when given a URL as a string, parses out just the domain name and returns it as a string. For example:
 
-// Each segment is 8 bits long, meaning the order of these segments needs to be reversed, for example:
-
-// 11111111  00000000  00001111  10101010
-//  (byte1)   (byte2)   (byte3)   (byte4)
-// should become:
-
-// 10101010  00001111  00000000  11111111
-//  (byte4)   (byte3)   (byte2)   (byte1)
-// The total number of bits will always be a multiple of 8.
-
-// The data is given in an array as such:
-
-// [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0]
-// Note: In the C and NASM languages you are given the third parameter which is the number of segment blocks.
+// domainName("http://github.com/carbonfive/raygun") == "github"
+// domainName("http://www.zombie-bites.com") == "zombie-bites"
+// domainName("https://www.cnet.com") == "cnet"
 
 // My code below:
 
-function dataReverse(data) {
-  if (data.length > 0) {
-    let result = [];
-    while (data.length) {
-      result.push(data.splice(0, 8));
-    }
-    return result
-      .reverse()
-      .join(",")
-      .split(",")
-      .map((el) => Number(el));
+function domainName(url) {
+  // first period position
+  let firstPeriodPos = url.indexOf(".");
+  // second period position
+  let secondPeriodPos = url.indexOf(".", firstPeriodPos + 1);
+  // forward slash position
+  let forwardSlashPos = url.indexOf("/");
+  let secondForwardSlashPos = forwardSlashPos + 1;
+  let domainName;
+
+  // if url contains 'www', extract from after first period up to the last period
+  if (url.includes("www")) {
+    domainName = url.slice(firstPeriodPos + 1, secondPeriodPos);
   }
-  return [];
+  // if there is a forward slash and no 'www', extract from after second forward slash up to first period
+  if (forwardSlashPos && !url.includes("www")) {
+    domainName = url.slice(secondForwardSlashPos + 1, firstPeriodPos);
+  }
+  // if there is no 'http' and 'www', extract from beginning up to first period
+  if (!url.includes("http") && !url.includes("www")) {
+    domainName = url.slice(0, firstPeriodPos);
+  }
+  return domainName;
 }
 
 // Tests below:
 
-console.log(
-  dataReverse([
-    1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
-    0, 1, 0, 1, 0, 1, 0,
-  ])
-); // returns [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
-console.log(dataReverse([0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1])); // returns [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0]
+console.log(domainName("http://github.com/carbonfive/raygun")); // github
+console.log(domainName("http://www.zombie-bites.com")); // zombie-bites
+console.log(domainName("https://www.cnet.com")); // cnet
+console.log(domainName("https://www.facebook.com")); // facebook
