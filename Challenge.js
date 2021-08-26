@@ -1,45 +1,80 @@
-// Challenge: Highest Scoring Word (6 kyu)
+// Challenge: Lottery Ticket (6 kyu)
 
 // Instructions:
 
-// Given a string of words, you need to find the highest scoring word.
+// Time to win the lottery!
 
-// Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+// Given a lottery ticket (ticket), represented by an array of 2-value arrays, you must find out if you've won the jackpot.
 
-// You need to return the highest scoring word as a string.
+// Example ticket:
 
-// If two words score the same, return the word that appears earliest in the original string.
+// [ [ 'ABC', 65 ], [ 'HGR', 74 ], [ 'BYHT', 74 ] ]
 
-// All letters will be lowercase and all inputs will be valid.
+// To do this, you must first count the 'mini-wins' on your ticket. Each subarray has both a string and a number within it. If the character code of any of the characters in the string matches the number, you get a mini win. Note you can only have one mini win per sub array.
+
+// Once you have counted all of your mini wins, compare that number to the other input provided (win). If your total is more than or equal to (win), return 'Winner!'. Else return 'Loser!'.
+
+// All inputs will be in the correct format. Strings on tickets are not always the same length.
 
 // My code below:
 
-function high(x) {
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-  let words = x.split(" "); // This splits x into an array, with each word as an element
-  let scores = [];
+function bingo(ticket, win) {
+  let winCount = 0;
+  let subArray = 0; // example: ['ABC', 65]
+  let string = 0; // example: 'ABC'
+  let code = 1; // example: 65
 
-  // Loop through the array of words.
-  for (let word = 0; word < words.length; word++) {
-    let score = 0;
-    // This nested for loop will loop through each letter in a word and determine score.
-    for (let letter = 0; letter < words[word].length; letter++) {
-      score += alphabet.indexOf(words[word][letter]) + 1; // add 1 to offset index starting at 0.
+  // loop through ticket
+  for (let i = subArray; i < ticket.length; i++) {
+    // loop through string.
+    for (let char = 0; char < ticket[subArray][string].length; char++) {
+      // if char code of any characters matches number, add one to mini-win count.
+      if (
+        ticket[subArray][string][char].charCodeAt(
+          ticket[subArray][string][char]
+        ) === ticket[subArray][code]
+      ) {
+        winCount += 1;
+        // Break the loop if there is a mini-win due to mini-win limit of one per sub array.
+        break;
+      }
     }
-    scores.push(score);
+    // Increment subArray by one to advance to the next sub array within the ticket array.
+    subArray++;
   }
-
-  // Determine highest scoring word and return it
-  return words[scores.indexOf(Math.max(...scores))];
+  // check mini win total. If it is greater than or equal to win, return Winner.
+  return winCount >= win ? "Winner!" : "Loser!";
 }
 
 // Tests below:
 
-console.log(high("man i need a taxi up to ubud")); //"taxi"
-console.log(high("what time are we climbing up the volcano")); //"volcano"
-console.log(high("take me to semynak")); //"semynak"
-console.log(high("aa b")); //"aa"
-console.log(high("b aa")); //"b"
-console.log(high("bb d")); //"bb"
-console.log(high("d bb")); //"d"
-console.log(high("aaa b")); //"aaa"
+console.log(
+  bingo(
+    [
+      ["ABC", 65],
+      ["HGR", 74],
+      ["BYHT", 74],
+    ],
+    2
+  )
+); // Loser!
+console.log(
+  bingo(
+    [
+      ["ABC", 65],
+      ["HGR", 74],
+      ["BYHT", 74],
+    ],
+    1
+  )
+); // Winner!
+console.log(
+  bingo(
+    [
+      ["HGTYRE", 74],
+      ["BE", 66],
+      ["JKTY", 74],
+    ],
+    3
+  )
+); // Loser!
