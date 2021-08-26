@@ -1,28 +1,45 @@
-// Challenge: Unique In Order (6 kyu)
+// Challenge: Highest Scoring Word (6 kyu)
 
 // Instructions:
 
-// Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+// Given a string of words, you need to find the highest scoring word.
+
+// Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+
+// You need to return the highest scoring word as a string.
+
+// If two words score the same, return the word that appears earliest in the original string.
+
+// All letters will be lowercase and all inputs will be valid.
 
 // My code below:
 
-const uniqueInOrder = (iterable) => {
-  let result = [];
+function high(x) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  let words = x.split(" "); // This splits x into an array, with each word as an element
+  let scores = [];
 
-  // loop through string
-  // If i is not equal to i  1, push to result
-
-  for (let i = 0; i < iterable.length; i++) {
-    if (iterable[i] !== iterable[i + 1]) {
-      result.push(iterable[i]);
+  // Loop through the array of words.
+  for (let word = 0; word < words.length; word++) {
+    let score = 0;
+    // This nested for loop will loop through each letter in a word and determine score.
+    for (let letter = 0; letter < words[word].length; letter++) {
+      score += alphabet.indexOf(words[word][letter]) + 1; // add 1 to offset index starting at 0.
     }
+    scores.push(score);
   }
 
-  return result;
-};
+  // Determine highest scoring word and return it
+  return words[scores.indexOf(Math.max(...scores))];
+}
 
 // Tests below:
 
-console.log(uniqueInOrder("AAAABBBCCDAABBB")); // ["A", "B", "C", "D", "A", "B"]
-console.log(uniqueInOrder("ABBCcAD")); // ["A", "B", "C", "c", "A", "D"]
-console.log(uniqueInOrder([1, 2, 2, 3, 3])); // [1, 2, 3]
+console.log(high("man i need a taxi up to ubud")); //"taxi"
+console.log(high("what time are we climbing up the volcano")); //"volcano"
+console.log(high("take me to semynak")); //"semynak"
+console.log(high("aa b")); //"aa"
+console.log(high("b aa")); //"b"
+console.log(high("bb d")); //"bb"
+console.log(high("d bb")); //"d"
+console.log(high("aaa b")); //"aaa"
