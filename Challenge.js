@@ -1,80 +1,31 @@
-// Challenge: Lottery Ticket (6 kyu)
+// Challenge: Regex Password Validation (5 kyu)
 
 // Instructions:
 
-// Time to win the lottery!
+// You need to write regex that will validate a password to make sure it meets the following criteria:
 
-// Given a lottery ticket (ticket), represented by an array of 2-value arrays, you must find out if you've won the jackpot.
-
-// Example ticket:
-
-// [ [ 'ABC', 65 ], [ 'HGR', 74 ], [ 'BYHT', 74 ] ]
-
-// To do this, you must first count the 'mini-wins' on your ticket. Each subarray has both a string and a number within it. If the character code of any of the characters in the string matches the number, you get a mini win. Note you can only have one mini win per sub array.
-
-// Once you have counted all of your mini wins, compare that number to the other input provided (win). If your total is more than or equal to (win), return 'Winner!'. Else return 'Loser!'.
-
-// All inputs will be in the correct format. Strings on tickets are not always the same length.
+// At least six characters long
+// contains a lowercase letter
+// contains an uppercase letter
+// contains a number
+// Valid passwords will only be alphanumeric characters.
 
 // My code below:
 
-function bingo(ticket, win) {
-  let winCount = 0;
-  let subArray = 0; // example: ['ABC', 65]
-  let string = 0; // example: 'ABC'
-  let code = 1; // example: 65
-
-  // loop through ticket
-  for (let i = subArray; i < ticket.length; i++) {
-    // loop through string.
-    for (let char = 0; char < ticket[subArray][string].length; char++) {
-      // if char code of any characters matches number, add one to mini-win count.
-      if (
-        ticket[subArray][string][char].charCodeAt(
-          ticket[subArray][string][char]
-        ) === ticket[subArray][code]
-      ) {
-        winCount += 1;
-        // Break the loop if there is a mini-win due to mini-win limit of one per sub array.
-        break;
-      }
-    }
-    // Increment subArray by one to advance to the next sub array within the ticket array.
-    subArray++;
-  }
-  // check mini win total. If it is greater than or equal to win, return Winner.
-  return winCount >= win ? "Winner!" : "Loser!";
+function validate(password) {
+  // Each ?=.* section looks through the entire string and must be matched at least once: at least one lowercase, one uppercase, and one number
+  // the [] section at the end excludes non-alphanumeric characters
+  // the {n,} pattern means there must be at least n characters (in this case, 6)
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/.test(password);
 }
 
 // Tests below:
 
-console.log(
-  bingo(
-    [
-      ["ABC", 65],
-      ["HGR", 74],
-      ["BYHT", 74],
-    ],
-    2
-  )
-); // Loser!
-console.log(
-  bingo(
-    [
-      ["ABC", 65],
-      ["HGR", 74],
-      ["BYHT", 74],
-    ],
-    1
-  )
-); // Winner!
-console.log(
-  bingo(
-    [
-      ["HGTYRE", 74],
-      ["BE", 66],
-      ["JKTY", 74],
-    ],
-    3
-  )
-); // Loser!
+console.log(validate("djI38D55")); // "djI38D55 - Expected true");
+console.log(validate("a2.d412")); // "a2.d412 - Expected false");
+console.log(validate("JHD5FJ53")); // "JHD5FJ53 - Expected false");
+console.log(validate("!fdjn345")); // "!fdjn345 - Expected false");
+console.log(validate("jfkdfj3j")); // "jfkdfj3j - Expected false");
+console.log(validate("123")); // "123 - Expected false");
+console.log(validate("abc")); // "abc - Expected false"
+console.log(validate("Password123")); // "Password123 - Expected true"
