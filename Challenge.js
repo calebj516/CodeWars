@@ -1,31 +1,41 @@
-// Challenge: Regex Password Validation (5 kyu)
+// Challenge: Round by 0.5 steps (6 kyu)
 
 // Instructions:
 
-// You need to write regex that will validate a password to make sure it meets the following criteria:
+// Round any given number to the closest 0.5 step
 
-// At least six characters long
-// contains a lowercase letter
-// contains an uppercase letter
-// contains a number
-// Valid passwords will only be alphanumeric characters.
+// I.E.
+
+// solution(4.2) = 4
+// solution(4.3) = 4.5
+// solution(4.6) = 4.5
+// solution(4.8) = 5
+// Round up if number is as close to previous and next 0.5 steps.
+
+// solution(4.75) == 5
 
 // My code below:
 
-function validate(password) {
-  // Each ?=.* section looks through the entire string and must be matched at least once: at least one lowercase, one uppercase, and one number
-  // the [] section at the end excludes non-alphanumeric characters
-  // the {n,} pattern means there must be at least n characters (in this case, 6)
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/.test(password);
+function solution(n){
+
+  // split at period, but prepend to the result to maintain decimal form
+  let decimal = '.' + n.toString().split(".")[1];
+  // If decimal is greater than or equal to .75, add 1 to Math.floor(n)
+  // If greater than or equal to .25, add 0.5 to Math.floor(n)
+  // Else round down by returning the result of Math.floor(n)
+  if(decimal >= 0.75){
+    return Math.floor(n) + 1;
+  } else if(decimal >= 0.25){
+    return Math.floor(n) + 0.5;
+  } else {
+    return Math.floor(n);
+  }
+  
 }
 
 // Tests below:
 
-console.log(validate("djI38D55")); // "djI38D55 - Expected true");
-console.log(validate("a2.d412")); // "a2.d412 - Expected false");
-console.log(validate("JHD5FJ53")); // "JHD5FJ53 - Expected false");
-console.log(validate("!fdjn345")); // "!fdjn345 - Expected false");
-console.log(validate("jfkdfj3j")); // "jfkdfj3j - Expected false");
-console.log(validate("123")); // "123 - Expected false");
-console.log(validate("abc")); // "abc - Expected false"
-console.log(validate("Password123")); // "Password123 - Expected true"
+console.log(solution(4.2)); // 4
+console.log(solution(4.3)); // 4.5
+console.log(solution(4.6)); // 4.5
+console.log(solution(4.8)); // 5
