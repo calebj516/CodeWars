@@ -1,35 +1,21 @@
-// Challenge: Multiplication table (6 kyu)
+// Challenge: Array.diff (6 kyu)
 
 // Instructions:
 
-// Your task, is to create NxN multiplication table, of size provided in parameter.
+// Your goal in this kata is to implement a difference function, which subtracts one list from another and returns the result.
 
-// for example, when given size is 3:
-
-// 1 2 3
-// 2 4 6
-// 3 6 9
-// for given example, the return value should be: [[1,2,3],[2,4,6],[3,6,9]]
+// It should remove all values from list a, which are present in list b keeping their order.
 
 // My code below:
 
-const multiplicationTable = size => {
-
-  let result = [];
-
-  for(let row = 1; row <= size; row++){
-    let innerArr = [];
-      for(let col = 1; col <= size; col++){
-        innerArr.push(col*row);
-      }
-      result.push(innerArr);
-    }
-
-  return result;
-
+function arrayDiff(a, b) {
+  
+  // return numbers from a that are not in b.
+  return a.filter(n => b.indexOf(n) < 0);
+  
 }
 
 // Tests below:
 
-console.log(multiplicationTable(3)); // [[1,2,3],[2,4,6],[3,6,9]]
-console.log(multiplicationTable(4)); // [[1,2,3,4],[2,4,6,8],[3,6,9,12],[4,8,12,16]]
+console.log(arrayDiff([1,2],[1])); // [2]
+console.log(arrayDiff([1,2,2,2,3],[2])); // [1, 3]
