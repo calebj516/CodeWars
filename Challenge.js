@@ -1,21 +1,36 @@
-// Challenge: Array.diff (6 kyu)
+// Challenge: Does my number look big in this? (6 kyu)
 
 // Instructions:
 
-// Your goal in this kata is to implement a difference function, which subtracts one list from another and returns the result.
+// A Narcissistic Number is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this Kata, we will restrict ourselves to decimal (base 10).
 
-// It should remove all values from list a, which are present in list b keeping their order.
+// For example, take 153 (3 digits), which is narcisstic:
+
+//     1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
+// and 1652 (4 digits), which isn't:
+
+//     1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
+
+// The Challenge:
+
+// Your code must return true or false (not 'true' and 'false') depending upon whether the given number is a Narcissistic number in base 10. This may be True and False in your language, e.g. PHP.
+
+// Error checking for text strings or other invalid inputs is not required, only valid positive non-zero integers will be passed into the function.
 
 // My code below:
 
-function arrayDiff(a, b) {
-  
-  // return numbers from a that are not in b.
-  return a.filter(n => b.indexOf(n) < 0);
-  
+function narcissistic(value) {
+  value = value.toString();
+  let sum = 0;
+  // loop through each number in value, raising the number to the power of the length of value.
+  for (let i = 0; i < value.length; i++) {
+    sum += value[i] ** value.length;
+  }
+  // compare the total in the sum variable to value. If match, true will be returned. Otherwise false will be returned.
+  return sum == value;
 }
 
 // Tests below:
 
-console.log(arrayDiff([1,2],[1])); // [2]
-console.log(arrayDiff([1,2,2,2,3],[2])); // [1, 3]
+console.log(narcissistic(153)); // true
+console.log(narcissistic(1938)); // false
