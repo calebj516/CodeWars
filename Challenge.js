@@ -1,36 +1,40 @@
-// Challenge: Does my number look big in this? (6 kyu)
+// Challenge: Password Check - Binary to String (7 kyu)
 
 // Instructions:
 
-// A Narcissistic Number is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this Kata, we will restrict ourselves to decimal (base 10).
+// Password Check - Binary to String
+// A wealthy client has forgotten the password to his business website, but he has a list of possible passwords. His previous developer has left a file on the server with the name password.txt. You open the file and realize it's in binary format.
 
-// For example, take 153 (3 digits), which is narcisstic:
-
-//     1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
-// and 1652 (4 digits), which isn't:
-
-//     1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
-
-// The Challenge:
-
-// Your code must return true or false (not 'true' and 'false') depending upon whether the given number is a Narcissistic number in base 10. This may be True and False in your language, e.g. PHP.
-
-// Error checking for text strings or other invalid inputs is not required, only valid positive non-zero integers will be passed into the function.
+// Write a script that takes an array of possible passwords and a string of binary representing the possible password. Convert the binary to a string and compare to the password array. If the password is found, return the password string, else return false;
 
 // My code below:
 
-function narcissistic(value) {
-  value = value.toString();
-  let sum = 0;
-  // loop through each number in value, raising the number to the power of the length of value.
-  for (let i = 0; i < value.length; i++) {
-    sum += value[i] ** value.length;
-  }
-  // compare the total in the sum variable to value. If match, true will be returned. Otherwise false will be returned.
-  return sum == value;
+function decodePass(passArr, bin) {
+  let binPass = bin
+    .split(" ") //Split string in array of binary chars
+    .map((el) => String.fromCharCode(parseInt(el, 2))) //Map every binary char to real char
+    .join(""); //Join the array back to a string
+
+  return passArr[passArr.indexOf(binPass)] ? binPass : false;
 }
 
 // Tests below:
 
-console.log(narcissistic(153)); // true
-console.log(narcissistic(1938)); // false
+console.log(
+  decodePass(
+    ["password123", "admin", "admin1"],
+    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
+  )
+); // 'password123'
+console.log(
+  decodePass(
+    ["password321", "admin", "admin1"],
+    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
+  )
+); // false
+console.log(
+  decodePass(
+    ["password456", "pass1", "test12"],
+    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
+  )
+); // false
