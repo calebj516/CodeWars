@@ -1,40 +1,30 @@
-// Challenge: Password Check - Binary to String (7 kyu)
+// Challenge: Sum of Cubes (7 kyu)
 
 // Instructions:
 
-// Password Check - Binary to String
-// A wealthy client has forgotten the password to his business website, but he has a list of possible passwords. His previous developer has left a file on the server with the name password.txt. You open the file and realize it's in binary format.
+// Write a function that takes a positive integer n, sums all the cubed values from 1 to n, and returns that sum.
 
-// Write a script that takes an array of possible passwords and a string of binary representing the possible password. Convert the binary to a string and compare to the password array. If the password is found, return the password string, else return false;
+// Assume that the input n will always be a positive integer.
+
+// Examples: (Input --> output)
+
+// 2 --> 9 (sum of the cubes of 1 and 2 is 1 + 8)
+// 3 --> 36 (sum of the cubes of 1, 2, and 3 is 1 + 8 + 27)
 
 // My code below:
 
-function decodePass(passArr, bin) {
-  let binPass = bin
-    .split(" ") //Split string in array of binary chars
-    .map((el) => String.fromCharCode(parseInt(el, 2))) //Map every binary char to real char
-    .join(""); //Join the array back to a string
+function sumCubes(n){
 
-  return passArr[passArr.indexOf(binPass)] ? binPass : false;
+  let sum = 0;
+  
+  for(let i = 1; i <= n; i++){
+    sum += (i ** 3);
+  }
+
+  return sum;
 }
 
 // Tests below:
 
-console.log(
-  decodePass(
-    ["password123", "admin", "admin1"],
-    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
-  )
-); // 'password123'
-console.log(
-  decodePass(
-    ["password321", "admin", "admin1"],
-    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
-  )
-); // false
-console.log(
-  decodePass(
-    ["password456", "pass1", "test12"],
-    "01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011"
-  )
-); // false
+console.log(sumCubes(2)); // 9
+console.log(sumCubes(3)); // 36
