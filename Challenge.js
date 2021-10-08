@@ -1,37 +1,42 @@
-// Challenge: Count the divisors of a number (7 kyu)
+// Challenge: Comfortable Words (7 kyu)
 
 // Instructions:
 
-// Count the number of divisors of a positive integer n.
+// Description:
+// A comfortable word is a word which you can type always alternating the hand you type with (assuming you type using a QWERTY keyboard and use fingers as shown in the image below).
 
-// Random tests go up to n = 500000.
+// That being said, complete the function which receives a word and returns true if it's a comfortable word and false otherwise.
 
-// Examples (input --> output)
-// 4 --> 3 (1, 2, 4)
-// 5 --> 2 (1, 5)
-// 12 --> 6 (1, 2, 3, 4, 6, 12)
-// 30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)
+// The word will always be a string consisting of only ascii letters from a to z.
+
+// To avoid problems with image availability, here's the lists of letters for each hand:
+
+// Left: q, w, e, r, t, a, s, d, f, g, z, x, c, v, b
+// Right: y, u, i, o, p, h, j, k, l, n, m
 
 // My code below:
 
-function getDivisorsCnt(n){
-  
-  let count = 0;
-  
-  for(let i = 1; i <= n; i++){
-        
-    if(n % i === 0){
-      count++;
+const comfortable_word = (word) => {
+  let left = "qwertasdfgzxcvb";
+  let wordArr = word.split(""); // split word into an array.
+  let isComfortable = true; // boolean to hold status of word.
+
+  // map over wordArr, changing each character into left or right based on if it is included in the left variable.
+  wordArr = wordArr.map((char) => (left.includes(char) ? "left" : "right"));
+
+  // loop through wordArr, comparing each element to the following element.
+  for (let i = 0; i < wordArr.length; i++) {
+    // if the element matches the following element, then we know it does not meet the criteria specified by the challenge: alternating left and right characters.
+    if (wordArr[i] === wordArr[i + 1]) {
+      isComfortable = false;
     }
-    
   }
-  
-  return count;
-}
+  // By default isComfortable is true, but if the condition on line 30 is successful, then it will return false.
+  return isComfortable;
+};
 
 // Tests below:
 
-console.log(getDivisorsCnt(4)); // 3
-console.log(getDivisorsCnt(5)); // 2
-console.log(getDivisorsCnt(12)); // 6
-console.log(getDivisorsCnt(30)); // 8
+console.log(comfortable_word("kris")); // true
+console.log(comfortable_word("yams")); // true
+console.log(comfortable_word("test")); // false
