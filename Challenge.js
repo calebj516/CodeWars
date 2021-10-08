@@ -1,30 +1,37 @@
-// Challenge: Sum of Cubes (7 kyu)
+// Challenge: Count the divisors of a number (7 kyu)
 
 // Instructions:
 
-// Write a function that takes a positive integer n, sums all the cubed values from 1 to n, and returns that sum.
+// Count the number of divisors of a positive integer n.
 
-// Assume that the input n will always be a positive integer.
+// Random tests go up to n = 500000.
 
-// Examples: (Input --> output)
-
-// 2 --> 9 (sum of the cubes of 1 and 2 is 1 + 8)
-// 3 --> 36 (sum of the cubes of 1, 2, and 3 is 1 + 8 + 27)
+// Examples (input --> output)
+// 4 --> 3 (1, 2, 4)
+// 5 --> 2 (1, 5)
+// 12 --> 6 (1, 2, 3, 4, 6, 12)
+// 30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)
 
 // My code below:
 
-function sumCubes(n){
-
-  let sum = 0;
+function getDivisorsCnt(n){
+  
+  let count = 0;
   
   for(let i = 1; i <= n; i++){
-    sum += (i ** 3);
+        
+    if(n % i === 0){
+      count++;
+    }
+    
   }
-
-  return sum;
+  
+  return count;
 }
 
 // Tests below:
 
-console.log(sumCubes(2)); // 9
-console.log(sumCubes(3)); // 36
+console.log(getDivisorsCnt(4)); // 3
+console.log(getDivisorsCnt(5)); // 2
+console.log(getDivisorsCnt(12)); // 6
+console.log(getDivisorsCnt(30)); // 8
