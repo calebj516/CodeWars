@@ -1,46 +1,29 @@
-// Challenge: Row Weights (JavaScript) (7 kyu)
+// Challenge: Odd Ones Out! (7 kyu)
 
 // Instructions:
 
-// Scenario
-// Several people are standing in a row divided into two teams.
-// The first person goes into team 1, the second goes into team 2, the third goes into team 1, and so on.
+// The town sheriff dislikes odd numbers and wants all odd numbered families out of town! In town crowds can form and individuals are often mixed with other people and families. However you can distinguish the family they belong to by the number on the shirts they wear. As the sheriff's assistant it's your job to find all the odd numbered families and remove them from the town!
 
-// Task
-// Given an array of positive integers (the weights of the people), return a new array/tuple of two integers, where the first one is the total weight of team 1, and the second one is the total weight of team 2.
+// Challenge: You are given a list of numbers. The numbers each repeat a certain number of times. Remove all numbers that repeat an odd number of times while keeping everything else the same.
 
-// Notes
-// Array size is at least 1.
-// All numbers will be positive.
+// oddOnesOut([1, 2, 3, 1, 3, 3]) = [1, 1]
+// In the above example:
+
+// the number 1 appears twice
+// the number 2 appears once
+// the number 3 appears three times
+// 2 and 3 both appear an odd number of times, so they are removed from the list. The final result is: [1,1]
 
 // My code below:
 
-function rowWeights(array){
-  
-  // declare variables for team 1 and team 2 total weights, and result array to hold the final result.
-  let team1 = 0;
-  let team2 = 0;
-  let resultArr = [];
-  // loop through array, adding even-numbered elements to team1 and odd-numbered elements to team2.
-  for(let i = 0; i < array.length; i++){
-    i % 2 === 0 ? team1 += array[i] : team2 += array[i];
-  }
-  // push team1 and team2 total weights to the result array.
-  resultArr.push(team1, team2);
-  // return result array.
-  return resultArr;
-  
-}
+const oddOnesOut = (nums) => {
+  // for each num, include the same occurences of that num that appear an even number of times.
+  return nums.filter((x) => nums.filter((y) => y === x).length % 2 === 0);
+};
 
 // Tests below:
 
-console.log(rowWeights([80])); // [80,0]
-console.log(rowWeights([100,50])); // [100,50]
-console.log(rowWeights([50,60,70,80]));  // [120,140]
-console.log(rowWeights([13,27,49])); // [62,27]
-console.log(rowWeights([70,58,75,34,91])); // [236,92]
-console.log(rowWeights([29,83,67,53,19,28,96])); // [211,164]
-console.log(rowWeights([0])); // [0,0]
-console.log(rowWeights([100,51,50,100])); // [150,151]
-console.log(rowWeights([39,84,74,18,59,72,35,61])); // [207,235];
-console.log(rowWeights([0,1,0])); // [0,1]
+console.log(oddOnesOut([1, 1, 2, 2, 3, 3, 3])); // [1, 1, 2, 2]
+console.log(oddOnesOut([26, 23, 24, 17, 23, 24, 23, 26])); // [26, 24, 24, 26]
+console.log(oddOnesOut([1, 2, 3])); // []
+console.log(oddOnesOut([1])); // []
