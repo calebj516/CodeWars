@@ -1,29 +1,61 @@
-// Challenge: Odd Ones Out! (7 kyu)
+// Challenge: Even or Odd, Which is Greater? (7 kyu)
 
 // Instructions:
 
-// The town sheriff dislikes odd numbers and wants all odd numbered families out of town! In town crowds can form and individuals are often mixed with other people and families. However you can distinguish the family they belong to by the number on the shirts they wear. As the sheriff's assistant it's your job to find all the odd numbered families and remove them from the town!
+// Given a string of digits confirm whether the sum of all the individual even digits are greater than the sum of all the indiviudal odd digits. Always a string of numbers will be given.
 
-// Challenge: You are given a list of numbers. The numbers each repeat a certain number of times. Remove all numbers that repeat an odd number of times while keeping everything else the same.
+// If the sum of even numbers is greater than the odd numbers return: "Even is greater than Odd"
 
-// oddOnesOut([1, 2, 3, 1, 3, 3]) = [1, 1]
-// In the above example:
+// If the sum of odd numbers is greater than the sum of even numbers return: "Odd is greater than Even"
 
-// the number 1 appears twice
-// the number 2 appears once
-// the number 3 appears three times
-// 2 and 3 both appear an odd number of times, so they are removed from the list. The final result is: [1,1]
+// If the total of both even and odd numbers are identical return: "Even and Odd are the same"
 
 // My code below:
 
-const oddOnesOut = (nums) => {
-  // for each num, include the same occurences of that num that appear an even number of times.
-  return nums.filter((x) => nums.filter((y) => y === x).length % 2 === 0);
-};
+function evenOrOdd(str) {
+
+  let evenTotal = 0;
+  let oddTotal = 0;
+  let numbers = str.split("");
+  
+  for(let i = 0; i < numbers.length; i++){
+    // adding a '+' symbol converts strings into numbers.
+    +numbers[i] % 2 === 0 ? evenTotal += +numbers[i] : oddTotal += +numbers[i];
+  }
+    
+  if(evenTotal > oddTotal){
+    return "Even is greater than Odd";
+  } else if(oddTotal > evenTotal){
+    return "Odd is greater than Even";
+  } else {
+    return "Even and Odd are the same";
+  }
+  
+}
 
 // Tests below:
 
-console.log(oddOnesOut([1, 1, 2, 2, 3, 3, 3])); // [1, 1, 2, 2]
-console.log(oddOnesOut([26, 23, 24, 17, 23, 24, 23, 26])); // [26, 24, 24, 26]
-console.log(oddOnesOut([1, 2, 3])); // []
-console.log(oddOnesOut([1])); // []
+console.log(evenOrOdd('12' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('123' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('112' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('1213896664' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('12399124677' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('7768' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('999988888444' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('11111111112' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('5578843' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('44590258866' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('91867' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('7247756662' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('834' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('964279' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('989899686' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('124326546547649683563465' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('23646531353253475361352437562453' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('663333' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('87536234' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('9998378356372' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('88188777752' )); // 'Even and Odd are the same' 
+console.log(evenOrOdd('46575888345254788864' )); // 'Even is greater than Odd' 
+console.log(evenOrOdd('35345679867564' )); // 'Odd is greater than Even' 
+console.log(evenOrOdd('3222111' )); // 'Even and Odd are the same' 
