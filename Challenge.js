@@ -1,29 +1,44 @@
-// Challenge: Odd Ones Out! (7 kyu)
+// Challenge: Alphabetical Addition (7 kyu)
 
-// Instructions:
+// Description:
+// Your task is to add up letters to one letter.
 
-// The town sheriff dislikes odd numbers and wants all odd numbered families out of town! In town crowds can form and individuals are often mixed with other people and families. However you can distinguish the family they belong to by the number on the shirts they wear. As the sheriff's assistant it's your job to find all the odd numbered families and remove them from the town!
+// The function will be given a variable amount of arguments, each one being a letter to add.
 
-// Challenge: You are given a list of numbers. The numbers each repeat a certain number of times. Remove all numbers that repeat an odd number of times while keeping everything else the same.
-
-// oddOnesOut([1, 2, 3, 1, 3, 3]) = [1, 1]
-// In the above example:
-
-// the number 1 appears twice
-// the number 2 appears once
-// the number 3 appears three times
-// 2 and 3 both appear an odd number of times, so they are removed from the list. The final result is: [1,1]
+// Notes:
+// Letters will always be lowercase.
+// Letters can overflow (see second to last example of the description)
+// If no letters are given, the function should return 'z'
 
 // My code below:
 
-const oddOnesOut = (nums) => {
-  // for each num, include the same occurences of that num that appear an even number of times.
-  return nums.filter((x) => nums.filter((y) => y === x).length % 2 === 0);
-};
+function addLetters(...letters) {
+  if (letters.length === 0) {
+    return "z";
+  }
+
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  let total = 0;
+
+  // determine value of each letter
+  for (let i = 0; i < letters.length; i++) {
+    // add 1 to index to obtain the correct value since value starts at a = 1
+    total += alphabet.indexOf(letters[i]) + 1;
+  }
+  // Logic to handle overflow
+  while (total > alphabet.length) {
+    total -= alphabet.length;
+  }
+  // return value - 1 to obtain the correct index (value starts at a = 1, so an offset is needed)
+  return alphabet[total - 1];
+}
 
 // Tests below:
 
-console.log(oddOnesOut([1, 1, 2, 2, 3, 3, 3])); // [1, 1, 2, 2]
-console.log(oddOnesOut([26, 23, 24, 17, 23, 24, 23, 26])); // [26, 24, 24, 26]
-console.log(oddOnesOut([1, 2, 3])); // []
-console.log(oddOnesOut([1])); // []
+console.log(addLetters("a", "b", "c")); // f
+console.log(addLetters("z")); // z
+console.log(addLetters("a", "b")); // c
+console.log(addLetters("c")); // c
+console.log(addLetters("z", "a")); // a
+console.log(addLetters("y", "c", "b")); // d
+console.log(addLetters()); // z
