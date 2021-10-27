@@ -1,44 +1,27 @@
-// Challenge: Alphabetical Addition (7 kyu)
+// Challenge: Multiples of 3 or 5 (7 kyu)
 
 // Description:
-// Your task is to add up letters to one letter.
+// If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 
-// The function will be given a variable amount of arguments, each one being a letter to add.
+// Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
 
-// Notes:
-// Letters will always be lowercase.
-// Letters can overflow (see second to last example of the description)
-// If no letters are given, the function should return 'z'
+// Note: If the number is a multiple of both 3 and 5, only count it once.
+
+// Courtesy of projecteuler.net (Problem 1)
 
 // My code below:
 
-function addLetters(...letters) {
-  if (letters.length === 0) {
-    return "z";
+function solution(number){
+  let sum = 0;
+  
+  for(let i = 0; i < number; i++){
+     i % 3 === 0 || i % 5 === 0 ? sum += i : sum += 0;
   }
-
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-  let total = 0;
-
-  // determine value of each letter
-  for (let i = 0; i < letters.length; i++) {
-    // add 1 to index to obtain the correct value since value starts at a = 1
-    total += alphabet.indexOf(letters[i]) + 1;
-  }
-  // Logic to handle overflow
-  while (total > alphabet.length) {
-    total -= alphabet.length;
-  }
-  // return value - 1 to obtain the correct index (value starts at a = 1, so an offset is needed)
-  return alphabet[total - 1];
+  
+  return sum;
 }
 
 // Tests below:
 
-console.log(addLetters("a", "b", "c")); // f
-console.log(addLetters("z")); // z
-console.log(addLetters("a", "b")); // c
-console.log(addLetters("c")); // c
-console.log(addLetters("z", "a")); // a
-console.log(addLetters("y", "c", "b")); // d
-console.log(addLetters()); // z
+console.log(solution(10)); // 3+5+6+9=23
+console.log(solution(20)); // 3+5+6+9+10+12+15+18=78
