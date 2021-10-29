@@ -1,27 +1,22 @@
-// Challenge: Multiples of 3 or 5 (7 kyu)
+// Challenge: Exclamation marks series #8: Move all exclamation marks to the end of the sentence (JavaScript) (7 kyu)
 
-// Description:
-// If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
-
-// Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
-
-// Note: If the number is a multiple of both 3 and 5, only count it once.
-
-// Courtesy of projecteuler.net (Problem 1)
+// Description: Move all exclamation marks to the end of the sentence
 
 // My code below:
 
-function solution(number){
-  let sum = 0;
+function remove(s){
+
+  // First, split s into an array and filter out the exclamation points.
+  // Next, join the result into a string.
+  // Lastly, add the number of exclamation points to the end, calculated by taking the length of an array formed by filtering out all characters that are not exclamation points.
+  return s.split("").filter(c => c !== '!').join("") + '!'.repeat(s.split("").filter(c => c === '!').length);
   
-  for(let i = 0; i < number; i++){
-     i % 3 === 0 || i % 5 === 0 ? sum += i : sum += 0;
-  }
-  
-  return sum;
 }
 
 // Tests below:
 
-console.log(solution(10)); // 3+5+6+9=23
-console.log(solution(20)); // 3+5+6+9+10+12+15+18=78
+console.log(remove("Hi!")); // "Hi!"
+console.log(remove("Hi! Hi!")); // "Hi Hi!!"
+console.log(remove("Hi! Hi! Hi!")); // "Hi Hi Hi!!!"
+console.log(remove("Hi! !Hi Hi!")); // "Hi Hi Hi!!!"
+console.log(remove("Hi! Hi!! Hi!")); // "Hi Hi Hi!!!!"
