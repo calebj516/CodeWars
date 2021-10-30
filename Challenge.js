@@ -5,11 +5,10 @@
 // My code below:
 
 function remove(s){
-
-  // First, split s into an array and filter out the exclamation points.
-  // Next, join the result into a string.
-  // Lastly, add the number of exclamation points to the end, calculated by taking the length of an array formed by filtering out all characters that are not exclamation points.
-  return s.split("").filter(c => c !== '!').join("") + '!'.repeat(s.split("").filter(c => c === '!').length);
+  // Note: replace x with '' removes x.
+  // First, remove all exclamation points.
+  // Next, remove all non-exclamation points. Add this to the first result for the final answer.
+  return s.replace(/!/g, '') + s.replace(/[^!]/g, '');
   
 }
 
