@@ -1,21 +1,23 @@
-// Challenge: Exclamation marks series #8: Move all exclamation marks to the end of the sentence (JavaScript) (7 kyu)
+// Challenge: Filter the number (JavaScript) (7 kyu)
 
-// Description: Move all exclamation marks to the end of the sentence
+// Oh no! The number has been mixed up with the text. Your goal is to retreive the number from the text, can you return the number back to it's original state?
+
+// Task:
+// Your task is to return a number from a string.
+
+// Details:
+// You will be given a string of numbers and letters mixed up, you have to return all the numbers in that string in the order they occur.
 
 // My code below:
 
-function remove(s){
-  // Note: replace x with '' removes x.
-  // First, remove all exclamation points.
-  // Next, remove all non-exclamation points. Add this to the first result for the final answer.
-  return s.replace(/!/g, '') + s.replace(/[^!]/g, '');
-  
+const FilterString = value => {
+  // Remove all non-digit characters, prepend result with '+' to change from string to number
+  return +value.replace(/[^\d]/g, "");
 }
 
 // Tests below:
 
-console.log(remove("Hi!")); // "Hi!"
-console.log(remove("Hi! Hi!")); // "Hi Hi!!"
-console.log(remove("Hi! Hi! Hi!")); // "Hi Hi Hi!!!"
-console.log(remove("Hi! !Hi Hi!")); // "Hi Hi Hi!!!"
-console.log(remove("Hi! Hi!! Hi!")); // "Hi Hi Hi!!!!"
+console.log(FilterString("123")); // 123
+console.log(FilterString("a1b2c3")); // 123
+console.log(FilterString("aa1bb2cc3dd")); // 123
+
