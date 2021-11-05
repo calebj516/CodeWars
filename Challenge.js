@@ -1,26 +1,32 @@
-// Challenge: Fix String Case (7 kyu)
+// Challenge: Stop gninnipS My sdroW! (6 kyu)
 
-// In this Kata, you will be given a string that may have mixed uppercase and lowercase letters and your task is to convert that string to either lowercase only or uppercase only based on:
-// make as few changes as possible.
-// if the string contains equal number of uppercase and lowercase letters, convert the string to lowercase.
+// Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+
+// Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
 
 // My code below:
 
-const solve = (s) => {
-
-  // Compare length of s with all lowercase removed (leaving only uppercase) to length with all uppercase removed (leaving only lowercase)
-  // If the length of the uppercase is greater, change s to uppercase, otherwise change to lowercase.
-
-  let sLower = s.replace(/[A-Z]/g, "");
-  let sUpper = s.replace(/[a-z]/g, "");
+const spinWords = string => {
   
-  return sUpper.length > sLower.length ? s.toUpperCase() : s.toLowerCase();
+  // Split string into array
+  // Test each element's length >= 5?
+  // if it passes test, reverse()
+  
+  let arr = string.split(" ");
+  
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].length >= 5){
+      arr[i] = arr[i].split("").reverse().join("");
+    }
+  }
+  
+  return arr.join(" ");
   
 }
 
 // Tests below:
 
-console.log(solve("coDe")); // code
-console.log(solve("CODe")); // CODE
-console.log(solve("coDE")); // code
+console.log(spinWords("Welcome")); // "emocleW"
+console.log(spinWords("Hey fellow warriors")); // "Hey wollef sroirraw"
+console.log(spinWords("This is a test")); // "This is a test"
 
