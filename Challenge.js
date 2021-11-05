@@ -1,32 +1,25 @@
-// Challenge: Stop gninnipS My sdroW! (6 kyu)
+// Challenge: Return String of First Characters (7 kyu)
 
-// Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
-
-// Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
+// In this exercise, a string is passed to a method and a new string has to be returned with the first character of each word in the string.
 
 // My code below:
 
-const spinWords = string => {
-  
-  // Split string into array
-  // Test each element's length >= 5?
-  // if it passes test, reverse()
-  
-  let arr = string.split(" ");
-  
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i].length >= 5){
-      arr[i] = arr[i].split("").reverse().join("");
-    }
+function makeString(s){
+  // split s into an array
+  s = s.split(" ");
+  // declare variable to hold result
+  let result = [];
+  // Push the beginning character of each element to result
+  for(let i = 0; i < s.length; i++){
+    result.push(s[i][0]);  
   }
-  
-  return arr.join(" ");
-  
+  // Return result joined into a string
+  return result.join("");
 }
 
 // Tests below:
 
-console.log(spinWords("Welcome")); // "emocleW"
-console.log(spinWords("Hey fellow warriors")); // "Hey wollef sroirraw"
-console.log(spinWords("This is a test")); // "This is a test"
+console.log(makeString("This Is A Test")); // "TIAT"
+console.log(makeString("sees eyes xray yoat")); // "sexy"
+console.log(makeString("brown eyes are nice")); // "bean"
 
