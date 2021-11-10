@@ -1,25 +1,19 @@
-// Challenge: Return String of First Characters (7 kyu)
+// Challenge: sPoNgEbOb MeMe (7 kyu)
 
-// In this exercise, a string is passed to a method and a new string has to be returned with the first character of each word in the string.
+// Description:
+
+// Remember the spongebob meme that is meant to make fun of people by repeating what they say in a mocking way?
+
+// You need to create a function that converts the input into this format, with the output being the same string except there is a pattern of uppercase and lowercase letters.
 
 // My code below:
 
-function makeString(s){
-  // split s into an array
-  s = s.split(" ");
-  // declare variable to hold result
-  let result = [];
-  // Push the beginning character of each element to result
-  for(let i = 0; i < s.length; i++){
-    result.push(s[i][0]);  
-  }
-  // Return result joined into a string
-  return result.join("");
+function spongeMeme(sentence) {
+  // Change even-numbered indexed elements to uppercase, and odd-numbered indexed elements to lowercase
+  return sentence.split('').map((c, i) => i % 2 === 0 ? c.toUpperCase(): c.toLowerCase()).join('');
 }
 
 // Tests below:
 
-console.log(makeString("This Is A Test")); // "TIAT"
-console.log(makeString("sees eyes xray yoat")); // "sexy"
-console.log(makeString("brown eyes are nice")); // "bean"
-
+console.log(spongeMeme("stop Making spongebob Memes!")); // 'StOp mAkInG SpOnGeBoB MeMeS!'
+console.log(spongeMeme("You can't listen to Christmas music until after Thanksgiving!")); // 'yOu CaN'T LiStEn To cHrIsTmAs MuSiC UnTiL AfTeR tHaNkSgIvInG!'
