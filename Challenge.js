@@ -1,24 +1,47 @@
-// Challenge: Convert an array of strings to array of numbers (7 kyu)
+// Challenge: Format a string of names like 'Bart, Lisa & Maggie'. (6 kyu)
 
-// Description:
+// Given: an array containing hashes of names
 
-// Oh no!
-// Some really funny web dev gave you a sequence of numbers from his API response as an sequence of strings!
+// Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.
 
-// You need to cast the whole array to the correct type.
+// Example:
 
-// Create the function that takes as a parameter a sequence of numbers represented as strings and outputs a sequence of numbers.
+// list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ])
+// // returns 'Bart, Lisa & Maggie'
 
-// ie:["1", "2", "3"] to [1, 2, 3]
+// list([ {name: 'Bart'}, {name: 'Lisa'} ])
+// // returns 'Bart & Lisa'
 
-// Note that you can receive floats as well.
+// list([ {name: 'Bart'} ])
+// // returns 'Bart'
+
+// list([])
+// returns ''
+// Note: all the hashes are pre-validated and will only contain A-Z, a-z, '-' and '.'.
 
 // My code below:
 
-const toNumberArray = (stringarray) => {
-  return stringarray.map(n => +n);
-}
+const list = (names) => {
+  return names.reduce((prev, current, currentIndex, array) => {
+    if (currentIndex === 0) {
+      return current.name;
+    } else if (currentIndex === array.length - 1) {
+      return prev + " & " + current.name;
+    } else {
+      return prev + ", " + current.name;
+    }
+  }, "");
+};
 
 // Tests below:
-console.log(toNumberArray(["1.1","2.2","3.3"])); // [1.1,2.2,3.3]
-console.log(toNumberArray(["1","2","3"])); // [1,2,3]
+console.log(list([{ name: "Bart" }, { name: "Lisa" }, { name: "Maggie" }]));
+// returns 'Bart, Lisa & Maggie'
+
+console.log(list([{ name: "Bart" }, { name: "Lisa" }]));
+// returns 'Bart & Lisa'
+
+console.log(list([{ name: "Bart" }]));
+// returns 'Bart'
+
+console.log(list([]));
+// returns ''
