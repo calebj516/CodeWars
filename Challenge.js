@@ -1,24 +1,47 @@
-// Challenge: Sort by Last Char (7 kyu)
+// Challenge: Format a string of names like 'Bart, Lisa & Maggie'. (6 kyu)
 
-// Description:
+// Given: an array containing hashes of names
 
-// Given a string of words (x), you need to return an array of the words, sorted alphabetically by the final character in each.
+// Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.
 
-// If two words have the same last letter, they returned array should show them in the order they appeared in the given string.
+// Example:
 
-// All inputs will be valid.
+// list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ])
+// // returns 'Bart, Lisa & Maggie'
+
+// list([ {name: 'Bart'}, {name: 'Lisa'} ])
+// // returns 'Bart & Lisa'
+
+// list([ {name: 'Bart'} ])
+// // returns 'Bart'
+
+// list([])
+// returns ''
+// Note: all the hashes are pre-validated and will only contain A-Z, a-z, '-' and '.'.
 
 // My code below:
 
-// const last = (x) => {
-//   return x.split(" ").sort((a, b) => a.slice(-1) > b.slice(-1));
-// };
-
-function last(x) {
-  return x.split(" ").sort((a, b) => a.slice(-1) > b.slice(-1));
-}
+const list = (names) => {
+  return names.reduce((prev, current, currentIndex, array) => {
+    if (currentIndex === 0) {
+      return current.name;
+    } else if (currentIndex === array.length - 1) {
+      return prev + " & " + current.name;
+    } else {
+      return prev + ", " + current.name;
+    }
+  }, "");
+};
 
 // Tests below:
-console.log(last("man i need a taxi up to ubud")); // ["a","need","ubud","i","taxi","man","to","up"]
-console.log(last("what time are we climbing up the volcano")); // ["time","are","we","the","climbing","volcano","up","what"]
-console.log(last("take me to semynak")); // ["take","me","semynak","to"]
+console.log(list([{ name: "Bart" }, { name: "Lisa" }, { name: "Maggie" }]));
+// returns 'Bart, Lisa & Maggie'
+
+console.log(list([{ name: "Bart" }, { name: "Lisa" }]));
+// returns 'Bart & Lisa'
+
+console.log(list([{ name: "Bart" }]));
+// returns 'Bart'
+
+console.log(list([]));
+// returns ''
