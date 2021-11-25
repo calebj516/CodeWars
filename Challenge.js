@@ -1,19 +1,29 @@
-// Challenge: Find the missing element between two arrays (7 kyu)
+// Challenge: Count the Digit (7 kyu)
 
 // Description:
 
-// Given two integer arrays where the second array is a shuffled duplicate of the first array with one element missing, find the missing element.
+// Take an integer n (n >= 0) and a digit d (0 <= d <= 9) as an integer.
 
-// Please note, there may be duplicates in the arrays, so checking if a numerical value exists in one and not the other is not a valid solution.
+// Square all numbers k (0 <= k <= n) between 0 and n.
+
+// Count the numbers of digits d used in the writing of all the k**2.
+
+// Call nb_dig (or nbDig or ...) the function taking n and d as parameters and returning this count.
 
 // My code below:
 
-const arrayDiff = (arr1, arr2) => {
-  // Since we know that the two arrays are comprised of numbers, we can total up the two and subtract the second from the first to find the difference.
-  return arr1.reduce((prev, current) => prev + current, 0) - arr2.reduce((prev, current) => prev + current, 0);
+const nbDig = (n, d) => {
+  // variable to hold total number of digits d
+  let totalOfDigits = 0;
+  // loop through from 0 to n, squaring each number, converting the result into a string, changing that string into an array, and filtering out the numbers that don't match d.
+  for(let i = 0; i <= n; i++){
+    totalOfDigits += (i * i).toString().split('').filter(num => num == d).length;
+  }
+
+  return totalOfDigits;
 }
 
 // Tests below:
-console.log(arrayDiff([1, 2, 2, 3], [1, 2, 3])); // 2
-console.log(arrayDiff([6, 1, 3, 6, 8, 2], [3, 6, 6, 1, 2])); // 8
-console.log(arrayDiff([0], [0])); // 0
+console.log(nbDig(5750, 0)); // 4700
+console.log(nbDig(11011, 2)); // 9481
+console.log(nbDig(12224, 8)); // 7733
