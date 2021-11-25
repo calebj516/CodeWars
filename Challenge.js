@@ -1,20 +1,19 @@
-// Challenge: Square Every Digit (7 kyu)
+// Challenge: Find the missing element between two arrays (7 kyu)
 
 // Description:
 
-// Welcome. In this kata, you are asked to square every digit of a number and concatenate them.
+// Given two integer arrays where the second array is a shuffled duplicate of the first array with one element missing, find the missing element.
 
-// For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1.
-
-// Note: The function accepts an integer and returns an integer
+// Please note, there may be duplicates in the arrays, so checking if a numerical value exists in one and not the other is not a valid solution.
 
 // My code below:
 
-function squareDigits(num){
-  return +(num.toString().split("").map(n => (n ** 2)).join(""));
+const arrayDiff = (arr1, arr2) => {
+  // Since we know that the two arrays are comprised of numbers, we can total up the two and subtract the second from the first to find the difference.
+  return arr1.reduce((prev, current) => prev + current, 0) - arr2.reduce((prev, current) => prev + current, 0);
 }
 
 // Tests below:
-console.log(squareDigits(3212)); // 9414
-console.log(squareDigits(2112)); // 4114
-console.log(squareDigits(0)); // 0
+console.log(arrayDiff([1, 2, 2, 3], [1, 2, 3])); // 2
+console.log(arrayDiff([6, 1, 3, 6, 8, 2], [3, 6, 6, 1, 2])); // 8
+console.log(arrayDiff([0], [0])); // 0
