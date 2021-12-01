@@ -1,19 +1,21 @@
-// Challenge: Number of Decimal Digits (7 kyu)
+// Challenge: Get decimal part of the given number (7 kyu)
 
 // Description:
 
-// Determine the total number of digits in the integer (n>=0) given as input to the function. For example, 9 is a single digit, 66 has 2 digits and 128685 has 6 digits. Be careful to avoid overflows/underflows.
+// Write a function that returns only the decimal part of the given number.
 
-// All inputs will be valid.
+// You only have to handle valid numbers, not Infinity, NaN, or similar. Always return a positive decimal part.
 
 // My code below:
 
-const digits = (n) => {
-  // code goes here
-  return n.toString().length;
+const getDecimal = (n) => {
+  // Taking the remainder of n divided by 1 will obtain the decimal portion of n.
+  // toFixed will match the number of places after the decimal point passed in with n.
+  // If there is a decimal point to begin with, take the length after the decimal point. Otherwise, there is no decimal point, and 0 will be returned.
+  return Math.abs(n % 1).toFixed(n.toString().split('.')[1] ? n.toString().split('.')[1].length : 0);
 }
 
 // Tests below:
-console.log(digits(12409512)); // 8 
-console.log(digits(1234)); // 4
-console.log(digits(412)); // 3
+console.log(getDecimal(14)); // 0
+console.log(getDecimal(2.4)); // 0.4
+console.log(getDecimal(-2.46834)); // 0.46834
