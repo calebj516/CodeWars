@@ -1,21 +1,23 @@
-// Challenge: Get decimal part of the given number (7 kyu)
+// Challenge: Sum of array singles (7 kyu)
 
 // Description:
 
-// Write a function that returns only the decimal part of the given number.
+// In this Kata, you will be given an array of numbers in which two numbers occur once and the rest occur only twice. Your task will be to return the sum of the numbers that occur only once.
 
-// You only have to handle valid numbers, not Infinity, NaN, or similar. Always return a positive decimal part.
+// For example, repeats([4,5,7,5,4,8]) = 15 because only the numbers 7 and 8 occur once, and their sum is 15. Every other number occurs twice.
+
+// More examples in the test cases.
+
+// Good luck!
 
 // My code below:
 
-const getDecimal = (n) => {
-  // Taking the remainder of n divided by 1 will obtain the decimal portion of n.
-  // toFixed will match the number of places after the decimal point passed in with n.
-  // If there is a decimal point to begin with, take the length after the decimal point. Otherwise, there is no decimal point, and 0 will be returned.
-  return Math.abs(n % 1).toFixed(n.toString().split('.')[1] ? n.toString().split('.')[1].length : 0);
-}
+function repeats(arr){
+  // Filter for the elements that occur only once with array filter, and then total them up with array reduce
+  return arr.filter(x => arr.filter(y => y === x).length === 1).reduce((prev, current) => prev + current);
+};
 
 // Tests below:
-console.log(getDecimal(14)); // 0
-console.log(getDecimal(2.4)); // 0.4
-console.log(getDecimal(-2.46834)); // 0.46834
+console.log(repeats([4,5,7,5,4,8])); // 15
+console.log(repeats([9, 10, 19, 13, 19, 13])); // 19
+console.log(repeats([16, 0, 11, 4, 8, 16, 0, 11])); // 12
