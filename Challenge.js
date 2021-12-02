@@ -19,6 +19,7 @@
 const oddity = n => {
   // only perfect squares have an odd number of divisors. Example: 16 has 1, 2, 4, 8, and 16, a total of 5.
   // Note: raising a number to the 0.5 power is the same as taking the square root of the number.
+  // Note: n % 1 will return 0 if n is a whole number; otherwise, it will return the decimal portion of n. In this case, a result of 0 means we have a perfect square.
   return (n ** 0.5) % 1 === 0 ? "odd" : "even";
 }
 
