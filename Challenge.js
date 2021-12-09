@@ -1,27 +1,38 @@
-// Challenge: Drone Fly-By (7 kyu)
+// Challenge: Beginner Series #3 Sum of Numbers (7 kyu)
 
 // Description:
-// The other day I saw an amazing video where a guy hacked some wifi controlled lightbulbs by flying a drone past them. Brilliant.
 
-// In this kata we will recreate that stunt... sort of.
+// Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
 
-// You will be given two strings: lamps and drone. lamps represents a row of lamps, currently off, each represented by x. When these lamps are on, they should be represented by o.
+// Note: a and b are not ordered!
 
-// The drone string represents the position of the drone T (any better suggestion for character??) and its flight path up until this point =. The drone always flies left to right, and always begins at the start of the row of lamps. Anywhere the drone has flown, including its current position, will result in the lamp at that position switching on.
-
-// Return the resulting lamps string. See example tests for more clarity.
+// Examples (a, b) --> output (explanation)
+// (1, 0) --> 1 (1 + 0 = 1)
+// (1, 2) --> 3 (1 + 2 = 3)
+// (0, 1) --> 1 (0 + 1 = 1)
+// (1, 1) --> 1 (1 since both are same)
+// (-1, 0) --> -1 (-1 + 0 = -1)
+// (-1, 2) --> 2 (-1 + 0 + 1 + 2 = 2)
 
 // My code below:
 
-function flyBy(lamps, drone) {
-  // change characters up to and including position of T
-  return lamps
-    .split("")
-    .map((el, idx) => (idx <= drone.indexOf("T") ? (el = "o") : (el = "x")))
-    .join("");
-}
+const getSum = (a, b) => {
+  let total = 0;
+  // Determine which between a and b are the largest and smallest numbers
+  let bigger = a > b ? a : b;
+  let smaller = a > b ? b : a;
+  // starting with the smallest, loop our way up to and including the largest number, adding each element to the total
+  for (let i = smaller; i <= bigger; i++) {
+    total += i;
+  }
+
+  return total;
+};
 
 // Tests below:
-console.log(flyBy("xxxxxx", "====T")); // "ooooox"
-console.log(flyBy("xxxxxxxxx", "==T")); // "oooxxxxxx"
-console.log(flyBy("xxxxxxxxxxxxxxx", "=========T")); // "ooooooooooxxxxx"
+console.log(getSum(5, -1)); // 14
+console.log(getSum(505, 4)); // 127759
+console.log(getSum(321, 123)); // 44178
+console.log(getSum(-50, 0)); // -1275
+console.log(getSum(-1, -5)); // -15
+console.log(getSum(-5, -5)); // -5
