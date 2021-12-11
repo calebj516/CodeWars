@@ -1,38 +1,30 @@
-// Challenge: Beginner Series #3 Sum of Numbers (7 kyu)
+// Challenge: Maximum Product (7 kyu)
 
 // Description:
 
-// Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+// Given an array of integers , Find the maximum product obtained from multiplying 2 adjacent numbers in the array.
 
-// Note: a and b are not ordered!
+// Notes
+// Array/list size is at least 2.
 
-// Examples (a, b) --> output (explanation)
-// (1, 0) --> 1 (1 + 0 = 1)
-// (1, 2) --> 3 (1 + 2 = 3)
-// (0, 1) --> 1 (0 + 1 = 1)
-// (1, 1) --> 1 (1 since both are same)
-// (-1, 0) --> -1 (-1 + 0 = -1)
-// (-1, 2) --> 2 (-1 + 0 + 1 + 2 = 2)
+// Array/list numbers could be a mixture of positives, negatives also zeroes.
 
 // My code below:
 
-const getSum = (a, b) => {
-  let total = 0;
-  // Determine which between a and b are the largest and smallest numbers
-  let bigger = a > b ? a : b;
-  let smaller = a > b ? b : a;
-  // starting with the smallest, loop our way up to and including the largest number, adding each element to the total
-  for (let i = smaller; i <= bigger; i++) {
-    total += i;
+function adjacentElementsProduct(array) {
+  let newArr = [];
+  // push the product of each element and its proceeding value to the newArr array.
+  for (let i = 0; i < array.length - 1; i++) {
+    newArr.push(array[i] * array[i + 1]);
   }
-
-  return total;
-};
+  // the spread operator lists out all the values contained in newArr, which Math.max operates on to get the maximum value.
+  return Math.max(...newArr);
+}
 
 // Tests below:
-console.log(getSum(5, -1)); // 14
-console.log(getSum(505, 4)); // 127759
-console.log(getSum(321, 123)); // 44178
-console.log(getSum(-50, 0)); // -1275
-console.log(getSum(-1, -5)); // -15
-console.log(getSum(-5, -5)); // -5
+console.log(adjacentElementsProduct([5, 8])); // 40
+console.log(adjacentElementsProduct([1, 2, 3])); // 6
+console.log(adjacentElementsProduct([1, 5, 10, 9])); // 90
+console.log(adjacentElementsProduct([4, 12, 3, 1, 5])); // 48
+console.log(adjacentElementsProduct([5, 1, 2, 3, 1, 4])); // 6
+console.log(adjacentElementsProduct([3, 6, -2, -5, 7, 3])); // 21
