@@ -1,48 +1,48 @@
-// Challenge: Char Code Calculation (7 kyu)
+// Challenge: Peak array index (7 kyu)
 
 // Description:
 
-// Given a string, turn each character into its ASCII character code and join them together to create a number - let's call this number total1:
+// Given an array of ints, return the index such that the sum of the elements to the right of that index equals the sum of the elements to the left of that index. If there is no such index, return -1. If there is more than one such index, return the left-most index.
 
-// 'ABC' --> 'A' = 65, 'B' = 66, 'C' = 67 --> 656667
-// Then replace any incidence of the number 7 with the number 1, and call this number 'total2':
+// For example:
 
-// total1 = 656667
-//               ^
-// total2 = 656661
-//               ^
-// Then return the difference between the sum of the digits in total1 and total2:
+// peak([1,2,3,5,3,2,1]) = 3, because the sum of the elements at indexes 0,1,2 == sum of elements at indexes 4,5,6. We don't sum index 3.
+// peak([1,12,3,3,6,3,1]) = 2
+// peak([10,20,30,40]) = -1
 
-//   (6 + 5 + 6 + 6 + 6 + 7)
-// - (6 + 5 + 6 + 6 + 6 + 1)
-// -------------------------
-//                        6
+// The special case of an array of zeros (for instance [0,0,0,0]) will not be tested.
+
+// More examples in the test cases.
+
+// Good luck!
 
 // My code below:
 
-function calc(x) {
-  // split x into an array, map each letter changing it into its corresponding char code.
-  const char_codes_1 = x
-    .split("")
-    .map((letter) => letter.charCodeAt())
-    //  Joining and splitting separates each number by digit (1, 2, 3...)instead of by the char code (67, 89, 101...)
-    .join("")
-    .split("");
-  // Change the 7's to 1's
-  const char_codes_2 = char_codes_1.map((number) =>
-    number == 7 ? "1" : number
-  );
-  // sum up each char code variable
-  const sum_1 = char_codes_1.reduce((sum, num) => sum + +num, 0);
-  const sum_2 = char_codes_2.reduce((sum, num) => sum + +num, 0);
-  // return difference
-  return sum_1 - sum_2;
+function peak(arr) {
+  // variable for final result
+  let resultIndex = -1;
+  // loop through arr, starting at index 1.
+  for (let i = 1; i < arr.length; i++) {
+    // extract from arr start up to and including i
+    let slicedArr1 = arr.slice(0, i);
+    // extract from one index ahead of i, not i itself! This is because we are comparing all values to the left and right of i
+    let slicedArr2 = arr.slice(i + 1);
+    // using array reduce, if the totals match, set resultIndex to i
+    if (
+      slicedArr1.reduce((prev, current) => prev + current, 0) ===
+      slicedArr2.reduce((prev, current) => prev + current, 0)
+    ) {
+      resultIndex = i;
+      // break out of the loop because the challenge stipulates that we want the first valid index.
+      break;
+    }
+  }
+  // if no index was assigned during the loop, we know nothing was found. Value will remain at -1.
+  return resultIndex;
 }
 
 // Tests
 
-console.log(calc("abcdef")); // 6
-console.log(calc("ifkhchlhfd")); // 6
-console.log(calc("aaaaaddddr")); // 30
-console.log(calc("jfmgklf8hglbe")); // 6
-console.log(calc("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")); // 96
+console.log(peak([1, 2, 3, 5, 3, 2, 1])); // 3
+console.log(peak([1, 12, 3, 3, 6, 3, 1])); // 2
+console.log(peak([10, 20, 30, 40])); // -1
