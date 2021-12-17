@@ -16,22 +16,31 @@
 // Testing: [0, 1, 1, 0] ==> 6
 // Testing: [1, 1, 1, 1] ==> 15
 // Testing: [1, 0, 1, 1] ==> 11
+
 // However, the arrays can have varying lengths, not just limited to 4.
+
+// Good luck!
 
 // My code below:
 
-const binaryArrayToNumber = arr => {
-  // parseInt will attempt to convert the first argument (in base x, the second argument) to an integer.
-  return parseInt(arr.join(''),2);
+const binaryArrayToNumber = (arr) => {
+  // determine binary numbers based on arr length
+  const numbers = [1];
+  for (let i = 0; i < arr.length - 1; i++) {
+    numbers.push(numbers[i] * 2);
+  }
+  numbers.reverse();
+  // loop through arr, multiplying each number by the value of its binary place
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += arr[i] * numbers[i];
+  }
+  return sum;
 };
 
 // Tests
 
 console.log(binaryArrayToNumber([0, 0, 0, 1])); // 1
 console.log(binaryArrayToNumber([0, 0, 1, 0])); // 2
-console.log(binaryArrayToNumber([0, 1, 0, 1])); // 5
-console.log(binaryArrayToNumber([1, 0, 0, 1])); // 9
-console.log(binaryArrayToNumber([0, 0, 1, 0])); // 2
-console.log(binaryArrayToNumber([0, 1, 1, 0])); // 6
 console.log(binaryArrayToNumber([1, 1, 1, 1])); // 15
-console.log(binaryArrayToNumber([1, 0, 1, 1])); // 11
+console.log(binaryArrayToNumber([0, 1, 1, 0])); // 6
