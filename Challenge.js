@@ -1,46 +1,39 @@
-// Challenge: Ones and Zeros (7 kyu)
+// Challenge: Double Trouble (7 kyu)
 
 // Description:
 
-// Given an array of ones and zeroes, convert the equivalent binary value to an integer.
+// Given an array of integers (x), and a target (t), you must find out if any two consecutive numbers in the array sum to t. If so, remove the second number.
 
-// Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1.
+// Example:
 
-// Examples:
+// x = [1, 2, 3, 4, 5]
+// t = 3
 
-// Testing: [0, 0, 0, 1] ==> 1
-// Testing: [0, 0, 1, 0] ==> 2
-// Testing: [0, 1, 0, 1] ==> 5
-// Testing: [1, 0, 0, 1] ==> 9
-// Testing: [0, 0, 1, 0] ==> 2
-// Testing: [0, 1, 1, 0] ==> 6
-// Testing: [1, 1, 1, 1] ==> 15
-// Testing: [1, 0, 1, 1] ==> 11
+// 1+2 = t, so remove 2. No other pairs = t, so rest of array remains:
 
-// However, the arrays can have varying lengths, not just limited to 4.
+// [1, 3, 4, 5]
 
-// Good luck!
+// Work through the array from left to right.
+
+// Return the resulting array.
 
 // My code below:
 
-const binaryArrayToNumber = (arr) => {
-  // determine binary numbers based on arr length
-  const numbers = [1];
-  for (let i = 0; i < arr.length - 1; i++) {
-    numbers.push(numbers[i] * 2);
+const trouble = (x, t) => {
+  let arr = x;
+  for (let i = 1; i < arr.length; ++i) {
+    // splice changes the array it is used on. When an item is removed, the index advances by one. This effect needs to be offset by subtracting one from the index.
+    if (arr[i] + arr[i - 1] === t) {
+      arr.splice(i, 1);
+      i--;
+    }
   }
-  numbers.reverse();
-  // loop through arr, multiplying each number by the value of its binary place
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sum += arr[i] * numbers[i];
-  }
-  return sum;
+  return arr;
 };
 
 // Tests
 
-console.log(binaryArrayToNumber([0, 0, 0, 1])); // 1
-console.log(binaryArrayToNumber([0, 0, 1, 0])); // 2
-console.log(binaryArrayToNumber([1, 1, 1, 1])); // 15
-console.log(binaryArrayToNumber([0, 1, 1, 0])); // 6
+console.log(trouble([1, 3, 5, 6, 7, 4, 3], 7)); // [1, 3, 5, 6, 7, 4])
+console.log(trouble([4, 1, 1, 1, 4], 2)); // [4, 1, 4])
+console.log(trouble([2, 2, 2, 2, 2, 2], 4)); // [2]
+console.log(trouble([2, 6, 2], 8)); // [2, 2]
