@@ -1,39 +1,27 @@
-// Challenge: Double Trouble (7 kyu)
+// Challenge: Printer Errors (7 kyu)
 
 // Description:
 
-// Given an array of integers (x), and a target (t), you must find out if any two consecutive numbers in the array sum to t. If so, remove the second number.
+// In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from a to m.
 
-// Example:
+// The colors used by the printer are recorded in a control string. For example a "good" control string would be aaabbbbhaijjjm meaning that the printer used three times color a, four times color b, one time color h then one time color a...
 
-// x = [1, 2, 3, 4, 5]
-// t = 3
+// Sometimes there are problems: lack of colors, technical malfunction and a "bad" control string is produced e.g. aaaxbbbbyyhwawiwjjjwwm with letters not from a to m.
 
-// 1+2 = t, so remove 2. No other pairs = t, so rest of array remains:
+// You have to write a function printer_error which given a string will return the error rate of the printer as a string representing a rational whose numerator is the number of errors and the denominator the length of the control string. Don't reduce this fraction to a simpler expression.
 
-// [1, 3, 4, 5]
-
-// Work through the array from left to right.
-
-// Return the resulting array.
+// The string has a length greater or equal to one and contains only letters from ato z.
 
 // My code below:
 
-const trouble = (x, t) => {
-  let arr = x;
-  for (let i = 1; i < arr.length; ++i) {
-    // splice changes the array it is used on. When an item is removed, the index advances by one. This effect needs to be offset by subtracting one from the index.
-    if (arr[i] + arr[i - 1] === t) {
-      arr.splice(i, 1);
-      i--;
-    }
-  }
-  return arr;
+const printerError = (s) => {
+  // Line 20 courtesy of https://forum.freecodecamp.org/t/uncaught-typeerror-cannot-read-property-length-of-null-error/332786/8
+  // This resolves "cannot read property length of null error"
+  let matches = s.match(/[^a-m]/g) || [];
+  return `${matches.join("").length}/${s.length}`;
 };
 
 // Tests
 
-console.log(trouble([1, 3, 5, 6, 7, 4, 3], 7)); // [1, 3, 5, 6, 7, 4])
-console.log(trouble([4, 1, 1, 1, 4], 2)); // [4, 1, 4])
-console.log(trouble([2, 2, 2, 2, 2, 2], 4)); // [2]
-console.log(trouble([2, 6, 2], 8)); // [2, 2]
+console.log(printerError("aaabbbbhaijjjm")); // "0/14"
+console.log(printerError("aaaxbbbbyyhwawiwjjjwwm")); // "8/22"
