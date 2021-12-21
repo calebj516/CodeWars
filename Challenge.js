@@ -1,27 +1,55 @@
-// Challenge: Printer Errors (7 kyu)
+// Challenge: Are there doubles? (7 kyu)
 
 // Description:
 
-// In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from a to m.
+// Your job is to build a function which determines whether or not there are double characters in a string (including whitespace characters). For example aa, !! or .
 
-// The colors used by the printer are recorded in a control string. For example a "good" control string would be aaabbbbhaijjjm meaning that the printer used three times color a, four times color b, one time color h then one time color a...
+// You want the function to return true if the string contains double characters and false if not. The test should not be case sensitive; for example both aa & aA return true.
 
-// Sometimes there are problems: lack of colors, technical malfunction and a "bad" control string is produced e.g. aaaxbbbbyyhwawiwjjjwwm with letters not from a to m.
+// Examples:
 
-// You have to write a function printer_error which given a string will return the error rate of the printer as a string representing a rational whose numerator is the number of errors and the denominator the length of the control string. Don't reduce this fraction to a simpler expression.
-
-// The string has a length greater or equal to one and contains only letters from ato z.
+//   doubleCheck("abca")
+//   returns false
+  
+//   doubleCheck("aabc")
+//   returns true
+  
+//   doubleCheck("a 11 c d")
+//   returns true
+  
+//   doubleCheck("AabBcC")
+//   returns true
+  
+//   doubleCheck("a b  c")
+//   returns true
+  
+//   doubleCheck("a b c d e f g h i h k")
+//   returns false
+  
+//   doubleCheck("2020")
+//   returns false
+  
+//   doubleCheck("a!@€£#$%^&*()_-+=}]{[|\"':;?/>.<,~")
+//   returns false
 
 // My code below:
 
-const printerError = (s) => {
-  // Line 20 courtesy of https://forum.freecodecamp.org/t/uncaught-typeerror-cannot-read-property-length-of-null-error/332786/8
-  // This resolves "cannot read property length of null error"
-  let matches = s.match(/[^a-m]/g) || [];
-  return `${matches.join("").length}/${s.length}`;
-};
+  // The some() method tests whether at least one element in the array passes the test implemented by the provided function. If so, it returns true.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+  // some((element, index, array) => { /* ... */ } )
+
+function doubleCheck(str){
+  // change all characters in str to lowercase, then split into an array and use some()
+  return str.toLowerCase().split('').some((c, i, arr) => c === arr[i + 1]);
+}
 
 // Tests
 
-console.log(printerError("aaabbbbhaijjjm")); // "0/14"
-console.log(printerError("aaaxbbbbyyhwawiwjjjwwm")); // "8/22"
+console.log(doubleCheck("abca")); //   returns false
+console.log(doubleCheck("aabc")); //   returns true
+console.log(doubleCheck("a 11 c d")); //   returns true
+console.log(doubleCheck("AabBcC")); //   returns true
+console.log(doubleCheck("a b  c")); //   returns true
+console.log(doubleCheck("a b c d e f g h i h k")); //   returns false
+console.log(doubleCheck("2020")); //   returns false
+console.log(doubleCheck("a!@€£#$%^&*()_-+=}]{[|\"':;?/>.<,~")); //   returns false
