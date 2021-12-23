@@ -1,55 +1,65 @@
-// Challenge: Are there doubles? (7 kyu)
+// Challenge: A Man and His Umbrellas (5 kyu)
 
 // Description:
 
-// Your job is to build a function which determines whether or not there are double characters in a string (including whitespace characters). For example aa, !! or .
+// Each morning a man walks to work, and each afternoon he walks back home.
 
-// You want the function to return true if the string contains double characters and false if not. The test should not be case sensitive; for example both aa & aA return true.
+// If it is raining in the morning and he has an umbrella at home, he takes an umbrella for the journey so he doesn't get wet, and stores it at work. Likewise, if it is raining in the afternoon and he has an umbrella at work, he takes an umbrella for the journey home.
 
-// Examples:
+// Given an array of the weather conditions, your task is to work out the minimum number of umbrellas he needs to start with in order that he never gets wet. He can start with some umbrellas at home and some at work, but the output is a single integer, the minimum total number.
 
-//   doubleCheck("abca")
-//   returns false
-  
-//   doubleCheck("aabc")
-//   returns true
-  
-//   doubleCheck("a 11 c d")
-//   returns true
-  
-//   doubleCheck("AabBcC")
-//   returns true
-  
-//   doubleCheck("a b  c")
-//   returns true
-  
-//   doubleCheck("a b c d e f g h i h k")
-//   returns false
-  
-//   doubleCheck("2020")
-//   returns false
-  
-//   doubleCheck("a!@€£#$%^&*()_-+=}]{[|\"':;?/>.<,~")
-//   returns false
+// The input is an array/list of consecutive half-day weather forecasts. So, e.g. the first value is the 1st day's morning weather and the second value is the 1st day's afternoon weather. The options are "clear", "sunny", "cloudy", "rainy", "windy" or "thunderstorms".
 
-// My code below:
+// e.g. for three days, 6 values:
 
-  // The some() method tests whether at least one element in the array passes the test implemented by the provided function. If so, it returns true.
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-  // some((element, index, array) => { /* ... */ } )
+// weather = ["rainy", "cloudy", "sunny", "sunny", "cloudy", "thunderstorms"]
+// N.B. He never takes an umbrella if it is not raining.
 
-function doubleCheck(str){
-  // change all characters in str to lowercase, then split into an array and use some()
-  return str.toLowerCase().split('').some((c, i, arr) => c === arr[i + 1]);
+// My cod below:
+
+const minUmbrellas = (weather) => {
+
+  const rainyWeather = ["thunderstorms", "rainy"];
+  let home = 0;
+  let office = 0;
+  
+  weather.forEach((el, i) => {
+    // if there is rainy weather...
+    if(rainyWeather.includes(el)){
+      // if AM...
+        if(i % 2 === 0){
+          // if an umbrella is at home, take it to the office.
+          if(home){
+            home--;
+          }
+          // office count will increase by one because an umbrella is taken to the office no matter what (perhaps one is purchased on the way there).
+          office++;
+        // if PM...
+        } else {
+          // if an umbrella is at the office, take it home.
+          if(office){
+            office--;
+          }
+          // home count will increase by one because an umbrella is taken home no matter what (perhaps one is purchased on the way home).
+          home++;
+        }
+      }
+  });
+  // return combined count of office and home
+  return office + home;
 }
 
 // Tests
 
-console.log(doubleCheck("abca")); //   returns false
-console.log(doubleCheck("aabc")); //   returns true
-console.log(doubleCheck("a 11 c d")); //   returns true
-console.log(doubleCheck("AabBcC")); //   returns true
-console.log(doubleCheck("a b  c")); //   returns true
-console.log(doubleCheck("a b c d e f g h i h k")); //   returns false
-console.log(doubleCheck("2020")); //   returns false
-console.log(doubleCheck("a!@€£#$%^&*()_-+=}]{[|\"':;?/>.<,~")); //   returns false
+console.log(minUmbrellas(["rainy", "clear", "rainy", "cloudy"]));
+// should return 2
+// Because on the first morning, he needs an umbrella to take, and he leaves it at work.
+// So on the second morning, he needs a second umbrella.
+
+console.log(minUmbrellas(["sunny", "windy", "sunny", "clear"]));
+// should return 0
+// Because it doesn't rain at all
+
+console.log(minUmbrellas(["rainy", "rainy", "rainy", "rainy", "thunderstorms", "rainy"]));
+// should return 1
+// Because he only needs 1 umbrella which he takes on every journey.
