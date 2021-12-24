@@ -1,65 +1,38 @@
-// Challenge: A Man and His Umbrellas (5 kyu)
+// Challenge: Meeting (6 kyu)
 
 // Description:
 
-// Each morning a man walks to work, and each afternoon he walks back home.
+// John has invited some friends. His list is:
 
-// If it is raining in the morning and he has an umbrella at home, he takes an umbrella for the journey so he doesn't get wet, and stores it at work. Likewise, if it is raining in the afternoon and he has an umbrella at work, he takes an umbrella for the journey home.
+// s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill";
+// Could you make a program that
 
-// Given an array of the weather conditions, your task is to work out the minimum number of umbrellas he needs to start with in order that he never gets wet. He can start with some umbrellas at home and some at work, but the output is a single integer, the minimum total number.
+// makes this string uppercase
+// gives it sorted in alphabetical order by last name.
+// When the last names are the same, sort them by first name. Last name and first name of a guest come in the result between parentheses separated by a comma.
 
-// The input is an array/list of consecutive half-day weather forecasts. So, e.g. the first value is the 1st day's morning weather and the second value is the 1st day's afternoon weather. The options are "clear", "sunny", "cloudy", "rainy", "windy" or "thunderstorms".
+// So the result of function meeting(s) will be:
 
-// e.g. for three days, 6 values:
+// "(CORWILL, ALFRED)(CORWILL, FRED)(CORWILL, RAPHAEL)(CORWILL, WILFRED)(TORNBULL, BARNEY)(TORNBULL, BETTY)(TORNBULL, BJON)"
+// It can happen that in two distinct families with the same family name two people have the same first name too.
 
-// weather = ["rainy", "cloudy", "sunny", "sunny", "cloudy", "thunderstorms"]
-// N.B. He never takes an umbrella if it is not raining.
+// My code below:
 
-// My cod below:
-
-const minUmbrellas = (weather) => {
-
-  const rainyWeather = ["thunderstorms", "rainy"];
-  let home = 0;
-  let office = 0;
-  
-  weather.forEach((el, i) => {
-    // if there is rainy weather...
-    if(rainyWeather.includes(el)){
-      // if AM...
-        if(i % 2 === 0){
-          // if an umbrella is at home, take it to the office.
-          if(home){
-            home--;
-          }
-          // office count will increase by one because an umbrella is taken to the office no matter what (perhaps one is purchased on the way there).
-          office++;
-        // if PM...
-        } else {
-          // if an umbrella is at the office, take it home.
-          if(office){
-            office--;
-          }
-          // home count will increase by one because an umbrella is taken home no matter what (perhaps one is purchased on the way home).
-          home++;
-        }
-      }
-  });
-  // return combined count of office and home
-  return office + home;
-}
+const meeting = s => {
+  // regex explanation: there are two capturing groups enclosed in parenthesis, within which any number of word characters \w+.
+  // These contain the first name, followed by a colon separating the two groups, then the last name.
+  // The $2 is a placeholder for the last name and the $1 is for the first name. Putting the $2 first means the last name comes first.
+  return s.toUpperCase()
+         .replace(/(\w+):(\w+)/g, "($2, $1)")
+         .split(';')
+         .sort()
+         .join('')
+};
 
 // Tests
 
-console.log(minUmbrellas(["rainy", "clear", "rainy", "cloudy"]));
-// should return 2
-// Because on the first morning, he needs an umbrella to take, and he leaves it at work.
-// So on the second morning, he needs a second umbrella.
+console.log(meeting("Alexis:Wahl;John:Bell;Victoria:Schwarz;Abba:Dorny;Grace:Meta;Ann:Arno;Madison:STAN;Alex:Cornwell;Lewis:Kern;Megan:Stan;Alex:Korn")); // "(ARNO, ANN)(BELL, JOHN)(CORNWELL, ALEX)(DORNY, ABBA)(KERN, LEWIS)(KORN, ALEX)(META, GRACE)(SCHWARZ, VICTORIA)(STAN, MADISON)(STAN, MEGAN)(WAHL, ALEXIS)");
 
-console.log(minUmbrellas(["sunny", "windy", "sunny", "clear"]));
-// should return 0
-// Because it doesn't rain at all
+console.log(meeting("John:Gates;Michael:Wahl;Megan:Bell;Paul:Dorries;James:Dorny;Lewis:Steve;Alex:Meta;Elizabeth:Russel;Anna:Korn;Ann:Kern;Amber:Cornwell")); // "(BELL, MEGAN)(CORNWELL, AMBER)(DORNY, JAMES)(DORRIES, PAUL)(GATES, JOHN)(KERN, ANN)(KORN, ANNA)(META, ALEX)(RUSSEL, ELIZABETH)(STEVE, LEWIS)(WAHL, MICHAEL)");
 
-console.log(minUmbrellas(["rainy", "rainy", "rainy", "rainy", "thunderstorms", "rainy"]));
-// should return 1
-// Because he only needs 1 umbrella which he takes on every journey.
+console.log(meeting("Alex:Arno;Alissa:Cornwell;Sarah:Bell;Andrew:Dorries;Ann:Kern;Haley:Arno;Paul:Dorny;Madison:Kern")); // "(ARNO, ALEX)(ARNO, HALEY)(BELL, SARAH)(CORNWELL, ALISSA)(DORNY, PAUL)(DORRIES, ANDREW)(KERN, ANN)(KERN, MADISON)");
