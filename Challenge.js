@@ -1,32 +1,26 @@
-// Challenge: Get the integers between two numbers (7 kyu)
+// Challenge: Largest pair sum in array (7 kyu)
 
 // Description:
 
-// Build a function that can get all the integers between two given numbers.
+// Given a sequence of numbers, find the largest pair sum in the sequence.
 
-// Example:
+// For example
 
-// (2,9)
-
-// Should give you this output back:
-
-// [ 3, 4, 5, 6, 7, 8 ]
-
-// If startNum is the same as endNum, return an empty array.
+// [10, 14, 2, 23, 19] -->  42 (= 23 + 19)
+// [99, 2, 2, 23, 19]  --> 122 (= 99 + 23)
+// Input sequence contains minimum two elements and every element is an integer.
 
 // My code below:
 
-const range = (startNum, endNum) =>  
-{  
- //code goes in here
-  let result = [];
-  for(let i = startNum + 1; i < endNum; i++){
-    result.push(i);
-  }
-  return result;
-};  
+function largestPairSum(numbers)
+{
+  // sort by ascending order, take the last two elements and sum them up using reduce
+  return numbers.sort((a, b) => a - b).slice(-2).reduce((total, current) => total + current);
+}
 
 // Tests
 
-console.log(range(0, 100)); // 1 to 99
-console.log(range(-100, 0)); // -99 to -1
+console.log(largestPairSum([10,14,2,23,19])); // 42
+console.log(largestPairSum([-100,-29,-24,-19,19])); // 0 
+console.log(largestPairSum([1,2,3,4,6,-1,2])); // 10 
+console.log(largestPairSum([-10, -8, -16, -18, -19])); // -18;
