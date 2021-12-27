@@ -1,26 +1,27 @@
-// Challenge: Largest pair sum in array (7 kyu)
+// Challenge: Rearrange Number to Get its Maximum (7 kyu)
 
 // Description:
 
-// Given a sequence of numbers, find the largest pair sum in the sequence.
+// Create a function that takes one positive three digit integer and rearranges its digits to get the maximum possible number. Assume that the argument is an integer.
 
-// For example
+// Returm null if the argument is invalid.
 
-// [10, 14, 2, 23, 19] -->  42 (= 23 + 19)
-// [99, 2, 2, 23, 19]  --> 122 (= 99 + 23)
-// Input sequence contains minimum two elements and every element is an integer.
+// maxRedigit(123) --> 321
 
 // My code below:
 
-function largestPairSum(numbers)
-{
-  // sort by ascending order, take the last two elements and sum them up using reduce
-  return numbers.sort((a, b) => a - b).slice(-2).reduce((total, current) => total + current);
-}
+const maxRedigit = (num) => { 
+  // only 3 digit integers are valid. Change to string and test the length to enforce this. If valid...
+  // take num, change it to an array and sort it, change it back to a string, and convert to a number
+  return num.toString().length === 3 ? Number(num.toString().split('').sort((a, b) => b - a).join('')) : null;
+};
 
 // Tests
 
-console.log(largestPairSum([10,14,2,23,19])); // 42
-console.log(largestPairSum([-100,-29,-24,-19,19])); // 0 
-console.log(largestPairSum([1,2,3,4,6,-1,2])); // 10 
-console.log(largestPairSum([-10, -8, -16, -18, -19])); // -18;
+console.log(maxRedigit(123)); // 321, "123 => 321"
+console.log(maxRedigit(231)); // 321, "231 => 321"
+console.log(maxRedigit(321)); // 321, "321 => 321"
+
+console.log(maxRedigit(-1)); // null, "-1 => null"
+console.log(maxRedigit(0));  // null, "0 => null"
+console.log(maxRedigit(99)); // null, "99 => null"
