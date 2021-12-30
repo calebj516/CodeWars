@@ -1,31 +1,31 @@
-// Challenge: Incrementer (7 kyu)
+// Challenge: Spoonerize Me (7 kyu)
 
 // Description:
 
-// Given an input of an array of digits, return the array with each digit incremented by its position in the array: the first digit will be incremented by 1, the second digit by 2, etc. Make sure to start counting your positions from 1 (and not 0).
+// A spoonerism is a spoken phrase in which the first letters of two of the words are swapped around, often with amusing results.
 
-// Your result can only contain single digit numbers, so if adding a digit with it's position gives you a multiple-digit number, only the last digit of the number should be returned.
+// In its most basic form a spoonerism is a two word phrase in which only the first letters of each word are swapped:
 
-// Notes:
-// return an empty array if your array is empty
-// arrays will only contain numbers so don't worry about checking that
-// Examples
-// [1, 2, 3]  -->  [2, 4, 6]   #  [1+1, 2+2, 3+3]
+// "not picking" --> "pot nicking"
 
-// [4, 6, 9, 1, 3]  -->  [5, 8, 2, 5, 8]  #  [4+1, 6+2, 9+3, 1+4, 3+5]
-//                                        #  9+3 = 12  -->  2
+// Your task is to create a function that takes a string of two words, separated by a space: words and returns a spoonerism of those words in a string, as in the above example.
+
+// NOTE: All input strings will contain only two words. Spoonerisms can be more complex. For example, three-word phrases in which the first letters of the first and last words are swapped: "pack of lies" --> "lack of pies" or more than one letter from a word is swapped: "flat battery --> "bat flattery" You are NOT expected to account for these, or any other nuances involved in spoonerisms.
+
+// Once you have completed this kata, a slightly more challenging take on the idea can be found here: http://www.codewars.com/kata/56dbed3a13c2f61ae3000bcd
 
 // My code below:
 
-function incrementer(nums) { 
-  // Take the element, add the index to it, and then add one to offset the index starting at 0.
-  // Taking a number % 10 gives us the last digit of the number.
-  return nums.map((el, i) => (el + i + 1) % 10);
+function spoonerize(words) {
+  let word = words.split(' ');
+  // Note on slice() from MDN: if endIndex is omitted slice() extracts to the end of the string. (E.g. "test".slice(1) returns "est")
+  // So, word[0].slice(1) and word[1].slice(1) returns the entire word except for the first character. Adding the first character in front of these gives us the answer.
+  return [word[1][0] + word[0].slice(1), word[0][0] + word[1].slice(1)].join(' ');
 }
 
 // Tests
 
-console.log(incrementer([])); // []
-console.log(incrementer([1, 2, 3])); // [2, 4, 6]
-console.log(incrementer([4, 6, 7, 1, 3])); // [5, 8, 0, 5, 8]
-console.log(incrementer([3, 6, 9, 8, 9])); // [4, 8, 2, 2, 4]
+console.log(spoonerize("not picking")); // "pot nicking"
+console.log(spoonerize("wedding bells")); // "bedding wells"
+console.log(spoonerize("jelly beans")); // "belly jeans"
+console.log(spoonerize("pop corn")); // "cop porn"
