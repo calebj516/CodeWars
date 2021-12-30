@@ -1,68 +1,31 @@
-// Challenge: Coding 3min : Remove screws I (7 kyu)
+// Challenge: Incrementer (7 kyu)
 
 // Description:
 
-// John is a worker, his job is to remove screws from a machine. There are 2 types of screws: slotted (-) and cross (+). John has two screwdrivers, one for each type of screw.
+// Given an input of an array of digits, return the array with each digit incremented by its position in the array: the first digit will be incremented by 1, the second digit by 2, etc. Make sure to start counting your positions from 1 (and not 0).
 
-// The input will be a (non-empty) string of screws, e.g. : "---+++"
+// Your result can only contain single digit numbers, so if adding a digit with it's position gives you a multiple-digit number, only the last digit of the number should be returned.
 
-// When John begins to work, he stands at the first screw, with the correct screwdriver in his hand, and another in his tool kit. He works from left to right, removing every screw. When necessary, he switches between the screwdriver in his hand and the one in his tool kit.
-
-// Each action takes a set amount of time:
-
-// remove one screw : 1 second
-// move to the next screw: 1 second
-// switch screwdrivers: 5 seconds
-// Your task is to return the total time taken to remove all the screws, in seconds.
-
+// Notes:
+// return an empty array if your array is empty
+// arrays will only contain numbers so don't worry about checking that
 // Examples
-// In order to be more clear, we use ABCDEF to represent the screws. The number in brackets is the time in seconds:
+// [1, 2, 3]  -->  [2, 4, 6]   #  [1+1, 2+2, 3+3]
 
-// screws: "---+++"
-//          ABCDEF
-
-// remove A (1) + move to B (1) + remove B (1) + 
-// move to C (1) + remove C (1) + move to D (1) +
-// switch screwdriver (5) + remove D (1) +
-// move to E (1) + remove E (1) + move to F (1) + remove F (1)
-
-// total time = 16 seconds
-// Another example:
-
-// screws: "-+-+-+"
-//          ABCDEF
-
-// remove A (1) +
-// move to B (1) + switch screwdriver (5) + remove B (1) +
-// move to C (1) + switch screwdriver (5) + remove C (1) +
-// move to D (1) + switch screwdriver (5) + remove D (1) +
-// move to E (1) + switch screwdriver (5) + remove E (1) +
-// move to F (1) + switch screwdriver (5) + remove F (1)
-
-// total time = 36 seconds 
+// [4, 6, 9, 1, 3]  -->  [5, 8, 2, 5, 8]  #  [4+1, 6+2, 9+3, 1+4, 3+5]
+//                                        #  9+3 = 12  -->  2
 
 // My code below:
 
-function sc(screws){
-  
-  let screwChangeTime = 0;
-  let screwsArr = screws.split('');
-  
-  for(let i = 1; i < screwsArr.length; i++){
-    // if current element is not equal to previous element a screw change has occured.
-    if(screwsArr[i] !== screwsArr[i - 1]){
-      screwChangeTime += 5;
-    }
-  }
-
-  // remove screw time = length of screws. Each screw has to be removed.
-  // move to next screw = length of screws - 1, because first screw is not counted.
-  return screws.length + (screws.length - 1) + screwChangeTime;
+function incrementer(nums) { 
+  // Take the element, add the index to it, and then add one to offset the index starting at 0.
+  // Taking a number % 10 gives us the last digit of the number.
+  return nums.map((el, i) => (el + i + 1) % 10);
 }
 
 // Tests
 
-console.log(sc("---+++")); // 16
-console.log(sc("-+-+-+")); // 36
-console.log(sc("-+-+-----------")); // 49
-console.log(sc("-+-+-++++++++++")); // 54
+console.log(incrementer([])); // []
+console.log(incrementer([1, 2, 3])); // [2, 4, 6]
+console.log(incrementer([4, 6, 7, 1, 3])); // [5, 8, 0, 5, 8]
+console.log(incrementer([3, 6, 9, 8, 9])); // [4, 8, 2, 2, 4]
