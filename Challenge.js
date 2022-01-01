@@ -1,36 +1,49 @@
-// Challenge: Noonerize Me (7 kyu)
+// Challenge: Rock Paper Scissors! (8 kyu)
 
 // Description:
 
-// Spoonerize... with numbers... numberize?... numboonerize?... noonerize? ...anyway! If you don't yet know what a spoonerism is and haven't yet tried my spoonerism kata, please do check it out first.
+// Rock Paper Scissors
+// Let's play! You have to return which player won! In case of a draw return Draw!.
 
-// You will create a function which takes an array of two positive integers, spoonerizes them, and returns the positive difference between them as a single number or 0 if the numbers are equal:
+// Examples:
 
-// [123, 456] = 423 - 156 = 267
-// Your code must test that all array items are numbers and return "invalid array" if it finds that either item is not a number. The provided array will always contain 2 elements.
-
-// When the inputs are valid, they will always be integers, no floats will be passed. However, you must take into account that the numbers will be of varying magnitude, between and within test cases.
+// rps('scissors','paper') // Player 1 won!
+// rps('scissors','rock') // Player 2 won!
+// rps('paper','paper') // Draw!
 
 // My code below:
 
-function noonerize(numbers) {
-  // ...mathoonerize, maybe?
-  if (numbers.every((el) => typeof el === "number")) {
-    numbers = numbers.map(String);
-    let [a, b] = numbers;
-    [a, b] = [b[0] + a.slice(1), a[0] + b.slice(1)];
-    numbers = numbers.map(Number);
-    return Math.abs([a - b]);
+const rps = (p1, p2) => {
+
+  let rules = {rock: "scissors", paper: "rock", scissors: "paper"};
+
+  if(p1 === p2){
+    return "Draw!"
+  } else if(p2 === rules[p1]) {
+    return "Player 1 won!";
+  } else {
+    return "Player 2 won!";
   }
-  return "invalid array";
+
 }
 
 // Tests
 
-console.log(noonerize([12, 34])); // 18
-console.log(noonerize([55, 63])); // 12
-console.log(noonerize([357, 579])); // 178
-console.log(noonerize(["hello", "world"])); // "invalid array"
-console.log(noonerize([1000000, 9999999])); // 7000001
-console.log(noonerize([1000000, "hello"])); // "invalid array"
-console.log(noonerize(["world", 63])); // "invalid array"
+// Player 1 Win
+
+console.log(rps('rock', 'scissors')); 
+console.log(rps('scissors', 'paper')); 
+console.log(rps('paper', 'rock')); 
+
+// Player 2 Win
+
+console.log(rps('scissors', 'rock')); 
+console.log(rps('paper', 'scissors')); 
+console.log(rps('rock', 'paper')); 
+
+// Draw
+
+console.log(rps('rock', 'rock'));
+console.log(rps('scissors', 'scissors'));
+console.log(rps('paper', 'paper'));
+
