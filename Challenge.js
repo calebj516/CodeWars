@@ -1,4 +1,4 @@
-// Challenge: Identical Elements (7 kyu)
+// Challenge: A Gift Well Spent (7 kyu)
 
 // Description:
 
@@ -8,28 +8,22 @@
 
 // My code below:
 
-function duplicateElements(m, n) {
-  // some will return true if it at least one test passes.
-  // includes will return true if an array contains a certain value among its entries.
-  // putting it all together: test each element in m using some, to see if it is included in n (n.includes(v), with v referring to each element in m)
-  return m.some(v => n.includes(v));
+const buy = (x, arr) => {
+  for(let i = 0; i < arr.length; i++){
+  // set j to 1 more than i because we are comparing the sum of arr[i], and the element immediately following arr[i].
+    for(let j = i + 1; j < arr.length; j++){
+      if(arr[i] + arr[j] === x){
+        return [i, j];
+      }
+    }
+  }
+  return null;
 }
 
 // Tests
 
-// It should handle duplicates
-
-console.log(duplicateElements([1, 2, 3, 4, 5], [1, 6, 7, 8, 9])); // true
-console.log(duplicateElements([9, 8, 7], [8, 1, 3])); // true
-console.log(duplicateElements([-2, -4, -6, -8], [-2, -3, -5, -7])); // true
-console.log(duplicateElements([-9, -8, -7], [-8, -1, -3])); // true
-
-// It should handle no duplicates
-
-console.log(duplicateElements([0, 1, 2, 3, 4], [5, 6, 7, 8, 9])); // false
-
-// It should handle empty arrays
-
-console.log(duplicateElements([], [9, 8, 7, 6, 5])); // false
-console.log(duplicateElements([9, 8, 7, 6, 5], [])); // false
-console.log(duplicateElements([],[])); // false
+console.log(buy(2,[1,1])); // [0,1]
+console.log(buy(3,[1,1])); // null
+console.log(buy(5,[5,2,3,4,5])); // [1,2]
+console.log(buy(5,[1,2,3,4,5])); // [0,3]
+console.log(buy(5,[0,0,0,2,3])); // [3,4]
