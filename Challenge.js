@@ -1,29 +1,29 @@
-// Challenge: A Gift Well Spent (7 kyu)
+// Challenge: Previous Multiple of Three (7 kyu)
 
 // Description:
 
-// Given two arrays of integers m and n, test if they contain at least one identical element. Return true if they do; false if not.
+// Given a positive integer n: 0 < n < 1e6, remove the last digit until you're left with a number that is a multiple of three.
 
-// Your code must handle any value within the range of a 32-bit integer, and must be capable of handling either array being empty (which is a false result, as there are no duplicated elements).
+// Return n if the input is already a multiple of three, and return null/nil/None/-1 if no such number exists.
 
 // My code below:
 
-const buy = (x, arr) => {
-  for(let i = 0; i < arr.length; i++){
-  // set j to 1 more than i because we are comparing the sum of arr[i], and the element immediately following arr[i].
-    for(let j = i + 1; j < arr.length; j++){
-      if(arr[i] + arr[j] === x){
-        return [i, j];
-      }
-    }
+const prevMultOfThree = n => {
+  // convert n into a string in order to slice it in the while loop (while it is not a multiple of 3)
+  n = n.toString();
+  // whlie n is not a multiple of 3, set n to the same thing except for the final character
+  while(+n % 3 !== 0) {
+    n = n.slice(0, n.length-1);
   }
-  return null;
+  // if all of n was removed, there is no multiple of 3 present. Return null.
+  // otherwise return n, converted to a number
+  return n.length == 0 ? null : +n;
 }
 
 // Tests
 
-console.log(buy(2,[1,1])); // [0,1]
-console.log(buy(3,[1,1])); // null
-console.log(buy(5,[5,2,3,4,5])); // [1,2]
-console.log(buy(5,[1,2,3,4,5])); // [0,3]
-console.log(buy(5,[0,0,0,2,3])); // [3,4]
+console.log(prevMultOfThree(1)); // null
+console.log(prevMultOfThree(25)); // null
+console.log(prevMultOfThree(36)); // 36
+console.log(prevMultOfThree(1244)); // 12
+console.log(prevMultOfThree(952406)); // 9
