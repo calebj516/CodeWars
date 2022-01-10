@@ -15,7 +15,7 @@ function alternateCase(s) {
         : letter.toUpperCase()
     )
     .join("");
-
+}
 // Tests
 
 console.log(alternateCase("abc")); // "ABC"
