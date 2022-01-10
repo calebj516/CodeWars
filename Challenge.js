@@ -15,7 +15,6 @@ function alternateCase(s) {
         : letter.toUpperCase()
     )
     .join("");
-}
 
 // Tests
 
