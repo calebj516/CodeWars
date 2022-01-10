@@ -1,33 +1,26 @@
-// Challenge: Two to One (7 kyu)
+// Challenge: Alternate case (7 kyu)
 
 // Description:
 
-// Take 2 strings s1 and s2 including only letters from ato z. Return a new sorted string, the longest possible, containing distinct letters - each taken only once - coming from s1 or s2.
-
-// Examples:
-
-// a = "xyaabbbccccdefww"
-// b = "xxxxyyyyabklmopq"
-// longest(a, b) -> "abcdefklmopqwxy"
-// a = "abcdefghijklmnopqrstuvwxyz"
-// longest(a, a) -> "abcdefghijklmnopqrstuvwxyz"
+// Write function alternateCase which switch every letter in string from upper to lower and from lower to upper. E.g: Hello World -> hELLO wORLD
 
 // My code below:
 
-function longest(s1, s2) {
-  // your code
-  return (s1 + s2)
+function alternateCase(s) {
+  return s
     .split("")
-    .sort()
-    .filter((el, i, arr) => el !== arr[i + 1])
+    .map((letter) =>
+      letter === letter.toUpperCase()
+        ? letter.toLowerCase()
+        : letter.toUpperCase()
+    )
     .join("");
 }
 
 // Tests
 
-console.log(longest("aretheyhere", "yestheyarehere")); // "aehrsty"
-console.log(longest("loopingisfunbutdangerous", "lessdangerousthancoding")); // "abcdefghilnoprstu"
-console.log(longest("inmanylanguages", "theresapairoffunctions")); // "acefghilmnoprstuy"
-console.log(longest("lordsofthefallen", "gamekult")); // "adefghklmnorstu"
-console.log(longest("codewars", "codewars")); // "acdeorsw"
-console.log(longest("agenerationmustconfrontthelooming", "codewarrs")); // "acdefghilmnorstuw"
+console.log(alternateCase("abc")); // "ABC"
+console.log(alternateCase("ABC")); // "abc"
+console.log(alternateCase("Hello World")); // "hELLO wORLD"
+console.log(alternateCase("CodeWars")); // "cODEwARS"
+console.log(alternateCase("i LIKE MAKING KATAS VERY MUCH!")); // "I like making katas very much!"
