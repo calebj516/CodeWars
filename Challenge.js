@@ -67,11 +67,10 @@ let scoring = { E: 1,
 function scrabbleScore(str){
   // ...
   let totalScore = 0;
-  // change str to uppercase and filter out spaces
-  str = str.toUpperCase().split('').filter(letter => letter !== ' ').join('');
-  // loop through str, adding each score to totalScore
+  // Empty spaces will evaluate to undefined (and by extension, falsy) when checked against scoring. The || 0 will handle these by not adding to the score.
+  // The Logical OR operator (||) returns the value of its second operand if the first one is falsy.
   for(let i = 0; i < str.length; i++){
-    totalScore += scoring[str[i]];
+    totalScore += scoring[str[i].toUpperCase()] || 0;
   }
   return totalScore;
 }
