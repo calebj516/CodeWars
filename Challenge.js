@@ -1,23 +1,20 @@
-// Challenge: Digit Explosion (7 kyu)
+// Challenge: Remove consecutive duplicate words (7 kyu)
 
 // Description:
 
-// Given a string made of digits [0-9], return a string where each digit is repeated a number of times equals to its value.
+// Your task is to remove all consecutive duplicate words from a string, leaving only first words entries. For example:
 
-// Examples
-// explode("312"); // => "333122"
-// explode("102269"); // => "12222666666999999999"
+// "alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta"
+
+// --> "alpha beta gamma delta alpha beta gamma delta"
 
 // My code below:
 
-function explode(s) {
-  // split s into an array
-  // loop through s, changing each number into the same number, but repeated the number of times equal to the number
-  // join s back into a string
-  return s.split('').map((num) => num.repeat(num)).join('');
+const removeConsecutiveDuplicates = s => {
+  // filter out elements that are equal to the following element
+  return s.split(' ').filter((word, index, array) => word !== array[index + 1]).join(' ');
 }
 
 // Tests
 
-console.log(explode("312")); // 333122
-console.log(explode("102269")); // 12222666666999999999
+console.log(removeConsecutiveDuplicates('alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta')); // 'alpha beta gamma delta alpha beta gamma delta');
