@@ -9,6 +9,8 @@
 // My code below:
 
 function sumOfIntegersInString(s) {
+  // the regex in match will return one or more numbers as a group, not each number individually. This allows reduce to function as intended (e.g. 12 + 12 instead of 1+2+1+2)
+  // if there are no numbers at all in s, an empty array will be returned
   return (s.match(/\d+/g) || []).reduce(
     (total, currentValue) => total + Number(currentValue),
     0
