@@ -1,29 +1,37 @@
-// Challenge: Shortest Word (7 kyu)
+// Challenge: Sum of integers in string (7 kyu)
 
 // Description:
 
-// Simple, given a string of words, return the length of the shortest word(s).
+// Your task in this kata is to implement a function that calculates the sum of the integers inside a string. For example, in the string "The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog", the sum of the integers is 3635.
 
-// String will never be empty and you do not need to account for different data types.
+// Note: only positive integers will be tested.
 
 // My code below:
 
-function findShort(s){
-  
-  // split string into an array
-  // sort array by length of words
-  // return length of first element
-  
-  return s.split(' ').sort((a, b) => a.length - b.length)[0].length;
-  
+function sumOfIntegersInString(s) {
+  return (s.match(/\d+/g) || []).reduce(
+    (total, currentValue) => total + Number(currentValue),
+    0
+  );
 }
 
 // Tests
 
-console.log(findShort("bitcoin take over the world maybe who knows perhaps")); // 3
-console.log(findShort("turns out random test cases are easier than writing out basic ones")); // 3 
-console.log(findShort("lets talk about javascript the best language")); // 3 
-console.log(findShort("i want to travel the world writing code one day")); // 1 
-console.log(findShort("Lets all go on holiday somewhere very cold")); // 2 
-console.log(findShort("Test where final word shortest see")); // 3 
-console.log(findShort("Let's travel abroad shall we")); // 2
+console.log(sumOfIntegersInString("12.4")); // ["12.4", 16],
+console.log(sumOfIntegersInString("h3ll0w0rld")); // ["h3ll0w0rld", 3],
+console.log(sumOfIntegersInString("2 + 3 = ")); // ["2 + 3 = ", 5],
+console.log(
+  sumOfIntegersInString(
+    "Our company made approximately 1 million in gross revenue last quarter."
+  )
+); // ["Our company made approximately 1 million in gross revenue last quarter.",1,]
+console.log(
+  sumOfIntegersInString("The Great Depression lasted from 1929 to 1939.")
+); // ["The Great Depression lasted from 1929 to 1939.", 3868],
+console.log(sumOfIntegersInString("Dogs are our best friends.")); // ["Dogs are our best friends.", 0],
+console.log(sumOfIntegersInString("C4t5 are 4m4z1ng.")); // ["C4t5 are 4m4z1ng.", 18],
+console.log(
+  sumOfIntegersInString(
+    "The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog"
+  )
+); // ["The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog", 3635];
