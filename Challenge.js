@@ -1,39 +1,31 @@
-// Challenge: Changing letters (7 kyu)
+// Challenge: Sum of integers in string (7 kyu)
 
 // Description:
 
-// When provided with a String, capitalize all vowels
+// Your task in this kata is to implement a function that calculates the sum of the integers inside a string. For example, in the string "The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog", the sum of the integers is 3635.
 
-// For example:
-
-// Input : "Hello World!"
-
-// Output : "HEllO WOrld!"
-
-// Note: Y is not a vowel in this kata.
+// Note: only positive integers will be tested.
 
 // My code below:
 
-function swap(string) {
-  // array to hold vowels
-  const vowels = ["a", "e", "i", "o", "u"];
-  // use array method includes to test each element to see if it is in vowels; if so, change it to uppercase, otherwise, do nothing.
-  return string
-    .split("")
-    .map((el) => (vowels.includes(el) ? el.toUpperCase() : el))
-    .join("");
+function sumOfIntegersInString(s) {
+// replace all non-numeric characters with a space
+// split into an array using a space as the delimiter
+// map each value to a number (spaces will be changed into a 0)
+// reduce array to one summed value of all the values from previous step
+return s.replace(/\D/g, ' ')
+        .split(' ')
+        .map(value => Number(value))
+        .reduce((total, currentValue) => total + currentValue, 0);
 }
 
 // Tests
 
-console.log(swap("")); // ""
-console.log(swap("   @@@")); // "   @@@"
-console.log(swap("HelloWorld!")); // "HEllOWOrld!"
-console.log(swap("Sunday")); // "SUndAy"
-console.log(swap("Codewars")); // "COdEwArs"
-console.log(swap("Monday")); // "MOndAy"
-console.log(swap("Friday")); // "FrIdAy"
-console.log(swap("abracadabra")); // "AbrAcAdAbrA"
-console.log(swap("AbrAcAdAbrA")); // "AbrAcAdAbrA"
-console.log(swap("ABRACADABRA")); // "ABRACADABRA"
-console.log(swap("aBRaCaDaBRa")); // "ABRACADABRA"
+console.log(sumOfIntegersInString("12.4")); // 16
+console.log(sumOfIntegersInString("h3ll0w0rld")); // 3
+console.log(sumOfIntegersInString("2 + 3 = ")); // 5
+console.log(sumOfIntegersInString("Our company made approximately 1 million in gross revenue last quarter.")); // 1
+console.log(sumOfIntegersInString("The Great Depression lasted from 1929 to 1939.")); // 3868
+console.log(sumOfIntegersInString("Dogs are our best friends.")); // 0
+console.log(sumOfIntegersInString("C4t5 are 4m4z1ng.")); // 18
+console.log(sumOfIntegersInString("The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog")); // 3635
