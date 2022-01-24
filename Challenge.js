@@ -1,31 +1,37 @@
-// Challenge: Sum of integers in string (7 kyu)
+// Challenge: Sum of Minimums! (7 kyu)
 
 // Description:
 
-// Your task in this kata is to implement a function that calculates the sum of the integers inside a string. For example, in the string "The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog", the sum of the integers is 3635.
+// Given a 2D ( nested ) list ( array, vector, .. ) of size m * n, your task is to find the sum of the minimum values in each row.
 
-// Note: only positive integers will be tested.
+// For Example:
+
+// [ [ 1, 2, 3, 4, 5 ]        #  minimum value of row is 1
+// , [ 5, 6, 7, 8, 9 ]        #  minimum value of row is 5
+// , [ 20, 21, 34, 56, 100 ]  #  minimum value of row is 20
+// ]
+// So the function should return 26 because the sum of the minimums is 1 + 5 + 20 = 26.
+
+// Note: You will always be given a non-empty list containing positive values.
+
+// ENJOY CODING :)
 
 // My code below:
 
-function sumOfIntegersInString(s) {
-// replace all non-numeric characters with a space
-// split into an array using a space as the delimiter
-// map each value to a number (spaces will be changed into a 0)
-// reduce array to one summed value of all the values from previous step
-return s.replace(/\D/g, ' ')
-        .split(' ')
-        .map(value => Number(value))
-        .reduce((total, currentValue) => total + currentValue, 0);
+const sumOfMinimums = (arr) => {
+        // variable to hold total of minimum values
+        let total = 0;
+        // loop through each array in arr.
+        for(let i = 0; i < arr.length; i++){
+                // sort each subarray ascending (lesser to greater)
+                arr[i].sort((a, b) => a - b);
+                // grab the first element from each subarray and add it to total.
+                total += arr[i][0];
+        }
+        return total;
 }
 
 // Tests
 
-console.log(sumOfIntegersInString("12.4")); // 16
-console.log(sumOfIntegersInString("h3ll0w0rld")); // 3
-console.log(sumOfIntegersInString("2 + 3 = ")); // 5
-console.log(sumOfIntegersInString("Our company made approximately 1 million in gross revenue last quarter.")); // 1
-console.log(sumOfIntegersInString("The Great Depression lasted from 1929 to 1939.")); // 3868
-console.log(sumOfIntegersInString("Dogs are our best friends.")); // 0
-console.log(sumOfIntegersInString("C4t5 are 4m4z1ng.")); // 18
-console.log(sumOfIntegersInString("The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog")); // 3635
+console.log(sumOfMinimums([[7, 9, 8, 6, 2], [6, 3, 5, 4, 3], [5, 8, 7, 4, 5]])); // 9
+console.log(sumOfMinimums([[11, 12, 14, 54], [67, 89, 90, 56], [7, 9, 4, 3], [9, 8, 6, 7]])); // 76
