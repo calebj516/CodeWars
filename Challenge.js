@@ -19,19 +19,30 @@
 // My code below:
 
 const sumOfMinimums = (arr) => {
-        // variable to hold total of minimum values
-        let total = 0;
-        // loop through each array in arr.
-        for(let i = 0; i < arr.length; i++){
-                // sort each subarray ascending (lesser to greater)
-                arr[i].sort((a, b) => a - b);
-                // grab the first element from each subarray and add it to total.
-                total += arr[i][0];
-        }
-        return total;
-}
+  // variable to hold total of minimum values
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    // Math.min() returns the lowest-valued number passed into it (see Math.min() on MDN)
+    // Spread syntax (...) allows an iterable such as an array expression to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected (see spread syntax on MDN)
+    total += Math.min(...arr[i]);
+  }
+  return total;
+};
 
 // Tests
 
-console.log(sumOfMinimums([[7, 9, 8, 6, 2], [6, 3, 5, 4, 3], [5, 8, 7, 4, 5]])); // 9
-console.log(sumOfMinimums([[11, 12, 14, 54], [67, 89, 90, 56], [7, 9, 4, 3], [9, 8, 6, 7]])); // 76
+console.log(
+  sumOfMinimums([
+    [7, 9, 8, 6, 2],
+    [6, 3, 5, 4, 3],
+    [5, 8, 7, 4, 5],
+  ])
+); // 9
+console.log(
+  sumOfMinimums([
+    [11, 12, 14, 54],
+    [67, 89, 90, 56],
+    [7, 9, 4, 3],
+    [9, 8, 6, 7],
+  ])
+); // 76
