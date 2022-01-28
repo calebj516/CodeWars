@@ -1,44 +1,26 @@
-// Challenge: Who likes it? (6 kyu)
+// Challenge: Disemvowel Trolls (6 kyu)
 
 // Description:
 
-// You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+// Trolls are attacking your comment section!
 
-// Implement the function which takes an array containing the names of people that like an item. It must return the display text as shown in the examples:
+// A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
 
-// []                                -->  "no one likes this"
-// ["Peter"]                         -->  "Peter likes this"
-// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
-// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
-// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+// Your task is to write a function that takes a string and return a new string with all vowels removed.
+
+// For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
+
+// Note: for this kata y isn't considered a vowel.
 
 // My code below:
 
-function likes(names) {
-  // If the length of names is sufficiently long, the first three names will be stored in the below variables (otherwise, null).
-  let first = names.length > 0 ? names[0] : null;
-  let second = names.length >= 2 ? names[1] : null;
-  let third = names.length >= 3 ? names[2] : null;
-  // This will indicate the remaining number of likes beyond the first two names.
-  let remainingCount = names.length - 2;
-
-  if (names.length >= 4) {
-    return `${first}, ${second} and ${remainingCount} others like this`;
-  } else if (names.length >= 3) {
-    return `${first}, ${second} and ${third} like this`;
-  } else if (names.length >= 2) {
-    return `${first} and ${second} like this`;
-  } else if (names.length >= 1) {
-    return `${first} likes this`;
-  } else {
-    return "no one likes this";
-  }
+function disemvowel(str) {
+        // this regex replaces all vowels (g = global) regardless of whether they are capitalized or not (i = case insensitve) with '', which has the effect of removing them
+        return str.replace(/[aeiou]/gi, '');
 }
 
 // Tests
 
-console.log(likes([])); // -->  "no one likes this"
-console.log(likes(["Peter"])); // -->  "Peter likes this"
-console.log(likes(["Jacob", "Alex"])); // -->  "Jacob and Alex like this"
-console.log(likes(["Max", "John", "Mark"])); // -->  "Max, John and Mark like this"
-console.log(likes(["Alex", "Jacob", "Mark", "Max"])); // -->  "Alex, Jacob and 2 others like this"
+console.log(disemvowel("This website is for losers LOL!")); // "Ths wbst s fr lsrs LL!"
+console.log(disemvowel("No offense but,\nYour writing is among the worst I've ever read")); // "N ffns bt,\nYr wrtng s mng th wrst 'v vr rd"
+console.log(disemvowel("What are you, a communist?")); // "Wht r y,  cmmnst?"
