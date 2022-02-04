@@ -1,26 +1,30 @@
-// Challenge: Disemvowel Trolls (6 kyu)
+// Challenge: Remove the minimum (7 kyu)
 
 // Description:
 
-// Trolls are attacking your comment section!
+// The museum of incredible dull things wants to get rid of some exhibitions. Miriam, the interior architect, comes up with a plan to remove the most boring exhibitions. She gives them a rating, and then removes the one with the lowest rating.
 
-// A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
+// However, just as she finished rating all exhibitions, she's off to an important fair, so she asks you to write a program that tells her the ratings of the items after one removed the lowest one. Fair enough.
 
-// Your task is to write a function that takes a string and return a new string with all vowels removed.
+// Task:
 
-// For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
+// Given an array of integers, remove the smallest value. Do not mutate the original array/list. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.
 
-// Note: for this kata y isn't considered a vowel.
+// Don't change the order of the elements that are left.
 
 // My code below:
 
-function disemvowel(str) {
-        // this regex replaces all vowels (g = global) regardless of whether they are capitalized or not (i = case insensitve) with '', which has the effect of removing them
-        return str.replace(/[aeiou]/gi, '');
+function removeSmallest(numbers) {
+  // obtain the index of the minimum number by using Math.min.
+  // the spread operator allows us to call this on an array.
+  let minNumIndex = numbers.indexOf(Math.min(...numbers));
+  // return elements of numbers up to the position of the minimum number, and then from one position after, effectively removing the min number from numbers
+  return [...numbers.slice(0, minNumIndex), ...numbers.slice(minNumIndex + 1)];
 }
 
 // Tests
 
-console.log(disemvowel("This website is for losers LOL!")); // "Ths wbst s fr lsrs LL!"
-console.log(disemvowel("No offense but,\nYour writing is among the worst I've ever read")); // "N ffns bt,\nYr wrtng s mng th wrst 'v vr rd"
-console.log(disemvowel("What are you, a communist?")); // "Wht r y,  cmmnst?"
+console.log(removeSmallest([1, 2, 3, 4, 5])); // [2, 3, 4, 5]
+console.log(removeSmallest([5, 3, 2, 1, 4])); // [5, 3, 2, 4]
+console.log(removeSmallest([2, 2, 1, 2, 1])); // [2, 2, 2, 1]
+console.log(removeSmallest([])); // []
