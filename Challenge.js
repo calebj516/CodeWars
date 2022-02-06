@@ -1,26 +1,26 @@
-// Challenge: Ones' Complement (7 kyu)
+// Challenge: Adding remainders to a list (7 kyu)
 
 // Description:
 
-// The Ones' Complement of a binary number is the number obtained by swapping all the 0s for 1s and all the 1s for 0s. For example:
+// This is a problem that involves adding numbers to items in a list. In a list you will have to add the item's remainder when divided by a given divisor to each item.
 
-// onesComplement(1001) = 0110
-// onesComplement(1001) = 0110
-// For any given binary number,formatted as a string, return the Ones' Complement of that number.
+// For example if the item is 40 and the divisor is 3 you would have to add 1 since 40 minus the closest multiple of 3 which is 39 is 1. So the 40 in the list will become 41. You would have to return the modified list in this problem.
+
+// For this problem you will receive a divisor called div as well as simple list of whole numbers called nums. Good luck and happy coding.
 
 // My code below:
 
-function onesComplement(n) {
-    // split n into an array
-    // map each element as follows: if 0, then 1; otherwise, 0
-    // join back into a string for the final result
-    return n.split('').map(num => num === "0" ? "1" : "0").join('');
+const solve = (nums, div) => {
+  
+    return nums.map(num => num + (num % div));
+    
 }
 
 // Tests
 
-console.log(onesComplement("0")); // "1"
-console.log(onesComplement("1")); // "0"
-console.log(onesComplement("10")); // "01"
-console.log(onesComplement("01")); // "10"
-console.log(onesComplement("1101")); // "0010"
+console.log(solve([2,7,5,9,100,34,32,0],3)); // [4,8,7,9,101,35,34,0]
+console.log(solve([],2)); // []
+console.log(solve([1000,999,998,997],5)); // [1000,1003,1001,999]
+console.log(solve([0,0,0,0],5)); // [0,0,0,0]
+console.log(solve([4,3,2,1],5)); // [8,6,4,2]
+console.log(solve([33,23,45,78,65],10)); // [36,26,50,86,70])
