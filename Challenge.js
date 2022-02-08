@@ -2,29 +2,38 @@
 
 // Description:
 
-// The museum of incredible dull things wants to get rid of some exhibitions. Miriam, the interior architect, comes up with a plan to remove the most boring exhibitions. She gives them a rating, and then removes the one with the lowest rating.
+// Your job is to implement a function which returns the last D digits of an integer N as a list.
 
-// However, just as she finished rating all exhibitions, she's off to an important fair, so she asks you to write a program that tells her the ratings of the items after one removed the lowest one. Fair enough.
+// Special cases:
 
-// Task:
+// If D > (the number of digits of N), return all the digits.
+// If D <= 0, return an empty list.
 
-// Given an array of integers, remove the smallest value. Do not mutate the original array/list. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.
+// Examples:
+// N = 1
+// D = 1
+// result = [1]
 
-// Don't change the order of the elements that are left.
+// N = 1234
+// D = 2
+// result = [3, 4]
+
+// N = 637547
+// D = 6
+// result = [6, 3, 7, 5, 4, 7]
 
 // My code below:
 
-function removeSmallest(numbers) {
-  // obtain the index of the minimum number by using Math.min.
-  // the spread operator allows us to call this on an array.
-  let minNumIndex = numbers.indexOf(Math.min(...numbers));
-  // return elements of numbers up to the position of the minimum number, and then from one position after, effectively removing the min number from numbers
-  return [...numbers.slice(0, minNumIndex), ...numbers.slice(minNumIndex + 1)];
+function lastDigit(n, d) {
+  const len = n.toString().length;
+  const nArr = n.toString().split("").map(Number);
+  // include only the elements with an index that is greater than or equal to length - d
+  return nArr.filter((num, idx) => idx >= len - d);
 }
 
 // Tests
 
-console.log(removeSmallest([1, 2, 3, 4, 5])); // [2, 3, 4, 5]
-console.log(removeSmallest([5, 3, 2, 1, 4])); // [5, 3, 2, 4]
-console.log(removeSmallest([2, 2, 1, 2, 1])); // [2, 2, 2, 1]
-console.log(removeSmallest([])); // []
+console.log(lastDigit(1, 1)); // [1]
+console.log(lastDigit(123767, 4)); // [3, 7, 6, 7]
+console.log(lastDigit(0, 1)); // [0]
+console.log(lastDigit(34625647867585, 10)); // [5, 6, 4, 7, 8, 6, 7, 5, 8, 5]
