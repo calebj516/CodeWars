@@ -1,4 +1,4 @@
-// Challenge: Remove the minimum (7 kyu)
+// Challenge: Adding remainders to a list (7 kyu)
 
 // Description:
 
