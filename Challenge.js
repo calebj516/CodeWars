@@ -12,8 +12,11 @@
 // My code below:
 
 function createPhoneNumber(numbers) {
-  numbers = numbers.join("");
-  return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6)}`;
+  // The first parameter of replace sets up three capturing groups. 
+  // the first two groups contain three characters and the last group contains 4 characters.
+  // the second parameter adds parentheses around the first group, a space in between the first and second groups,
+  // and a hyphen between the second and third groups.
+  return numbers.join('').replace(/(...)(...)(....)/, "($1) $2-$3");
 }
 
 // Tests
