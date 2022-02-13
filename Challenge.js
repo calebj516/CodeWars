@@ -12,11 +12,12 @@
 // My code below:
 
 function createPhoneNumber(numbers) {
-  // The first parameter of replace sets up three capturing groups. 
-  // the first two groups contain three characters and the last group contains 4 characters.
-  // the second parameter adds parentheses around the first group, a space in between the first and second groups,
-  // and a hyphen between the second and third groups.
-  return numbers.join('').replace(/(...)(...)(....)/, "($1) $2-$3");
+  let format = "(xxx) xxx-xxxx";
+  // use a for loop to replace each 'x' in format with the number from numbers
+  for (let i = 0; i < format.length; i++) {
+    format = format.replace("x", numbers[i]);
+  }
+  return format;
 }
 
 // Tests
