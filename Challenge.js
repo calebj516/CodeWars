@@ -1,57 +1,45 @@
-// Challenge: Defining getters and setters on an existing class (6 kyu)
+// Challenge: Fizz Buzz - Without ifs (7 kyu)
 
 // Description:
 
-// There is a preloaded class of Person and it needs a new getter and setter. Person is defined with a constructor that takes a first name and a last name, and provides a mean to get the first name, last name, and full name.
+// I know that there are quite a few fizz-buzz problems already out there but this one does have a twist (you may find this useful)
 
-// Add a getter of name that returns the full name
-// Add a setter of name that modifies first name and last name
+// Task:
+
+// You need to implement a function that applies the standard fizz buzz test:
+
+// If a number is divisible by 3, return Fizz
+// If it is divisible by 5, return Buzz
+// If it is divisible by both 3 and 5, return FizzBuzz
+// If it is not divisible by 3 or 5, return the number itself
+// However, when making the function, you cannot use if (meaning else is also not an option).
+
+// Input:
+
+// A number will always be provided
+// The number provided will always be positive and an integer
+
+// Examples:
+
+// 6 should return Fizz
+// 10 should return Buzz
+// 15 should return FizzBuzz
+// 17 should return 17
 
 // My code below:
 
-// Note - I have added a property of my own, middleInitial, to this challenge.
+// The code does the following:
+// if n is only divisible by 3... return Fizz + an empty string, which evaluates to Fizz
+// if n is only divisible by 5... return an empty string + Buzz, which evaluates to Buzz
+// if n is divisible by both 3 and 5... return an Fizz + Buzz, which evaluates to FizzBuzz
+// if n is divisible by neither 3 nor 5, the two "halves" of the expression evaluate to two empty strings, which added together are stil an empty string,
+// which evaluates to false. Due to the logical OR operator, the truthy value will be returned, which is n.
 
-class Person {
-  constructor(firstName, middleName, lastName) {
-    this.firstName = firstName;
-    this.middleInitial = middleName[0].toUpperCase(); // this will work whether a full middle name is passed in, or just the middle initial
-    this.lastName = lastName;
-  }
-  
-  getName() {
-    return `${this.firstName} ${this.middleInitial} ${this.lastName}`;
-  }
-}
-
-// define a new property called "name"
-// using the prototype ensures that all objects instantiated using the Person class follow the pattern below
-Object.defineProperty(Person.prototype, "name", {
-
-  get() { 
-    return this.getName();
-  },
-
-  set(name) {
-    // the line below uses destructuring to set the properties
-    return [firstName, middleInitial, lastName] = name.split(" ");
-  }
-
-})
+const fizzBuzz = n => ((n % 3 === 0 ? 'Fizz' : '') + (n % 5 === 0 ? 'Buzz' : '') || n );
 
 // Tests
 
-let calebJones = new Person('Caleb', 'D', 'Jones');
-
-console.log(calebJones.firstName); // 'Caleb'
-console.log(calebJones.middleInitial); // 'D'
-console.log(calebJones.lastName);  // 'Jones'
-console.log(calebJones.getName()); // 'Caleb D Jones'
-console.log(calebJones.name); // 'Caleb D Jones'
-
-let joeSchmoe = new Person('Joseph', 'Moe', 'Schmoe');
-
-console.log(joeSchmoe.firstName); // 'Joseph'
-console.log(joeSchmoe.middleInitial); // 'M'
-console.log(joeSchmoe.lastName);  // 'Schmoe'
-console.log(joeSchmoe.getName()); // 'Joseph M Schmoe'
-console.log(joeSchmoe.name); // 'Joseph M Schmoe'
+console.log(fizzBuzz(3)) // "Fizz"
+console.log(fizzBuzz(5)) // "Buzz"
+console.log(fizzBuzz(15)) // "FizzBuzz"
+console.log(fizzBuzz(17)) // "17"
