@@ -1,4 +1,4 @@
-// Challenge: Count by X (8 kyu)
+// Challenge: Is n divisible by (...)? (7 kyu)
 
 // Description:
 
@@ -10,23 +10,24 @@
 
 // My code below:
 
-function countBy(x, n) {
-
-  let z = [];
-  let max = x * n;
-  
-  // start at x, work up to and including the maximum value of x which will be the multiple x multiplied by n, and increment each iteration by the value of the multiple x
-  for(let i = x; i <= max; i += x){
-    z.push(i);
-  }
-  
-  return z;
+function isDivisible(){
+  // make use of the arguments object paired with the Object values method to create an array containing all arguments passed in
+  const nums = Object.values(arguments);
+  // divisor is the first number
+  const divisor = nums[0];  
+  // use the every method which returns true if and only if all elements of the array pass the test
+  return nums.every(num => divisor % num === 0);
 }
 
 // Tests
 
-console.log(countBy(1,10)); // [1,2,3,4,5,6,7,8,9,10]
-console.log(countBy(2,5)); // [2,4,6,8,10]
-console.log(countBy(3,7)); // [3,6,9,12,15,18,21]
-console.log(countBy(50,5)); // [50,100,150,200,250]
-console.log(countBy(100,6)); // [100,200,300,400,500,600]
+console.log(isDivisible(3,3,4)); // false
+console.log(isDivisible(12,3,4)); // true
+console.log(isDivisible(8,3,4,2,5)); // false
+console.log(isDivisible(48,3,4,2)); // true
+console.log(isDivisible(100,5,10,20,25)); // true
+console.log(isDivisible(100,5)); // true
+console.log(isDivisible(4,4,2,4,4,4,4,4,4)); // true
+console.log(isDivisible(5,2)); // false
+console.log(isDivisible(17,17,17,17)); // true
+console.log(isDivisible(17,1)); // true
