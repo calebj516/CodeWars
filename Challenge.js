@@ -13,9 +13,17 @@
 // My code below:
 
 function findUniq(arr) {
-  
-  return arr.find(num => arr.indexOf(num) === arr.lastIndexOf(num));
-
+  // initialize uniqueNum to the first element in the array
+  let uniqueNum = arr[0];
+  // loop through arr; if the index returned from indexOf and lastIndexOf match, we know the number is unique and does not appear more than once
+  for(let i = 0; i < arr.length; i++){
+    if(arr.indexOf(arr[i]) === arr.lastIndexOf(arr[i])){
+      uniqueNum = arr[i];
+      // No need to continue through the rest of arr if we find the unique number.
+      break;
+    }
+  }
+  return uniqueNum;
 }
 
 // Tests
