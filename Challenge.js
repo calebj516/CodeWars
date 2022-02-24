@@ -1,36 +1,25 @@
-// Challenge: Find the unique number (6 kyu)
+// Challenge: Longest vowel chain (7 kyu)
 
 // Description:
 
-// There is an array with some numbers. All numbers are equal except for one. Try to find it!
-
-// findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
-// findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
-// It’s guaranteed that array contains at least 3 numbers.
-
-// The tests contain some very huge arrays, so think about performance.
+// The vowel substrings in the word codewarriors are o,e,a,io. The longest of these has a length of 2. Given a lowercase string that has alphabetic characters only (both vowels and consonants) and no spaces, return the length of the longest vowel substring. Vowels are any of aeiou.
 
 // My code below:
 
-function findUniq(arr) {
-  // initialize uniqueNum to the first element in the array
-  let uniqueNum = arr[0];
-  // loop through arr; if the index returned from indexOf and lastIndexOf match, we know the number is unique and does not appear more than once
-  for(let i = 0; i < arr.length; i++){
-    if(arr.indexOf(arr[i]) === arr.lastIndexOf(arr[i])){
-      uniqueNum = arr[i];
-      // No need to continue through the rest of arr if we find the unique number.
-      break;
-    }
-  }
-  return uniqueNum;
+function solve(s){
+  // replace consonants with a space
+  // split s into an array using the space as a delimiter. This will group contiguous consonants together.
+  // sort s based on descending length -- the longest will be first
+  // return the first element's length for the final answer
+  return s.replace(/[^aeiou]/g, ' ').split(' ').sort((a, b) => b.length - a.length)[0].length;
 }
 
 // Tests
 
-console.log(findUniq([ 1, 0, 0 ])); // 1
-console.log(findUniq([ 0, 1, 0 ])); // 1
-console.log(findUniq([ 0, 0, 1 ])); // 1
-console.log(findUniq([ 1, 1, 1, 2, 1, 1 ])); // 2
-console.log(findUniq([ 1, 1, 2, 1, 1 ])); // 2
-console.log(findUniq([ 3, 10, 3, 3, 3 ])); // 10
+console.log(solve("codewarriors")); // 2
+console.log(solve("suoidea")); // 3
+console.log(solve("ultrarevolutionariees")); // 3
+console.log(solve("strengthlessnesses")); // 1
+console.log(solve("cuboideonavicuare")); // 2
+console.log(solve("chrononhotonthuooaos")); // 5
+console.log(solve("iiihoovaeaaaoougjyaw")); // 8
