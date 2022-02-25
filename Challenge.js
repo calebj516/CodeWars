@@ -7,11 +7,9 @@
 // My code below:
 
 function solve(s){
-  // replace consonants with a space
-  // split s into an array using the space as a delimiter. This will group contiguous consonants together.
-  // sort s based on descending length -- the longest will be first
-  // return the first element's length for the final answer
-  return s.replace(/[^aeiou]/g, ' ').split(' ').sort((a, b) => b.length - a.length)[0].length;
+  // the spread operator "unpacks" the array of lengths of each vowel/vowels
+  // and allows Math.max to return the maximum value, which would be the longest vowel chain
+  return Math.max(...s.match(/[aeiou]+/g).map(num => num.length));
 }
 
 // Tests
