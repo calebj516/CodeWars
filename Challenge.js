@@ -17,16 +17,19 @@
 // My code below:
 
 function battle(x, y) {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let xScore = 0,
+    yScore = 0;
 
-  let xScore = x
-    .split("")
-    .reduce((total, current) => total + (alphabet.indexOf(current) + 1), 0);
-  let yScore = y
-    .split("")
-    .reduce((total, current) => total + (alphabet.indexOf(current) + 1), 0);
+  for (let i = 0; i < x.length; i++) {
+    // ASCII code # for capital letters start at 65, so subtracting 64 obtains the score
+    xScore += x[i].charCodeAt(0) - 64;
+  }
 
-  return xScore > yScore ? x : xScore === yScore ? "Tie!" : y;
+  for (let i = 0; i < y.length; i++) {
+    yScore += y[i].charCodeAt(0) - 64;
+  }
+
+  return xScore > yScore ? x : xScore < yScore ? y : "Tie!";
 }
 
 // Tests
