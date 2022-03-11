@@ -1,41 +1,29 @@
-// Challenge: Battle of the characters (Easy) (7 kyu)
+// Challenge: Reverse words (7 kyu)
 
 // Description:
 
-// Groups of characters decided to make a battle. Help them to figure out which group is more powerful. Create a function that will accept 2 variables and return the one who's stronger.
+// Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained.
 
-// Rules:
-// Each character have its own power: A = 1, B = 2, ... Y = 25, Z = 26
-// Only capital characters can and will participate a battle.
-// Only two groups to a fight.
-// Group whose total power (A + B + C + ...) is bigger wins.
-// If the powers are equal, it's a tie.
 // Examples:
-//   battle("ONE", "TWO"); // => "TWO"`
-//   battle("ONE", "NEO"); // => "Tie!"
+
+// "This is an example!" ==> "sihT si na !elpmaxe"
+// "double  spaces"      ==> "elbuod  secaps"
 
 // My code below:
 
-function battle(x, y) {
-  let xScore = 0,
-    yScore = 0;
-
-  for (let i = 0; i < x.length; i++) {
-    // ASCII code # for capital letters start at 65, so subtracting 64 obtains the score
-    xScore += x[i].charCodeAt(0) - 64;
-  }
-
-  for (let i = 0; i < y.length; i++) {
-    yScore += y[i].charCodeAt(0) - 64;
-  }
-
-  return xScore > yScore ? x : xScore < yScore ? y : "Tie!";
+function reverseWords(str) {
+  // str.split(" ") gives us an array with the words only (no spaces)
+  // map will split each word into an array, upon which we can then use reverse(), which reverses each word.
+  // the reversed word array is then joined back into a string
+  // finally, we join all the words back together into one string, with a space as a delimiter, which puts the spaces back in.
+  return str.split(" ").map(word => word.split("").reverse().join("")).join(" ");
 }
 
 // Tests
 
-console.log(battle("ONE", "TWO")); // "Two"
-console.log(battle("ONE", "NEO")); // "Tie!"
-console.log(battle("ONE", "NEO")); // "Tie!"
-console.log(battle("FOO", "BAR")); // "FOO"
-console.log(battle("FOUR", "FIVE")); // "FOUR"
+console.log(reverseWords('The quick brown fox jumps over the lazy dog.')); // 'ehT kciuq nworb xof spmuj revo eht yzal .god'
+console.log(reverseWords('apple')); // 'elppa'
+console.log(reverseWords('a b c d')); // 'a b c d'
+console.log(reverseWords('double  spaced  words')); // 'elbuod  decaps  sdrow'
+console.log(reverseWords('stressed desserts')); // 'desserts stressed'
+console.log(reverseWords('hello hello')); // 'olleh olleh'
