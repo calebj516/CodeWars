@@ -1,41 +1,26 @@
-// Challenge: Battle of the characters (Easy) (7 kyu)
+// Challenge: Palindromes Here and There (7 kyu)
 
 // Description:
 
-// Groups of characters decided to make a battle. Help them to figure out which group is more powerful. Create a function that will accept 2 variables and return the one who's stronger.
+// An array is given with palindromic and non-palindromic numbers. A palindromic number is a number that is the same from a reversed order. For example 122 is not a palindromic number, but 202 is one.
 
-// Rules:
-// Each character have its own power: A = 1, B = 2, ... Y = 25, Z = 26
-// Only capital characters can and will participate a battle.
-// Only two groups to a fight.
-// Group whose total power (A + B + C + ...) is bigger wins.
-// If the powers are equal, it's a tie.
-// Examples:
-//   battle("ONE", "TWO"); // => "TWO"`
-//   battle("ONE", "NEO"); // => "Tie!"
+// Your task is to write a function that returns an array with only 1s and 0s, where all palindromic numbers are replaced with a 1 and all non-palindromic numbers are replaced with a 0.
+
+// For example:
+
+// [101, 2, 85, 33, 14014]  ==>  [1, 1, 0, 1, 0]
+// [45, 21, 303, 56]        ==>  [0, 0, 1, 0]
 
 // My code below:
 
-function battle(x, y) {
-  let xScore = 0,
-    yScore = 0;
-
-  for (let i = 0; i < x.length; i++) {
-    // ASCII code # for capital letters start at 65, so subtracting 64 obtains the score
-    xScore += x[i].charCodeAt(0) - 64;
-  }
-
-  for (let i = 0; i < y.length; i++) {
-    yScore += y[i].charCodeAt(0) - 64;
-  }
-
-  return xScore > yScore ? x : xScore < yScore ? y : "Tie!";
-}
+const convertPalindromes = (numbers) =>
+  // convert each number to a string, split into an array, reverse the array, join back into a string, and convert the result back into a number to get the reversed number. Compare to the original number and if it matches, change number to 1; otherwise, 0
+  numbers.map((number) =>
+    Number(number.toString().split("").reverse().join("")) === number ? 1 : 0
+  );
 
 // Tests
 
-console.log(battle("ONE", "TWO")); // "Two"
-console.log(battle("ONE", "NEO")); // "Tie!"
-console.log(battle("ONE", "NEO")); // "Tie!"
-console.log(battle("FOO", "BAR")); // "FOO"
-console.log(battle("FOUR", "FIVE")); // "FOUR"
+console.log(convertPalindromes([22, 303, 76, 411, 89])); // [1, 1, 0, 0, 0]
+console.log(convertPalindromes([653, 808, 5])); // [0, 1, 1]
+console.log(convertPalindromes([4, 23, 441, 565, 19, 818])); // [1, 0, 0, 1, 0, 1]
