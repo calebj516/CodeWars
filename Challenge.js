@@ -1,26 +1,39 @@
-// Challenge: Palindromes Here and There (7 kyu)
+// Challenge: Filter Unused Digits (7 kyu)
 
 // Description:
 
-// An array is given with palindromic and non-palindromic numbers. A palindromic number is a number that is the same from a reversed order. For example 122 is not a palindromic number, but 202 is one.
+// Given a list of integers, return the digits that are not present in any of them.
 
-// Your task is to write a function that returns an array with only 1s and 0s, where all palindromic numbers are replaced with a 1 and all non-palindromic numbers are replaced with a 0.
+// Example:
 
-// For example:
-
-// [101, 2, 85, 33, 14014]  ==>  [1, 1, 0, 1, 0]
-// [45, 21, 303, 56]        ==>  [0, 0, 1, 0]
+// [12, 34, 56, 78]  =>  "09"
+// [2015, 8, 26]     =>  "3479"
+// Note: the digits in the resulting string should be sorted.
 
 // My code below:
 
-const convertPalindromes = (numbers) =>
-  // convert each number to a string, split into an array, reverse the array, join back into a string, and convert the result back into a number to get the reversed number. Compare to the original number and if it matches, change number to 1; otherwise, 0
-  numbers.map((number) =>
-    Number(number.toString().split("").reverse().join("")) === number ? 1 : 0
-  );
+function unusedDigits() {
+  const nums = Object.values(arguments);
+  const ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  let numsSorted = nums
+    .join("")
+    .split("")
+    .sort((num1, num2) => num1 > num2)
+    .map(Number);
+
+  return ints.filter((num) => numsSorted.includes(num) === false).join("");
+}
 
 // Tests
 
-console.log(convertPalindromes([22, 303, 76, 411, 89])); // [1, 1, 0, 0, 0]
-console.log(convertPalindromes([653, 808, 5])); // [0, 1, 1]
-console.log(convertPalindromes([4, 23, 441, 565, 19, 818])); // [1, 0, 0, 1, 0, 1]
+console.log(unusedDigits([12, 34, 56, 78])); // "09"
+console.log(unusedDigits([2015, 8, 26])); //"3479"
+console.log(unusedDigits([276, 575])); // "013489"
+console.log(unusedDigits([643])); // "0125789"
+console.log(unusedDigits([864, 896, 744])); // "01235"
+console.log(unusedDigits([364, 500, 715, 730])); // "289"
+console.log(unusedDigits([93, 10, 11, 40])); // "25678"
+console.log(unusedDigits([])); // "0123456789"
+console.log(unusedDigits([1, 11, 111, 1111])); // "023456789"
+console.log(unusedDigits([9, 87, 654, 3210])); // ""
