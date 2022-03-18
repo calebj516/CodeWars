@@ -12,17 +12,12 @@
 
 // My code below:
 
-function unusedDigits() {
-  const nums = Object.values(arguments);
-  const ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  let numsSorted = nums
-    .join("")
-    .split("")
-    .sort((num1, num2) => num1 > num2)
-    .map(Number);
-
-  return ints.filter((num) => numsSorted.includes(num) === false).join("");
+function unusedDigits(...args){
+  // Here we are constructing a regular expression by passing in the arguments to the RegExp object's constructor,
+  // surrounded by brackets, with 'g' for global as the flag.
+  // This is used as the first argument in replace; the second argument, '', will remove all matches.
+  // Taken together, this has the effect of matching all occurrences of the numbers in the list of integers, and removing them
+  return "0123456789".replace(new RegExp('['+args.join('')+']','g'), '')
 }
 
 // Tests
