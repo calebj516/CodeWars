@@ -17,11 +17,17 @@
 // My code below:
 
 function hydrate(s) {
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  const formatGlass = (n) => (n > 1 ? "glasses" : "glass");
-  const numberOfDrinks = s.match(/\d/g).map(Number).reduce(reducer);
-
-  return `${numberOfDrinks} ${formatGlass(numberOfDrinks)} of water`;
+  // replace all non digit characters with '' which removes them from the string
+  // split into an array
+  // convert each element into a number
+  // reduce the numbers into one number (summing up)
+  // Finally, based on the number of glasses, return a template literal stating 'glasses' (if greater than 1 glass) or 'glass'
+  const numGlasses = s
+    .replace(/\D/g, "")
+    .split("")
+    .map(Number)
+    .reduce((total, currentNum) => total + currentNum);
+  return numGlasses > 1 ? `${numGlasses} glasses of water` : `1 glass of water`;
 }
 
 // Tests
