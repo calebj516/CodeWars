@@ -10,15 +10,8 @@
 
 // My code below:
 
-function maxDiff(list) {
-  
-    if(list.length > 1){
-      let sortedList = list.sort((firstNum, secondNum) => firstNum - secondNum);
-      return sortedList[sortedList.length - 1] - sortedList[0];
-    }
-    
-    return 0;
-  };
+const maxDiff = (list) =>
+  list.length > 1 ? Math.max(...list) - Math.min(...list) : 0;
 
 // Tests
 
