@@ -28,14 +28,21 @@
 // My code below:
 
 function dotCalculator (equation) {
-  
+    
+  // operations object will hold all possible operations for the dot calculator
+  const operations = {
+    '+' : (a, b) => a + b,
+    '-' : (a, b) => a - b,
+    '*' : (a, b) => a * b,
+    '//': (a, b) => a / b
+  };
+
   // Use destructuring to obtain the first part, the operator, and the last part of the equation
-  let [ a, op, b ] = equation.split(' ');
+  let [a, operator, b] = equation.split(' ');
   
-  console.log(op[0]);
-  // repeat the '.' character as many times as the result of the equation
-  return '.'.repeat(eval(a.length + op[0] + b.length));
-  
+  // Passing in the operator to the operations object (the key) will obtain for us the proper operation function (the value)
+  return '.'.repeat(operations[operator](a.length, b.length));
+
 }
 
 // Tests
