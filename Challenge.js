@@ -1,58 +1,40 @@
-// Challenge: Dot Calculator (7 kyu)
+// Challenge: Numerical Palindrome #1 (7 kyu)
 
 // Description:
 
-// Dot Calculator
-// You have to write a calculator that receives strings for input. The dots will represent the number in the equation. There will be dots on one side, an operator, and dots again after the operator. The dots and the operator will be separated by one space.
+// A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Examples of numerical palindromes are:
 
-// Here are the following valid operators :
+// 2332
+// 110011
+// 54322345
 
-// + Addition
-// - Subtraction
-// * Multiplication
-// // Integer Division
-// Your Work (Task)
-// You'll have to return a string that contains dots, as many the equation returns. If the result is 0, return the empty string. When it comes to subtraction, the first number will always be greater than or equal to the second number.
+// For a given number num, write a function to test if it's a numerical palindrome or not and return a boolean (true if it is and false if not).
 
-// Examples (Input => Output)
-// * "..... + ..............." => "...................."
-// * "..... - ..."             => ".."
-// * "..... - ."               => "...."
-// * "..... * ..."             => "..............."
-// * "..... * .."              => ".........."
-// * "..... // .."             => ".."
-// * "..... // ."              => "....."
-// * ". // .."                 => ""
-// * ".. - .."                 => ""
+// Return "Not valid" if the input is not an integer or less than 0.
 
 // My code below:
 
-function dotCalculator (equation) {
-    
-  // operations object will hold all possible operations for the dot calculator
-  const operations = {
-    '+' : (a, b) => a + b,
-    '-' : (a, b) => a - b,
-    '*' : (a, b) => a * b,
-    '//': (a, b) => a / b
-  };
-
-  // Use destructuring to obtain the first part, the operator, and the last part of the equation
-  let [a, operator, b] = equation.split(' ');
+function palindrome(num) { 
   
-  // Passing in the operator to the operations object (the key) will obtain for us the proper operation function (the value)
-  return '.'.repeat(operations[operator](a.length, b.length));
+  if(typeof num === 'number' && num >= 0){
+    // the equality operator '==' does the type coercion for us (i.e., we do not have to convert num to a string)
+    return num.toString().split('').reverse().join('') == num;   
+  }
+  
+  return "Not valid";
 
-}
+} 
 
 // Tests
 
-console.log(dotCalculator("..... + ...............")); // "...................."
-console.log(dotCalculator("..... - ...")); // ".."
-console.log(dotCalculator("..... - .")); // "...."
-console.log(dotCalculator("..... * ...")); // "..............."
-console.log(dotCalculator("..... * ..")); // ".........."
-console.log(dotCalculator("..... // ..")); // ".."
-console.log(dotCalculator("..... // .")); // "....."
-console.log(dotCalculator(". // ..")); // ""
-console.log(dotCalculator(". - .")); // ""
+console.log(palindrome(1221)); // true
+console.log(palindrome(110011)); // true
+console.log(palindrome(1456009006541)); // true
+console.log(palindrome(123322)); // false
+console.log(palindrome(1)); // true
+console.log(palindrome(152)); // false
+console.log(palindrome(9999)); // true
+console.log(palindrome("ACCDDCCA")); // "Not valid"
+console.log(palindrome("@14AbC")); // "Not valid"
+console.log(palindrome("1221")); // "Not valid"
+console.log(palindrome(-450)); // "Not valid"
