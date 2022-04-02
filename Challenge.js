@@ -1,4 +1,4 @@
-// Challenge: Numerical Palindrome #1.5 (6 kyu)
+// Challenge: Numerical Palindrome #2 (6 kyu)
 
 // Description:
 
@@ -8,51 +8,45 @@
 // 110011
 // 54322345
 
-// You'll be given 2 numbers as arguments: (num,s). Write a function which returns an array of s number of numerical palindromes that come after num. If num is a palindrome itself, it should be included in the count.
+// For this kata, single digit numbers will not be considered numerical palindromes.
 
-// Return "Not valid" instead if any one of the inputs is not an integer or is less than 0.
+// For a given number num, write a function to test if the number contains a numerical palindrome or not and return a boolean (true if it does and false if does not). Return "Not valid" if the input is not an integer or is less than 0.
 
-// For this kata, single digit numbers will NOT be considered numerical palindromes.
+// Note: Palindromes should be found without permutating num.
 
-// palindrome(6,4) => [11,22,33,44]
-// palindrome(59,3) => [66,77,88]
-// palindrome(101,2) => [101,111]
-// palindrome("15651",5) => "Not valid" 
-// palindrome(1221,"8") => "Not valid" 
+// palindrome(5) => false
+// palindrome(1221) => true
+// palindrome(141221001) => true
+// palindrome(1215) => true 
+// palindrome(1294) => false 
+// palindrome("109982") => "Not valid"
 
 // My code below:
 
-function palindrome(num,s) { 
-  
-  // if either parameter isn't a number or negative, it is invalid
-  if(typeof num !== 'number' || typeof s !== 'number' || num < 0 || s < 0){
-    return "Not valid";
+function palindrome(num) {
+  if (typeof num !== 'number' || num < 0 || !Number.isInteger(num)) {
+    return 'Not valid';
   }
-  
-  const resultArr = [];
-  // the starting value will never be a single digit integer which excludes them from being included in the results,
-  // as per the instructions.
-  // any number n that passes the palindrome test will be added to resultArr up to s times
-  for(let n = Math.max(10, num); resultArr.length < s; n++){
-    if(isPalindrome(n)){
-      resultArr.push(n);
-    }
-  }
-  
-  return resultArr;
-}
-
-function isPalindrome(val) {
-  if(val.toString().split('').reverse().join('') == val){
-    return true;
-  }
+  let arr = String(num).split('');
+ 
+   if(arr.length > 1){
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr.slice(i, j + 1).reverse().join('') === arr.slice(i, j + 1).join('')) {
+            return true;
+          }
+        }
+     }
+   }
+ 
   return false;
-}
+ }
 
 // Tests
 
-console.log(palindrome(6,4)); // => [11,22,33,44]
-console.log(palindrome(59,3)); // => [66,77,88]
-console.log(palindrome(101,2)); // => [101,111]
-console.log(palindrome("15651",5)); // => "Not valid" 
-console.log(palindrome(1221,"8")); // => "Not valid" 
+console.log(palindrome(5)); // => false
+console.log(palindrome(1221)); // => true
+console.log(palindrome(141221001)); // => true
+console.log(palindrome(1215)); // => true 
+console.log(palindrome(1294)); // => false 
+console.log(palindrome("109982")); // => "Not valid"
