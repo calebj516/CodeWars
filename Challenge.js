@@ -1,25 +1,54 @@
-// Challenge: Mumbling (7 kyu)
+// Challenge: Numerical Palindrome #3 (6 kyu)
 
 // Description:
 
-// This time no story, no theory. The examples below show you how to write function accum:
+// A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Examples of numerical palindromes are:
 
-// Examples:
-// accum("abcd") -> "A-Bb-Ccc-Dddd"
-// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
-// accum("cwAt") -> "C-Ww-Aaa-Tttt"
-// The parameter of accum is a string which includes only letters from a..z and A..Z.
+// 2332
+// 110011
+// 54322345
+
+// For a given number num, write a function which returns the number of numerical palindromes within each number. For this kata, single digit numbers will NOT be considered numerical palindromes.
+
+// Return "Not valid" if the input is not an integer or is less than 0.
+
+// palindrome(5) => 0
+// palindrome(1221) => 2
+// palindrome(141221001) => 5
+// palindrome(1294) => 0
+// palindrome("1221") => "Not valid"
 
 // My code below:
 
-const accum = (s) =>
-  s
-    .split("") // split s into an array
-    .map((el, idx) => el[0].toUpperCase() + el.repeat(idx).toLowerCase()) // change the first character of each element to uppercase, and concatenate it with the same character in lowercase, repeated the same number of times as the current index
-    .join("-"); // join back into a string, separated by hyphens
+function palindrome(num) {
+  if (typeof num !== "number" || num < 0 || !Number.isInteger(num)) {
+    return "Not valid";
+  }
+
+  let arr = [...num.toString()];
+  let count = 0;
+
+  if (arr.length > 1) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (
+          arr
+            .slice(i, j + 1)
+            .reverse()
+            .join("") === arr.slice(i, j + 1).join("")
+        ) {
+          count++;
+        }
+      }
+    }
+  }
+
+  return count;
+}
 
 // Tests
-
-console.log(accum("ZpglnRxqenU")); //"Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"
-console.log(accum("NyffsGeyylB")); //"N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb"
-console.log(accum("MjtkuBovqrU")); //"M-Jj-Ttt-Kkkk-Uuuuu-Bbbbbb-Ooooooo-Vvvvvvvv-Qqqqqqqqq-Rrrrrrrrrr-Uuuuuuuuuuu"
+console.log(palindrome(5)); // 0
+console.log(palindrome(1221)); // 2
+console.log(palindrome(141221001)); // 5
+console.log(palindrome(1294)); // 0
+console.log(palindrome("1221")); // "Not valid"
