@@ -1,62 +1,48 @@
-// Challenge: Numerical Palindrome #4 (6 kyu)
+// Challenge: Number-Star ladder (7 kyu)
 
 // Description:
 
-// A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Examples of numerical palindromes are:
+// Task
 
-// 2332
-// 110011
-// 54322345
+// Using n as a parameter in the function pattern, where n>0, complete the codes to get the pattern (take the help of examples):
 
-// For a given number num, return its closest numerical palindrome which can either be smaller or larger than num. If there are 2 possible values, the larger value should be returned. If num is a numerical palindrome itself, return it.
+// Note: There is no newline in the end (after the pattern ends)
 
-// For this kata, single digit numbers will NOT be considered numerical palindromes.
+// Examples
+// pattern(3) should return "1\n1*2\n1**3", e.g. the following:
 
-// Also, you know the drill - be sure to return "Not valid" if the input is not an integer or is less than 0.
+// 1
+// 1*2
+// 1**3
+// pattern(10): should return the following:
 
-// palindrome(8) => 11
-// palindrome(281) => 282
-// palindrome(1029) => 1001
-// palindrome(1221) => 1221
-// palindrome("1221") => "Not valid"
+// 1
+// 1*2
+// 1**3
+// 1***4
+// 1****5
+// 1*****6
+// 1******7
+// 1*******8
+// 1********9
+// 1*********10
 
 // My code below:
 
-function isPalindrome(num) {
-  // Test if the num is a palindrome AND is greater than or equal to 10 (the first double digit number, which excludes single digit numbers as per the instructions)
-  if (num >= 10 && num == num.toString().split("").reverse().join("")) {
-    return true;
-  }
-  return false;
-}
+function pattern(n) {
+  let output = "";
+  let asterisk = "*";
 
-function palindrome(num) {
-  // If not an integer OR less than zero, invalid input
-  if (!Number.isInteger(num) || num < 0) {
-    return "Not valid";
+  for (let i = 0; i < n; i++) {
+    i === 0
+      ? (output += `${i + 1}\n`)
+      : i > 0 && i < n - 1
+      ? (output += `1${asterisk.repeat(i)}${i + 1}\n`)
+      : (output += `1${asterisk.repeat(i)}${i + 1}`);
   }
 
-  let index = 0;
-
-  // This loop will keep running until one of the if statements' conditions passes.
-  // They are arranged so that the larger number will be returned if both tests pass.
-  while (true) {
-    // Test for numbers greater than or equal to num
-    if (isPalindrome(num + index)) {
-      return num + index;
-    }
-    // Test for numbers less than or equal to num
-    if (isPalindrome(num - index)) {
-      return num - index;
-    }
-    // If neither test passes, increment the index by one and try again.
-    index++;
-  }
+  return output;
 }
 
 // Tests
-console.log(palindrome(8)); // 11
-console.log(palindrome(281)); // 282
-console.log(palindrome(1029)); // 1001
-console.log(palindrome(1221)); // 1221
-console.log(palindrome("1221")); // "Not valid"
+console.log(pattern(10)); // see kata description
