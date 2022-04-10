@@ -1,48 +1,41 @@
-// Challenge: Number-Star ladder (7 kyu)
+// Challenge: Sum up the random string (7 kyu)
 
 // Description:
 
-// Task
+// Given a random string consisting of numbers, letters, symbols, you need to sum up the numbers in the string.
 
-// Using n as a parameter in the function pattern, where n>0, complete the codes to get the pattern (take the help of examples):
+// Note:
 
-// Note: There is no newline in the end (after the pattern ends)
+// Consecutive integers should be treated as a single number. eg, 2015 should be treated as a single number 2015, NOT four numbers
+// All the numbers should be treaded as positive integer. eg, 11-14 should be treated as two numbers 11 and 14. Same as 3.14, should be treated as two numbers 3 and 14
+// If no number was given in the string, it should return 0
+// Example:
 
-// Examples
-// pattern(3) should return "1\n1*2\n1**3", e.g. the following:
+// str = "In 2015, I want to know how much does iPhone 6+ cost?"
+// The numbers are 2015, 6
 
-// 1
-// 1*2
-// 1**3
-// pattern(10): should return the following:
-
-// 1
-// 1*2
-// 1**3
-// 1***4
-// 1****5
-// 1*****6
-// 1******7
-// 1*******8
-// 1********9
-// 1*********10
+// Sum is 2021.
 
 // My code below:
 
-function pattern(n) {
-  let output = "";
-  let asterisk = "*";
-
-  for (let i = 0; i < n; i++) {
-    i === 0
-      ? (output += `${i + 1}\n`)
-      : i > 0 && i < n - 1
-      ? (output += `1${asterisk.repeat(i)}${i + 1}\n`)
-      : (output += `1${asterisk.repeat(i)}${i + 1}`);
-  }
-
-  return output;
-}
+const sumFromString = (str) =>
+  str
+    .replace(/\D/g, " ")
+    .split(" ")
+    .map(Number)
+    .reduce((total, currentNum) => total + currentNum);
 
 // Tests
-console.log(pattern(10)); // see kata description
+console.log(
+  sumFromString("In 2015, I want to know how much does iPhone 6+ cost?")
+); // 2021
+console.log(sumFromString("1+1=2")); // 4
+console.log(sumFromString("e=mc^2")); // 2
+console.log(
+  sumFromString("aHR0cDovL3d3dy5jb2Rld2Fycy5jb20va2F0YS9uZXcvamF2YXNjcmlwdA==")
+); // 53
+console.log(sumFromString("a30561ff4fb19170aa598b1431b52edad1fcc3e0")); // 51820
+console.log(sumFromString("x1KT   CmZ__\rYouOY8Uqu-ETtz")); // 9
+console.log(sumFromString('x1KT-8&*@"CmZ__\rYouO  __Y8Uq\\u-ETtz')); // 17
+console.log(sumFromString("")); // 0, "Empty string should return 0"
+console.log(sumFromString("Hello World")); // 0, "String with no numbers should return 0"];
