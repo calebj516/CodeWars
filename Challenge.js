@@ -1,45 +1,31 @@
-// Challenge: Dropcaps (7 kyu)
+// Challenge: Simple String Characters (7 kyu)
 
 // Description:
 
-// DropCaps means that the first letter of the starting word of the paragraph should be in caps and the remaining lowercase, just like you see in the newspaper.
+// In this Kata, you will be given a string and your task will be to return a list of ints detailing the count of uppercase letters, lowercase, numbers and special characters, as follows.
 
-// But for a change, let"s do that for each and every word of the given String. Your task is to capitalize every word that has length greater than 2, leaving smaller words as they are.
-
-// *should work also on Leading and Trailing Spaces and caps.
-
-// "apple"            => "Apple"
-// "apple of banana"  => "Apple of Banana"
-// "one   space"      => "One   Space
-// "   space WALK   " => "   Space Walk   "
-// Note: you will be provided atleast one word and should take string as input and return string as output.
+// Solve("*'&ABCDabcde12345") = [4,5,5,3].
+// --the order is: uppercase letters, lowercase, numbers and special characters.
+// More examples in the test cases.
 
 // My code below:
 
-function dropCap(n) {
-  n = n.split(" ");
+function solve(s) {
+  if (s.length > 0) {
+    let uppercase = s.match(/[A-Z]/g).length;
+    let lowercase = s.match(/[a-z]/g).length;
+    let numbers = s.match(/\d/g).length;
+    let specials = s.match(/[^\w]/g).length;
 
-  for (let i = 0; i < n.length; i++) {
-    if (n[i].length > 2) {
-      n[i] = n[i][0].toUpperCase() + n[i].slice(1).toLowerCase();
-    }
+    return [uppercase, lowercase, numbers, specials];
   }
-
-  return n.join(" ");
 }
 
 // Tests
-console.log(dropCap("Apple Banana")); // "Apple Banana"
-console.log(dropCap("Apple")); // "Apple"
-console.log(dropCap("")); // ""
-console.log(dropCap("of")); // "of"
-console.log(
-  dropCap(
-    "Revelation of the contents outraged American public opinion, and helped generate"
-  )
-); //"Revelation of The Contents Outraged American Public Opinion, And Helped Generate"
-console.log(dropCap("more  than    one space between words")); // "More  Than    One Space Between Words"
-console.log(dropCap("  leading spaces")); // "  Leading Spaces"
-console.log(dropCap("trailing spaces   ")); // "Trailing Spaces   "
-console.log(dropCap("ALL CAPS CRAZINESS")); // "All Caps Craziness"
-console.log(dropCap("rAnDoM CaPs CrAzInEsS")); // "Random Caps Craziness"
+console.log(solve("Codewars@codewars123.com")); // [1, 18, 3, 2]
+console.log(solve("bgA5<1d-tOwUZTS8yQ")); // [7, 6, 3, 2]
+console.log(solve("P*K4%>mQUDaG$h=cx2?.Czt7!Zn16p@5H")); // [9, 9, 6, 9]
+console.log(solve("RYT'>s&gO-.CM9AKeH?,5317tWGpS<*x2ukXZD")); // [15, 8, 6, 9]
+
+console.log(solve("$Cnl)Sr<7bBW-&qLHI!mY41ODe")); // [10, 7, 3, 6]
+console.log(solve("@mw>0=QD-iAx!rp9TaG?o&M%l$34L.nbft")); // [7, 13, 4, 10]
