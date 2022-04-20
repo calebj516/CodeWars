@@ -1,31 +1,42 @@
-// Challenge: Simple String Characters (7 kyu)
+// Challenge: Clock In Mirror (6 kyu)
 
 // Description:
 
-// In this Kata, you will be given a string and your task will be to return a list of ints detailing the count of uppercase letters, lowercase, numbers and special characters, as follows.
+// Peter can see a clock in the mirror from the place he sits in the office. When he saw the clock shows 12:22, he knows that the time is 11:38
 
-// Solve("*'&ABCDabcde12345") = [4,5,5,3].
-// --the order is: uppercase letters, lowercase, numbers and special characters.
-// More examples in the test cases.
+// in the same manner:
+
+// 05:25 --> 06:35
+
+// 01:50 --> 10:10
+
+// 11:58 --> 12:02
+
+// 12:01 --> 11:59
+
+// Please complete the function WhatIsTheTime(timeInMirror), where timeInMirror is the mirrored time (what Peter sees) as string.
+
+// Return the real time as a string.
+
+// Consider hours to be between 1 <= hour < 13.
+
+// So there is no 00:20, instead it is 12:20.
+
+// There is no 13:20, instead it is 01:20.
 
 // My code below:
 
-function solve(s) {
-  if (s.length > 0) {
-    let uppercase = s.match(/[A-Z]/g).length;
-    let lowercase = s.match(/[a-z]/g).length;
-    let numbers = s.match(/\d/g).length;
-    let specials = s.match(/[^\w]/g).length;
-
-    return [uppercase, lowercase, numbers, specials];
-  }
-}
+let WhatIsTheTime = (t) => {
+  let [h, m] = t.split(":"); // Destructure t into hours and minutes
+  h = (+m ? 11 : 12) - (h % 12) || 12; // if the minutes are truthy (something greater than 0) we need to reduce 12 to 11 in order to correctly take the minutes into account when mirroring. Otherwise the result will be off by 1 hour.
+  m = (60 - m) % 60; // This mirrors the minutes correctly. An amount % a larger amount gives us the same amount
+  return [h, m].map((e) => (e > 9 ? e : "0" + e)).join(":"); // add a zero to the front of any single digit integer
+};
 
 // Tests
-console.log(solve("Codewars@codewars123.com")); // [1, 18, 3, 2]
-console.log(solve("bgA5<1d-tOwUZTS8yQ")); // [7, 6, 3, 2]
-console.log(solve("P*K4%>mQUDaG$h=cx2?.Czt7!Zn16p@5H")); // [9, 9, 6, 9]
-console.log(solve("RYT'>s&gO-.CM9AKeH?,5317tWGpS<*x2ukXZD")); // [15, 8, 6, 9]
-
-console.log(solve("$Cnl)Sr<7bBW-&qLHI!mY41ODe")); // [10, 7, 3, 6]
-console.log(solve("@mw>0=QD-iAx!rp9TaG?o&M%l$34L.nbft")); // [7, 13, 4, 10]
+console.log(WhatIsTheTime("06:35")); // "05:25"
+console.log(WhatIsTheTime("11:59")); // "12:01"
+console.log(WhatIsTheTime("12:02")); // "11:58"
+console.log(WhatIsTheTime("04:00")); // "08:00"
+console.log(WhatIsTheTime("06:00")); // "06:00"
+console.log(WhatIsTheTime("12:00")); // "12:00"
