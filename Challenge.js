@@ -1,42 +1,23 @@
-// Challenge: Clock In Mirror (6 kyu)
+// Challenge: Narcissistic Numbers (7 kyu)
 
 // Description:
 
-// Peter can see a clock in the mirror from the place he sits in the office. When he saw the clock shows 12:22, he knows that the time is 11:38
+// A Narcissistic Number is a number of length n in which the sum of its digits to the power of n is equal to the original number. If this seems confusing, refer to the example below.
 
-// in the same manner:
+// Ex: 153, where n = 3 (number of digits in 153)
+// 13 + 53 + 33 = 153
 
-// 05:25 --> 06:35
-
-// 01:50 --> 10:10
-
-// 11:58 --> 12:02
-
-// 12:01 --> 11:59
-
-// Please complete the function WhatIsTheTime(timeInMirror), where timeInMirror is the mirrored time (what Peter sees) as string.
-
-// Return the real time as a string.
-
-// Consider hours to be between 1 <= hour < 13.
-
-// So there is no 00:20, instead it is 12:20.
-
-// There is no 13:20, instead it is 01:20.
+// Write a method is_narcissistic(i) (in Haskell: isNarcissistic :: Integer -> Bool) which returns whether or not i is a Narcissistic Number.
 
 // My code below:
 
-let WhatIsTheTime = (t) => {
-  let [h, m] = t.split(":"); // Destructure t into hours and minutes
-  h = (+m ? 11 : 12) - (h % 12) || 12; // if the minutes are truthy (something greater than 0) we need to reduce 12 to 11 in order to correctly take the minutes into account when mirroring. Otherwise the result will be off by 1 hour.
-  m = (60 - m) % 60; // This mirrors the minutes correctly. An amount % a larger amount gives us the same amount
-  return [h, m].map((e) => (e > 9 ? e : "0" + e)).join(":"); // add a zero to the front of any single digit integer
-};
+// Compare n to the result of n converted to a string, split into an array, changing each digit into a number, and using reduce to sum the result of each digit raised to the power of the length of the array.
+
+const isNarcissistic = n => n == n.toString().split('').map(Number).reduce((total, currentNum, idx, arr) => total + currentNum ** arr.length, 0);
 
 // Tests
-console.log(WhatIsTheTime("06:35")); // "05:25"
-console.log(WhatIsTheTime("11:59")); // "12:01"
-console.log(WhatIsTheTime("12:02")); // "11:58"
-console.log(WhatIsTheTime("04:00")); // "08:00"
-console.log(WhatIsTheTime("06:00")); // "06:00"
-console.log(WhatIsTheTime("12:00")); // "12:00"
+console.log(isNarcissistic(234229983));       // false
+console.log(isNarcissistic(9926315));         // true
+console.log(isNarcissistic(24678050));        // true
+console.log(isNarcissistic(88593477));        // true
+console.log(isNarcissistic(11513221922401));  // false
