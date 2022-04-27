@@ -1,24 +1,22 @@
-// Challenge: Sum of numerous arguments (7 kyu)
+// Challenge: Sort Numbers (7 kyu)
 
 // Description:
 
-// After calling the function findSum() with any number of non-negative integer arguments, it should return the sum of all those arguments. If no arguments are given, the function should return 0, if negative arguments are given, it should return -1.
+// Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
 
-// Example
-// findSum(1,2,3,4); // returns 10
-// findSum(1,-2);    // returns -1
-// findSum();        // returns 0
-// Hint: research the arguments object on google or read Chapter 4 from Eloquent Javascript
+// For example:
 
-function findSum(...args){
-  return args.reduce((total, current) => total < 0 || current < 0 ? -1 : total + current, 0);
+// solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
+// solution(null); // should return []
+
+function solution(nums){
+  // if nums is truthy, sort it; otherwise, return an empty array.
+  return nums ? nums.sort((num1, num2) => num1 - num2) : [];
 }
 
 // Tests
-console.log(findSum(1, 3, 5)); // 9, "1 + 3 + 5 = 9"
-console.log(findSum()); // 0
-console.log(findSum(1, -2, 4)); // -1
-console.log(findSum(0)); // 0
-console.log(findSum(1, 1, 5)); // 7
-console.log(findSum(1, 1, 1, 1, 1, 1, 1, 1, 0)); // 8
-console.log(findSum(-1, -1, 5)); // -1
+console.log(solution([1,2,3,10,5])); // [1,2,3,5,10]
+console.log(solution(null)); // []
+console.log(solution([])); // []
+console.log(solution([20, 2, 10])); // [2,10,20]
+console.log(solution([2, 20, 10])); // [2,10,20]
