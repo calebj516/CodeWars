@@ -1,18 +1,25 @@
-// Challenge: Credit Card Mask (7 kyu)
+// Challenge: IP Validation (6 kyu)
 
 // Description:
 
-// Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
+// Write an algorithm that will identify valid IPv4 addresses in dot-decimal format. IPs should be considered valid if they consist of four octets, with values between 0 and 255, inclusive.
 
-// Your task is to write a function maskify, which changes all but the last four characters into '#'.
-
-const maskify = (cc) =>
-  cc
-    .split("")
-    .map((el, idx, arr) => (idx < arr.length - 4 ? "#" : el))
-    .join("");
+function isValidIP(str) {
+  const octets = str.split(".");
+  return (
+    octets.length === 4 &&
+    octets.every(
+      (octet, idx, arr) =>
+        arr.length > 0 && // make sure arr has contents
+        Number(octet).toString() === octet && // check for leading zeroes
+        Number(octet) >= 0 && // Between 0...
+        Number(octet) <= 255 // ... and 255
+    )
+  );
+}
 
 // Tests
-console.log(maskify("4556364607935616")); // "############5616"
-console.log(maskify("1")); // "1"
-console.log(maskify("11111")); // "#1111"
+console.log(isValidIP("0.0.0.0")); // true
+console.log(isValidIP("123.45.67.89")); // true
+console.log(isValidIP("12.34.56")); // false
+console.log(isValidIP("01.02.03.04")); // false
