@@ -1,22 +1,40 @@
-// Challenge: Bingo ( Or Not ) (7 kyu)
+// Challenge: List of Presents (7 kyu)
 
 // Description:
 
-// For this game of BINGO, you will receive a single array of 10 numbers from 1 to 26 as an input. Duplicate numbers within the array are possible.
+// Leo's girlfriend asked him to buy a gift list during his next trip, now he wants to know how many of them will he be able to buy.
 
-// Each number corresponds to their alphabetical order letter (e.g. 1 = A. 2 = B, etc). Write a function where you will win the game if your numbers can spell "BINGO". They do not need to be in the right order in the input array). Otherwise you will lose. Your outputs should be "WIN" or "LOSE" respectively.
+// Write a function to help Leo out. The first parameter of the function is Leo's budget; the second one is an array containing the price of each gift. You should return an integer representing the maximum amount of gifts Leo can buy.
 
-// Write an algorithm that will identify valid IPv4 addresses in dot-decimal format. IPs should be considered valid if they consist of four octets, with values between 0 and 255, inclusive.
+// Example:
+// Maximum budget: 20
+// Gift List: [13, 2, 4, 6, 1]
+// Should return 4.
+
+// _ NOTE: All numbers will be integers >= 0, and the array will never be empty. _
 
 // My code below:
 
-// Explanation: map each capital letter to its ASCII code equivalent, and then subtract 64 to obtain its order in the alphabet.
-// Then, test that every code appears in array passed in to the function.
-const bingo = a => ([...'BINGO'].map(letter => letter.charCodeAt(letter) - 64).every(num => a.includes(num))) ? "WIN" : "LOSE";
+function howManyGifts(maxBudget, gifts){
+    // sort gifts in ascending order
+    gifts.sort((num1, num2) => num1 - num2);
+    // include only the values such that when subtracted from the max budget are greater than or equal to zero (max budget decreases as each number is processed)
+    return gifts.filter(num => (maxBudget -= num) >= 0).length;
+}
 
 // Tests
 
-console.log(bingo([1,2,3,4,5,6,7,8,9,10])); // "LOSE"
-console.log(bingo([20,12,23,14,6,22,12,17,2,26])); // "LOSE"
-console.log(bingo([1,2,3,7,5,14,7,15,9,10])); // "WIN"
-console.log(bingo([5,2,13,7,5,14,17,15,9,10])); // "WIN"
+console.log(howManyGifts(20, [13, 2, 4, 6, 1])); // 4
+
+// Example for above test: 
+    // sorted values are: 1, 2, 4, 6, 13
+    // 20 - 1 = 19 => Pass
+    // 19 - 2 = 17 => Pass
+    // 17 - 4 = 13 => Pass
+    // 13 - 6 = 7 => Pass
+    // 7 - 13 = -6 => Fail
+    // return 4
+
+console.log(howManyGifts(90, [87, 3, 5, 25, 1, 3, 4, 6, 20])); // 8
+console.log(howManyGifts(100, [6, 94, 10, 45, 2, 4, 5, 6, 8, 1])); // 9
+
