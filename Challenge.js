@@ -1,28 +1,24 @@
-// Challenge: ASCII Shift Encryption/Decryption (7 kyu)
+// Challenge: Find the smallest integer in the array (8 kyu)
 
 // Description:
 
-// The goal of this kata is to create a very simple ASCII encryption and decryption. The encryption algorithm should shift each character's charcode by the character's current index in the string (0-based).
+// Given an array of integers your solution should find the smallest integer.
 
-// The input strings will never require to go outside of the ASCII range.
+// For example:
+
+// Given [34, 15, 88, 2] your solution will return 2
+// Given [34, -345, -1, 100] your solution will return -345
+// You can assume, for the purpose of this kata, that the supplied array will not be empty.
 
 // My code below:
 
-function asciiEncrypt(plaintext) {
-  return plaintext
-    .split("")
-    .map((el, idx) => String.fromCharCode(el.charCodeAt(0) + idx))
-    .join("");
-}
-
-function asciiDecrypt(ciphertext) {
-  return ciphertext
-    .split("")
-    .map((el, idx) => String.fromCharCode(el.charCodeAt(0) - idx))
-    .join("");
-}
+// spread operator expands the array that is passed in via "args", and Math.min returns the smallest integer
+findSmallestInt = (args) => Math.min(...args);
 
 // Tests
 
-console.log(asciiEncrypt("PASSWORD")); // "PBUV[TXK"
-console.log(asciiDecrypt("PBUV[TXK")); // "PASSWORD"
+console.log(findSmallestInt([78, 56, 232, 12, 8])); // 8
+console.log(findSmallestInt([78, 56, 232, 12, 18])); // 12
+console.log(findSmallestInt([78, 56, 232, 412, 228])); // 56
+console.log(findSmallestInt([78, 56, 232, 12, 0])); // 0
+console.log(findSmallestInt([1, 56, 232, 12, 8])); // 1
