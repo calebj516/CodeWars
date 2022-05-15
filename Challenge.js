@@ -20,14 +20,17 @@
 
 function duplicates(array) {
   let count = 0;
-  let sortedArr = array.sort((num1, num2) => num1 - num2);
+  let index = 0;
 
-  for (let i = 0; i < sortedArr.length; i++) {
-    if (sortedArr[i] === sortedArr[i + 1]) {
-      i++;
-      // need to advance the index by two in order to avoid double counting
+  array.sort((num1, num2) => num1 - num2);
+
+  while (index < array.length) {
+    // if there is a match, increment the index as well. This will result in the index increasing by two when the loop completes an iteration and prevent counting the pair twice
+    if (array[index] === array[index + 1]) {
       count++;
+      index++;
     }
+    index++;
   }
 
   return count;
