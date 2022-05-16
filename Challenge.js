@@ -1,46 +1,29 @@
-// Challenge: Find all pairs (7 kyu)
+// Challenge: Nth Root of a Number (7 kyu)
 
 // Description:
 
-// You are given array of integers, your task will be to count all pairs in that array and return their count.
+// Given two numbers x and n, calculate the (positive) nth root of x; this means that being r = result, r^n = x
+
+// Examples
+// x = 4     n = 2  -->  2    # the square root of 4 is 2     2^2 = 4
+// x = 8     n = 3  -->  2    # the cube root of 8 is 2       2^3 = 8
+// x = 256   n = 4  -->  4    # the 4th root of 256 is 4      4^4 = 256
+// x = 9     n = 2  -->  3    # the square root of 9 is 3     3^2 = 9
+// x = 6.25  n = 2  -->  2.5  #                             2.5^2 = 6.25
 
 // Notes:
 
-// Array can be empty or contain only one value; in this case return 0
-// If there are more pairs of a certain number, count each pair only once. E.g.: for [0, 0, 0, 0] the return value is 2 (= 2 pairs of 0s)
-// Random tests: maximum array length is 1000, range of values in array is between 0 and 1000
-// Examples
-// [1, 2, 5, 6, 5, 2]  -->  2
-// ...because there are 2 pairs: 2 and 5
-
-// [1, 2, 2, 20, 6, 20, 2, 6, 2]  -->  4
-// ...because there are 4 pairs: 2, 20, 6 and 2 (again)
+// 4 <= x < 10 ^ 20
+// 4 <= n <= 50
 
 // My code below:
 
-function duplicates(array) {
-  let count = 0;
-  let index = 0;
-
-  array.sort((num1, num2) => num1 - num2);
-
-  while (index < array.length) {
-    // if there is a match, increment the index as well. This will result in the index increasing by two when the loop completes an iteration and prevent counting the pair twice
-    if (array[index] === array[index + 1]) {
-      count++;
-      index++;
-    }
-    index++;
-  }
-
-  return count;
-}
+const root = (x, n) => x ** (1 / n);
 
 // Tests
 
-console.log(duplicates([1, 2, 5, 6, 5, 2])); // 2
-console.log(duplicates([1, 2, 2, 20, 6, 20, 2, 6, 2])); // 4
-console.log(duplicates([0, 0, 0, 0, 0, 0, 0])); // 3
-console.log(duplicates([1000, 1000])); // 1
-console.log(duplicates([])); // 0
-console.log(duplicates([54])); // 0
+console.log(root(4, 2)); // 2
+console.log(root(8, 3)); // 2
+console.log(root(256, 4)); // 4
+console.log(root(9, 2)); // 3
+console.log(root(6.25, 2)); // 2.5
