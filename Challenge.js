@@ -1,29 +1,23 @@
-// Challenge: Nth Root of a Number (7 kyu)
+// Challenge: Consecutive Items (7 kyu)
 
 // Description:
 
-// Given two numbers x and n, calculate the (positive) nth root of x; this means that being r = result, r^n = x
+// You are given a list of unique integers arr, and two integers a and b. Your task is to find out whether or not a and b appear consecutively in arr, and return a boolean value (True if a and b are consecutive, False otherwise).
 
-// Examples
-// x = 4     n = 2  -->  2    # the square root of 4 is 2     2^2 = 4
-// x = 8     n = 3  -->  2    # the cube root of 8 is 2       2^3 = 8
-// x = 256   n = 4  -->  4    # the 4th root of 256 is 4      4^4 = 256
-// x = 9     n = 2  -->  3    # the square root of 9 is 3     3^2 = 9
-// x = 6.25  n = 2  -->  2.5  #                             2.5^2 = 6.25
-
-// Notes:
-
-// 4 <= x < 10 ^ 20
-// 4 <= n <= 50
+// It is guaranteed that a and b are both present in arr.
 
 // My code below:
 
-const root = (x, n) => x ** (1 / n);
+// If the index of a and b are 1 apart, we know they occur consecutively.
+// Using Math.abs ensures that our result will always be positive. We don't need to be concerned with which number is greater than the other.
+const consecutive = (arr, a, b) =>
+  Math.abs(arr.indexOf(a) - arr.indexOf(b)) === 1;
 
 // Tests
 
-console.log(root(4, 2)); // 2
-console.log(root(8, 3)); // 2
-console.log(root(256, 4)); // 4
-console.log(root(9, 2)); // 3
-console.log(root(6.25, 2)); // 2.5
+console.log(consecutive([1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 8)); // false
+console.log(consecutive([1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 3)); // true
+console.log(consecutive([1, 4, 5, 3, 2, 7, 6, 23, 76, 11, 0], 2, 3)); // true
+console.log(consecutive([1, -4, -5, 3, -2, 11, 23, -76, 6, -7, 2], 2, 3)); // false
+console.log(consecutive([1, 2, 3, 4, 5], 1, 5)); // false
+console.log(consecutive([1, 2, 3, 4, 5], 5, 1)); // false
