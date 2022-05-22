@@ -1,23 +1,52 @@
-// Challenge: Consecutive Items (7 kyu)
+// Challenge: Separating Strings (6 kyu)
 
 // Description:
 
-// You are given a list of unique integers arr, and two integers a and b. Your task is to find out whether or not a and b appear consecutively in arr, and return a boolean value (True if a and b are consecutive, False otherwise).
+// Create a function that takes a string and separates it into a sequence of letters.
 
-// It is guaranteed that a and b are both present in arr.
+// The array will be formatted as so:
 
-// My code below:
+// [['J','L','L','M']
+// ,['u','i','i','a']
+// ,['s','v','f','n']
+// ,['t','e','e','']]
 
-// If the index of a and b are 1 apart, we know they occur consecutively.
-// Using Math.abs ensures that our result will always be positive. We don't need to be concerned with which number is greater than the other.
-const consecutive = (arr, a, b) =>
-  Math.abs(arr.indexOf(a) - arr.indexOf(b)) === 1;
+// The function should separate each word into individual letters, with the first word in the sentence having its letters in the 0th index of each 2nd dimension array, and so on.
+
+// Shorter words will have an empty string in the place once the word has already been mapped out. (See the last element in the last part of the array.)
+
+const sepStr = (str) => {
+  let result = [];
+  // obtain words
+  let words = str.split(" ");
+  // obtain length of longest word
+  let length = Math.max(...words.map((word) => word.length));
+  // loop through up to the length of the longest word, pushing the first character in each word to result
+  for (let i = 0; i < length; i++) {
+    result.push(words.map((word) => word[i] || ""));
+  }
+  // return result
+  return result;
+};
 
 // Tests
 
-console.log(consecutive([1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 8)); // false
-console.log(consecutive([1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 3)); // true
-console.log(consecutive([1, 4, 5, 3, 2, 7, 6, 23, 76, 11, 0], 2, 3)); // true
-console.log(consecutive([1, -4, -5, 3, -2, 11, 23, -76, 6, -7, 2], 2, 3)); // false
-console.log(consecutive([1, 2, 3, 4, 5], 1, 5)); // false
-console.log(consecutive([1, 2, 3, 4, 5], 5, 1)); // false
+console.log(sepStr("Just Live Life Man"));
+// => [['J','L','L','M'],
+// => ['u','i','i','a'],
+// => ['s','v','f','n'],
+// => ['t','e','e','']]);
+
+console.log(sepStr("The Mitochondria is the powerhouse of the cell"));
+// => [ [ 'T', 'M', 'i', 't', 'p', 'o', 't', 'c' ],
+// => [ 'h', 'i', 's', 'h', 'o', 'f', 'h', 'e' ],
+// => [ 'e', 't', '', 'e', 'w', '', 'e', 'l' ],
+// => [ '', 'o', '', '', 'e', '', '', 'l' ],
+// => [ '', 'c', '', '', 'r', '', '', '' ],
+// => [ '', 'h', '', '', 'h', '', '', '' ],
+// => [ '', 'o', '', '', 'o', '', '', '' ],
+// => [ '', 'n', '', '', 'u', '', '', '' ],
+// => [ '', 'd', '', '', 's', '', '', '' ],
+// => [ '', 'r', '', '', 'e', '', '', '' ],
+// => [ '', 'i', '', '', '', '', '', '' ],
+// => [ '', 'a', '', '', '', '', '', '' ]]
