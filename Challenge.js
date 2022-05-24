@@ -1,52 +1,28 @@
-// Challenge: Separating Strings (6 kyu)
+// Challenge: Sum of differences in array (8 kyu)
 
 // Description:
 
-// Create a function that takes a string and separates it into a sequence of letters.
+// Your task is to sum the differences between consecutive pairs in the array in descending order.
 
-// The array will be formatted as so:
+// Example
+// [2, 1, 10]  -->  9
+// In descending order: [10, 2, 1]
 
-// [['J','L','L','M']
-// ,['u','i','i','a']
-// ,['s','v','f','n']
-// ,['t','e','e','']]
+// Sum: (10 - 2) + (2 - 1) = 8 + 1 = 9
 
-// The function should separate each word into individual letters, with the first word in the sentence having its letters in the 0th index of each 2nd dimension array, and so on.
+// If the array is empty or the array has only one element the result should be 0 (Nothing in Haskell ).
 
-// Shorter words will have an empty string in the place once the word has already been mapped out. (See the last element in the last part of the array.)
+// My code below:
 
-const sepStr = (str) => {
-  let result = [];
-  // obtain words
-  let words = str.split(" ");
-  // obtain length of longest word
-  let length = Math.max(...words.map((word) => word.length));
-  // loop through up to the length of the longest word, pushing the first character in each word to result
-  for (let i = 0; i < length; i++) {
-    result.push(words.map((word) => word[i] || ""));
-  }
-  // return result
-  return result;
-};
+// Mathematical shortcut to solve this problem is to take the largest number and subtract it from the smallest number. This is reflected in my solution with the Math.max and Math.min methods.
+
+const sumOfDifferences = (arr) =>
+  arr.length > 1 ? Math.max(...arr) - Math.min(...arr) : 0;
 
 // Tests
 
-console.log(sepStr("Just Live Life Man"));
-// => [['J','L','L','M'],
-// => ['u','i','i','a'],
-// => ['s','v','f','n'],
-// => ['t','e','e','']]);
-
-console.log(sepStr("The Mitochondria is the powerhouse of the cell"));
-// => [ [ 'T', 'M', 'i', 't', 'p', 'o', 't', 'c' ],
-// => [ 'h', 'i', 's', 'h', 'o', 'f', 'h', 'e' ],
-// => [ 'e', 't', '', 'e', 'w', '', 'e', 'l' ],
-// => [ '', 'o', '', '', 'e', '', '', 'l' ],
-// => [ '', 'c', '', '', 'r', '', '', '' ],
-// => [ '', 'h', '', '', 'h', '', '', '' ],
-// => [ '', 'o', '', '', 'o', '', '', '' ],
-// => [ '', 'n', '', '', 'u', '', '', '' ],
-// => [ '', 'd', '', '', 's', '', '', '' ],
-// => [ '', 'r', '', '', 'e', '', '', '' ],
-// => [ '', 'i', '', '', '', '', '', '' ],
-// => [ '', 'a', '', '', '', '', '', '' ]]
+console.log(sumOfDifferences([1, 2, 10])); // 9
+console.log(sumOfDifferences([-3, -2, -1])); // 2
+console.log(sumOfDifferences([1, 1, 1, 1, 1])); // 0
+console.log(sumOfDifferences([-17, 17])); // 34
+console.log(sumOfDifferences([])); // 0
