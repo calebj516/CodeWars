@@ -1,28 +1,27 @@
-// Challenge: Sum of differences in array (8 kyu)
+// Challenge: What is between? (8 kyu)
 
 // Description:
 
-// Your task is to sum the differences between consecutive pairs in the array in descending order.
-
-// Example
-// [2, 1, 10]  -->  9
-// In descending order: [10, 2, 1]
-
-// Sum: (10 - 2) + (2 - 1) = 8 + 1 = 9
-
-// If the array is empty or the array has only one element the result should be 0 (Nothing in Haskell ).
+// Complete the function that takes two integers (a, b, where a < b) and return an array of all integers between the input parameters, including them.
 
 // My code below:
 
-// Mathematical shortcut to solve this problem is to take the largest number and subtract it from the smallest number. This is reflected in my solution with the Math.max and Math.min methods.
+function between(a, b) {
+  // your code here
+  let result = [];
 
-const sumOfDifferences = (arr) =>
-  arr.length > 1 ? Math.max(...arr) - Math.min(...arr) : 0;
+  // determine the starting and ending numbers
+  let min = Math.min(a, b);
+  let max = Math.max(a, b);
+
+  for (let i = min; i <= max; i++) {
+    result.push(i);
+  }
+
+  return result;
+}
 
 // Tests
 
-console.log(sumOfDifferences([1, 2, 10])); // 9
-console.log(sumOfDifferences([-3, -2, -1])); // 2
-console.log(sumOfDifferences([1, 1, 1, 1, 1])); // 0
-console.log(sumOfDifferences([-17, 17])); // 34
-console.log(sumOfDifferences([])); // 0
+console.log(between(1, 4)); // [1, 2, 3, 4]
+console.log(between(-2, 2)); // [-2, -1, 0, 1, 2]
