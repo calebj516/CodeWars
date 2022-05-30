@@ -1,27 +1,27 @@
-// Challenge: What is between? (8 kyu)
+// Challenge: Return Negative (8 kyu)
 
 // Description:
 
-// Complete the function that takes two integers (a, b, where a < b) and return an array of all integers between the input parameters, including them.
+// In this simple assignment you are given a number and have to make it negative. But maybe the number is already negative?
+
+// Examples
+// makeNegative(1);    // return -1
+// makeNegative(-5);   // return -5
+// makeNegative(0);    // return 0
+// makeNegative(0.12); // return -0.12
+
+// Notes
+
+// The number can be negative already, in which case no change is required.
+// Zero (0) is not checked for any specific sign. Negative zeros make no mathematical sense.
 
 // My code below:
 
-function between(a, b) {
-  // your code here
-  let result = [];
-
-  // determine the starting and ending numbers
-  let min = Math.min(a, b);
-  let max = Math.max(a, b);
-
-  for (let i = min; i <= max; i++) {
-    result.push(i);
-  }
-
-  return result;
-}
+const makeNegative = (num) => (num <= 0 ? num : -num);
 
 // Tests
 
-console.log(between(1, 4)); // [1, 2, 3, 4]
-console.log(between(-2, 2)); // [-2, -1, 0, 1, 2]
+console.log(makeNegative(1)); // -1
+console.log(makeNegative(-5)); // 5
+console.log(makeNegative(0)); // 0
+console.log(makeNegative(0.12)); // -0.12
