@@ -1,26 +1,33 @@
-// Challenge: Sum of two lowest positive integers (7 kyu)
+// Challenge: Ghostbusters (whitespace removal) (7 kyu)
 
 // Description:
 
-// Create a function that returns the sum of the two lowest positive numbers given an array of minimum 4 positive integers. No floats or non-positive integers will be passed.
+// Oh no! Ghosts have reportedly swarmed the city. It's your job to get rid of them and save the day!
 
-// For example, when an array is passed like [19, 5, 42, 2, 77], the output should be 7.
+// In this kata, strings represent buildings while whitespaces within those strings represent ghosts.
 
-// [10, 343445353, 3453445, 3453545353453] should return 3453455.
+// So what are you waiting for? Return the building(string) without any ghosts(whitespaces)!
+
+// Example:
+
+// ghostBusters("Sky scra per");
+// Should return:
+
+// "Skyscraper"
+// If the building contains no ghosts, return the string:
+
+// "You just wanted my autograph didn't you?"
 
 // My code below:
 
-function sumTwoSmallestNumbers(numbers) {
-  // sort numbers in ascending order
-  numbers.sort((num1, num2) => num1 - num2);
-  // return sum of first two elements (least and second-most least, respectively)
-  return numbers[0] + numbers[1];
-}
+// Logic: if the building string is not equal to the same string with whitespace removed, then we know that whitespace characters are present that need to be removed. Else, return the string specified in the instructions.
+const ghostBusters = (building) =>
+  building.replace(/\s/g, "") !== building
+    ? building.replace(/\s/g, "")
+    : "You just wanted my autograph didn't you?";
 
 // Tests
 
-console.log(sumTwoSmallestNumbers([5, 8, 12, 19, 22])); // 13
-console.log(sumTwoSmallestNumbers([15, 28, 4, 2, 43])); // 6
-console.log(sumTwoSmallestNumbers([3, 87, 45, 12, 7])); // 10
-console.log(sumTwoSmallestNumbers([23, 71, 33, 82, 1])); // 24
-console.log(sumTwoSmallestNumbers([52, 76, 14, 12, 4])); // 16
+console.log(ghostBusters("Factor y")); // "Factory"
+console.log(ghostBusters("O  f fi ce")); // "Office"
+console.log(ghostBusters("BusStation")); // "You just wanted my autograph didn't you?"
