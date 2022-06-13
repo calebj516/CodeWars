@@ -1,62 +1,52 @@
-// Challenge: Digital Cypher (7 kyu)
+// Challenge: CSV Representation of Array (8 kyu)
 
 // Description:
 
-// Digital Cypher assigns to each letter of the alphabet unique number. For example:
+// Create a function that returns the CSV representation of a two-dimensional numeric array.
 
-//  a  b  c  d  e  f  g  h  i  j  k  l  m
-//  1  2  3  4  5  6  7  8  9 10 11 12 13
-//  n  o  p  q  r  s  t  u  v  w  x  y  z
-// 14 15 16 17 18 19 20 21 22 23 24 25 26
+// Example:
 
-// Instead of letters in encrypted word we write the corresponding number, eg. The word scout:
+// input:
+//    [[ 0, 1, 2, 3, 4 ],
+//     [ 10,11,12,13,14 ],
+//     [ 20,21,22,23,24 ],
+//     [ 30,31,32,33,34 ]]
 
-//  s  c  o  u  t
-// 19  3 15 21 20
-// Then we add to each obtained digit consecutive digits from the key. For example. In case of key equal to 1939 :
+// output:
+//      '0,1,2,3,4\n'
+//     +'10,11,12,13,14\n'
+//     +'20,21,22,23,24\n'
+//     +'30,31,32,33,34'
+// Array's length > 2.
 
-//    s  c  o  u  t
-//   19  3 15 21 20
-//  + 1  9  3  9  1
-//  ---------------
-//   20 12 18 30 21
-
-//    m  a  s  t  e  r  p  i  e  c  e
-//   13  1 19 20  5 18 16  9  5  3  5
-// +  1  9  3  9  1  9  3  9  1  9  3
-//   --------------------------------
-//   14 10 22 29  6 27 19 18  6  12 8
-
-// Task
-
-// Write a function that accepts str string and key number and returns an array of integers representing encoded str.
-
-// Input / Output
-
-// The str input string consists of lowercase characters only.
-// The key input number is a positive integer.
-
-// Example
-
-// Encode("scout",1939);  ==>  [ 20, 12, 18, 30, 21]
-// Encode("masterpiece",1939);  ==>  [ 14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8]
+// More details here: https://en.wikipedia.org/wiki/Comma-separated_values
 
 // My code below:
 
-function encode(str, n) {
-  // split str into an array and map each code to its position in the alphabet
-  let alphabetPositionArray = str
-    .toLowerCase()
-    .split("")
-    .map((el) => el.charCodeAt(0) - 96);
-  let keyArray = String(n).split("").map(Number);
-  // loop through the result from step 1, adding the value from the key and then repeating
-  return alphabetPositionArray.map(
-    (num, idx) => num + keyArray[idx % keyArray.length]
-  );
-}
+const toCsvText = (array) => array.join("\n");
 
 // Tests
 
-console.log(encode("scout", 1939)); // [20, 12, 18, 30, 21]
-console.log(encode("masterpiece", 1939)); // [14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8]
+console.log(
+  toCsvText([
+    [0, 1, 2, 3, 45],
+    [10, 11, 12, 13, 14],
+    [20, 21, 22, 23, 24],
+    [30, 31, 32, 33, 34],
+  ])
+); // '0,1,2,3,45\n10,11,12,13,14\n20,21,22,23,24\n30,31,32,33,34'
+
+console.log(
+  toCsvText([
+    [-25, 21, 2, -33, 48],
+    [30, 31, -32, 33, -34],
+  ])
+); // '-25,21,2,-33,48\n30,31,-32,33,-34'
+
+console.log(
+  toCsvText([
+    [5, 55, 5, 5, 55],
+    [6, 6, 66, 23, 24],
+    [666, 31, 66, 33, 7],
+  ])
+); // '5,55,5,5,55\n6,6,66,23,24\n666,31,66,33,7'
