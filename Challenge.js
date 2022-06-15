@@ -1,52 +1,34 @@
-// Challenge: CSV Representation of Array (8 kyu)
+// Challenge: Regex validate PIN code (7 kyu)
 
 // Description:
 
-// Create a function that returns the CSV representation of a two-dimensional numeric array.
+// ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
 
-// Example:
+// If the function is passed a valid PIN string, return true, else return false.
 
-// input:
-//    [[ 0, 1, 2, 3, 4 ],
-//     [ 10,11,12,13,14 ],
-//     [ 20,21,22,23,24 ],
-//     [ 30,31,32,33,34 ]]
-
-// output:
-//      '0,1,2,3,4\n'
-//     +'10,11,12,13,14\n'
-//     +'20,21,22,23,24\n'
-//     +'30,31,32,33,34'
-// Array's length > 2.
-
-// More details here: https://en.wikipedia.org/wiki/Comma-separated_values
+// Examples (Input --> Output)
+// "1234"   -->  true
+// "12345"  -->  false
+// "a234"   -->  false
 
 // My code below:
 
-const toCsvText = (array) => array.join("\n");
+const validatePIN = (pin) =>
+  !(
+    (pin.length !== 4 && pin.length !== 6) ||
+    pin.replace(/\d/g, "").length > 0
+  );
 
 // Tests
 
-console.log(
-  toCsvText([
-    [0, 1, 2, 3, 45],
-    [10, 11, 12, 13, 14],
-    [20, 21, 22, 23, 24],
-    [30, 31, 32, 33, 34],
-  ])
-); // '0,1,2,3,45\n10,11,12,13,14\n20,21,22,23,24\n30,31,32,33,34'
-
-console.log(
-  toCsvText([
-    [-25, 21, 2, -33, 48],
-    [30, 31, -32, 33, -34],
-  ])
-); // '-25,21,2,-33,48\n30,31,-32,33,-34'
-
-console.log(
-  toCsvText([
-    [5, 55, 5, 5, 55],
-    [6, 6, 66, 23, 24],
-    [666, 31, 66, 33, 7],
-  ])
-); // '5,55,5,5,55\n6,6,66,23,24\n666,31,66,33,7'
+console.log(validatePIN("1")); // false
+console.log(validatePIN("12")); // false
+console.log(validatePIN("123")); // false
+console.log(validatePIN("12345")); // false
+console.log(validatePIN("1234567")); // false
+console.log(validatePIN("-1234")); // false
+console.log(validatePIN("-12345")); // false
+console.log(validatePIN("1.234")); // false
+console.log(validatePIN("00000000")); // false
+console.log(validatePIN("1234")); // true
+console.log(validatePIN("654321")); // true
