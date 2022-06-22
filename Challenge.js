@@ -1,34 +1,26 @@
-// Challenge: Regex validate PIN code (7 kyu)
+// Challenge: Hollow Array (6 kyu)
 
 // Description:
 
-// ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
+// An array is said to be hollow if it contains 3 or more 0s in the middle that are preceded and followed by the same number of non-zero elements. Furthermore, all the zeroes in the array must be in the middle of the array.
 
-// If the function is passed a valid PIN string, return true, else return false.
-
-// Examples (Input --> Output)
-// "1234"   -->  true
-// "12345"  -->  false
-// "a234"   -->  false
+// Write a function named isHollow/is_hollow/IsHollow that accepts an integer array and returns true if it is a hollow array,else false.
 
 // My code below:
 
-const validatePIN = (pin) =>
-  !(
-    (pin.length !== 4 && pin.length !== 6) ||
-    pin.replace(/\d/g, "").length > 0
-  );
+const isHollow = (arr) => {
+  while (arr.length >= 3 && arr[0] !== 0 && arr[arr.length - 1] !== 0) {
+    arr.pop();
+    arr.shift();
+  }
+  return arr.length >= 3 && arr.filter((num) => num !== 0).length === 0;
+};
 
 // Tests
 
-console.log(validatePIN("1")); // false
-console.log(validatePIN("12")); // false
-console.log(validatePIN("123")); // false
-console.log(validatePIN("12345")); // false
-console.log(validatePIN("1234567")); // false
-console.log(validatePIN("-1234")); // false
-console.log(validatePIN("-12345")); // false
-console.log(validatePIN("1.234")); // false
-console.log(validatePIN("00000000")); // false
-console.log(validatePIN("1234")); // true
-console.log(validatePIN("654321")); // true
+console.log(isHollow([-1, 0, 0, 0, 3])); // true
+console.log(isHollow([1, 0, 0, 0, 0])); // false
+console.log(isHollow([100, 0, 0, 3])); // false
+console.log(isHollow([0, 2, 19, 4, 4])); // false
+console.log(isHollow([1, 2, 0, 0, 0, 3, 4])); // true
+console.log(isHollow([3, 2, 10, 4, 1, 6])); // false
