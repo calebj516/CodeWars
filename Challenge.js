@@ -1,22 +1,25 @@
-// Challenge: Evens and Odds (7 kyu)
+// Challenge: Descending Order (7 kyu)
 
 // Description:
 
-// This kata is about converting numbers to their binary or hexadecimal representation:
+// Your task is to make a function that can take any non-negative integer as an argument and return it with its digits in descending order. Essentially, rearrange the digits to create the highest possible number.
 
-// If a number is even, convert it to binary.
-// If a number is odd, convert it to hex.
-// Numbers will be positive. The hexadecimal string should be lowercased.
+// Examples:
+// Input: 42145 Output: 54421
+
+// Input: 145263 Output: 654321
+
+// Input: 123456789 Output: 987654321
 
 // My code below:
 
-const evensAndOdds = (num) => (num % 2 ? num.toString(16) : num.toString(2));
+const descendingOrder = n => parseInt(n.toString().split('').sort((num1, num2) => num2 - num1).join(''));
 
 // Tests
 
-console.log(evensAndOdds(2)); // "10"
-console.log(evensAndOdds(13)); // "d"
-console.log(evensAndOdds(47)); // "2f"
-console.log(evensAndOdds(0)); // "0"
-console.log(evensAndOdds(12800)); // "11001000000000"
-console.log(evensAndOdds(8172381723)); // "1e71ca61b"
+console.log(descendingOrder(0)); // 0
+console.log(descendingOrder(1)); // 1
+console.log(descendingOrder(111)); // 111
+console.log(descendingOrder(15)); // 51
+console.log(descendingOrder(1021)); // 2110
+console.log(descendingOrder(123456789)); // 987654321
