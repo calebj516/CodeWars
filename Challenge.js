@@ -11,7 +11,7 @@
 
 // My code below:
 
-const filter_list = (l) => l.filter((el) => typeof el === "number");
+const filter_list = (l) => l.filter((el) => Number.isInteger(el));
 
 // Tests
 
