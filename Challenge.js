@@ -1,22 +1,17 @@
-// Challenge: List Filtering (7 kyu)
+// Challenge: Hex to Decimal (8 kyu)
 
 // Description:
 
-// In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
-
-// Example
-// filter_list([1,2,'a','b']) == [1,2]
-// filter_list([1,'a','b',0,15]) == [1,0,15]
-// filter_list([1,2,'aasf','1','123',123]) == [1,2,123]
+// Complete the function which converts hex number (given as a string) to a decimal number.
 
 // My code below:
 
-const filter_list = (l) => l.filter((el) => Number.isInteger(el));
+const hexToDec = (hexString) => parseInt(hexString, 16);
 
 // Tests
 
-console.log(filter_list([1, 2, "a", "b"])); // [1, 2]
-console.log(filter_list([1, "a", "b", 0, 15])); // [1, 0, 15]
-console.log(filter_list([1, 2, "aasf", "1", "123", 123])); // [1, 2, 123]
-console.log(filter_list(["a", "b", "1"])); // []
-console.log(filter_list([1, 2, "a", "b"])); // [1, 2]
+console.log(hexToDec("1")); // 1
+console.log(hexToDec("a")); // 10
+console.log(hexToDec("10")); // 16
+console.log(hexToDec("FF")); // 255
+console.log(hexToDec("-C")); // -12
