@@ -1,17 +1,31 @@
-// Challenge: Hex to Decimal (8 kyu)
+// Challenge: Is the string uppercase? (8 kyu)
 
 // Description:
 
-// Complete the function which converts hex number (given as a string) to a decimal number.
+// Create a method to see whether the string is ALL CAPS.
+
+// Examples (input -> output)
+// "c" -> False
+// "C" -> True
+// "hello I AM DONALD" -> False
+// "HELLO I AM DONALD" -> True
+// "ACSKLDFJSgSKLDFJSKLDFJ" -> False
+// "ACSKLDFJSGSKLDFJSKLDFJ" -> True
+
+// In this Kata, a string is said to be in ALL CAPS whenever it does not contain any lowercase letter so any string containing no letters at all is trivially considered to be in ALL CAPS.
 
 // My code below:
 
-const hexToDec = (hexString) => parseInt(hexString, 16);
+String.prototype.isUpperCase = function () {
+  // your code here
+  return this == this.toUpperCase();
+};
 
 // Tests
 
-console.log(hexToDec("1")); // 1
-console.log(hexToDec("a")); // 10
-console.log(hexToDec("10")); // 16
-console.log(hexToDec("FF")); // 255
-console.log(hexToDec("-C")); // -12
+console.log("c".isUpperCase()); // false
+console.log("C".isUpperCase()); // true
+console.log("hello I AM DONALD".isUpperCase()); // false
+console.log("HELLO I AM DONALD".isUpperCase()); // true
+console.log("ACSKLDFJSgSKLDFJSKLDFJ".isUpperCase()); // false
+console.log("ACSKLDFJSGSKLDFJSKLDFJ".isUpperCase()); // true
