@@ -20,8 +20,11 @@
 
 // My code below:
 
-const strCount = (str, letter) =>
-  str.split("").filter((c) => c === letter).length;
+function strCount(str, letter){   
+    let count = 0;
+    str.split('').forEach(c => c === letter ? count += 1 : count += 0);
+    return count;
+}
 
 // Tests
 
