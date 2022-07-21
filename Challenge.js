@@ -1,31 +1,30 @@
-// Challenge: Is the string uppercase? (8 kyu)
+// Challenge: All Star Code Challenge #18 (8 kyu)
 
 // Description:
 
-// Create a method to see whether the string is ALL CAPS.
+// This Kata is intended as a small challenge for my students
 
-// Examples (input -> output)
-// "c" -> False
-// "C" -> True
-// "hello I AM DONALD" -> False
-// "HELLO I AM DONALD" -> True
-// "ACSKLDFJSgSKLDFJSKLDFJ" -> False
-// "ACSKLDFJSGSKLDFJSKLDFJ" -> True
+// All Star Code Challenge #18
 
-// In this Kata, a string is said to be in ALL CAPS whenever it does not contain any lowercase letter so any string containing no letters at all is trivially considered to be in ALL CAPS.
+// Create a function that accepts 2 string arguments and returns an integer of the count of occurrences the 2nd argument is found in the first one.
+
+// If no occurrences can be found, a count of 0 should be returned.
+
+// ("Hello", "o")  ==>  1
+// ("Hello", "l")  ==>  2
+// ("", "z")       ==>  0
+// Notes:
+
+// The first argument can be an empty string
+// The second string argument will always be of length 1
 
 // My code below:
 
-String.prototype.isUpperCase = function () {
-  // your code here
-  return this == this.toUpperCase();
-};
+const strCount = (str, letter) =>
+  str.split("").filter((c) => c === letter).length;
 
 // Tests
 
-console.log("c".isUpperCase()); // false
-console.log("C".isUpperCase()); // true
-console.log("hello I AM DONALD".isUpperCase()); // false
-console.log("HELLO I AM DONALD".isUpperCase()); // true
-console.log("ACSKLDFJSgSKLDFJSKLDFJ".isUpperCase()); // false
-console.log("ACSKLDFJSGSKLDFJSKLDFJ".isUpperCase()); // true
+console.log(strCount("Hello", "o")); // 1
+console.log(strCount("Hello", "l")); // 2
+console.log(strCount("abcedfghijklmnopqrstuvwxyz", "z")); // 1
