@@ -1,33 +1,31 @@
-// Challenge: altERnaTIng cAsE <=> ALTerNAtiNG CaSe (8 kyu)
+// Challenge: Exes and Ohs (7 kyu)
 
 // Description:
 
-// altERnaTIng cAsE <=> ALTerNAtiNG CaSe
-// Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase. For example:
+// Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
 
-// "hello world".toAlternatingCase() === "HELLO WORLD"
-// "HELLO WORLD".toAlternatingCase() === "hello world"
-// "hello WORLD".toAlternatingCase() === "HELLO world"
-// "HeLLo WoRLD".toAlternatingCase() === "hEllO wOrld"
-// "12345".toAlternatingCase() === "12345" // Non-alphabetical characters are unaffected
-// "1a2b3c4d5e".toAlternatingCase() === "1A2B3C4D5E"
-// "String.prototype.toAlternatingCase".toAlternatingCase() === "sTRING.PROTOTYPE.TOaLTERNATINGcASE"
-// As usual, your function/method should be pure, i.e. it should not mutate the original string.
+// Examples input/output:
+
+// XO("ooxx") => true
+// XO("xooxx") => false
+// XO("ooxXm") => true
+// XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+// XO("zzoo") => false
 
 // My code below:
 
-String.prototype.toAlternatingCase = function () {
-    // split string into an array, perform operations on each character (lower becomes upper, upper becomes lower), and then join back into a string.
-    return this.split('').map(char => char == char.toLowerCase() ? char.toUpperCase() : char.toLowerCase()).join('');
-}
+const XO = str => str.replace(/[^x]/gi, '').length == str.replace(/[^o]/gi, '').length;
 
 // Tests
 
-console.log("hello world".toAlternatingCase()); // "HELLO WORLD"
-console.log("HELLO WORLD".toAlternatingCase()); // "hello world"
-console.log("hello WORLD".toAlternatingCase()); // "HELLO world"
-console.log("HeLLo WoRLD".toAlternatingCase()); // "hEllO wOrld"
-console.log("12345".toAlternatingCase()); // "12345"
-console.log("1a2b3c4d5e".toAlternatingCase()); // "1A2B3C4D5E"
-console.log("String.prototype.toAlternatingCase".toAlternatingCase()); // "sTRING.PROTOTYPE.TOaLTERNATINGcASE"
-console.log("Hello World".toAlternatingCase().toAlternatingCase()); // "Hello World"
+console.log(XO('xo')); // true
+console.log(XO('XO')); // true
+console.log(XO('xo0')); // true
+console.log(XO('xxxoo')); // false
+console.log(XO("xxOo")); // true
+console.log(XO('')); // true
+console.log(XO('xxxxxoooxooo')); // true
+console.log(XO("xxxm")); // false
+console.log(XO("ooom")); // false
+console.log(XO("Oo")); // false
+console.log(XO('abcdefghijklmnopqrstuvwxyz')); // true
