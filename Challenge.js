@@ -1,31 +1,30 @@
-// Challenge: Exes and Ohs (7 kyu)
+// Challenge: Reverse list (7 kyu)
 
 // Description:
 
-// Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
+// Write reverseList function that simply reverses lists.
 
-// Examples input/output:
+// My code below (solved without using array reverse method):
 
-// XO("ooxx") => true
-// XO("xooxx") => false
-// XO("ooxXm") => true
-// XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
-// XO("zzoo") => false
+function reverseList(arr) {
 
-// My code below:
-
-const XO = str => str.replace(/[^x]/gi, '').length == str.replace(/[^o]/gi, '').length;
+    const reversedArr = [];
+    
+    if(arr.length > 0){
+      
+      for(let i = arr.length - 1; i >= 0; i--){
+        reversedArr.push(arr[i]);
+      }
+      
+      return reversedArr;
+    }
+  
+    return [];
+}
 
 // Tests
 
-console.log(XO('xo')); // true
-console.log(XO('XO')); // true
-console.log(XO('xo0')); // true
-console.log(XO('xxxoo')); // false
-console.log(XO("xxOo")); // true
-console.log(XO('')); // true
-console.log(XO('xxxxxoooxooo')); // true
-console.log(XO("xxxm")); // false
-console.log(XO("ooom")); // false
-console.log(XO("Oo")); // false
-console.log(XO('abcdefghijklmnopqrstuvwxyz')); // true
+console.log(reverseList([])); //  []
+console.log(reverseList([1,2,3])); //  [3,2,1]
+console.log(reverseList([1,2,3,4])); //  [4,3,2,1]
+console.log(reverseList([1,2,3,4,5])); //  [5,4,3,2,1]
