@@ -8,7 +8,7 @@
 
 // My code below:
 
-const countBits = n => n.toString(2).split('').filter(num => num === '1').length;
+const countBits = n => n.toString(2).replace(/0/g, '').length;
 
 // Tests
 
