@@ -1,43 +1,30 @@
-// Challenge: Message Validator (6 kyu)
+// Challenge: Is It Negative Zero (-0)? (7 kyu)
 
 // Description:
 
-// In this kata, you have an input string and you should check whether it is a valid message. To decide that, you need to split the string by the numbers, and then compare the numbers with the number of characters in the following substring.
+// There exist two zeroes: +0 (or just 0) and -0.
 
-// For example "3hey5hello2hi" should be split into 3, hey, 5, hello, 2, hi and the function should return true, because "hey" is 3 characters, "hello" is 5, and "hi" is 2; as the numbers and the character counts match, the result is true.
+// Write a function that returns true if the input number is -0 and false otherwise (True and False for Python).
 
-// Notes:
+// In JavaScript / TypeScript / Coffeescript the input will be a number.
 
-// Messages are composed of only letters and digits
-// Numbers may have multiple digits: e.g. "4code13hellocodewars" is a valid message
-// Every number must match the number of character in the following substring, otherwise the message is invalid: e.g. "hello5" and "2hi2" are invalid
-// If the message is an empty string, you should return true
+// In Python / Java / C / NASM / Haskell / the input will be a float.
 
 // My code below:
 
-function isAValidMessage(message){
-    // if there is a message, proceed
-    if(message){
-      let messageArr = message.split(/(\d+)/);
-    // loop through the message
-      for(let i = 0; i < messageArr.length - 1; i++){
-        // if the element is truthy AND a number, test if its length is equal to the length of the following string
-        if(messageArr[i] && Number.isInteger(+messageArr[i])){
-          if(messageArr[i + 1].length !== +messageArr[i]) return false;
-        }
-      }
-      // if the message is processed without returning false, we know the message is valid and this return statement will run.
-      return true;    
-    }
-    // if the message is falsy (i.e. an empty string), this return statement will run
-    return true;  
-}
+// MDN: The Object.is() method determines whether two values are the same value.
+// MDN: The only difference between Object.is() and === is in their treatment of signed zeroes and NaNs. For example, the === operator (and the == operator) treats the number values -0 and +0 as equal.
+
+const isNegativeZero = n => Object.is(n, -0);
 
 // Tests
 
-console.log(isAValidMessage("3hey5hello2hi")); // true
-console.log(isAValidMessage("4code13hellocodewars")); // true
-console.log(isAValidMessage("3hey5hello2hi5")); // false
-console.log(isAValidMessage("code4hello5")); // false
-console.log(isAValidMessage("1a2bb3ccc4dddd5eeeee")); // true
-console.log(isAValidMessage("")); // true
+console.log(isNegativeZero(-0)); // true
+console.log(isNegativeZero(-Infinity)); // false
+console.log(isNegativeZero(-5)); // false
+console.log(isNegativeZero(-4)); // false
+console.log(isNegativeZero(-3)); // false
+console.log(isNegativeZero(-2)); // false
+console.log(isNegativeZero(-1)); // false
+console.log(isNegativeZero(-Number.MIN_VALUE)); // false
+console.log(isNegativeZero(0)); // false
