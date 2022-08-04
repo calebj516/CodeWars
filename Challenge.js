@@ -1,30 +1,32 @@
-// Challenge: Is It Negative Zero (-0)? (7 kyu)
+// Challenge: Product Array (Array Series #5) (7 kyu)
 
 // Description:
 
-// There exist two zeroes: +0 (or just 0) and -0.
+// Task: Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
 
-// Write a function that returns true if the input number is -0 and false otherwise (True and False for Python).
+// Notes:
 
-// In JavaScript / TypeScript / Coffeescript the input will be a number.
+// Array/list size is at least 2 .
 
-// In Python / Java / C / NASM / Haskell / the input will be a float.
+// Array/list's numbers Will be only Positives
 
-// My code below:
+// Repetition of numbers in the array/list could occur.
 
-// MDN: The Object.is() method determines whether two values are the same value.
-// MDN: The only difference between Object.is() and === is in their treatment of signed zeroes and NaNs. For example, the === operator (and the == operator) treats the number values -0 and +0 as equal.
+function productArray(numbers){
 
-const isNegativeZero = n => Object.is(n, -0);
+    const productArr = [];
+    
+    for(let i = 0; i < numbers.length; i++){
+      productArr.push(numbers.filter((num, idx) => idx !== i).reduce((total, current) => total * current, 1));
+    }
+    
+    return productArr;
+  }
 
 // Tests
 
-console.log(isNegativeZero(-0)); // true
-console.log(isNegativeZero(-Infinity)); // false
-console.log(isNegativeZero(-5)); // false
-console.log(isNegativeZero(-4)); // false
-console.log(isNegativeZero(-3)); // false
-console.log(isNegativeZero(-2)); // false
-console.log(isNegativeZero(-1)); // false
-console.log(isNegativeZero(-Number.MIN_VALUE)); // false
-console.log(isNegativeZero(0)); // false
+console.log(productArray([12,20])); // [20,12]
+console.log(productArray([12,20])); // [20,12]
+console.log(productArray([3,27,4,2])); // [216,24,162,324]
+console.log(productArray([13,10,5,2,9])); // [900,1170,2340,5850,1300]
+console.log(productArray([16,17,4,3,5,2])); // [2040,1920,8160,10880,6528,16320]
