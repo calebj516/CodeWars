@@ -1,32 +1,34 @@
-// Challenge: Product Array (Array Series #5) (7 kyu)
+// Challenge: Find the middle element (7 kyu)
 
 // Description:
 
-// Task: Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
+// As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
 
-// Notes:
+// The input to the function will be an array of three distinct numbers (Haskell: a tuple).
 
-// Array/list size is at least 2 .
+// For example:
 
-// Array/list's numbers Will be only Positives
+// gimme([2, 3, 1]) => 0
+// 2 is the number that fits between 1 and 3 and the index of 2 in the input array is 0.
 
-// Repetition of numbers in the array/list could occur.
+// Another example (just to make sure it is clear):
 
-function productArray(numbers){
+// gimme([5, 10, 14]) => 1
+// 10 is the number that fits between 5 and 14 and the index of 10 in the input array is 1.
 
-    const productArr = [];
-    
-    for(let i = 0; i < numbers.length; i++){
-      productArr.push(numbers.filter((num, idx) => idx !== i).reduce((total, current) => total * current, 1));
-    }
-    
-    return productArr;
-  }
+// My code below:
+
+function gimme(triplet) {
+  let arr = [0, 1, 2];
+
+  let maxIdx = triplet.indexOf(Math.max(...triplet));
+  let minIdx = triplet.indexOf(Math.min(...triplet));
+
+  return +arr.filter((num) => num !== maxIdx && num !== minIdx).join("");
+}
 
 // Tests
 
-console.log(productArray([12,20])); // [20,12]
-console.log(productArray([12,20])); // [20,12]
-console.log(productArray([3,27,4,2])); // [216,24,162,324]
-console.log(productArray([13,10,5,2,9])); // [900,1170,2340,5850,1300]
-console.log(productArray([16,17,4,3,5,2])); // [2040,1920,8160,10880,6528,16320]
+console.log(gimme([-2, -3, -1])); // 0
+console.log(gimme([-5, -10, -14])); // 1
+console.log(gimme([-5.2, -10.6, 14])); // 0
