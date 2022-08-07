@@ -18,14 +18,8 @@
 
 // My code below:
 
-function gimme(triplet) {
-  let arr = [0, 1, 2];
-
-  let maxIdx = triplet.indexOf(Math.max(...triplet));
-  let minIdx = triplet.indexOf(Math.min(...triplet));
-
-  return +arr.filter((num) => num !== maxIdx && num !== minIdx).join("");
-}
+const gimme = (triplet) =>
+  triplet.indexOf([...triplet].sort((num1, num2) => num1 - num2)[1]);
 
 // Tests
 
