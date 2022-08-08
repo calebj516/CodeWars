@@ -1,28 +1,27 @@
-// Challenge: Find the middle element (7 kyu)
+// Challenge: All unique (7 kyu)
 
 // Description:
 
-// As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
+// Write a program to determine if a string contains only unique characters. Return true if it does and false otherwise.
 
-// The input to the function will be an array of three distinct numbers (Haskell: a tuple).
-
-// For example:
-
-// gimme([2, 3, 1]) => 0
-// 2 is the number that fits between 1 and 3 and the index of 2 in the input array is 0.
-
-// Another example (just to make sure it is clear):
-
-// gimme([5, 10, 14]) => 1
-// 10 is the number that fits between 5 and 14 and the index of 10 in the input array is 1.
+// The string may contain any of the 128 ASCII characters. Characters are case-sensitive, e.g. 'a' and 'A' are considered different characters.
 
 // My code below:
 
-const gimme = (triplet) =>
-  triplet.indexOf([...triplet].sort((num1, num2) => num1 - num2)[1]);
+function hasUniqueChars(str){
+  // convert str into an array of ascii codes,
+  // sort the array so that duplicates will be next to each other,
+  // filter out non-duplicates
+  // if the array is empty, there are no duplicates and the str has unique chars.
+  return str.split('')
+    .map(el => el.charCodeAt(0))
+    .sort((num1, num2) => num1 - num2)
+    .filter((code, idx, arr) => code === arr[idx + 1])
+    .length === 0;
+}
 
 // Tests
 
-console.log(gimme([-2, -3, -1])); // 0
-console.log(gimme([-5, -10, -14])); // 1
-console.log(gimme([-5.2, -10.6, 14])); // 0
+console.log(hasUniqueChars("  nAa")); // false
+console.log(hasUniqueChars("abcdef")); // true
+console.log(hasUniqueChars("++-")); // false
