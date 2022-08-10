@@ -8,17 +8,7 @@
 
 // My code below:
 
-function hasUniqueChars(str){
-  // convert str into an array of ascii codes,
-  // sort the array so that duplicates will be next to each other,
-  // filter out non-duplicates
-  // if the array is empty, there are no duplicates and the str has unique chars.
-  return str.split('')
-    .map(el => el.charCodeAt(0))
-    .sort((num1, num2) => num1 - num2)
-    .filter((code, idx, arr) => code === arr[idx + 1])
-    .length === 0;
-}
+const hasUniqueChars = (str) => new Set(str).size === str.length;
 
 // Tests
 
