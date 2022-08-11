@@ -1,17 +1,38 @@
-// Challenge: All unique (7 kyu)
+// Challenge: Sum of the first nth term of Series (7 kyu)
 
 // Description:
 
-// Write a program to determine if a string contains only unique characters. Return true if it does and false otherwise.
+// Your task is to write a function which returns the sum of following series upto nth term(parameter).
 
-// The string may contain any of the 128 ASCII characters. Characters are case-sensitive, e.g. 'a' and 'A' are considered different characters.
+// Series: 1 + 1/4 + 1/7 + 1/10 + 1/13 + 1/16 +...
+// Rules:
+// You need to round the answer to 2 decimal places and return it as String.
+
+// If the given value is 0 then it should return 0.00
+
+// You will only be given Natural Numbers as arguments.
+
+// Examples:(Input --> Output)
+
+// 1 --> 1 --> "1.00"
+// 2 --> 1 + 1/4 --> "1.25"
+// 5 --> 1 + 1/4 + 1/7 + 1/10 + 1/13 --> "1.57"
 
 // My code below:
 
-const hasUniqueChars = (str) => new Set(str).size === str.length;
+function SeriesSum(n) {
+  let sum = 0;
+
+  // increment i by three each iteration and therefore up to n * 3 times
+  for (let i = 1; i <= n * 3; i += 3) {
+    sum += 1 / i;
+  }
+
+  return sum.toFixed(2);
+}
 
 // Tests
 
-console.log(hasUniqueChars("  nAa")); // false
-console.log(hasUniqueChars("abcdef")); // true
-console.log(hasUniqueChars("++-")); // false
+console.log(SeriesSum(1)); // 1.00
+console.log(SeriesSum(2)); // 1.25
+console.log(SeriesSum(5)); // 1.57
