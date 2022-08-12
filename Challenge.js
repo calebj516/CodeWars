@@ -21,14 +21,14 @@
 // My code below:
 
 function SeriesSum(n) {
-  let sum = 0;
+  let result = [];
 
   // increment i by three each iteration and therefore up to n * 3 times
   for (let i = 1; i <= n * 3; i += 3) {
-    sum += 1 / i;
+    result.push(1 / i);
   }
 
-  return sum.toFixed(2);
+  return result.reduce((total, current) => total + current, 0).toFixed(2);
 }
 
 // Tests
