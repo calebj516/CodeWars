@@ -1,27 +1,44 @@
-// Challenge: Return the closest number multiple of 10 (7 kyu)
+// Challenge: Sum of a sequence (7 kyu)
 
 // Description:
 
-// Given a number return the closest number to it that is divisible by 10.
+// Your task is to make function, which returns the sum of a sequence of integers.
 
-// Example input:
+// The sequence is defined by 3 non-negative values: begin, end, step (inclusive).
 
-// 22
-// 25
-// 37
+// If begin value is greater than the end, function should returns 0
 
-// Expected output:
+// Examples
 
-// 20
-// 30
-// 40
+// 2,2,2 --> 2
+// 2,6,2 --> 12 (2 + 4 + 6)
+// 1,5,1 --> 15 (1 + 2 + 3 + 4 + 5)
+// 1,5,3  --> 5 (1 + 4)
+
+// This is the first kata in the series:
+
+// Sum of a sequence (this kata)
+// Sum of a Sequence [Hard-Core Version]
 
 // My code below:
 
-const closestMultiple10 = (num) => Math.round(num / 10) * 10;
+const sequenceSum = (begin, end, step) => {
+  if (begin > end) return 0;
+
+  let sum = 0;
+
+  for (let i = begin; i <= end; i += step) {
+    sum += i;
+  }
+
+  return sum;
+};
 
 // Tests
 
-console.log(closestMultiple10(22)); // 20
-console.log(closestMultiple10(25)); // 30
-console.log(closestMultiple10(37)); // 40
+console.log(sequenceSum(2, 6, 2)); // 12
+console.log(sequenceSum(1, 5, 1)); // 15
+console.log(sequenceSum(1, 5, 3)); // 5
+console.log(sequenceSum(0, 15, 3)); // 45
+console.log(sequenceSum(16, 15, 3)); // 0
+console.log(sequenceSum(2, 24, 22)); // 26
