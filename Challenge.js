@@ -25,13 +25,13 @@
 const sequenceSum = (begin, end, step) => {
   if (begin > end) return 0;
 
-  let sum = 0;
+  let result = [];
 
   for (let i = begin; i <= end; i += step) {
-    sum += i;
+    result.push(i);
   }
 
-  return sum;
+  return result.reduce((total, current) => total + current, 0);
 };
 
 // Tests
