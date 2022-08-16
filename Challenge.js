@@ -1,19 +1,22 @@
-// Challenge: Remove First and Last Character (8 kyu)
+// Challenge: Move 10 (7 kyu)
 
 // Description:
 
-// It's pretty straightforward. Your goal is to create a function that removes the first and last characters of a string. You're given one parameter, the original string. You don't have to worry with strings with less than two characters.
+// Move every letter in the provided string forward 10 letters through the alphabet.
+
+// If it goes past 'z', start again at 'a'.
+
+// Input will be a string with length > 0.
 
 // My code below:
 
-// The second paramater in slice counts from the end of the string, so a -1 works (it's equivalent to str.length - 1)
-
-const removeChar = str => str.slice(1, -1);
+const moveTen = s => s.toLowerCase().split('').map(el => String.charCodeFrom((el.charCodeAt(0) - 87) % 26 + 97)).join('');
 
 // Tests
 
-console.log(removeChar('eloquent')); // 'loquen'
-console.log(removeChar('country')); // 'ountr'
-console.log(removeChar('person')); // 'erso'
-console.log(removeChar('place')); // 'lac'
-console.log(removeChar('ooopsss')); // 'oopss'
+console.log(moveTen("testcase")); // "docdmkco"
+console.log(moveTen("codewars")); // "mynogkbc"
+console.log(moveTen("exampletesthere")); // "ohkwzvodocdrobo"
+console.log(moveTen("returnofthespacecamel")); // "bodebxypdroczkmomkwov"
+console.log(moveTen("bringonthebootcamp")); // "lbsxqyxdrolyydmkwz"
+console.log(moveTen("weneedanofficedog")); // "goxoonkxyppsmonyq"
