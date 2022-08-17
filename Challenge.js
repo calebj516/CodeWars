@@ -1,22 +1,28 @@
-// Challenge: Move 10 (7 kyu)
+// Challenge: Make acronym (7 kyu)
 
 // Description:
 
-// Move every letter in the provided string forward 10 letters through the alphabet.
+// Write function which takes a string and make an acronym of it.
 
-// If it goes past 'z', start again at 'a'.
+// Rule of making acronym in this kata:
 
-// Input will be a string with length > 0.
+// split string to words by space char
+// take every first letter from word in given string
+// uppercase it
+// join them together
+
+// Eg:
+
+// Code wars -> C, w -> C W -> CW
 
 // My code below:
 
-const moveTen = s => s.toLowerCase().split('').map(el => String.fromCharCode((el.charCodeAt(0) - 87) % 26 + 97)).join('');
+const toAcronym = inp => inp.split(' ').map(el => el.slice(0, 1)).join('').toUpperCase();
 
 // Tests
 
-console.log(moveTen("testcase")); // "docdmkco"
-console.log(moveTen("codewars")); // "mynogkbc"
-console.log(moveTen("exampletesthere")); // "ohkwzvodocdrobo"
-console.log(moveTen("returnofthespacecamel")); // "bodebxypdroczkmomkwov"
-console.log(moveTen("bringonthebootcamp")); // "lbsxqyxdrolyydmkwz"
-console.log(moveTen("weneedanofficedog")); // "goxoonkxyppsmonyq"
+console.log(toAcronym("Code Wars")); // CW
+console.log(toAcronym("Water Closet")); // WC
+console.log(toAcronym("Portable Network Graphics")); // PNG
+console.log(toAcronym("PHP: Hypertext Preprocessor")); // PHP
+console.log(toAcronym("hyper text markup language")); // HTML
