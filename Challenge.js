@@ -10,7 +10,7 @@
 
 // My code below:
 
-const moveTen = s => s.toLowerCase().split('').map(el => String.charCodeFrom((el.charCodeAt(0) - 87) % 26 + 97)).join('');
+const moveTen = s => s.toLowerCase().split('').map(el => String.fromCharCode((el.charCodeAt(0) - 87) % 26 + 97)).join('');
 
 // Tests
 
