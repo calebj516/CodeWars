@@ -1,28 +1,31 @@
-// Challenge: Make acronym (7 kyu)
+// Challenge: Switcheroo (7 kyu)
 
 // Description:
 
-// Write function which takes a string and make an acronym of it.
+// Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched.
 
-// Rule of making acronym in this kata:
+// Example:
 
-// split string to words by space char
-// take every first letter from word in given string
-// uppercase it
-// join them together
-
-// Eg:
-
-// Code wars -> C, w -> C W -> CW
+// 'acb' --> 'bca'
+// 'aabacbaa' --> 'bbabcabb'
 
 // My code below:
 
-const toAcronym = inp => inp.split(' ').map(el => el.slice(0, 1)).join('').toUpperCase();
+function switcheroo(x) {
+  return x
+    .split("")
+    .map((el) => {
+      if (el == "a") return "b";
+      if (el == "b") return "a";
+      if (el == "c") return "c";
+    })
+    .join("");
+}
 
 // Tests
 
-console.log(toAcronym("Code Wars")); // CW
-console.log(toAcronym("Water Closet")); // WC
-console.log(toAcronym("Portable Network Graphics")); // PNG
-console.log(toAcronym("PHP: Hypertext Preprocessor")); // PHP
-console.log(toAcronym("hyper text markup language")); // HTML
+console.log(switcheroo("abc")); // "bac"
+console.log(switcheroo("aaabcccbaaa")); // "bbbacccabbb"
+console.log(switcheroo("ccccc")); // "ccccc"
+console.log(switcheroo("abababababababab")); // "babababababababa"
+console.log(switcheroo("aaaaa")); // "bbbbb"
