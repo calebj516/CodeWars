@@ -1,31 +1,33 @@
-// Challenge: Switcheroo (7 kyu)
+// Challenge: Likes Vs Dislikes (7 kyu)
 
 // Description:
 
-// Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched.
+// Story
+// YouTube had a like and a dislike button, which allowed users to express their opinions about particular content. It was set up in such a way that you cannot like and dislike a video at the same time. There are two other interesting rules to be noted about the interface: Pressing a button, which is already active, will undo your press. If you press the like button after pressing the dislike button, the like button overwrites the previous "Dislike" state. The same is true for the other way round.
 
-// Example:
+// Task
+// Create a function that takes in a list of button inputs and returns the final state.
 
-// 'acb' --> 'bca'
-// 'aabacbaa' --> 'bbabcabb'
+// Examples
+// likeOrDislike([Dislike]) => Dislike
+// likeOrDislike([Like,Like]) => Nothing
+// likeOrDislike([Dislike,Like]) => Like
+// likeOrDislike([Like,Dislike,Dislike]) => Nothing
+// Notes
+// If no button is currently active, return Nothing.
+// If the list is empty, return Nothing.
 
 // My code below:
 
-function switcheroo(x) {
-  return x
-    .split("")
-    .map((el) => {
-      if (el == "a") return "b";
-      if (el == "b") return "a";
-      if (el == "c") return "c";
-    })
-    .join("");
-}
+const likeOrDislike = (buttons) =>
+  buttons.reduce(
+    (state, button) => (state === button ? "Nothing" : button),
+    "Nothing"
+  );
 
 // Tests
 
-console.log(switcheroo("abc")); // "bac"
-console.log(switcheroo("aaabcccbaaa")); // "bbbacccabbb"
-console.log(switcheroo("ccccc")); // "ccccc"
-console.log(switcheroo("abababababababab")); // "babababababababa"
-console.log(switcheroo("aaaaa")); // "bbbbb"
+console.log(likeOrDislike(["Dislike"])); // Dislike
+console.log(likeOrDislike(["Like", "Like"])); // Nothing
+console.log(likeOrDislike(["Dislike", "Like"])); // Like
+console.log(likeOrDislike(["Like", "Dislike", "Dislike"])); // Nothing
