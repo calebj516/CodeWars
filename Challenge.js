@@ -19,11 +19,15 @@
 
 // My code below:
 
-const likeOrDislike = (buttons) =>
-  buttons.reduce(
-    (state, button) => (state === button ? "Nothing" : button),
-    "Nothing"
-  );
+const likeOrDislike = (buttons) => {
+  let state = "Nothing";
+
+  for (button of buttons) {
+    state === button ? (state = "Nothing") : (state = button);
+  }
+
+  return state;
+};
 
 // Tests
 
