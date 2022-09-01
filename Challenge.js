@@ -1,37 +1,33 @@
-// Challenge: Likes Vs Dislikes (7 kyu)
+// Challenge: What's the real floor? (8 kyu)
 
 // Description:
 
-// Story
-// YouTube had a like and a dislike button, which allowed users to express their opinions about particular content. It was set up in such a way that you cannot like and dislike a video at the same time. There are two other interesting rules to be noted about the interface: Pressing a button, which is already active, will undo your press. If you press the like button after pressing the dislike button, the like button overwrites the previous "Dislike" state. The same is true for the other way round.
+// Americans are odd people: in their buildings, the first floor is actually the ground floor and there is no 13th floor (due to superstition).
 
-// Task
-// Create a function that takes in a list of button inputs and returns the final state.
+// Write a function that given a floor in the american system returns the floor in the european system.
 
-// Examples
-// likeOrDislike([Dislike]) => Dislike
-// likeOrDislike([Like,Like]) => Nothing
-// likeOrDislike([Dislike,Like]) => Like
-// likeOrDislike([Like,Dislike,Dislike]) => Nothing
-// Notes
-// If no button is currently active, return Nothing.
-// If the list is empty, return Nothing.
+// With the 1st floor being replaced by the ground floor and the 13th floor being removed, the numbers move down to take their place. In case of above 13, they move down by two because there are two omitted numbers below them.
+
+// Basements (negatives) stay the same as the universal level.
+
+// Task: create a function that takes in a list of button inputs and returns the final state.
 
 // My code below:
 
-const likeOrDislike = (buttons) => {
-  let state = "Nothing";
-
-  for (button of buttons) {
-    state === button ? (state = "Nothing") : (state = button);
-  }
-
-  return state;
-};
+const getRealFloor = n => n > 13 ? n - 2 : n > 0 ? n - 1 : n;
 
 // Tests
 
-console.log(likeOrDislike(["Dislike"])); // Dislike
-console.log(likeOrDislike(["Like", "Like"])); // Nothing
-console.log(likeOrDislike(["Dislike", "Like"])); // Like
-console.log(likeOrDislike(["Like", "Dislike", "Dislike"])); // Nothing
+console.log(getRealFloor(1)); // 0
+console.log(getRealFloor(0)); // 0
+console.log(getRealFloor(5)); // 4
+console.log(getRealFloor(10)); // 9
+console.log(getRealFloor(12)); // 11
+
+console.log(getRealFloor(14)); // 12
+console.log(getRealFloor(15)); // 13
+console.log(getRealFloor(37)); // 35
+console.log(getRealFloor(200)); // 198
+
+console.log(getRealFloor(-2)); // -2
+console.log(getRealFloor(-5)); // -5
