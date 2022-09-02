@@ -1,33 +1,24 @@
-// Challenge: What's the real floor? (8 kyu)
+// Challenge: Invert values (8 kyu)
 
 // Description:
 
-// Americans are odd people: in their buildings, the first floor is actually the ground floor and there is no 13th floor (due to superstition).
+// Given a set of numbers, return the additive inverse of each. Each positive becomes negatives, and the negatives become positives.
 
-// Write a function that given a floor in the american system returns the floor in the european system.
+// invert([1,2,3,4,5]) == [-1,-2,-3,-4,-5]
+// invert([1,-2,3,-4,5]) == [-1,2,-3,4,-5]
+// invert([]) == []
 
-// With the 1st floor being replaced by the ground floor and the 13th floor being removed, the numbers move down to take their place. In case of above 13, they move down by two because there are two omitted numbers below them.
-
-// Basements (negatives) stay the same as the universal level.
-
-// Task: create a function that takes in a list of button inputs and returns the final state.
+// You can assume that all values are integers. Do not mutate the input array/list.
 
 // My code below:
 
-const getRealFloor = n => n > 13 ? n - 2 : n > 0 ? n - 1 : n;
+// const getRealFloor = n => n > 13 ? n - 2 : n > 0 ? n - 1 : n;
+
+const invert = array => array.map(num => num * -1);
 
 // Tests
 
-console.log(getRealFloor(1)); // 0
-console.log(getRealFloor(0)); // 0
-console.log(getRealFloor(5)); // 4
-console.log(getRealFloor(10)); // 9
-console.log(getRealFloor(12)); // 11
-
-console.log(getRealFloor(14)); // 12
-console.log(getRealFloor(15)); // 13
-console.log(getRealFloor(37)); // 35
-console.log(getRealFloor(200)); // 198
-
-console.log(getRealFloor(-2)); // -2
-console.log(getRealFloor(-5)); // -5
+console.log(invert([1,2,3,4,5])); // [-1,-2,-3,-4,-5])
+console.log(invert([1,-2,3,-4,5])); // [-1,2,-3,4,-5]
+console.log(invert([])); // []
+console.log(invert([0])); // [-0]
