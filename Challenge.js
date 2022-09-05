@@ -1,24 +1,32 @@
-// Challenge: Invert values (8 kyu)
+// Challenge: Ordered Count of Characters (7 kyu)
 
 // Description:
 
-// Given a set of numbers, return the additive inverse of each. Each positive becomes negatives, and the negatives become positives.
+// Count the number of occurrences of each character and return it as a list of tuples in order of appearance. For empty output return an empty list.
 
-// invert([1,2,3,4,5]) == [-1,-2,-3,-4,-5]
-// invert([1,-2,3,-4,5]) == [-1,2,-3,4,-5]
-// invert([]) == []
+// Example:
 
-// You can assume that all values are integers. Do not mutate the input array/list.
+// orderedCount("abracadabra") == [['a', 5], ['b', 2], ['r', 2], ['c', 1], ['d', 1]]
 
-// My code below:
+const orderedCount = function (text) {
+  // Implement me!
+  let textArr = text.split("");
+  let result = [];
 
-// const getRealFloor = n => n > 13 ? n - 2 : n > 0 ? n - 1 : n;
+  let i = 0;
 
-const invert = array => array.map(num => num * -1);
+  while (textArr.length > 0) {
+    // Push an array to result consisting of the character and the character count
+    result.push([textArr[i], textArr.filter((el) => el === textArr[i]).length]);
+    // filter out all occurrences of textArr[i] before the next iteration
+    textArr = textArr.filter((el) => el !== textArr[i]);
+  }
+
+  return result;
+};
 
 // Tests
 
-console.log(invert([1,2,3,4,5])); // [-1,-2,-3,-4,-5])
-console.log(invert([1,-2,3,-4,5])); // [-1,2,-3,4,-5]
-console.log(invert([])); // []
-console.log(invert([0])); // [-0]
+console.log(orderedCount("abracadabra")); // [['a', 5], ['b', 2], ['r', 2], ['c', 1], ['d', 1]]
+console.log(orderedCount("Code Wars")); // [['C', 1], ['o', 1], ['d', 1], ['e', 1], [' ', 1], ['W', 1], ['a', 1], ['r', 1], ['s', 1]]
+console.log(orderedCount("233312")); // [['2', 2], ['3', 3], ['1', 1 ]]
