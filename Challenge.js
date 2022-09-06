@@ -1,4 +1,4 @@
-// Challenge: Exclamation marks series #1: Remove an exclamation mark from the end of string (8 kyu)
+// Challenge: Exclamation marks series #2: Remove all exclamation marks from the end of sentence
 
 // Description:
 
@@ -12,13 +12,15 @@
 // remove("Hi! Hi!") == "Hi! Hi"
 // remove("Hi") == "Hi"
 
-const remove = (s) => s.replace(/!$/, "");
+// My code below:
+
+const remove = (s) => s.replace(/!+$/, "");
 
 // Tests
 
 console.log(remove("Hi!")); // "Hi"
-console.log(remove("Hi!!!")); // "Hi!!"
+console.log(remove("Hi!!!")); // "Hi"
 console.log(remove("!Hi")); // "!Hi"
 console.log(remove("!Hi!")); // "!Hi"
-console.log(remove("Hi! Hi!")); // "Hi! Hi"
+console.log(remove("Hi! Hi")); // "Hi! Hi"
 console.log(remove("Hi")); // "Hi"
