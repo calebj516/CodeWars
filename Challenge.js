@@ -43,17 +43,14 @@
 
 // My code below:
 
-function pattern(n){
-    if(n < 1) return "";
-    if(n == 1) return "1";
-    
-    let output="";
-  
-    for(let i = 1; i <= n; i++){
-     i != n ? output += `${i.toString().repeat(i)}\n` : output += `${i.toString().repeat(i)}`;
-    }
-  
-    return output;
+function pattern(n) {
+  let output = [];
+
+  for (let i = 1; i <= n; i++) {
+    output.push(i.toString().repeat(i));
+  }
+
+  return output.join("\n");
 }
 
 // Tests
