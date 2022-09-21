@@ -1,63 +1,27 @@
-// Challenge: Complete The Pattern #1 (7 kyu)
+// Challenge: Exclamation marks series #9: Remove or add a exclamation mark at the end of words of the sentence (7 kyu)
 
 // Description:
 
-// You have to write a function pattern which returns the following Pattern(See Pattern & Examples) upto n number of rows.
+// Remove or add a exclamation mark at the end of words of the sentence. Words are separated by spaces in the sentence. That is: If a word has one ! at the end, remove it; If a word has no ! at the end, add a ! to the end; If there are more than one ! at the end of word, keep it.
 
-// Note:Returning the pattern is not the same as Printing the pattern.
-// Rules/Note:
-// If n < 1 then it should return "" i.e. empty string.
-// There are no whitespaces in the pattern.
-
-// Pattern:
-// 1
-// 22
-// 333
-// ....
-// .....
-// nnnnnn
-
-// Examples:
-// pattern(5):
-
-// 1
-// 22
-// 333
-// 4444
-// 55555
-// pattern(11):
-
-// 1
-// 22
-// 333
-// 4444
-// 55555
-// 666666
-// 7777777
-// 88888888
-// 999999999
-// 10101010101010101010
-// 1111111111111111111111
-
-// Hint: Use \n in string to jump to next line
+// Examples
+// removeOrAdd("Hi!") === "Hi"
+// removeOrAdd("Hi! Hi!") === "Hi Hi"
+// removeOrAdd("Hi! Hi") === "Hi Hi!"
+// removeOrAdd("Hi! Hi Hi!!") === "Hi Hi! Hi!!"
+// removeOrAdd("!Hi! !Hi !Hi!!") === "!Hi !Hi! !Hi!!"
 
 // My code below:
 
-function pattern(n) {
-  let output = [];
-
-  for (let i = 1; i <= n; i++) {
-    output.push(i.toString().repeat(i));
-  }
-
-  return output.join("\n");
-}
+const removeOrAdd = (str) =>
+  str.replace(/\w\b!*/g, (x) =>
+    x.length === 1 ? x + "!" : x.length === 2 ? x[0] : x
+  );
 
 // Tests
 
-console.log(pattern(1)); // "1"
-console.log(pattern(2)); // "1\n22"
-console.log(pattern(5)); // "1\n22\n333\n4444\n55555"
-console.log(pattern(0)); // ""
-console.log(pattern(-25)); // ""
-console.log(pattern(-99)); // ""
+console.log(removeOrAdd("Hi!")); // "Hi"
+console.log(removeOrAdd("Hi! Hi!")); // "Hi Hi"
+console.log(removeOrAdd("Hi! Hi")); // "Hi Hi!"
+console.log(removeOrAdd("Hi! Hi Hi!!")); // "Hi Hi! Hi!!"
+console.log(removeOrAdd("!Hi! !Hi !Hi!!")); // "!Hi !Hi! !Hi!!"
