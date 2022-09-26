@@ -1,44 +1,20 @@
-// Challenge: Coding 3min: Bug in Apple (7 kyu)
+// Challenge: Remove All The Marked Elements of a List (7 kyu)
 
 // Description:
 
-// This is the simple version of Shortest Code series. If you need some challenges, please try the challenge version.
+// Define a method/function that removes from a given array of integers all the values contained in a second array.
 
-// Task:
-// Find out "B"(Bug) in a lot of "A"(Apple).
-
-// There will always be one bug in apple, not need to consider the situation that without bug or more than one bugs.
-
-// input: string Array apple
-
-// output: Location of "B", [x,y]
+// Examples (input -> output):
+// * [1, 1, 2, 3, 1, 2, 3, 4], [1, 3] -> [2, 2, 4]
+// * [1, 1, 2, 3, 1, 2, 3, 4, 4, 3, 5, 6, 7, 2, 8], [1, 3, 4, 2] -> [5, 6, 7, 8]
+// * [8, 2, 7, 2, 3, 4, 6, 5, 4, 4, 1, 2, 3], [2, 4, 3] -> [8, 7, 6, 5, 1]
 
 // My code below:
 
-function sc(apple){
-    for(let i = 0; i < apple.length; i++){
-        for(let j = 0; j < apple[i].length; j++){
-            if(apple[i][j] === 'B') return [i, j];
-        }
-    }
-}
+const remove = (integer_list, values_list) => integer_list.filter(int => !values_list.includes(int));
 
 // Tests
 
-console.log(sc([["B","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"]])); // [0,0]
-
-console.log(sc([["A","A","A","A","A"],
-["A","B","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"]])); // [1,1]
-
-console.log(sc([["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","A","A","A","A"],
-["A","B","A","A","A"]])); // [4,1]
+console.log(remove([1, 1, 2 ,3 ,1 ,2 ,3 ,4], [1, 3])); // [2, 2, 4]
+console.log(remove([1, 1, 2 ,3 ,1 ,2 ,3 ,4, 4, 3 ,5, 6, 7, 2, 8], [1, 3, 4, 2])); // [5, 6 ,7 ,8]
+console.log(remove([8, 2, 7, 2, 3, 4, 6, 5, 4, 4, 1, 2 , 3], [2, 4, 3])); // [8, 7, 6, 5, 1]
