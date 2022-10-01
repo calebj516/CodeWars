@@ -1,52 +1,59 @@
-// Challenge: The maximum sum value of ranges -- Simple version (6 kyu)
+// Challenge: Strong Number (Special Numbers Series #2) (7 kyu)
 
 // Description:
 
-// Given an array arr that contains some integers(positive, negative or 0), and a range list such as [[start1,end1],[start2,end2],...], start and end are the index of arr and start always less than end. Your task is to calculate the sum value of each range (start index and end index are both inclusive), and return the maximum sum value.
+// Strong number is the number that the sum of the factorial of its digits is equal to number itself.
 
-// For example:
+// For example, 145 is strong, since 1! + 4! + 5! = 1 + 24 + 120 = 145.
 
-//  Given arr = [1,-2,3,4,-5,-4,3,2,1], 
-//        range = [[1,3],[0,4],[6,8]]
-//  should return 6
- 
-//  calculation process:
+// Task
 
-//  range[1,3] = arr[1]+arr[2]+arr[3] = 5
-//  range[0,4] = arr[0]+arr[1]+arr[2]+arr[3]+arr[4] = 1
-//  range[6,8] = arr[6]+arr[7]+arr[8] = 6
+// Given a number, Find if it is Strong or not and return either "STRONG!!!!" or "Not Strong !!".
 
-//  So the maximum sum value is 6
+// Notes
 
-// Note:
+// Number passed is always Positive.
+// Return the result as String
+// Input >> Output Examples
+// strong_num(1) ==> return "STRONG!!!!"
+// Since, the sum of its digits' factorial (1) is equal to number itself, then its a Strong.
 
-// arr/$a always has at least 5 elements;
-// range/$range/ranges always has at least 1 element;
-// All inputs are valid;
-// This is a simple version, if you want some challenge, please try the challenge version.
+// strong_num(123) ==> return "Not Strong !!"
+// Since the sum of its digits' factorial of 1! + 2! + 3! = 9 is not equal to number itself, then it's Not Strong .
 
-// Some Examples:
+// strong_num(2)  ==>  return "STRONG!!!!"
+// Since the sum of its digits' factorial of 2! = 2 is equal to number itself, then its a Strong.
 
-//  maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,3],[0,4],[6,8]]) === 6
-//  maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,3]]) === 5
-//  maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,4],[2,5]]) === 0
+// strong_num(150) ==> return "Not Strong !!"
+// Since the sum of its digits' factorial of 1! + 5! + 0! = 122 is not equal to number itself, Then it's Not Strong .
 
 // My code below:
 
-function maxSum(arr,range){
+function strong(n) {
+  let sum = 0;
+  let numArr = n.toString().split("").map(Number);
 
-    let sumArr = [];
+  for (let i = 0; i < numArr.length; i++) {
+    sum += factorialize(numArr[i]);
+  }
 
-    for(let i = 0; i < range.length; i++){
-        // Note: added 1 to the second argument of slice because slice extracts up to, but not including, the end.
-        sumArr.push(arr.slice(range[i][0], range[i][1] + 1).reduce((prev, current) => prev + current));
-    }
+  return sum == n ? "STRONG!!!!" : "Not Strong !!";
+}
 
-    return Math.max(...sumArr);
+function factorialize(num) {
+  if (num === 0 || num === 1) return 1;
+
+  for (let i = num - 1; i >= 1; i--) {
+    num *= i;
+  }
+  return num;
 }
 
 // Tests
 
-console.log(maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,3],[0,4],[6,8]])); // === 6
-console.log(maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,3]])); // === 5
-console.log(maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,4],[2,5]])); // === 0
+console.log(strong(1)); // "STRONG!!!!"
+console.log(strong(2)); // "STRONG!!!!"
+console.log(strong(145)); // "STRONG!!!!"
+console.log(strong(7)); // "Not Strong !!"
+console.log(strong(93)); // "Not Strong !!"
+console.log(strong(185)); // "Not Strong !!"
