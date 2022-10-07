@@ -1,54 +1,35 @@
-// Challenge: Strong Number (Special Numbers Series #2) (7 kyu)
+// Challenge: Take a Ten Minutes Walk (6 kyu)
 
 // Description:
 
-// Strong number is the number that the sum of the factorial of its digits is equal to number itself.
+// You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
 
-// For example, 145 is strong, since 1! + 4! + 5! = 1 + 24 + 120 = 145.
-
-// Task
-
-// Given a number, Find if it is Strong or not and return either "STRONG!!!!" or "Not Strong !!".
-
-// Notes
-
-// Number passed is always Positive.
-// Return the result as String
-// Input >> Output Examples
-// strong_num(1) ==> return "STRONG!!!!"
-// Since, the sum of its digits' factorial (1) is equal to number itself, then its a Strong.
-
-// strong_num(123) ==> return "Not Strong !!"
-// Since the sum of its digits' factorial of 1! + 2! + 3! = 9 is not equal to number itself, then it's Not Strong .
-
-// strong_num(2)  ==>  return "STRONG!!!!"
-// Since the sum of its digits' factorial of 2! = 2 is equal to number itself, then its a Strong.
-
-// strong_num(150) ==> return "Not Strong !!"
-// Since the sum of its digits' factorial of 1! + 5! + 0! = 122 is not equal to number itself, Then it's Not Strong .
+// Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
 
 // My code below:
 
-function strong(n) {
-  let sum = 0;
-  let numArr = n.toString().split("").map(Number);
-
-  for (let i = 0; i < numArr.length; i++) {
-    sum += factorialize(numArr[i]);
+const isValidWalk = walk => {
+  // if the walk is not exactly 10 steps, it did not take 10 minutes.
+  if(walk.length !== 10) return false;
+  // variables: distance x, distance y
+  let dx = 0, dy = 0;
+  // loop through each step in the walk. 
+  // Moving north is equivalent to an increase on the y-axis, moving east is an increase on the x-axis. The opposites are true for south and west.
+  for(let i = 0; i < walk.length; i++) {
+    switch(walk[i]) {
+      case 'n' : dy++; break;
+      case 'e' : dx++; break;
+      case 's' : dy--; break;
+      case 'w' : dx--; break;
+    }
   }
-
-  return sum == n ? "STRONG!!!!" : "Not Strong !!";
-}
-
-function factorialize(num) {
-  return num > 1 ? num * factorialize(num - 1) : 1;
+  // If the user returns to the same location (0, 0), we know that dx and dy must both be zero
+  return dx === 0 && dy === 0;
 }
 
 // Tests
 
-console.log(strong(1)); // "STRONG!!!!"
-console.log(strong(2)); // "STRONG!!!!"
-console.log(strong(145)); // "STRONG!!!!"
-console.log(strong(7)); // "Not Strong !!"
-console.log(strong(93)); // "Not Strong !!"
-console.log(strong(185)); // "Not Strong !!"
+console.log(isValidWalk(['n','s','n','s','n','s','n','s','n','s'])); // 'should return true'
+console.log(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e'])); // 'should return false'
+console.log(isValidWalk(['w'])); // 'should return false'
+console.log(isValidWalk(['n','n','n','s','n','s','n','s','n','s'])); // 'should return false'
