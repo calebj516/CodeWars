@@ -11,20 +11,17 @@
 const isValidWalk = walk => {
   // if the walk is not exactly 10 steps, it did not take 10 minutes.
   if(walk.length !== 10) return false;
-  // variables: distance x, distance y
-  let dx = 0, dy = 0;
-  // loop through each step in the walk. 
-  // Moving north is equivalent to an increase on the y-axis, moving east is an increase on the x-axis. The opposites are true for south and west.
-  for(let i = 0; i < walk.length; i++) {
-    switch(walk[i]) {
-      case 'n' : dy++; break;
-      case 'e' : dx++; break;
-      case 's' : dy--; break;
-      case 'w' : dx--; break;
-    }
-  }
-  // If the user returns to the same location (0, 0), we know that dx and dy must both be zero
-  return dx === 0 && dy === 0;
+  
+  let n = 0, e = 0, s = 0, w = 0;
+
+  walk.forEach(direction => {
+    if(direction == 'n') n++;
+    if(direction == 's') s++;
+    if(direction == 'e') e++;
+    if(direction == 'w') w++;
+  });
+  
+  return n == s && e == w;
 }
 
 // Tests
