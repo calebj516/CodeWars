@@ -8,25 +8,23 @@
 
 // My code below:
 
-const isValidWalk = walk => {
+const isValidWalk = (walk) => {
   // if the walk is not exactly 10 steps, it did not take 10 minutes.
-  if(walk.length !== 10) return false;
-  
-  let n = 0, e = 0, s = 0, w = 0;
+  if (walk.length !== 10) return false;
 
-  walk.forEach(direction => {
-    if(direction == 'n') n++;
-    if(direction == 's') s++;
-    if(direction == 'e') e++;
-    if(direction == 'w') w++;
-  });
-  
+  let n = walk.filter((direction) => direction == "n").length,
+    e = walk.filter((direction) => direction == "e").length,
+    s = walk.filter((direction) => direction == "s").length,
+    w = walk.filter((direction) => direction == "w").length;
+
   return n == s && e == w;
-}
+};
 
 // Tests
 
-console.log(isValidWalk(['n','s','n','s','n','s','n','s','n','s'])); // 'should return true'
-console.log(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e'])); // 'should return false'
-console.log(isValidWalk(['w'])); // 'should return false'
-console.log(isValidWalk(['n','n','n','s','n','s','n','s','n','s'])); // 'should return false'
+console.log(isValidWalk(["n", "s", "n", "s", "n", "s", "n", "s", "n", "s"])); // 'should return true'
+console.log(
+  isValidWalk(["w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w", "e"])
+); // 'should return false'
+console.log(isValidWalk(["w"])); // 'should return false'
+console.log(isValidWalk(["n", "n", "n", "s", "n", "s", "n", "s", "n", "s"])); // 'should return false'
