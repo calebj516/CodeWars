@@ -1,30 +1,48 @@
-// Challenge: Take a Ten Minutes Walk (6 kyu)
+// Challenge: Playing with digits (6 kyu)
 
 // Description:
 
-// You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+// Some numbers have funny properties. For example:
 
-// Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
+// 89 --> 8¹ + 9² = 89 * 1
+
+// 695 --> 6² + 9³ + 5⁴= 1390 = 695 * 2
+
+// 46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+
+// Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p
+
+// we want to find a positive integer k, if it exists, such that the sum of the digits of n taken to the successive powers of p is equal to k * n.
+// In other words:
+
+// Is there an integer k such as : (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n * k
+
+// If it is the case we will return k, if not return -1.
+
+// Note: n and p will always be given as strictly positive integers.
+
+// digPow(89, 1) should return 1 since 8¹ + 9² = 89 = 89 * 1
+// digPow(92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 * k
+// digPow(695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 * 2
+// digPow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
 
 // My code below:
 
-const isValidWalk = (walk) => {
-  // if the walk is not exactly 10 steps, it did not take 10 minutes.
-  if (walk.length !== 10) return false;
-
-  let n = walk.filter((direction) => direction == "n").length,
-    e = walk.filter((direction) => direction == "e").length,
-    s = walk.filter((direction) => direction == "s").length,
-    w = walk.filter((direction) => direction == "w").length;
-
-  return n == s && e == w;
-};
+function digPow(n, p){
+  let sum = 0;
+  let str = n.toString();
+  
+  for(let i = 0; i < str.length; i++) {
+    sum += (+str[i]) ** p;
+    p++;
+  }
+  
+  return Number.isInteger(sum / n) ? (sum / n) : -1;  
+}
 
 // Tests
 
-console.log(isValidWalk(["n", "s", "n", "s", "n", "s", "n", "s", "n", "s"])); // 'should return true'
-console.log(
-  isValidWalk(["w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w", "e"])
-); // 'should return false'
-console.log(isValidWalk(["w"])); // 'should return false'
-console.log(isValidWalk(["n", "n", "n", "s", "n", "s", "n", "s", "n", "s"])); // 'should return false'
+console.log(digPow(89, 1)); // should return 1 since 8¹ + 9² = 89 = 89 * 1
+console.log(digPow(92, 1)); // should return -1 since there is no k such as 9¹ + 2² equals 92 * k
+console.log(digPow(695, 2)); // should return 2 since 6² + 9³ + 5⁴= 1390 = 695 * 2
+console.log(digPow(46288, 3)); // should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
