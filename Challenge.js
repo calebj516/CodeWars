@@ -1,36 +1,33 @@
-// Challenge: Simple decrypt algo (6 kyu)
+// Challenge: Find the odd int (6 kyu)
 
 // Description:
 
-// You'll be given a string of random characters (numbers, letters, and symbols). To decode this string into the key we're searching for:
+// Given an array of integers, find the one that appears an odd number of times.
 
-// (1) count the number occurences of each ascii lowercase letter, and
+// There will always be only one integer that appears an odd number of times.
 
-// (2) return an ordered string, 26 places long, corresponding to the number of occurences for each corresponding letter in the alphabet.
-
-// For example:
-
-// '$aaaa#bbb*cc^fff!z' gives '43200300000000000000000001'
-//    ^    ^   ^  ^  ^         ^^^  ^                   ^
-//   [4]  [3] [2][3][1]        abc  f                   z
-  
-// 'z$aaa#ccc%eee1234567890' gives '30303000000000000000000001'
-//  ^  ^   ^   ^                    ^ ^ ^                    ^
-// [1][3] [3] [3]                   a c e                    z
-// Remember, the string returned should always be 26 characters long, and only count lowercase letters.
-
-// Note: You can assume that each lowercase letter will appears a maximum of 9 times in the input string.
+// Examples
+// [7] should return 7, because it occurs 1 time (which is odd).
+// [0] should return 0, because it occurs 1 time (which is odd).
+// [1,1,2] should return 2, because it occurs 1 time (which is odd).
+// [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
+// [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
 
 // My code below:
 
-function decrypt(encryption) {
+function findOdd(nums) {
   
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
-  
-  return alphabet.map((el, idx, arr) => encryption.split('').filter(letter => letter == arr[idx]).length).join('');
+  for(let num of nums) {
+    let occurrences = nums.filter(n => n === num).length;
+    if(occurrences % 2 !== 0) return num;
+  }
+
 }
 
 // Tests
 
-console.log(decrypt('$aaaa#bbb*ccfff!z')); // '43200300000000000000000001'
-console.log(decrypt('z$aaa#ccc%eee123456789')); // '30303000000000000000000001'
+console.log(findOdd([7])); // 7
+console.log(findOdd([0])); // 0
+console.log(findOdd([1,1,2])); // 2
+console.log(findOdd([0,1,0,1,0])); // 0
+console.log(findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1])); // 4
