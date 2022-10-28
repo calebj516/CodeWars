@@ -1,50 +1,33 @@
-// Challenge: Counting Duplicates (6 kyu)
+// Challenge: Persistent Bugger (6 kyu)
 
 // Description:
 
-// Count the number of Duplicates
-// Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+// Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
 
-// Example
+// For example (Input --> Output):
 
-// "abcde" -> 0 # no characters repeats more than once
-// "aabbcde" -> 2 # 'a' and 'b'
-// "aabBcde" -> 2 # 'a' occurs twice and 'b' twice (`b` and `B`)
-// "indivisibility" -> 1 # 'i' occurs six times
-// "Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
-// "aA11" -> 2 # 'a' and '1'
-// "ABBA" -> 2 # 'A' and 'B' each occur twice
+// 39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
+// 999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
+// 4 --> 0 (because 4 is already a one-digit number)
 
 // My code below:
 
-function duplicateCount(text) {
-  const textArr = text.toLowerCase().split("").sort();
-  const distinctChars = [];
-
-  for (let i = 0; i < textArr.length; i++) {
-    // if the character following the current one is the same, and has not already been added to the distinct chars array...
-    // push the character to the distinct chars array
-    if (textArr[i] == textArr[i + 1] && !distinctChars.includes(textArr[i]))
-      distinctChars.push(textArr[i]);
+function persistence(num) {
+  
+  let count = 0;
+  num = num.toString();
+  
+  while(num.length > 1) {
+    num = num.split('').map(Number).reduce((total, current) => total * current).toString();
+    count++;
   }
-
-  return distinctChars.length;
+  
+  return count;
 }
 
 // Tests
 
-<<<<<<< HEAD
-console.log(duplicateCount("abcde")); // 0
-console.log(duplicateCount("aabbcde")); // 2
-console.log(duplicateCount("aabBcde")); // 2
-console.log(duplicateCount("indivisibility")); // 1
-console.log(duplicateCount("Indivisibilities")); // 2
-console.log(duplicateCount("aA11")); // 2
-console.log(duplicateCount("ABBA")); // 2
-=======
-console.log(findOdd([7])); // 7
-console.log(findOdd([0])); // 0
-console.log(findOdd([1,1,2])); // 2
-console.log(findOdd([0,1,0,1,0])); // 0
-console.log(findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1])); // 4
->>>>>>> ffb407aafe360078ce6af0dfa4738cbe53cb5bbc
+console.log(persistence(39)); // 3
+console.log(persistence(4)); // 0
+console.log(persistence(25)); // 2
+console.log(persistence(999)); // 4
