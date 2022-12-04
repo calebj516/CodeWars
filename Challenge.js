@@ -1,75 +1,88 @@
-// Challenge: Good vs Evil (6 kyu)
+// Challenge: Letter Triangles (6 kyu)
 
 // Description:
 
-// Middle Earth is about to go to war. The forces of good will have many battles with the forces of evil. Different races will certainly be involved. Each race has a certain worth when battling against others. On the side of good we have the following races, with their associated worth:
+// Letter triangles
 
-// Hobbits: 1
-// Men: 2
-// Elves: 3
-// Dwarves: 3
-// Eagles: 4
-// Wizards: 10
-// On the side of evil we have:
+// similar to Coloured triangles
 
-// Orcs: 1
-// Men: 2
-// Wargs: 2
-// Goblins: 2
-// Uruk Hai: 3
-// Trolls: 5
-// Wizards: 10
-// Although weather, location, supplies and valor play a part in any battle, if you add up the worth of the side of good and compare it with the worth of the side of evil, the side with the larger worth will tend to win.
+// But this one sums indexes of letters in alphabet.
 
-// Thus, given the count of each of the races on the side of good, followed by the count of each of the races on the side of evil, determine which side wins.
+// Examples
 
-// Input:
-// The function will be given two parameters. Each parameter will be a string of multiple integers separated by a single space. Each string will contain the count of each race on the side of good and evil.
+// c o d e w a r s
+// c is 3
+// o is 15
+// 15+3=18
+// 18. letter in the alphabet is r
+// then append r
+// next is o d
+// sum is 19
+// append s
 
-// The first parameter will contain the count of each race on the side of good in the following order:
+// do this until you iterate through whole string
+// now, string is rsibxsk
+// repeat whole cycle until you reach 1 character
+// then return the char
 
-// Hobbits, Men, Elves, Dwarves, Eagles, Wizards.
-// The second parameter will contain the count of each race on the side of evil in the following order:
+// output is l
+// codewars -> l
+// triangle -> d
+// C O D E W A R S
+//  R S I B X S K
+//   K B K Z Q D
+//    M M K Q U
+//     Z X B L
+//      X Z N
+//       X N
+//        L
+// A B C D
+//  C E G
+//   H L
+//    T
 
-// Orcs, Men, Wargs, Goblins, Uruk Hai, Trolls, Wizards.
-// All values are non-negative integers. The resulting sum of the worth for each side will not exceed the limit of a 32-bit integer.
+// More examples
 
-// Output:
-// Return "Battle Result: Good triumphs over Evil" if good wins, "Battle Result: Evil eradicates all trace of Good" if evil wins, or "Battle Result: No victor on this battle field" if it ends in a tie.
+// youhavechosentotranslatethiskata -> a
+// cod -> k
+// yes -> b
+// hours -> y
+// circlecipher -> z
+// lettertriangles -> o
+// cod -> rs -> k
+// abcd -> ceg -> hl -> t
+// codewars -> rsibxsk -> kbkzqd -> mmkqu -> zxbl -> xzn -> xn -> l
+// Note, if the sum is bigger than 26 then start over
+
+// input will always be lowercase letters
+
+// random tests contains strings up to 30 chars
 
 // My code below:
 
-function goodVsEvil(good, evil) {
-  const goodValues = [1, 2, 3, 3, 4, 10];
-  const evilValues = [1, 2, 2, 2, 3, 5, 10];
+const triangle = str => {
+  if(str.length == 1) return str;
 
-  const sumGood = good
-    .split(" ")
-    .map((el, idx) => +el * goodValues[idx])
-    .reduce((prev, current) => prev + current);
-  const sumEvil = evil
-    .split(" ")
-    .map((el, idx) => +el * evilValues[idx])
-    .reduce((prev, current) => prev + current);
+  let myStr = "";
 
-  if (sumGood > sumEvil) {
-    return "Battle Result: Good triumphs over Evil";
-  } else if (sumGood < sumEvil) {
-    return "Battle Result: Evil eradicates all trace of Good";
-  } else {
-    return "Battle Result: No victor on this battle field";
+  for(let i = 0; i < str.length - 1; i++) {
+    // index 1, index 2, then add both together to get the next index
+    let index1 = str[i].charCodeAt(0) - 96;
+    let index2 = str[i + 1].charCodeAt(0) - 96;
+    let index3 = index1 + index2;
+    // we need the position of the character in the alphabet, so if greater than 26, offset that by subtracting 26
+    if(index3 > 26) index3 -= 26;
+    // append result to myStr
+    myStr += String.fromCharCode(index3 + 96);
   }
+
+  return triangle(myStr);
 }
 
 // Tests
 
-console.log(goodVsEvil("1 1 1 1 1 1", "1 1 1 1 1 1 1")); // "Battle Result: Evil eradicates all trace of Good"
-console.log(goodVsEvil("1 1 1 1 1 1", "0 1 1 1 1 1 1")); // "Battle Result: Evil eradicates all trace of Good"
-console.log(goodVsEvil("1 0 0 0 0 0", "0 1 0 0 0 0 0")); // "Battle Result: Evil eradicates all trace of Good"
-console.log(goodVsEvil("0 1 0 0 0 0", "0 0 0 0 1 0 0")); // "Battle Result: Evil eradicates all trace of Good"
-console.log(goodVsEvil("0 0 0 0 0 10", "0 1 1 1 1 0 0")); // "Battle Result: Good triumphs over Evil"
-console.log(goodVsEvil("1 1 1 1 1 1", "0 0 1 1 1 1 1")); // "Battle Result: Good triumphs over Evil"
-console.log(goodVsEvil("0 1 0 0 0 0", "1 0 0 0 0 0 0")); // "Battle Result: Good triumphs over Evil"
-console.log(goodVsEvil("1 0 0 0 0 0", "1 0 0 0 0 0 0")); // "Battle Result: No victor on this battle field"
-console.log(goodVsEvil("0 0 0 0 0 0", "0 0 0 0 0 0 0")); // "Battle Result: No victor on this battle field"
-console.log(goodVsEvil("1 1 1 1 1 1", "1 0 1 1 1 1 1")); // "Battle Result: No victor on this battle field"
+console.log(triangle('codewars')); // 'l'
+console.log(triangle('triangle')); // 'd'
+console.log(triangle('youhavechosentotranslatethiskata')); // 'a'
+console.log(triangle('b')); // 'b'
+console.log(triangle('zz')); // 'z'
