@@ -1,88 +1,26 @@
-// Challenge: Letter Triangles (6 kyu)
+// Challenge: The highest profit wins! (7 kyu)
 
 // Description:
 
-// Letter triangles
+// Story
+// Ben has a very simple idea to make some profit: he buys something and sells it again. Of course, this wouldn't give him any profit at all if he was simply to buy and sell it at the same price. Instead, he's going to buy it for the lowest possible price and sell it at the highest.
 
-// similar to Coloured triangles
+// Task
+// Write a function that returns both the minimum and maximum number of the given list/array.
 
-// But this one sums indexes of letters in alphabet.
-
-// Examples
-
-// c o d e w a r s
-// c is 3
-// o is 15
-// 15+3=18
-// 18. letter in the alphabet is r
-// then append r
-// next is o d
-// sum is 19
-// append s
-
-// do this until you iterate through whole string
-// now, string is rsibxsk
-// repeat whole cycle until you reach 1 character
-// then return the char
-
-// output is l
-// codewars -> l
-// triangle -> d
-// C O D E W A R S
-//  R S I B X S K
-//   K B K Z Q D
-//    M M K Q U
-//     Z X B L
-//      X Z N
-//       X N
-//        L
-// A B C D
-//  C E G
-//   H L
-//    T
-
-// More examples
-
-// youhavechosentotranslatethiskata -> a
-// cod -> k
-// yes -> b
-// hours -> y
-// circlecipher -> z
-// lettertriangles -> o
-// cod -> rs -> k
-// abcd -> ceg -> hl -> t
-// codewars -> rsibxsk -> kbkzqd -> mmkqu -> zxbl -> xzn -> xn -> l
-// Note, if the sum is bigger than 26 then start over
-
-// input will always be lowercase letters
-
-// random tests contains strings up to 30 chars
+// Examples (Input --> Output)
+// [1,2,3,4,5] --> [1,5]
+// [2334454,5] --> [5,2334454]
+// [1]         --> [1,1]
+// Remarks
+// All arrays or lists will always have at least one element, so you don't need to check the length. Also, your function will always get an array or a list, you don't have to check for null, undefined or similar.
 
 // My code below:
 
-const triangle = str => {
-  if(str.length == 1) return str;
-
-  let myStr = "";
-
-  for(let i = 0; i < str.length - 1; i++) {
-    // index 1, index 2, then add both together to get the next index
-    let index1 = str[i].charCodeAt(0) - 96;
-    let index2 = str[i + 1].charCodeAt(0) - 96;
-    let index3 = index1 + index2;
-    // we need the position of the character in the alphabet, so if greater than 26, offset that by subtracting 26
-    if(index3 > 26) index3 -= 26;
-    // append result to myStr
-    myStr += String.fromCharCode(index3 + 96);
-  }
-
-  return triangle(myStr);
-}
+const minMax = arr => [Math.min(...arr), Math.max(...arr)];
 
 // Tests
 
-console.log(triangle('codewars')); // 'l'
-console.log(triangle('triangle')); // 'd'
-console.log(triangle('youhavechosentotranslatethiskata')); // 'a'
-console.log(triangle('b')); // 'b'
-console.log(triangle('zz')); // 'z'
+console.log(minMax([1, 2, 3, 4, 5])); // 1, 5
+console.log(minMax([2334454, 5])); // 5, 2334454
+console.log(minMax([5])); // 5, 5
