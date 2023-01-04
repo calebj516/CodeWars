@@ -1,26 +1,21 @@
-// Challenge: The highest profit wins! (7 kyu)
+// Challenge: Frequency Sequence (7 kyu)
 
 // Description:
 
-// Story
-// Ben has a very simple idea to make some profit: he buys something and sells it again. Of course, this wouldn't give him any profit at all if he was simply to buy and sell it at the same price. Instead, he's going to buy it for the lowest possible price and sell it at the highest.
+// Your task is to return an output string that translates an input string s by replacing each character in s with a number representing the number of times that character occurs in s and separating each number with the sep character(s).
 
-// Task
-// Write a function that returns both the minimum and maximum number of the given list/array.
+// Example (s, sep --> Output)
 
-// Examples (Input --> Output)
-// [1,2,3,4,5] --> [1,5]
-// [2334454,5] --> [5,2334454]
-// [1]         --> [1,1]
-// Remarks
-// All arrays or lists will always have at least one element, so you don't need to check the length. Also, your function will always get an array or a list, you don't have to check for null, undefined or similar.
+// "hello world", "-" --> "1-1-3-3-2-1-1-2-1-3-1"
+// "19999999"   , ":" --> "1:7:7:7:7:7:7:7"
+// "^^^**$"     , "x" --> "3x3x3x2x2x1"
 
 // My code below:
 
-const minMax = arr => [Math.min(...arr), Math.max(...arr)];
+const freqSeq = (str, sep) => str.split('').map((char, idx, arr) => arr.filter(el => el == char).length).join(sep); 
 
 // Tests
 
-console.log(minMax([1, 2, 3, 4, 5])); // 1, 5
-console.log(minMax([2334454, 5])); // 5, 2334454
-console.log(minMax([5])); // 5, 5
+console.log(freqSeq('hello world', '-')); // '1-1-3-3-2-1-1-2-1-3-1'
+console.log(freqSeq('19999999',    ':')); // '1:7:7:7:7:7:7:7'
+console.log(freqSeq('^^^**$',      'x')); // '3x3x3x2x2x1'
