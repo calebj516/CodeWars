@@ -1,21 +1,30 @@
-// Challenge: Frequency Sequence (7 kyu)
+// Challenge: Jaden Casing Strings (7 kyu)
 
 // Description:
 
-// Your task is to return an output string that translates an input string s by replacing each character in s with a number representing the number of times that character occurs in s and separating each number with the sep character(s).
+// Jaden Smith, the son of Will Smith, is the star of films such as The Karate Kid (2010) and After Earth (2013). 
+// Jaden is also known for some of his philosophy that he delivers via Twitter. 
+// When writing on Twitter, he is known for almost always capitalizing every word. 
+// For simplicity, you'll have to capitalize each word, check out how contractions are expected to be in the example below.
 
-// Example (s, sep --> Output)
+// Your task is to convert strings to how they would be written by Jaden Smith. 
+// The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
 
-// "hello world", "-" --> "1-1-3-3-2-1-1-2-1-3-1"
-// "19999999"   , ":" --> "1:7:7:7:7:7:7:7"
-// "^^^**$"     , "x" --> "3x3x3x2x2x1"
+// Example:
+
+// Not Jaden-Cased: "How can mirrors be real if our eyes aren't real"
+// Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real"
 
 // My code below:
 
-const freqSeq = (str, sep) => str.split('').map((char, idx, arr) => arr.filter(el => el == char).length).join(sep); 
+String.prototype.toJadenCase = function() {
+  return this.split(' ').map(function(word) {
+    return word[0].toUpperCase() + word.slice(1);
+  }).join(' ');
+}
 
 // Tests
 
-console.log(freqSeq('hello world', '-')); // '1-1-3-3-2-1-1-2-1-3-1'
-console.log(freqSeq('19999999',    ':')); // '1:7:7:7:7:7:7:7'
-console.log(freqSeq('^^^**$',      'x')); // '3x3x3x2x2x1'
+console.log(("How can mirrors be real if our eyes aren't real").toJadenCase()); // "How Can Mirrors Be Real If Our Eyes Aren't Real"
+console.log(("What is the sound of one hand clapping?").toJadenCase()); // "How Can Mirrors Be Real If Our Eyes Aren't Real"
+console.log(("A journey of 10000 miles begins with one step").toJadenCase()); // "How Can Mirrors Be Real If Our Eyes Aren't Real"
