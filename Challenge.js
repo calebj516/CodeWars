@@ -1,25 +1,28 @@
-// Challenge: Sum of odd numbers (7 kyu)
+// Challenge: Isograms (7 kyu)
 
 // Description:
 
-// Given the triangle of consecutive odd numbers:
+// An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
 
-//              1
-//           3     5
-//        7     9    11
-//    13    15    17    19
-// 21    23    25    27    29
-// ...
-// Calculate the sum of the numbers in the nth row of this triangle (starting at index 1) e.g.: (Input --> Output)
+// Example: (Input --> Output)
 
-// 1 -->  1
-// 2 --> 3 + 5 = 8
+// "Dermatoglyphics" --> true "aba" --> false "moOse" --> false (ignore letter case)
+
+// isIsogram "Dermatoglyphics" = true
+// isIsogram "moose" = false
+// isIsogram "aba" = false
 
 // My code below:
 
-const rowOddSumNumbers = n => n ** 3;
+const isIsogram = str => new Set(str.toLowerCase()).size == str.length;
 
 // Tests
 
-console.log(rowOddSumNumbers(1)); // 1
-console.log(rowOddSumNumbers(42)); // 74088
+console.log(isIsogram("Dermatoglyphics")); // true 
+console.log(isIsogram("isogram")); // true
+console.log(isIsogram("moose")); // false
+console.log(isIsogram("isIsogram")); // false
+console.log(isIsogram("aba")); // false
+console.log(isIsogram("moOse")); // false
+console.log(isIsogram("thumbscrewjapingly")); // true
+console.log(isIsogram("")); // true
