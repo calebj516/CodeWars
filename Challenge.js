@@ -31,15 +31,13 @@
 // My code below:
 
 function nbYear(p0, percent, aug, p) {
+  
+  let years = 0, multiplier = 1 + (percent / 100);
 
-  let years = 0;
-  const multiplier = 1 + (percent / 100);
-  
-  while (p0 < p) {
+  for(years; p0 < p; years++) {
     p0 = Math.floor(p0 * multiplier + aug);
-    years++;
   }
-  
+
   return years;
 }
 
