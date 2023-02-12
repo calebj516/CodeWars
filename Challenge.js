@@ -11,7 +11,13 @@
 function isPangram(string) {
   const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
 
-  return alphabet.every((char) => string.toLowerCase().includes(char));
+  string = string.toLowerCase();
+
+  for (let i = 0; i < alphabet.length; i++) {
+    if (!string.includes(alphabet[i])) return false;
+  }
+
+  return true;
 }
 
 // Tests
