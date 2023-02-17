@@ -1,28 +1,40 @@
-// Challenge: Detect Pangram (6 kyu)
+// Challenge: Hamming Distance (6 kyu)
 
 // Description:
 
-// A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+// The hamming distance between a pair of numbers is the number of binary bits that differ in their binary notation.
 
-// Given a string, detect whether or not it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
+// Example
+// For a = 25, b = 87, the result should be 4
+
+// 25: 00011001
+// 87: 01010111
+// The hamming distance between these two would be 4 ( the 2nd, 5th, 6th, 7th bit ).
+
+// Input/Output
+// [input] integer a
+// First Number. 1 <= a <= 2^20
+
+// [input] integer b
+// Second Number. 1 <= b <= 2^20
+
+// [output] an integer
+// Hamming Distance
 
 // My code below:
 
-function isPangram(string) {
-  const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
+const hammingDistance = (a, b) => (a ^ b).toString(2).replace(/0/g, '').length;
 
-  string = string.toLowerCase();
+// Notes:
 
-  for (let i = 0; i < alphabet.length; i++) {
-    if (!string.includes(alphabet[i])) return false;
-  }
+// The bitwise XOR (^) operator returns a 1 in each bit position for which the corresponding bits of either but not both operands are 1s.
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR
 
-  return true;
-}
+// n.toString(2) converts an int to its binary equivalent
 
 // Tests
 
-console.log(isPangram("This isn't a pangram!")); // false
-console.log(isPangram("abcdefghijklmopqrstuvwxyz ")); // false
-console.log(isPangram("Cwm fjord bank glyphs vext quiz")); // true
-console.log(isPangram("How quickly daft jumping zebras vex.")); // true
+console.log(hammingDistance(25, 87)); // 4
+console.log(hammingDistance(256, 302)); // 4
+console.log(hammingDistance(543, 634)); // 4
+console.log(hammingDistance(34013, 702)); // 7
