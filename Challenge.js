@@ -23,7 +23,11 @@
 
 // My code below:
 
-const hammingDistance = (a, b) => (a ^ b).toString(2).replace(/0/g, '').length;
+const hammingDistance = (a, b) =>
+  (a ^ b)
+    .toString(2)
+    .split("")
+    .filter((n) => n !== "0").length;
 
 // Notes:
 
