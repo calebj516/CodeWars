@@ -1,44 +1,44 @@
-// Challenge: Hamming Distance (6 kyu)
+// Challenge: Race Ceremony (7 kyu)
 
 // Description:
 
-// The hamming distance between a pair of numbers is the number of binary bits that differ in their binary notation.
+// The national go-kart racing competition is taking place at your local town and you've been called for building the winners podium with the available wooden blocks. Thankfully you are in a wood-rich area, number of blocks are always at least 6.
 
-// Example
-// For a = 25, b = 87, the result should be 4
+// Remember a classic racing podium has three platforms for first, second and third place. First place is the highest and second place is higher than third. Also notice that platforms are arranged as 2nd - 1st - 3rd.
 
-// 25: 00011001
-// 87: 01010111
-// The hamming distance between these two would be 4 ( the 2nd, 5th, 6th, 7th bit ).
+// The organizers want a podium that satisfies:
 
-// Input/Output
-// [input] integer a
-// First Number. 1 <= a <= 2^20
+// The first place platform has the minimum height possible
+// The second place platform has the closest height to first place
+// All platforms have heights greater than zero.
+// Task
+// Given the numbers of blocks available, return an array / tuple or another data structure depending on the language (refer sample tests) with the heights of 2nd, 1st, 3rd places platforms.
 
-// [input] integer b
-// Second Number. 1 <= b <= 2^20
-
-// [output] an integer
-// Hamming Distance
+// Examples (input -> output)
+// 11 ->   [4, 5, 2]
+// 6  ->   [2, 3, 1]
+// 10 ->   [4, 5, 1]
 
 // My code below:
 
-const hammingDistance = (a, b) =>
-  (a ^ b)
-    .toString(2)
-    .split("")
-    .filter((n) => n !== "0").length;
+const racePodium = (blocks) => {
+  let first = Math.ceil(blocks / 3) + 1;
+  let second = first - 1;
+  let third = blocks - (first + second);
 
-// Notes:
+  if (third === 0) {
+    third++;
+    second--;
+  }
 
-// The bitwise XOR (^) operator returns a 1 in each bit position for which the corresponding bits of either but not both operands are 1s.
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR
-
-// n.toString(2) converts an int to its binary equivalent
+  return [second, first, third];
+};
 
 // Tests
 
-console.log(hammingDistance(25, 87)); // 4
-console.log(hammingDistance(256, 302)); // 4
-console.log(hammingDistance(543, 634)); // 4
-console.log(hammingDistance(34013, 702)); // 7
+console.log(racePodium(11)); // [4, 5, 2]
+console.log(racePodium(6)); // [2, 3, 1]
+console.log(racePodium(10)); // [4, 5, 1]
+console.log(racePodium(100000)); // [33334, 33335, 33331]
+console.log(racePodium(7)); // [2, 4, 1]
+console.log(racePodium(8)); // [3, 4, 1]
