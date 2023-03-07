@@ -1,4 +1,4 @@
-// Challenge: Prime Number? (7 kyu)
+// Challenge: Is A Number Prime? (6 kyu)
 
 // Description:
 
@@ -8,9 +8,11 @@
 
 const isPrimeNumber = (num) => {
   const limit = Math.sqrt(num);
+  let i = 2;
 
-  for (let i = 2; i <= limit; i++) {
+  while (i <= limit) {
     if (!(num % i)) return false;
+    i++;
   }
 
   return num > 1;
