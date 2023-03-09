@@ -1,25 +1,25 @@
-// Challenge: Is A Number Prime? (6 kyu)
+// Challenge: Band name generator (7 kyu)
 
 // Description:
 
-// Determine if a given number is prime
+// My friend wants a new band name for her band. She like bands that use the formula: "The" + a noun with the first letter capitalized, for example:
+
+// "dolphin" -> "The Dolphin"
+
+// However, when a noun STARTS and ENDS with the same letter, she likes to repeat the noun twice and connect them together with the first and last letter, combined into one word (WITHOUT "The" in front), like this:
+
+// "alaska" -> "Alaskalaska"
+
+// Complete the function that takes a noun as a string, and returns her preferred band name written as a string.
 
 // My code below:
 
-const isPrimeNumber = (num) => {
-  const limit = Math.sqrt(num);
-  let i = 2;
-
-  while (i <= limit) {
-    if (!(num % i)) return false;
-    i++;
-  }
-
-  return num > 1;
-};
+const bandNameGenerator = (n) =>
+  n[0] != n[n.length - 1]
+    ? "The " + n[0].toUpperCase() + n.slice(1)
+    : n[0].toUpperCase() + n.slice(1) + n.slice(1);
 
 // Tests
 
-console.log(isPrimeNumber(10000)); // F
-console.log(isPrimeNumber(1223)); // T
-console.log(isPrimeNumber(769)); // T
+console.log(bandNameGenerator("alaska")); // "Alaskalaska"
+console.log(bandNameGenerator("dolphin")); // "The Dolphin"
