@@ -1,25 +1,19 @@
-// Challenge: Band name generator (7 kyu)
+// Challenge: Calculate Greatest Common Denominator
 
-// Description:
-
-// My friend wants a new band name for her band. She like bands that use the formula: "The" + a noun with the first letter capitalized, for example:
-
-// "dolphin" -> "The Dolphin"
-
-// However, when a noun STARTS and ENDS with the same letter, she likes to repeat the noun twice and connect them together with the first and last letter, combined into one word (WITHOUT "The" in front), like this:
-
-// "alaska" -> "Alaskalaska"
-
-// Complete the function that takes a noun as a string, and returns her preferred band name written as a string.
+// Description: n/a
 
 // My code below:
 
-const bandNameGenerator = (n) =>
-  n[0] != n[n.length - 1]
-    ? "The " + n[0].toUpperCase() + n.slice(1)
-    : n[0].toUpperCase() + n.slice(1) + n.slice(1);
+function calcGcd(a, b) {
+  if (b != 0) {
+    return calcGcd(b, a % b);
+  } else {
+    return a;
+  }
+}
 
 // Tests
 
-console.log(bandNameGenerator("alaska")); // "Alaskalaska"
-console.log(bandNameGenerator("dolphin")); // "The Dolphin"
+console.log(calcGcd(108, 48)); // 12
+console.log(calcGcd(632, 150)); // 2
+console.log(calcGcd(256, 60)); // 4
