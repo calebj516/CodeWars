@@ -18,8 +18,7 @@
 
 // My code below:
 
-const ipToInt32 = (ip) => parseInt(ip.split('.').map(n => Number(n).toString(2).padStart(8, '0')).join('') , 2);
-
+const ipToInt32 = ip => ip.split(".").reduce((total, current) => total * 256 + Number(current));
 // Tests
 
 console.log(ipToInt32("128.32.10.1")); // 2149583361
