@@ -1,26 +1,27 @@
-// Challenge: IPv4 to int32 (6 kyu)
+// Challenge: Basic Encryption (6 kyu)
 
 // Description:
 
-// Take the following IPv4 address: 128.32.10.1 This address has 4 octets where each octet is a single byte (or 8 bits).
+// The most basic encryption method is to map a char to another char by a certain math rule. Because every char has an ASCII value, we can manipulate this value with a simple math expression. For example 'a' + 1 would give us 'b', because 'a' value is 97 and 'b' value is 98.
 
-// 1st octet 128 has the binary representation: 10000000
-// 2nd octet 32 has the binary representation: 00100000
-// 3rd octet 10 has the binary representation: 00001010
-// 4th octet 1 has the binary representation: 00000001
-// So 128.32.10.1 == 10000000.00100000.00001010.00000001
+// You will need to write a method which does exactly that -
 
-// Because the above IP address has 32 bits, we can represent it as the 32 bit number: 2149583361.
+// get a string as text and an int as the rule of manipulation, and should return encrypted text. for example:
 
-// Write a function ip_to_int32(ip) ( JS: ipToInt32(ip) ) that takes an IPv4 address and returns a 32 bit number.
+// encrypt("a",1) = "b"
 
-//   ipToInt32("128.32.10.1") => 2149583361
+// Full ascii table is used on our question (256 chars) - so 0-255 are the valid values.
+
+// If the value exceeds 255, it should 'wrap'. ie. if the value is 345 it should wrap to 89.
+
+// Good luck.
 
 // My code below:
 
-const ipToInt32 = ip => ip.split(".").reduce((total, current) => total * 256 + Number(current));
+const encrypt = (text, rule) => text.split('').map(char => String.fromCharCode((char.charCodeAt() + rule) % 256)).join('');
+
 // Tests
 
-console.log(ipToInt32("128.32.10.1")); // 2149583361
-console.log(ipToInt32("128.114.17.104")); // 2154959208
-console.log(ipToInt32("0.0.0.0")); // 0
+console.log(encrypt("", 1)); // ""
+console.log(encrypt("a", 1)); // "b"
+console.log(encrypt("please encrypt me", 2)); // "rngcug\"gpet{rv\"og"
