@@ -1,49 +1,29 @@
-// Challenge: Mispelled Word (7 kyu)
+// Challenge: Divide and Conquer (7 kyu)
 
 // Description:
 
-// Create a function mispelled(word1, word2):
+// Given a mixed array of number and string representations of integers, add up the non-string integers and subtract the total of the string integers.
 
-// mispelled('versed', 'xersed'); // returns true
-// mispelled('versed', 'applb'); // returns false
-// mispelled('versed', 'v5rsed'); // returns true
-// mispelled('1versed', 'versed'); // returns true
-// mispelled('versed', 'versed'); // returns true
-// It checks if the word2 differs from word1 by at most one character.
-
-// This can include an extra char at the end or the beginning of either of words.
-
-// In the tests that expect true, the mispelled word will always differ mostly by one character. If the two words are the same, return True.
-
-// Good luck.
+// Return as a number.
 
 // My code below:
 
-function mispelled(word1, word2) {
-  if(Math.abs(word1.length - word2.length) >= 2) return false;
-    
-  if(Math.abs(word1.length - word2.length) == 1) {
-    return (word1.includes(word2) || word2.includes(word1));
-   }
- 
-  let mispelledCount = 0;
+function divCon(x) {
+  const nonStrIntTotal = x
+    .filter((el) => typeof el === "number")
+    .reduce((total, current) => total + current, 0);
   
-  for(let i = 0; i < word1.length; i++){  
-    if(word1[i] !== word2[i]) mispelledCount++;
-  }
- 
-  return mispelledCount <= 1;
+  const strIntTotal = x
+    .filter((el) => typeof el === "string")
+    .reduce((total, current) => total + Number(current), 0);
+
+  return nonStrIntTotal - strIntTotal;
 }
 
 // Tests
 
-console.log(mispelled('versed', 'xersed')); // true
-console.log(mispelled('versed', 'applb')); // false
-
-console.log(mispelled('versed', 'v5rsed')); // true
-console.log(mispelled('1versed', 'versed')); // true
-console.log(mispelled('versed', 'versed1')); // true
-
-console.log(mispelled('versed', 'aversed')); // true
-console.log(mispelled('aaversed', 'versed')); // false
-console.log(mispelled('versed', 'aaversed'));; // false
+console.log(divCon([9, 3, "7", "3"])); // 2
+console.log(divCon(["5", "0", 9, 3, 2, 1, "9", 6, 7])); // 14
+console.log(divCon(["3", 6, 6, 0, "5", 8, 5, "6", 2, "0"])); // 13
+console.log(divCon(["1", "5", "8", 8, 9, 9, 2, "3"])); // 11
+console.log(divCon([8, 0, 0, 8, 5, 7, 2, 3, 7, 8, 6, 7])); // 61
