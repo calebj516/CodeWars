@@ -8,17 +8,7 @@
 
 // My code below:
 
-function divCon(x) {
-  const nonStrIntTotal = x
-    .filter((el) => typeof el === "number")
-    .reduce((total, current) => total + current, 0);
-  
-  const strIntTotal = x
-    .filter((el) => typeof el === "string")
-    .reduce((total, current) => total + Number(current), 0);
-
-  return nonStrIntTotal - strIntTotal;
-}
+const divCon = x => x.reduce((total, current) => typeof current === "number" ? total + current : total - Number(current), 0);
 
 // Tests
 
