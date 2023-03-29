@@ -1,50 +1,33 @@
-// Challenge: Cats and Shelves (7 kyu)
+// Challenge: Decreasing Inputs (7 kyu)
 
 // Description:
 
-// An infinite number of shelves are arranged one above the other in a staggered fashion.
-// The cat can jump either one or three shelves at a time: from shelf i to shelf i+1 or i+3 (the cat cannot climb on the shelf directly above its head), according to the illustration:
+// This kata is all about adding numbers.
 
-//                  ┌────────┐
-//                  │-6------│
-//                  └────────┘
-// ┌────────┐       
-// │------5-│        
-// └────────┘  ┌─────► OK!
-//             │    ┌────────┐
-//             │    │-4------│
-//             │    └────────┘
-// ┌────────┐  │
-// │------3-│  │     
-// BANG!────┘  ├─────► OK! 
-//   ▲  |\_/|  │    ┌────────┐
-//   │ ("^-^)  │    │-2------│
-//   │ )   (   │    └────────┘
-// ┌─┴─┴───┴┬──┘
-// │------1-│
-// └────────┘
-// Input
-// Start and finish shelf numbers (always positive integers, finish no smaller than start)
+// You will create a function named add. It will return the sum of all the arguments. Sounds easy, doesn't it?
 
-// Task
-// Find the minimum number of jumps to go from start to finish
+// Well Here's the Twist. The inputs will gradually decrease with their index as parameter to the function.
+
+//   add(3,4,6); 
+//   /*
+//   returns ( 3 / 1 ) + ( 4 / 2 ) + ( 6 / 3 ) = 7
+//   */
+// Remember the function will return 0 if no arguments are passed and it must round the result if sum is a float.
 
 // Example
-// Start 1, finish 5, then answer is 2 (1 => 4 => 5 or 1 => 2 => 5)
 
-// Return as a number.
+//   add(); //=> 0
+//   add(1,2,3); //=> 3
+//   add(1,4,-6,20); //=> 6
+// Check my another kata here!! http://www.codewars.com/kata/555b73a81a6285b6ce000047
 
 // My code below:
 
-const solution = (start, finish) => ((finish - start) % 3) + Math.floor((finish - start) / 3);
-
-// Logic:
-
-// ((finish - start) % 3) = number of small jumps
-// Math.floor((finish - start) / 3) = number of big jumps
+const add = (...args) => Math.round(args.reduce((total, current, idx) => total + current / (idx + 1), 0));
 
 // Tests
 
-console.log(solution(1, 5)); // 2
-console.log(solution(3, 3)); // 0
-console.log(solution(2, 4)); // 2
+console.log(add(100, 200, 300)); // 300
+console.log(add(2)); // 2
+console.log(add(4, -3, -2)); // 2
+console.log(add(-1, -2, -3, -4)); // -4
