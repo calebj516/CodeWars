@@ -1,19 +1,50 @@
-// Challenge: Divide and Conquer (7 kyu)
+// Challenge: Cats and Shelves (7 kyu)
 
 // Description:
 
-// Given a mixed array of number and string representations of integers, add up the non-string integers and subtract the total of the string integers.
+// An infinite number of shelves are arranged one above the other in a staggered fashion.
+// The cat can jump either one or three shelves at a time: from shelf i to shelf i+1 or i+3 (the cat cannot climb on the shelf directly above its head), according to the illustration:
+
+//                  ┌────────┐
+//                  │-6------│
+//                  └────────┘
+// ┌────────┐       
+// │------5-│        
+// └────────┘  ┌─────► OK!
+//             │    ┌────────┐
+//             │    │-4------│
+//             │    └────────┘
+// ┌────────┐  │
+// │------3-│  │     
+// BANG!────┘  ├─────► OK! 
+//   ▲  |\_/|  │    ┌────────┐
+//   │ ("^-^)  │    │-2------│
+//   │ )   (   │    └────────┘
+// ┌─┴─┴───┴┬──┘
+// │------1-│
+// └────────┘
+// Input
+// Start and finish shelf numbers (always positive integers, finish no smaller than start)
+
+// Task
+// Find the minimum number of jumps to go from start to finish
+
+// Example
+// Start 1, finish 5, then answer is 2 (1 => 4 => 5 or 1 => 2 => 5)
 
 // Return as a number.
 
 // My code below:
 
-const divCon = x => x.reduce((total, current) => typeof current === "number" ? total + current : total - Number(current), 0);
+const solution = (start, finish) => ((finish - start) % 3) + Math.floor((finish - start) / 3);
+
+// Logic:
+
+// ((finish - start) % 3) = number of small jumps
+// Math.floor((finish - start) / 3) = number of big jumps
 
 // Tests
 
-console.log(divCon([9, 3, "7", "3"])); // 2
-console.log(divCon(["5", "0", 9, 3, 2, 1, "9", 6, 7])); // 14
-console.log(divCon(["3", 6, 6, 0, "5", 8, 5, "6", 2, "0"])); // 13
-console.log(divCon(["1", "5", "8", 8, 9, 9, 2, "3"])); // 11
-console.log(divCon([8, 0, 0, 8, 5, 7, 2, 3, 7, 8, 6, 7])); // 61
+console.log(solution(1, 5)); // 2
+console.log(solution(3, 3)); // 0
+console.log(solution(2, 4)); // 2
