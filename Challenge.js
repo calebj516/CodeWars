@@ -1,27 +1,20 @@
-// Challenge: Insert Dashes (7 kyu)
+// Challenge: How many consecutive numbers are needed? (7 kyu)
 
 // Description:
 
-// Write a function insert_dash(num) / insertDash(num) / InsertDash(int num) that will insert dashes ('-') between each two odd digits in num. For example: if num is 454793 the output should be 4547-9-3. Don't count zero as an odd digit.
+// Create the function consecutive(arr) that takes an array of integers and return the minimum number of integers needed to make the contents of arr consecutive from the lowest number to the highest number.
 
-// Note that the number will always be non-negative (>= 0).
+// For example:
+
+// If arr contains [4, 8, 6] then the output should be 2 because two numbers need to be added to the array (5 and 7) to make it a consecutive array of numbers from 4 to 8. Numbers in arr will be unique.
 
 // My code below:
 
-const insertDash = num => {
-  num = num.toString().split('');
-
-  for(let i = 0; i < num.length; i++) {
-    if(parseInt(num[i]) % 2 > 0 && parseInt(num[i + 1]) % 2 > 0) {
-      num[i] += '-';
-    }
-  }
-  
-  return num.join('');
-}
+const consecutive = arr => arr.length ? Math.max(...arr) - Math.min(...arr) - arr.length + 1 : 0;
 
 // Tests
 
-console.log(insertDash(454793)); // '4547-9-3'
-console.log(insertDash(123456)); // '123456'
-console.log(insertDash(1003567)); // '1003-567'
+console.log(consecutive([4,8,6])); //2
+console.log(consecutive([1,2,3,4])); // 0
+console.log(consecutive([])); // 0
+console.log(consecutive([1])); // 0
