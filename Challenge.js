@@ -20,14 +20,19 @@
 // My code below:
 
 const keepOrder = (arr, val) => {
-  let idx = arr.findIndex(n => val <= n);
-  return idx < 0 ? arr.length : idx;
-}
-
-// Logic:
-
-// The findIndex() method returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned.
-// If -1 is returned, we know all the values in arr are greater than val, and the first index for which that is true would be 0.
+  // initialize targetIdx to 0 in case val is less than every single value in arr
+  let targetIdx = 0;
+  // loop through each value in arr
+  for (let i = 0; i < arr.length; i++) {
+    // if val is less than or equal to the value in arr[i], set the targetIdx to the index and break out of the loop
+    if (val <= arr[i]) {
+      targetIdx = i;
+      break;
+    }
+  }
+  // return the targetIdx
+  return targetIdx;
+};
 
 // Tests
 
