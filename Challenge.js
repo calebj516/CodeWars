@@ -1,41 +1,27 @@
-// Challenge: Keep the Order (7 kyu)
+// Challenge: Sum even numbers (7 kyu)
 
 // Description:
 
-// Your job here is to write a function (keepOrder in JS/CoffeeScript, keep_order in Ruby/Crystal/Python, keeporder in Julia), which takes a sorted array ary and a value val, and returns the lowest index where you could insert val to maintain the sorted-ness of the array. The input array will always be sorted in ascending order. It may contain duplicates.
+// Complete the function that takes a sequence of numbers as single parameter. Your function must return the sum of the even values of this sequence.
 
-// Do not modify the input.
+// Only numbers without decimals like 4 or 4.0 can be even.
 
-// Some examples:
-// keepOrder([1, 2, 3, 4, 7], 5) //=> 4
-//                       ^(index 4)
-// keepOrder([1, 2, 3, 4, 7], 0) //=> 0
-//           ^(index 0)
-// keepOrder([1, 1, 2, 2, 2], 2) //=> 2
-//                 ^(index 2)
-// Also check out my other creations — Naming Files, Elections: Weighted Average, Identify Case, Split Without Loss, Adding Fractions, Random Integers, Implement String#transpose, Implement Array#transpose!, Arrays and Procs #1, and Arrays and Procs #2.
+// The input is a sequence of numbers: integers and/or floats.
 
-// If you notice any issues or have any suggestions/comments whatsoever, please don't hesitate to mark an issue or just comment. Thanks!
+// Examples
+// [4, 3, 1, 2, 5, 10, 6, 7, 9, 8]  -->  30   # because 4 + 2 + 10 + 6 + 8 = 30
+// []                               -->  0
 
 // My code below:
 
-const keepOrder = (arr, val) => {
-  // initialize targetIdx to 0 in case val is less than every single value in arr
-  let targetIdx = 0;
-  // loop through each value in arr
-  for (let i = 0; i < arr.length; i++) {
-    // if val is less than or equal to the value in arr[i], set the targetIdx to the index and break out of the loop
-    if (val <= arr[i]) {
-      targetIdx = i;
-      break;
-    }
-  }
-  // return the targetIdx
-  return targetIdx;
-};
+const sumEvenNumbers = (input) =>
+  input.reduce(
+    (total, current) => total + (current % 2 === 0 ? current : 0),
+    0
+  );
 
 // Tests
 
-console.log(keepOrder([1, 2, 3, 4, 7], 5)); //=> 4
-console.log(keepOrder([1, 2, 3, 4, 7], 0)); //=> 0
-console.log(keepOrder([1, 1, 2, 2, 2], 2)); //=> 2
+console.log(sumEvenNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); // 30
+console.log(sumEvenNumbers([1337, 374, 849, 22.5, 19, 16, 0, 0, 16, 32])); // 438
+console.log(sumEvenNumbers([-16, -32, 20, 21, 41, 42])); // 14
