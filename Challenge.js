@@ -14,11 +14,19 @@
 
 // My code below:
 
-const sumEvenNumbers = (input) =>
-  input.reduce(
-    (total, current) => total + (current % 2 === 0 ? current : 0),
-    0
-  );
+const sumEvenNumbers = (numbers) => {
+  let evenSum = 0;
+
+  for(let num of numbers) {
+    if(!(num % 2)) evenSum += num;
+  }
+
+  return evenSum;
+}
+
+// Note on logic:
+
+// For even numbers, num % 2 will equal 0, but since 0 is considered a falsy value in JS the ! operator is needed to reverse it to a truthy value.
 
 // Tests
 
