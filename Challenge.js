@@ -16,6 +16,6 @@ const largest = (n, array) => n ? [...array].sort((a, b) => a - b).slice(-n) : [
 
 // Tests
 
-console.log(2, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]); // [9, 10]
-console.log(0, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]); // []
-console.log(2, [-3, -2, -1, 0, -9, -8, -7, -6, -4, -5]); // [-1, 0]
+console.log(largest(2, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1])); // [9, 10]
+console.log(largest(0, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1])); // []
+console.log(largest(2, [-3, -2, -1, 0, -9, -8, -7, -6, -4, -5])); // [-1, 0]
