@@ -1,21 +1,23 @@
-// Challenge: Largest Elements (7 kyu)
+// Challenge: Between Extremes (7 kyu)
 
 // Description:
 
-// Write a program that outputs the top n elements from a list.
+// Given an array of numbers, return the difference between the largest and smallest values.
 
-// Example:
+// For example:
 
-// largest(2, [7,6,5,4,3,2,1])
+// [23, 3, 19, 21, 16] should return 20 (i.e., 23 - 3).
 
-// => [6,7]
+// [1, 434, 555, 34, 112] should return 554 (i.e., 555 - 1).
+
+// The array will contain a minimum of two elements. Input data range guarantees that max-min will cause no integer overflow.
 
 // My code below:
 
-const largest = (n, array) => n ? [...array].sort((a, b) => a - b).slice(-n) : [];
+const betweenExtremes = numbers => Math.max(...numbers) - Math.min(...numbers);
 
 // Tests
 
-console.log(largest(2, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1])); // [9, 10]
-console.log(largest(0, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1])); // []
-console.log(largest(2, [-3, -2, -1, 0, -9, -8, -7, -6, -4, -5])); // [-1, 0]
+console.log(betweenExtremes([-23, 23])); // 46
+console.log(betweenExtremes([21, 34, 54, 43, 26, 12])); // 42
+console.log(betweenExtremes([-1, -41, -77, -100])); // 99
