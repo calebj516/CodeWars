@@ -14,7 +14,15 @@
 
 // My code below:
 
-const betweenExtremes = numbers => Math.max(...numbers) - Math.min(...numbers);
+const betweenExtremes = (numbers) => findMaxNum(numbers) - findMinNum(numbers);
+
+const findMinNum = (nums) => {
+  return [...nums].sort((a, b) => a - b)[0];
+};
+
+const findMaxNum = (nums) => {
+  return [...nums].sort((a, b) => a - b)[nums.length - 1];
+};
 
 // Tests
 
