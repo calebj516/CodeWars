@@ -19,10 +19,10 @@
 
 // My code below:
 
-const isItANum = str =>{
-  let nums = str.replace(/\D/g, '');
-  return nums.length == 11 && nums[0] == '0' ? nums : "Not a phone number";
-}
+const isItANum = (str) => {
+  let nums = str.replace(/\D/g, "");
+  return /^0\d{10}$/.test(nums) ? nums : "Not a phone number";
+};
 
 // Tests
 
