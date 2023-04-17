@@ -1,31 +1,48 @@
-// Challenge: Fix My Phone Numbers! (7 kyu)
+// Challenge: Bouncing Balls (6 kyu)
 
 // Description:
 
-// Fix My Phone Numbers
-// Oh thank goodness you're here! The last intern has completely ruined everything!
+// A child is playing with a ball on the nth floor of a tall building. The height of this floor above ground level, h, is known.
 
-// All of our customer's phone numbers have been scrambled, and we need those phone numbers to annoy them with endless sales calls!
+// He drops the ball out of the window. The ball bounces (for example), to two-thirds of its height (a bounce of 0.66).
 
-// The Format
-// Phone numbers are stored as strings and comprise 11 digits, eg '02078834982' and must always start with a 0.
+// His mother looks out of a window 1.5 meters from the ground.
 
-// However, something strange has happened and now all of the phone numbers contain lots of random characters, whitespace and some are not phone numbers at all!
+// How many times will the mother see the ball pass in front of her window (including when it's falling and bouncing?
 
-// For example, '02078834982' has somehow become 'efRFS:)0207ERGQREG88349F82!' and there are lots more lines that we need to check.
+// Three conditions must be met for a valid experiment:
+// Float parameter "h" in meters must be greater than 0
+// Float parameter "bounce" must be greater than 0 and less than 1
+// Float parameter "window" must be less than h.
+// If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
 
-// The Task
-// Given a string, you must decide whether or not it contains a valid phone number. If it does, return the corrected phone number as a string ie. '02078834982' with no whitespace or special characters, else return "Not a phone number".
+// Note:
+// The ball can only be seen if the height of the rebounding ball is strictly greater than the window parameter.
+
+// Examples:
+// - h = 3, bounce = 0.66, window = 1.5, result is 3
+
+// - h = 3, bounce = 1, window = 1.5, result is -1
+
+// (Condition 2) not fulfilled).
 
 // My code below:
 
-const isItANum = (str) => {
-  let nums = str.replace(/\D/g, "");
-  return /^0\d{10}$/.test(nums) ? nums : "Not a phone number";
-};
+function bouncingBall(h, bounce, window) {
+  if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) return -1;
+
+  let count = 0;
+
+  while (h > window) {
+    h *= bounce;
+    h > window ? (count += 2) : count++;
+  }
+
+  return count;
+}
 
 // Tests
 
-console.log(isItANum("02078834982")); // "02078834982"
-console.log(isItANum("102078834982")); // "Not a phone number"
-console.log(isItANum("efRFS:)0207ERGQREG88349F82!")); // "02078834982"
+console.log(bouncingBall(2, 0.5, 1)); // 1
+console.log(bouncingBall(3, 0.66, 1.5)); // 3
+console.log(bouncingBall(30, 0.66, 1.5)); // 15
