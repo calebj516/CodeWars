@@ -33,10 +33,10 @@ function bouncingBall(h, bounce, window) {
 
   let count = 0;
 
-  while (h > window) {
+  do {
     h *= bounce;
     h > window ? (count += 2) : count++;
-  }
+  } while (h > window);
 
   return count;
 }
