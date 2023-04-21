@@ -1,48 +1,39 @@
-// Challenge: Bouncing Balls (6 kyu)
+// Challenge: Trimming a string (7 kyu)
 
 // Description:
 
-// A child is playing with a ball on the nth floor of a tall building. The height of this floor above ground level, h, is known.
+// Create a function that will trim a string (the first argument given) if it is longer than the requested maximum string length (the second argument given). The result should also end with "..."
 
-// He drops the ball out of the window. The ball bounces (for example), to two-thirds of its height (a bounce of 0.66).
+// These dots at the end also add to the string length.
 
-// His mother looks out of a window 1.5 meters from the ground.
+// For example, trim("Creating kata is fun", 14) should return "Creating ka..."
 
-// How many times will the mother see the ball pass in front of her window (including when it's falling and bouncing?
+// If the string is smaller or equal than the maximum string length, then simply return the string with no trimming or dots required.
 
-// Three conditions must be met for a valid experiment:
-// Float parameter "h" in meters must be greater than 0
-// Float parameter "bounce" must be greater than 0 and less than 1
-// Float parameter "window" must be less than h.
-// If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
+// e.g. trim("Code Wars is pretty rad", 50) should return "Code Wars is pretty rad"
 
-// Note:
-// The ball can only be seen if the height of the rebounding ball is strictly greater than the window parameter.
+// If the requested string length is smaller than or equal to 3 characters, then the length of the dots is not added to the string length.
 
-// Examples:
-// - h = 3, bounce = 0.66, window = 1.5, result is 3
+// e.g. trim("He", 1) should return "H...", because 1 <= 3
 
-// - h = 3, bounce = 1, window = 1.5, result is -1
-
-// (Condition 2) not fulfilled).
+// Requested maximum length will be greater than 0. Input string will not be empty.
 
 // My code below:
 
-function bouncingBall(h, bounce, window) {
-  if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) return -1;
-
-  let count = 0;
-
-  do {
-    h *= bounce;
-    h > window ? (count += 2) : count++;
-  } while (h > window);
-
-  return count;
+const trim = (str, size) => {
+  if(str.length <= size) return str;
+  if(size > 3) return str.slice(0, size - 3) + '...';
+  if(size <= 3) return str.slice(0, size) + '...';
 }
 
 // Tests
 
-console.log(bouncingBall(2, 0.5, 1)); // 1
-console.log(bouncingBall(3, 0.66, 1.5)); // 3
-console.log(bouncingBall(30, 0.66, 1.5)); // 15
+console.log(trim("Creating kata is fun", 14)); // "Creating ka..."
+console.log(trim("He", 1)); // "H..."
+console.log(trim("Hey", 2)); // "He..."
+console.log(trim("Hey", 3)); // "Hey"
+console.log(trim("Creating kata is fun", 2)); // "Cr..."
+console.log(trim("Code Wars is pretty rad", 3)); // "Cod..."
+console.log(trim("Coding rocks", "Coding rocks".length)); // "Coding rocks"
+console.log(trim("Code Wars is pretty rad", 50)); // "Code Wars is pretty rad"
+console.log(trim("London is freezing",18)); // "London is freezing"
