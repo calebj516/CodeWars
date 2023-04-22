@@ -20,11 +20,12 @@
 
 // My code below:
 
-const trim = (str, size) => {
-  if(str.length <= size) return str;
-  if(size > 3) return str.slice(0, size - 3) + '...';
-  if(size <= 3) return str.slice(0, size) + '...';
-}
+const trim = (str, size) =>
+  str.length <= size
+    ? str
+    : size > 3
+    ? str.slice(0, size - 3) + "..."
+    : str.slice(0, size) + "...";
 
 // Tests
 
@@ -36,4 +37,4 @@ console.log(trim("Creating kata is fun", 2)); // "Cr..."
 console.log(trim("Code Wars is pretty rad", 3)); // "Cod..."
 console.log(trim("Coding rocks", "Coding rocks".length)); // "Coding rocks"
 console.log(trim("Code Wars is pretty rad", 50)); // "Code Wars is pretty rad"
-console.log(trim("London is freezing",18)); // "London is freezing"
+console.log(trim("London is freezing", 18)); // "London is freezing"
