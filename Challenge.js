@@ -1,40 +1,29 @@
-// Challenge: Trimming a string (7 kyu)
+// Challenge: Sum Factorial (7 kyu)
 
 // Description:
 
-// Create a function that will trim a string (the first argument given) if it is longer than the requested maximum string length (the second argument given). The result should also end with "..."
+// Factorials are often used in probability and are used as an introductory problem for looping constructs. In this kata you will be summing together multiple factorials.
 
-// These dots at the end also add to the string length.
+// Here are a few examples of factorials:
 
-// For example, trim("Creating kata is fun", 14) should return "Creating ka..."
+// 4 Factorial = 4! = 4 * 3 * 2 * 1 = 24
 
-// If the string is smaller or equal than the maximum string length, then simply return the string with no trimming or dots required.
+// 6 Factorial = 6! = 6 * 5 * 4 * 3 * 2 * 1 = 720
+// In this kata you will be given a list of values that you must first find the factorial, and then return their sum.
 
-// e.g. trim("Code Wars is pretty rad", 50) should return "Code Wars is pretty rad"
+// For example if you are passed the list [4, 6] the equivalent mathematical expression would be 4! + 6! which would equal 744.
 
-// If the requested string length is smaller than or equal to 3 characters, then the length of the dots is not added to the string length.
+// Good Luck!
 
-// e.g. trim("He", 1) should return "H...", because 1 <= 3
-
-// Requested maximum length will be greater than 0. Input string will not be empty.
+// Note: Assume that all values in the list are positive integer values > 0 and each value in the list is unique.
 
 // My code below:
 
-const trim = (str, size) =>
-  str.length <= size
-    ? str
-    : size > 3
-    ? str.slice(0, size - 3) + "..."
-    : str.slice(0, size) + "...";
+const sumFactorial = (arr) => arr.reduce((total, current) => total + factorial(current), 0);
+
+const factorial = num => num == 1 ? num : num * factorial(num - 1);
 
 // Tests
 
-console.log(trim("Creating kata is fun", 14)); // "Creating ka..."
-console.log(trim("He", 1)); // "H..."
-console.log(trim("Hey", 2)); // "He..."
-console.log(trim("Hey", 3)); // "Hey"
-console.log(trim("Creating kata is fun", 2)); // "Cr..."
-console.log(trim("Code Wars is pretty rad", 3)); // "Cod..."
-console.log(trim("Coding rocks", "Coding rocks".length)); // "Coding rocks"
-console.log(trim("Code Wars is pretty rad", 50)); // "Code Wars is pretty rad"
-console.log(trim("London is freezing", 18)); // "London is freezing"
+console.log(sumFactorial([4, 6])); // 744
+console.log(sumFactorial([5, 4, 1])); // 145
