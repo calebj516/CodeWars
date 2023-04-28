@@ -1,29 +1,45 @@
-// Challenge: Sum Factorial (7 kyu)
+// Challenge: Flatten and sort an array (7 kyu)
 
 // Description:
 
-// Factorials are often used in probability and are used as an introductory problem for looping constructs. In this kata you will be summing together multiple factorials.
+// Challenge:
 
-// Here are a few examples of factorials:
+// Given a two-dimensional array of integers, return the flattened version of the array with all the integers in the sorted (ascending) order.
 
-// 4 Factorial = 4! = 4 * 3 * 2 * 1 = 24
+// Example:
 
-// 6 Factorial = 6! = 6 * 5 * 4 * 3 * 2 * 1 = 720
-// In this kata you will be given a list of values that you must first find the factorial, and then return their sum.
+// Given [[3, 2, 1], [4, 6, 5], [], [9, 7, 8]], your function should return [1, 2, 3, 4, 5, 6, 7, 8, 9].
 
-// For example if you are passed the list [4, 6] the equivalent mathematical expression would be 4! + 6! which would equal 744.
+// Addendum:
 
-// Good Luck!
+// Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
 
-// Note: Assume that all values in the list are positive integer values > 0 and each value in the list is unique.
+// http://stackoverflow.com/questions/6093874/why-doesnt-the-sort-function-of-javascript-work-well
 
 // My code below:
 
-const sumFactorial = (arr) => arr.reduce((total, current) => total + factorial(current), 0);
-
-const factorial = num => num == 1 ? num : num * factorial(num - 1);
+function flattenAndSort(array) {
+  
+  let nums = [];
+  
+  for(let i = 0; i < array.length; i++) {
+    // if the sub-array has data, then loop through it
+    if(array[i].length) {
+      for(let j = 0; j < array[i].length; j++) {
+        nums.push(array[i][j]);
+      }
+    }
+  }
+  
+  return nums.sort((a, b) => a - b);
+}
 
 // Tests
 
-console.log(sumFactorial([4, 6])); // 744
-console.log(sumFactorial([5, 4, 1])); // 145
+console.log(flattenAndSort([[9, 7, 5, 3, 1], [8, 6, 4, 2, 0], [], [1]])); // [0, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(flattenAndSort([[1], [], [1], [], [], [-1, -2, -1], [0, 3], [1], [2]])); // [-2, -1, -1, 0, 1, 1, 1, 2, 3]
+console.log(flattenAndSort([[], [], [64], [], [504, 503], [4096], [], [303], [202], [2500], [], [100]])); // [64, 100, 202, 303, 503, 504, 2500, 4096]
+console.log(flattenAndSort([[90, 81, 72], [63, 54, 35], [], [46], [27, 18, 0]])); // [0, 18, 27, 35, 46, 54, 63, 72, 81, 90]
+console.log(flattenAndSort([[1], [], [1], [1], [0], [-1], [], [0], [-1], [0], [-1]])); // [-1, -1, -1, 0, 0, 0, 1, 1, 1]
+console.log(flattenAndSort([[-9, -8, -7, -6, -5, -4, -3, -2, -1]])); // [-9, -8, -7, -6, -5, -4, -3, -2, -1]
+console.log(flattenAndSort([[9, 8, 7, 6, 5, 4, 3, 2, 1]])); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
