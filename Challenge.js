@@ -18,21 +18,7 @@
 
 // My code below:
 
-function flattenAndSort(array) {
-  
-  let nums = [];
-  
-  for(let i = 0; i < array.length; i++) {
-    // if the sub-array has data, then loop through it
-    if(array[i].length) {
-      for(let j = 0; j < array[i].length; j++) {
-        nums.push(array[i][j]);
-      }
-    }
-  }
-  
-  return nums.sort((a, b) => a - b);
-}
+const flattenAndSort = (array) => [].concat(...array).sort((a, b) => a - b);
 
 // Tests
 
