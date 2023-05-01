@@ -1,31 +1,38 @@
-// Challenge: Flatten and sort an array (7 kyu)
+// Challenge: Find the index of the second occurrence of a letter in a string (7 kyu)
 
 // Description:
 
 // Challenge:
 
-// Given a two-dimensional array of integers, return the flattened version of the array with all the integers in the sorted (ascending) order.
+// In this kata, you need to write a function that takes a string and a letter as input and then returns the index of the second occurrence of that letter in the string. If there is no such letter in the string, then the function should return -1. If the letter occurs only once in the string, then -1 should also be returned.
 
-// Example:
+// Examples:
 
-// Given [[3, 2, 1], [4, 6, 5], [], [9, 7, 8]], your function should return [1, 2, 3, 4, 5, 6, 7, 8, 9].
-
-// Addendum:
-
-// Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
-
-// http://stackoverflow.com/questions/6093874/why-doesnt-the-sort-function-of-javascript-work-well
+// secondSymbol('Hello world!!!','l')  --> 3
+// secondSymbol('Hello world!!!', 'A') --> -1
+// Good luck ;) And don't forget to rate this Kata if you liked it.
 
 // My code below:
 
-const flattenAndSort = (array) => [].concat(...array).sort((a, b) => a - b);
+function secondSymbol(s, symbol) {
+  // if symbol is in s...
+  if(s.includes(symbol)) {
+    let firstIndex = s.indexOf(symbol);
+    // if the last index of symbol is equal to the result of indexOf, we know there is only one occurrence of symbol in s
+    if(firstIndex == s.lastIndexOf(symbol)) {
+      return -1;
+    }
+    // if there are more than one occurrences of symbol in s, start the search from firstIndex + 1
+    return s.indexOf(symbol, firstIndex + 1);
+  } 
+  // if we reach this point, symbol is not in s
+  return -1;
+}
 
 // Tests
 
-console.log(flattenAndSort([[9, 7, 5, 3, 1], [8, 6, 4, 2, 0], [], [1]])); // [0, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-console.log(flattenAndSort([[1], [], [1], [], [], [-1, -2, -1], [0, 3], [1], [2]])); // [-2, -1, -1, 0, 1, 1, 1, 2, 3]
-console.log(flattenAndSort([[], [], [64], [], [504, 503], [4096], [], [303], [202], [2500], [], [100]])); // [64, 100, 202, 303, 503, 504, 2500, 4096]
-console.log(flattenAndSort([[90, 81, 72], [63, 54, 35], [], [46], [27, 18, 0]])); // [0, 18, 27, 35, 46, 54, 63, 72, 81, 90]
-console.log(flattenAndSort([[1], [], [1], [1], [0], [-1], [], [0], [-1], [0], [-1]])); // [-1, -1, -1, 0, 0, 0, 1, 1, 1]
-console.log(flattenAndSort([[-9, -8, -7, -6, -5, -4, -3, -2, -1]])); // [-9, -8, -7, -6, -5, -4, -3, -2, -1]
-console.log(flattenAndSort([[9, 8, 7, 6, 5, 4, 3, 2, 1]])); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(secondSymbol('Hello world!!!','l')); // 3
+console.log(secondSymbol('Hello world!!!', 'o')); // 7
+console.log(secondSymbol('Hello world!!!', 'A')); // -1
+console.log(secondSymbol('', 'q')); // -1
+console.log(secondSymbol('Hello', '!')); // -1
