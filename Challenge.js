@@ -14,20 +14,7 @@
 
 // My code below:
 
-function secondSymbol(s, symbol) {
-  // if symbol is in s...
-  if(s.includes(symbol)) {
-    let firstIndex = s.indexOf(symbol);
-    // if the last index of symbol is equal to the result of indexOf, we know there is only one occurrence of symbol in s
-    if(firstIndex == s.lastIndexOf(symbol)) {
-      return -1;
-    }
-    // if there are more than one occurrences of symbol in s, start the search from firstIndex + 1
-    return s.indexOf(symbol, firstIndex + 1);
-  } 
-  // if we reach this point, symbol is not in s
-  return -1;
-}
+const secondSymbol = (s, symbol) => s.indexOf(symbol, s.indexOf(symbol) + 1);
 
 // Tests
 
