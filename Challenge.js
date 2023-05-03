@@ -1,25 +1,38 @@
-// Challenge: Find the index of the second occurrence of a letter in a string (7 kyu)
+// Challenge: Alphabet war (7 kyu)
 
 // Description:
 
-// Challenge:
+// There is a war and nobody knows - the alphabet war!
+// There are two groups of hostile letters. The tension between left side letters and right side letters was too high and the war began.
 
-// In this kata, you need to write a function that takes a string and a letter as input and then returns the index of the second occurrence of that letter in the string. If there is no such letter in the string, then the function should return -1. If the letter occurs only once in the string, then -1 should also be returned.
+// Task
+// Write a function that accepts fight string consists of only small letters and return who wins the fight. When the left side wins return Left side wins!, when the right side wins return Right side wins!, in other case return Let's fight again!.
 
-// Examples:
+// The left side letters and their power:
 
-// secondSymbol('Hello world!!!','l')  --> 3
-// secondSymbol('Hello world!!!', 'A') --> -1
-// Good luck ;) And don't forget to rate this Kata if you liked it.
+//  w - 4
+//  p - 3
+//  b - 2
+//  s - 1
+// The right side letters and their power:
+
+//  m - 4
+//  q - 3
+//  d - 2
+//  z - 1
 
 // My code below:
 
-const secondSymbol = (s, symbol) => s.indexOf(symbol, s.indexOf(symbol) + 1);
+const alphabetWar = fight => {
+  const scoring = {'w' : -4, 'p' : -3, 'b' : -2, 's' : -1, 'm' : 4, 'q' : 3, 'd' : 2, 'z' : 1};
+  let score = fight.split('').reduce((total, current) => total + (scoring[current] || 0), 0);
+
+  return score < 0 ? "Left side wins!" : score > 0 ? "Right side wins!" : "Let's fight again!";
+}
 
 // Tests
 
-console.log(secondSymbol('Hello world!!!','l')); // 3
-console.log(secondSymbol('Hello world!!!', 'o')); // 7
-console.log(secondSymbol('Hello world!!!', 'A')); // -1
-console.log(secondSymbol('', 'q')); // -1
-console.log(secondSymbol('Hello', '!')); // -1
+console.log(alphabetWar("z")); //=> Right side wins!
+console.log(alphabetWar("zdqmwpbs")); //=> Let's fight again!
+console.log(alphabetWar("zzzzs")); //=> Right side wins!
+console.log(alphabetWar("wwwwwwz"));  //=> Left side wins!
