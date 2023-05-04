@@ -25,7 +25,7 @@
 
 const alphabetWar = fight => {
   const scoring = {'w' : -4, 'p' : -3, 'b' : -2, 's' : -1, 'm' : 4, 'q' : 3, 'd' : 2, 'z' : 1};
-  let score = fight.split('').reduce((total, current) => total + (scoring[current] || 0), 0);
+  let score = fight.replace(/[^wpbsmqdz]/g, '').split('').reduce((total, current) => total + scoring[current], 0);
 
   return score < 0 ? "Left side wins!" : score > 0 ? "Right side wins!" : "Let's fight again!";
 }
