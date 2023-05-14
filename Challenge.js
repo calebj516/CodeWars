@@ -20,9 +20,9 @@
 // My code below:
 
 function outed(meet, boss) {
-  const scores = Object.values(meet);
+  const scores = Object.keys(meet);
   let totalScore =
-    scores.reduce((total, current) => total + current, 0) + meet[boss];
+    scores.reduce((total, current) => total + meet[current], 0) + meet[boss];
   let happinessRating = totalScore / scores.length;
 
   return happinessRating <= 5 ? "Get Out Now!" : "Nice Work Champ!";
