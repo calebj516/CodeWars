@@ -1,83 +1,105 @@
-// Challenge: The Office I - Outed (7 kyu)
+// Challenge: The Office II - Boredom Score (7 kyu)
 
 // Description:
 
-// Your colleagues have been looking over you shoulder. When you should have been doing your boring real job, you've been using the work computers to smash in endless hours of codewars.
+// Every now and then people in the office moves teams or departments. Depending what people are doing with their time they can become more or less boring. Time to assess the current team.
 
-// In a team meeting, a terrible, awful person declares to the group that you aren't working. You're in trouble. You quickly have to gauge the feeling in the room to decide whether or not you should gather your things and leave.
+// You will be provided with an object(staff) containing the staff names as keys, and the department they work in as values.
 
-// Given an object (meet) containing team member names as keys, and their happiness rating out of 10 as the value, you need to assess the overall happiness rating of the group. If <= 5, return 'Get Out Now!'. Else return 'Nice Work Champ!'.
+// Each department has a different boredom assessment score, as follows:
 
-// Happiness rating will be total score / number of people in the room.
+// accounts = 1
+// finance = 2
+// canteen = 10
+// regulation = 3
+// trading = 6
+// change = 6
+// IS = 8
+// retail = 5
+// cleaning = 4
+// pissing about = 25
 
-// Note that your boss is in the room (boss), their score is worth double it's face value (but they are still just one person!).
+// Depending on the cumulative score of the team, return the appropriate sentiment:
 
-// The Office II - Boredom Score
+// <=80: 'kill me now'
+// < 100 & > 80: 'i can handle this'
+// 100 or over: 'party time!!'
+
+// The Office I - Outed
 // The Office III - Broken Photocopier
 // The Office IV - Find a Meeting Room
 // The Office V - Find a Chair
 
 // My code below:
 
-function outed(meet, boss) {
-  const scores = Object.keys(meet);
-  let totalScore =
-    scores.reduce((total, current) => total + meet[current], 0) + meet[boss];
-  let happinessRating = totalScore / scores.length;
+function boredom(staff) {
+  let scores = {
+    accounts: 1,
+    finance: 2,
+    canteen: 10,
+    regulation: 3,
+    trading: 6,
+    change: 6,
+    IS: 8,
+    retail: 5,
+    cleaning: 4,
+    "pissing about": 25,
+  };
 
-  return happinessRating <= 5 ? "Get Out Now!" : "Nice Work Champ!";
+  let depts = Object.values(staff);
+  let score = depts.reduce((total, current) => total + scores[current], 0);
+
+  return score <= 80
+    ? "kill me now"
+    : score < 100
+    ? "i can handle this"
+    : "party time!!";
 }
 
 // Tests
 
 console.log(
-  outed(
-    {
-      tim: 0,
-      jim: 2,
-      randy: 0,
-      sandy: 7,
-      andy: 0,
-      katie: 5,
-      laura: 1,
-      saajid: 2,
-      alex: 3,
-      john: 2,
-      mr: 0,
-    },
-    "laura"
-  )); // "Get Out Now!"
+  boredom({
+    tim: "change",
+    jim: "accounts",
+    randy: "canteen",
+    sandy: "change",
+    andy: "change",
+    katie: "IS",
+    laura: "change",
+    saajid: "IS",
+    alex: "trading",
+    john: "accounts",
+    mr: "finance",
+  })
+); // 'kill me now'
 console.log(
-  outed(
-    {
-      tim: 1,
-      jim: 3,
-      randy: 9,
-      sandy: 6,
-      andy: 7,
-      katie: 6,
-      laura: 9,
-      saajid: 9,
-      alex: 9,
-      john: 9,
-      mr: 8,
-    },
-    "katie"
-  )); // "Nice Work Champ!"
+  boredom({
+    tim: "IS",
+    jim: "finance",
+    randy: "pissing about",
+    sandy: "cleaning",
+    andy: "cleaning",
+    katie: "cleaning",
+    laura: "pissing about",
+    saajid: "regulation",
+    alex: "regulation",
+    john: "accounts",
+    mr: "canteen",
+  })
+); // 'i can handle this'
 console.log(
-  outed(
-    {
-      tim: 2,
-      jim: 4,
-      randy: 0,
-      sandy: 5,
-      andy: 8,
-      katie: 6,
-      laura: 2,
-      saajid: 2,
-      alex: 3,
-      john: 2,
-      mr: 8,
-    },
-    "john"
-  )); // "Get Out Now!"
+  boredom({
+    tim: "accounts",
+    jim: "accounts",
+    randy: "pissing about",
+    sandy: "finance",
+    andy: "change",
+    katie: "IS",
+    laura: "IS",
+    saajid: "canteen",
+    alex: "pissing about",
+    john: "retail",
+    mr: "pissing about",
+  })
+); // 'party time!!'
