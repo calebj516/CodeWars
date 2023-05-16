@@ -1,105 +1,28 @@
-// Challenge: The Office II - Boredom Score (7 kyu)
+// Challenge: The Office III - Broken Photocopier (7 kyu)
 
 // Description:
 
-// Every now and then people in the office moves teams or departments. Depending what people are doing with their time they can become more or less boring. Time to assess the current team.
+// The bloody photocopier is broken... Just as you were sneaking around the office to print off your favourite binary code!
 
-// You will be provided with an object(staff) containing the staff names as keys, and the department they work in as values.
+// Instead of copying the original, it reverses it: '1' becomes '0' and vice versa.
 
-// Each department has a different boredom assessment score, as follows:
-
-// accounts = 1
-// finance = 2
-// canteen = 10
-// regulation = 3
-// trading = 6
-// change = 6
-// IS = 8
-// retail = 5
-// cleaning = 4
-// pissing about = 25
-
-// Depending on the cumulative score of the team, return the appropriate sentiment:
-
-// <=80: 'kill me now'
-// < 100 & > 80: 'i can handle this'
-// 100 or over: 'party time!!'
+// Given a string of binary, return the version the photocopier gives you as a string.
 
 // The Office I - Outed
-// The Office III - Broken Photocopier
+// The Office II - Boredeom Score
 // The Office IV - Find a Meeting Room
 // The Office V - Find a Chair
 
 // My code below:
 
-function boredom(staff) {
-  let scores = {
-    accounts: 1,
-    finance: 2,
-    canteen: 10,
-    regulation: 3,
-    trading: 6,
-    change: 6,
-    IS: 8,
-    retail: 5,
-    cleaning: 4,
-    "pissing about": 25,
-  };
-
-  let depts = Object.values(staff);
-  let score = depts.reduce((total, current) => total + scores[current], 0);
-
-  return score <= 80
-    ? "kill me now"
-    : score < 100
-    ? "i can handle this"
-    : "party time!!";
-}
+const broken = (x) =>
+  x
+    .split("")
+    .map((num) => (num === "1" ? "0" : "1"))
+    .join("");
 
 // Tests
 
-console.log(
-  boredom({
-    tim: "change",
-    jim: "accounts",
-    randy: "canteen",
-    sandy: "change",
-    andy: "change",
-    katie: "IS",
-    laura: "change",
-    saajid: "IS",
-    alex: "trading",
-    john: "accounts",
-    mr: "finance",
-  })
-); // 'kill me now'
-console.log(
-  boredom({
-    tim: "IS",
-    jim: "finance",
-    randy: "pissing about",
-    sandy: "cleaning",
-    andy: "cleaning",
-    katie: "cleaning",
-    laura: "pissing about",
-    saajid: "regulation",
-    alex: "regulation",
-    john: "accounts",
-    mr: "canteen",
-  })
-); // 'i can handle this'
-console.log(
-  boredom({
-    tim: "accounts",
-    jim: "accounts",
-    randy: "pissing about",
-    sandy: "finance",
-    andy: "change",
-    katie: "IS",
-    laura: "IS",
-    saajid: "canteen",
-    alex: "pissing about",
-    john: "retail",
-    mr: "pissing about",
-  })
-); // 'party time!!'
+console.log(broken("1")); // "0"
+console.log(broken("10000000101101111110011001000")); // "01111111010010000001100110111"
+console.log(broken("100010")); // "011101"
