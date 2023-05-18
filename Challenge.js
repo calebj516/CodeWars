@@ -1,28 +1,22 @@
-// Challenge: The Office III - Broken Photocopier (7 kyu)
+// Challenge: The Office IV - Find a Meeting Room (7 kyu)
 
 // Description:
 
-// The bloody photocopier is broken... Just as you were sneaking around the office to print off your favourite binary code!
+// Your job at E-Corp is both boring and difficult. It isn't made any easier by the fact that everyone constantly wants to have a meeting with you, and that the meeting rooms are always taken!
 
-// Instead of copying the original, it reverses it: '1' becomes '0' and vice versa.
+// In this kata, you will be given an array. Each value represents a meeting room. Your job? Find the first empty one and return its index (N.B. There may be more than one empty room in some test cases).
 
-// Given a string of binary, return the version the photocopier gives you as a string.
-
-// The Office I - Outed
-// The Office II - Boredeom Score
-// The Office IV - Find a Meeting Room
-// The Office V - Find a Chair
+// 'X' --> busy
+// 'O' --> empty
+// If all rooms are busy, return "None available!"
 
 // My code below:
 
-const broken = (x) =>
-  x
-    .split("")
-    .map((num) => (num === "1" ? "0" : "1"))
-    .join("");
+const meeting = (x) => x.indexOf("O") > -1 ? x.indexOf("O") : "None available!";
 
 // Tests
 
-console.log(broken("1")); // "0"
-console.log(broken("10000000101101111110011001000")); // "01111111010010000001100110111"
-console.log(broken("100010")); // "011101"
+console.log(meeting(["X", "O", "X"])); // 1
+console.log(meeting(["O", "X", "X", "X", "X"])); // 0
+console.log(meeting(["X", "X", "O", "X", "X"])); // 2
+console.log(meeting(["X", "X", "X", "X", "X"])); // "None available!"
