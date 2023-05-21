@@ -12,7 +12,7 @@
 
 // My code below:
 
-const meeting = (x) => x.indexOf("O") > -1 ? x.indexOf("O") : "None available!";
+const meeting = (x) => x.includes("O") ? x.indexOf("O") : "None available!";
 
 // Tests
 
