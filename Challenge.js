@@ -1,22 +1,80 @@
-// Challenge: The Office IV - Find a Meeting Room (7 kyu)
+// Challenge: The Office V - Find a Chair (6 kyu)
 
 // Description:
 
-// Your job at E-Corp is both boring and difficult. It isn't made any easier by the fact that everyone constantly wants to have a meeting with you, and that the meeting rooms are always taken!
+// So you've found a meeting room - phew! You arrive there ready to present, and find that someone has taken one or more of the chairs!! You need to find some quick.... check all the other meeting rooms to see if all of the chairs are in use.
 
-// In this kata, you will be given an array. Each value represents a meeting room. Your job? Find the first empty one and return its index (N.B. There may be more than one empty room in some test cases).
+// Your meeting room can take up to 8 chairs. need will tell you how many have been taken. You need to find that many.
 
-// 'X' --> busy
-// 'O' --> empty
-// If all rooms are busy, return "None available!"
+// Find the spare chairs from the array of meeting rooms. Each meeting room tuple will have the number of occupants as a string. Each occupant is represented by 'X'. The room tuple will also have an integer telling you how many chairs there are in the room.
+
+// You should return an array of integers that shows how many chairs you take from each room in order, up until you have the required amount.
+
+// example:
+
+// [['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9], ['XXX',2]] when you need 4 chairs:
+
+// result -> [0, 1, 3] no chairs free in room 0, take 1 from room 1, take 3 from room 2. no need to consider room 3 as you have your 4 chairs already.
+
+// If you need no chairs, return "Game On". If there aren't enough spare chairs available, return "Not enough!".
 
 // My code below:
 
-const meeting = (x) => x.includes("O") ? x.indexOf("O") : "None available!";
+function meeting(x, need) {
+  if (need <= 0) return "Game On";
+
+  const takenChairs = [];
+
+  for (let i = 0; i < x.length; i++) {
+    let occupants = x[i][0].length;
+    let chairs = x[i][1];
+    // The below statement is making sure that no more than the needed chairs are taken, or no less than 0 which wouldn't make sense
+    let spareChairs = Math.min(Math.max(chairs - occupants, 0), need);
+    // Push the number of spare chairs to the taken chairs array
+    takenChairs.push(spareChairs);
+    // Decrement need by the number of spare chairs found
+    need -= spareChairs;
+    // If the need is at 0, no need to continue looping; return the array containing the result
+    if (need <= 0) return takenChairs;
+  }
+  // If the entire x array is processed and the need never reaches zero, not enough chairs have been taken
+  return "Not enough!";
+}
 
 // Tests
 
-console.log(meeting(["X", "O", "X"])); // 1
-console.log(meeting(["O", "X", "X", "X", "X"])); // 0
-console.log(meeting(["X", "X", "O", "X", "X"])); // 2
-console.log(meeting(["X", "X", "X", "X", "X"])); // "None available!"
+console.log(
+  meeting(
+    [
+      ["XXX", 3],
+      ["XXXXX", 6],
+      ["XXXXXX", 9],
+    ],
+    4
+  )
+); // [0, 1, 3]
+
+console.log(
+  meeting(
+    [
+      ["XXX", 1],
+      ["XXXXXX", 6],
+      ["X", 2],
+      ["XXXXXX", 8],
+      ["X", 3],
+      ["XXX", 1],
+    ],
+    5
+  )
+); // [0, 0, 1, 2, 2]
+
+console.log(
+  meeting(
+    [
+      ["XX", 2],
+      ["XXXX", 6],
+      ["XXXXX", 4],
+    ],
+    0
+  )
+); // "Game On"
