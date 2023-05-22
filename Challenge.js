@@ -25,9 +25,7 @@ function meeting(x, need) {
 
   const takenChairs = [];
 
-  for (let i = 0; i < x.length; i++) {
-    let occupants = x[i][0].length;
-    let chairs = x[i][1];
+  for (const [{length : occupants}, chairs] of x) {
     // The below statement is making sure that no more than the needed chairs are taken, or no less than 0 which wouldn't make sense
     let spareChairs = Math.min(Math.max(chairs - occupants, 0), need);
     // Push the number of spare chairs to the taken chairs array
