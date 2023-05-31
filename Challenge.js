@@ -10,13 +10,15 @@
 
 // My code below:
 
-const sumSquareEvenRootOdd = (ns) =>
-  +ns
-    .reduce(
-      (total, current) => total + (current % 2 ? current ** 0.5 : current ** 2),
-      0
-    )
-    .toFixed(2);
+const sumSquareEvenRootOdd = numbers => {
+  let total = 0;
+
+  for (let num of numbers) {
+    total += (num % 2 ? num ** 0.5 : num ** 2);
+  }
+
+  return total.toFixed(2);
+}
 
 // Tests
 
