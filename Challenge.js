@@ -31,28 +31,11 @@
 // My code below:
 
 function areEqual(s1, s2) {
-  // Take the result of the notEqual function and reverse the logic:
-  // If notEqual returns true, s1 and s2 are not equal so we need areEqual to return false
-  return !notEqual(s1, s2);
+  return s1.length == s2.length && [...s1].every(el => s2.has(el)) && [...s2].every(el => s1.has(el));
 }
 
 function notEqual(s1, s2) {
-  // If the lengths are different we know s1 != s2
-  if(s1.length != s2.length) return true;
-  
-  let s1Arr = Array.from(s1);
-  let s2Arr = Array.from(s2);
-  
-  // Loop through s1. If s2 does not contain any value from s1, s1 != s2
-  for(let num of s1Arr) {
-    if(!s2Arr.includes(num)) return true;
-  }
-  // Loop through s2. If s1 does not contain any value from s2, s1 != s2
-  for(let num of s2Arr) {
-    if(!s1Arr.includes(num)) return true;
-  }
-  // If we get to this point, we have established that every value in each set is within the other set. The two sets are NOT equal.
-  return false;
+  return !areEqual(s1, s2);
 }
 
 // Tests
