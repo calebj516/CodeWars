@@ -31,7 +31,7 @@
 // My code below:
 
 function areEqual(s1, s2) {
-  return s1.length == s2.length && [...s1].every(el => s2.has(el)) && [...s2].every(el => s1.has(el));
+  return s1.size == s2.size && [...s1].every(el => s2.has(el));
 }
 
 function notEqual(s1, s2) {
