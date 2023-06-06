@@ -31,11 +31,11 @@
 // My code below:
 
 function areEqual(s1, s2) {
-  return s1.size == s2.size && [...s1].every(el => s2.has(el));
+  return !notEqual(s1, s2);
 }
 
 function notEqual(s1, s2) {
-  return !areEqual(s1, s2);
+  return s1.size != s2.size || [...s1].some(el => !s2.has(el)) || [...s2].some(el => !s1.has(el));
 }
 
 // Tests
