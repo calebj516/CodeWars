@@ -1,49 +1,50 @@
-// Challenge: Playing with Sets: Equal or Not? (7 kyu)
+// Challenge: Basic JS - Building a calculator (7 kyu)
 
 // Description:
 
-// Set objects are new JavaScript built-in objects defined since ECMAScript 2015
+// Let's build a calculator.
 
-// A Set lets you store unique values of any type. It comes with some useful methods like .add, .clear, .has . . . BUT some "Set operations" are missing, like . . .
+// This is very basic Javascript kata.
 
-// Equality
+// The test expects you to provide a Calculator object with the following methods:
 
-// Two sets ( A, B ) are considered "equal" if all elements of A are elements of B and all elements of B are elements of A no matter "order" of elements.
+// Calculator.add()
+// Calculator.subtract()
+// Calculator.multiply()
+// Calculator.divide()
+// Each method expects two arguments, so for instance:
 
-// Examples:
-//   {1, 2} == {2, 1}
-//   {1, 2} != {1, 2, 3}
-// Task
-// Create 2 functions, areEqual and notEqual, getting 2 sets as arguments and returning a true or false depending if these 2 sets are "equal" (respectively not equal) ie : if all elements of 1st set are elements of 2d and all elements of 2d set are elements of 1st.
+// Calculator.add(1,4) should return 5.
 
-// Examples:
-// A  = new Set([1,2]);
-// A2 = new Set([2,1]);
-// B  = new Set([2,3]);
-
-// areEqual(A,B)  // -> false
-// areEqual(A,A2) // -> true
-// notEqual(A,B)  // -> true
- 
-
-// " May the Code be with you ! "
+// Only integers are expected to be passed in as arguments, and the divide method should return 'false' when trying the divide by zero.
 
 // My code below:
 
-function areEqual(s1, s2) {
-  return !notEqual(s1, s2);
-}
+var Calculator = {
+  
+  add(a, b) {
+    return a + b;
+  },
 
-function notEqual(s1, s2) {
-  return s1.size != s2.size || [...s1].some(el => !s2.has(el)) || [...s2].some(el => !s1.has(el));
-}
+  subtract(a, b) {
+    return a - b;
+  },
+
+  multiply(a, b) {
+    return a * b;
+  },
+
+  divide(a, b) {
+    if(b === 0) return false;
+    return a / b;
+  }
+  
+};
 
 // Tests
 
-let A1 = new Set([1,2,3]), A2 = new Set([3,2,1]), B = new Set([1,2,5]), D = new Set(["1","2","3"]);
-  
-console.log(areEqual(A1, A1)); // "A == A" True
-console.log(areEqual(A1, A2)); // "{1,2,3} == {3,2,1}" True
-console.log(areEqual(A2, A1)); // "{3,2,1} == {1,2,3}" True
-console.log(areEqual(A1, B)); // "{1,2,3} != {1,2,5}" False
-console.log(areEqual(A1, D)); // "{1,2,3} != {'1','2','3'}" False
+console.log(Calculator.add(2, 4)); // 6 '2+4=6'
+console.log(Calculator.subtract(5, 3)); // 2 '5-3=2'
+console.log(Calculator.multiply(9, 2)); // 18 '9x2=18'
+console.log(Calculator.divide(12, 4)); // 3 '12/4=3'
+console.log(Calculator.divide(33, 0)); // false, 'Tried to divide by zero'
