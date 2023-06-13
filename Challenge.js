@@ -20,30 +20,30 @@
 
 // My code below:
 
-var Calculator = {
+const Calculator = {
   
   add(a, b) {
-    return a + b;
+    return Number(a) + Number(b);
   },
 
   subtract(a, b) {
-    return a - b;
+    return Number(a) - Number(b);
   },
 
   multiply(a, b) {
-    return a * b;
+    return Number(a) * Number(b);
   },
 
   divide(a, b) {
-    if(b === 0) return false;
-    return a / b;
+    if(Number(b) == 0) return false;
+    return Number(a) / Number(b);
   }
   
 };
 
 // Tests
 
-console.log(Calculator.add(2, 4)); // 6 '2+4=6'
+console.log(Calculator.add("2.5", 4)); // 6.5 '2+4=6'
 console.log(Calculator.subtract(5, 3)); // 2 '5-3=2'
 console.log(Calculator.multiply(9, 2)); // 18 '9x2=18'
 console.log(Calculator.divide(12, 4)); // 3 '12/4=3'
