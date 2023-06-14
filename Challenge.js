@@ -1,50 +1,35 @@
-// Challenge: Basic JS - Building a calculator (7 kyu)
+// Challenge: Exclusive "or" (xor) Logical Operator (8 kyu)
 
 // Description:
 
-// Let's build a calculator.
+// In some scripting languages like PHP, there exists a logical operator (e.g. &&, ||, and, or, etc.) called the "Exclusive Or" (hence the name of this Kata). The exclusive or evaluates two booleans. It then returns true if exactly one of the two expressions are true, false otherwise. For example:
 
-// This is very basic Javascript kata.
+// false xor false == false // since both are false
+// true xor false == true // exactly one of the two expressions are true
+// false xor true == true // exactly one of the two expressions are true
+// true xor true == false // Both are true.  "xor" only returns true if EXACTLY one of the two expressions evaluate to true.
 
-// The test expects you to provide a Calculator object with the following methods:
+// Task:
 
-// Calculator.add()
-// Calculator.subtract()
-// Calculator.multiply()
-// Calculator.divide()
-// Each method expects two arguments, so for instance:
-
-// Calculator.add(1,4) should return 5.
-
-// Only integers are expected to be passed in as arguments, and the divide method should return 'false' when trying the divide by zero.
+// Since we cannot define keywords in Javascript (well, at least I don't know how to do it), your task is to define a function xor(a, b) where a and b are the two expressions to be evaluated. Your xor function should have the behaviour described above, returning true if exactly one of the two expressions evaluate to true, false otherwise.
 
 // My code below:
 
-const Calculator = {
-  
-  add(a, b) {
-    return Number(a) + Number(b);
-  },
+const xor = (a, b) => Boolean((a || b) && !(a && b));
 
-  subtract(a, b) {
-    return Number(a) - Number(b);
-  },
+// Notes on logic:
 
-  multiply(a, b) {
-    return Number(a) * Number(b);
-  },
+// a || b will return true if a or b evaluates to true; otherwise, false.
 
-  divide(a, b) {
-    if(Number(b) == 0) return false;
-    return Number(a) / Number(b);
-  }
-  
-};
+// a && b tests if a && b are both the same boolean value; therefore, adding the ! operator tests that a and b are not the same boolean value.
+
+// Wrapping these conditional statements in a Boolean constructor ensures that the function returns a boolean value.
 
 // Tests
 
-console.log(Calculator.add("2.5", 4)); // 6.5 '2+4=6'
-console.log(Calculator.subtract(5, 3)); // 2 '5-3=2'
-console.log(Calculator.multiply(9, 2)); // 18 '9x2=18'
-console.log(Calculator.divide(12, 4)); // 3 '12/4=3'
-console.log(Calculator.divide(33, 0)); // false, 'Tried to divide by zero'
+console.log(xor(false, false)); // false "false xor false"
+console.log(xor(true, false)); // true, "true xor false"
+console.log(xor(false, true)); // true, "false xor true"
+console.log(xor(true, true)); // false, "true xor true"
+console.log(xor('', 5)); // true, "false xor true"
+console.log(xor(0, '')); // false, "false xor false"
