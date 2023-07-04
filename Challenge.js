@@ -1,29 +1,31 @@
-// Challenge: Reversed Words (8 kyu)
+// Challenge: No zeros for heros (8 kyu)
 
 // Description:
 
-// Complete the solution so that it reverses all of the words within the string passed in.
+// Numbers ending with zeros are boring.
 
-// Words are separated by exactly one space and there are no leading or trailing spaces.
+// They might be fun in your world, but not here.
 
-// Example(Input --> Output):
+// Get rid of them. Only the ending ones.
 
-// "The greatest victory is that which requires no battle" --> "battle no requires which that is victory greatest The"
+// 1450 -> 145
+// 960000 -> 96
+// 1050 -> 105
+// -1050 -> -105
+// Zero alone is fine, don't worry about it. Poor guy anyway
 
 // My code below:
 
-const reverseWords = str => str.split(' ').reverse().join(' ');
-
-// Notes on logic:
-
-// In order to reverse the words, which are separated by spaces in str, we need to specify this as the delimiter in the split and join functions.
-// Not specifying this, and doing something like split('') and join(''), will reverse the letters and cause the solution to fail.
+function noBoringZeros(n) {
+  while(n % 10 == 0 && n != 0) n /= 10;
+  return n;
+}
 
 // Tests
 
-console.log(reverseWords("hello world!"                 )); //  "world! hello"
-console.log(reverseWords("yoda doesn't speak like this" )); //  "this like speak doesn't yoda"
-console.log(reverseWords("foobar"                       )); //  "foobar"
-console.log(reverseWords("kata editor"                  )); //  "editor kata"
-console.log(reverseWords("row row row your boat"        )); //  "boat your row row row"
-console.log(reverseWords(""                             )); //  ""
+console.log(noBoringZeros(1450)); // 145
+console.log(noBoringZeros(960000)); // 96
+console.log(noBoringZeros(1050)); // 105
+console.log(noBoringZeros(-1050)); // -105
+console.log(noBoringZeros(-105)); // -105
+console.log(noBoringZeros(0)); // 0
