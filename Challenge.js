@@ -16,11 +16,7 @@
 
 // My code below:
 
-const reverseList = (list) => list.map((num, i) => list[list.length - i - 1]);
-
-// Notes on logic:
-
-// The list.length - i - 1 mirrors the current index, with the - 1 needed to counteract the zero-based indexing of arrays in JS
+const reverseList = (list) => list.reverse();
 
 // Tests
 
