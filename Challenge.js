@@ -19,11 +19,7 @@
 
 // My code below:
 
-function enough(cap, on, wait) {
-  let availableSeats = cap - on;
-  let remainingSeats = wait - availableSeats;
-  return remainingSeats > 0 ? remainingSeats : 0;
-}
+const enough = (cap, on, wait) => Math.max(wait - cap + on, 0);
 
 // Tests
 
