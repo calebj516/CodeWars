@@ -1,28 +1,56 @@
-// Challenge: Will there be enough space? (8 kyu)
+// Challenge: Suzuki needs help lining up his students! (7 kyu)
 
 // Description:
 
-// The Story:
-// Bob is working as a bus driver. However, he has become extremely popular amongst the city's residents. With so many passengers wanting to get aboard his bus, he sometimes has to face the problem of not enough space left on the bus! He wants you to write a simple program telling him if he will be able to fit all the passengers.
+// Suzuki needs help lining up his students!
 
-// Task Overview:
-// You have to write a function that accepts three parameters:
+// Today Suzuki will be interviewing his students to ensure they are progressing in their training. He decided to schedule the interviews based on the length of the students name in descending order. The students will line up and wait for their turn.
 
-// cap is the amount of people the bus can hold excluding the driver.
-// on is the number of people on the bus excluding the driver.
-// wait is the number of people waiting to get on to the bus excluding the driver.
-// If there is enough space, return 0, and if there isn't, return the number of passengers he can't take.
+// You will be given a string of student names. Sort them and return a list of names in descending order.
 
-// Usage Examples:
-// cap = 10, on = 5, wait = 5 --> 0 # He can fit all 5 passengers
-// cap = 100, on = 60, wait = 50 --> 10 # He can't fit 10 of the 50 waiting
+// Here is an example input:
+
+// string = 'Tadashi Takahiro Takao Takashi Takayuki Takehiko Takeo Takeshi Takeshi'
+// Here is an example return from your function:
+
+//  lst = ['Takehiko',
+//         'Takayuki',
+//         'Takahiro',
+//         'Takeshi',
+//         'Takeshi',
+//         'Takashi',
+//         'Tadashi',
+//         'Takeo',
+//         'Takao']
+// Names of equal length will be returned in reverse alphabetical order (Z->A) such that:
+
+// string = "xxa xxb xxc xxd xa xb xc xd"
+// Returns
+
+// ['xxd', 'xxc', 'xxb', 'xxa', 'xd', 'xc', 'xb', 'xa']
+// Please also try the other Kata in this series..
+
+// Help Suzuki count his vegetables...
+// Help Suzuki purchase his Tofu!
+// Help Suzuki pack his coal basket!
+// Help Suzuki rake his garden!
+// How many stairs will Suzuki climb in 20 years?
 
 // My code below:
 
-const enough = (cap, on, wait) => Math.max(wait - cap + on, 0);
+const lineupStudents = (students) => students.split(' ').sort((a, b) => b.length - a.length || b.localeCompare(a));
+
+// Notes on logic:
+
+// If two names are of equal length, the left half of the logical OR operator will return 0, which will cause the right half to be returned, which is known as short-circuit evaluation in Computer Science. The expression, b.localeCompare(a)), will sort the equal length names in reverse alphabetical order.
 
 // Tests
 
-console.log(enough(10, 5, 5)); // 0
-console.log(enough(100, 60, 50)); // 10
-console.log(enough(20, 5, 5)); // 0
+let s1 = 'Tadashi Takahiro Takao Takashi Takayuki Takehiko Takeo Takeshi Takeshi';
+
+let s2 = 'Michio Miki Mikio Minori Minoru Mitsuo Mitsuru Nao Naoki Naoko Noboru Nobu Nobuo Nobuyuki Nori Norio Osamu Rafu Raiden Ringo Rokuro Ronin Ryo Ryoichi Ryota Ryozo Ryuichi Ryuu Saburo Sadao Samuru Satoru Satoshi Seiichi Seiji Senichi Shichiro Shig Shigekazu Shigeo Shigeru Shima Shin Shinichi Shinji Shiro Shoichi Shoji Shuichi Shuji Shunichi Susumu Tadao Tadashi Takahiro Takao Takashi Takayuki Takehiko Takeo Takeshi Takeshi Takumi Tama Tamotsu Taro Tatsuo Tatsuya Teruo Tetsip Tetsuya Tomi Tomio Toru Toshi Toshiaki Toshihiro Toshio Toshiyuki Toyo Tsuneo Tsutomu Tsuyoshi Uyeda Yasahiro Yasuhiro Yasuo Yasushi Yemon Yogi Yoichi Yori Yoshi Yoshiaki Yoshihiro Yoshikazu Yoshimitsu Yoshinori Yoshio Yoshiro Yoshito Yoshiyuki Yuichi Yuji Yuki';
+
+console.log(lineupStudents(s1)); // ['Takehiko','Takayuki','Takahiro','Takeshi','Takeshi','Takashi','Tadashi','Takeo','Takao'];
+console.log(lineupStudents(s2));
+// ['Yoshimitsu', 'Yoshiyuki', 'Yoshinori', 'Yoshikazu', 'Yoshihiro', 'Toshiyuki', 'Toshihiro', 'Shigekazu', 'Yoshiaki', 'Yasuhiro', 'Yasahiro', 'Tsuyoshi', 'Toshiaki', 'Takehiko', 'Takayuki', 'Takahiro', 'Shunichi', 'Shinichi', 'Shichiro', 'Nobuyuki', 'Yoshito', 'Yoshiro', 'Yasushi', 'Tsutomu', 'Tetsuya', 'Tatsuya', 'Tamotsu', 'Takeshi', 'Takeshi', 'Takashi', 'Tadashi', 'Shuichi', 'Shoichi', 'Shigeru', 'Senichi', 'Seiichi', 'Satoshi', 'Ryuichi', 'Ryoichi', 'Mitsuru', 'Yuichi', 'Yoshio', 'Yoichi', 'Tsuneo', 'Toshio', 'Tetsip', 'Tatsuo', 'Takumi', 'Susumu', 'Shinji', 'Shigeo', 'Satoru', 'Samuru', 'Saburo', 'Rokuro', 'Raiden', 'Noboru', 'Mitsuo', 'Minoru', 'Minori', 'Michio', 'Yoshi', 'Yemon', 'Yasuo', 'Uyeda', 'Toshi', 'Tomio', 'Teruo', 'Takeo', 'Takao', 'Tadao', 'Shuji', 'Shoji', 'Shiro', 'Shima', 'Seiji', 'Sadao', 'Ryozo', 'Ryota', 'Ronin', 'Ringo', 'Osamu', 'Norio', 'Nobuo', 'Naoko', 'Naoki', 'Mikio', 'Yuki', 'Yuji', 'Yori', 'Yogi', 'Toyo', 'Toru', 'Tomi', 'Taro', 'Tama', 'Shin', 'Shig', 'Ryuu', 'Rafu', 'Nori', 'Nobu', 'Miki', 'Ryo', 'Nao'];
+
