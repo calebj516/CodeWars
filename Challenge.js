@@ -1,70 +1,24 @@
-// Challenge: Welcome! (8 kyu)
+// Challenge: Remove duplicates from list (8 kyu)
 
 // Description:
 
-// Your start-up's BA has told marketing that your website has a large audience in Scandinavia and surrounding countries. Marketing thinks it would be great to welcome visitors to the site in their own language. Luckily you already use an API that detects the user's location, so this is an easy win.
+// Define a function that removes duplicates from an array of non negative numbers and returns it as a result.
 
-// The Task
-
-// Think of a way to store the languages as a database (eg an object). The languages are listed below so you can copy and paste!
-// Write a 'welcome' function that takes a parameter 'language' (always a string), and returns a greeting - if you have it in your database. It should default to English if the language is not in the database, or in the event of an invalid input.
-
-// The Database
-// english: 'Welcome',
-// czech: 'Vitejte',
-// danish: 'Velkomst',
-// dutch: 'Welkom',
-// estonian: 'Tere tulemast',
-// finnish: 'Tervetuloa',
-// flemish: 'Welgekomen',
-// french: 'Bienvenue',
-// german: 'Willkommen',
-// irish: 'Failte',
-// italian: 'Benvenuto',
-// latvian: 'Gaidits',
-// lithuanian: 'Laukiamas',
-// polish: 'Witamy',
-// spanish: 'Bienvenido',
-// swedish: 'Valkommen',
-// welsh: 'Croeso'
-// Possible invalid inputs include:
-
-// IP_ADDRESS_INVALID - not a valid ipv4 or ipv6 ip address
-// IP_ADDRESS_NOT_FOUND - ip address not in the database
-// IP_ADDRESS_REQUIRED - no ip address was supplied
+// The order of the sequence has to stay the same.
 
 // My code below:
 
-function greet(language) {
-  
-  const greetings = {
-    english: 'Welcome',
-    czech: 'Vitejte',
-    danish: 'Velkomst',
-    dutch: 'Welkom',
-    estonian: 'Tere tulemast',
-    finnish: 'Tervetuloa',
-    flemish: 'Welgekomen',
-    french: 'Bienvenue',
-    german: 'Willkommen',
-    irish: 'Failte',
-    italian: 'Benvenuto',
-    latvian: 'Gaidits',
-    lithuanian: 'Laukiamas',
-    polish: 'Witamy',
-    spanish: 'Bienvenido',
-    swedish: 'Valkommen',
-    welsh: 'Croeso'
-  };
-  
-  return greetings[language] || 'Welcome';
-	
-}
+const distinct = a => [...new Set(a)];
+
+// Notes on logic:
+
+// Passing a to the Set constructor creates an object with only unique values.
+// The spread operator converts this object to an array since the expression is encased with brackets.
 
 // Tests
 
-console.log(greet('english')); // 'Welcome'
-console.log(greet('dutch')); // 'Welkom'
-console.log(greet('polish')); // 'Witamy'
-console.log(greet('german')); // 'Willkomen'
-console.log(greet('IP_ADDRESS_INVALID')); // 'Welcome'
+console.log(distinct([1])); // [1]
+console.log(distinct([1,2])); // [1,2]
+console.log(distinct([1,1,2])); // [1,2]
+console.log(distinct([1,1,1,2,3,4,5])); // [1,2,3,4,5]
+console.log(distinct([1,2,2,3,3,4,4,5,6,7,7,7])); // [1,2,3,4,5,6,7]
