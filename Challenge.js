@@ -1,24 +1,20 @@
-// Challenge: Remove duplicates from list (8 kyu)
+// Challenge: Who is going to pay for the wall? (8 kyu)
 
 // Description:
 
-// Define a function that removes duplicates from an array of non negative numbers and returns it as a result.
+// Don Drumphet lives in a nice neighborhood, but one of his neighbors has started to let his house go. Don Drumphet wants to build a wall between his house and his neighbor’s, and is trying to get the neighborhood association to pay for it. He begins to solicit his neighbors to petition to get the association to build the wall. Unfortunately for Don Drumphet, he cannot read very well, has a very limited attention span, and can only remember two letters from each of his neighbors’ names. As he collects signatures, he insists that his neighbors keep truncating their names until two letters remain, and he can finally read them.
 
-// The order of the sequence has to stay the same.
+// Your code will show Full name of the neighbor and the truncated version of the name as an array. If the number of the characters in name is less than or equal to two, it will return an array containing only the name as is"
 
 // My code below:
 
-const distinct = a => [...new Set(a)];
-
-// Notes on logic:
-
-// Passing a to the Set constructor creates an object with only unique values.
-// The spread operator converts this object to an array since the expression is encased with brackets.
+const whoIsPaying = name => name.length <= 2 ? [name] : [name, name.slice(0, 2)];
 
 // Tests
 
-console.log(distinct([1])); // [1]
-console.log(distinct([1,2])); // [1,2]
-console.log(distinct([1,1,2])); // [1,2]
-console.log(distinct([1,1,1,2,3,4,5])); // [1,2,3,4,5]
-console.log(distinct([1,2,2,3,3,4,4,5,6,7,7,7])); // [1,2,3,4,5,6,7]
+console.log(whoIsPaying("Mexico")); //["Mexico", "Me"]
+console.log(whoIsPaying("Melania")); //["Melania", "Me"]
+console.log(whoIsPaying("Melissa")); //["Melissa", "Me"]
+console.log(whoIsPaying("Me")); //["Me"]
+console.log(whoIsPaying("")); // [""]
+console.log(whoIsPaying("I")); // ["I"]
