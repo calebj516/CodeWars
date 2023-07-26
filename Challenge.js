@@ -1,20 +1,37 @@
-// Challenge: Who is going to pay for the wall? (8 kyu)
+// Challenge: Who ate the cookie? (8 kyu)
 
 // Description:
 
-// Don Drumphet lives in a nice neighborhood, but one of his neighbors has started to let his house go. Don Drumphet wants to build a wall between his house and his neighbor’s, and is trying to get the neighborhood association to pay for it. He begins to solicit his neighbors to petition to get the association to build the wall. Unfortunately for Don Drumphet, he cannot read very well, has a very limited attention span, and can only remember two letters from each of his neighbors’ names. As he collects signatures, he insists that his neighbors keep truncating their names until two letters remain, and he can finally read them.
+// For this problem you must create a program that says who ate the last cookie. If the input is a string then "Zach" ate the cookie. If the input is a float or an int then "Monica" ate the cookie. If the input is anything else "the dog" ate the cookie. The way to return the statement is: "Who ate the last cookie? It was (name)!"
 
-// Your code will show Full name of the neighbor and the truncated version of the name as an array. If the number of the characters in name is less than or equal to two, it will return an array containing only the name as is"
+// Ex: Input = "hi" --> Output = "Who ate the last cookie? It was Zach! (The reason you return Zach is because the input is a string)
+
+// Note: Make sure you return the correct message with correct spaces and punctuation.
+
+// Please leave feedback for this kata. Cheers!
 
 // My code below:
 
-const whoIsPaying = name => name.length <= 2 ? [name] : [name, name.slice(0, 2)];
+function cookie(x){
+  let answer = "";
+  
+  if(typeof x == "string") {
+    answer = "Zach!"    
+  } else if(typeof x == "number") {
+    answer = "Monica!";
+  } else {
+    answer = "the dog!";
+  }
+  
+  return `Who ate the last cookie? It was ${answer}`;
+}
 
 // Tests
 
-console.log(whoIsPaying("Mexico")); //["Mexico", "Me"]
-console.log(whoIsPaying("Melania")); //["Melania", "Me"]
-console.log(whoIsPaying("Melissa")); //["Melissa", "Me"]
-console.log(whoIsPaying("Me")); //["Me"]
-console.log(whoIsPaying("")); // [""]
-console.log(whoIsPaying("I")); // ["I"]
+console.log(cookie("Ryan")); // "Who ate the last cookie? It was Zach!"
+console.log(cookie(2.3)); // "Who ate the last cookie? It was Monica!"
+console.log(cookie(26)); // "Who ate the last cookie? It was Monica!"
+console.log(cookie(true)); // "Who ate the last cookie? It was the dog!"
+console.log(cookie("true")); // "Who ate the last cookie? It was Zach!"
+console.log(cookie(false)); // "Who ate the last cookie? It was the dog!"
+console.log(cookie(1.98528462)); //"Who ate the last cookie? It was Monica!"
