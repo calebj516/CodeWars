@@ -12,19 +12,12 @@
 
 // My code below:
 
-function cookie(x){
-  let answer = "";
-  
-  if(typeof x == "string") {
-    answer = "Zach!"    
-  } else if(typeof x == "number") {
-    answer = "Monica!";
-  } else {
-    answer = "the dog!";
-  }
-  
-  return `Who ate the last cookie? It was ${answer}`;
-}
+const cookie = x => `Who ate the last cookie? It was ${({string: "Zach", number: "Monica"}[typeof x] || "the dog")}!`;
+
+// Notes on logic:
+
+// We are making use of an object with two key value pairs, and then accessing the appropriate value by using typeof x as our key.
+// If no result is returned from the object, the logical OR operator will return the truthy value, which would be "the dog".
 
 // Tests
 
