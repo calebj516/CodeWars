@@ -1,30 +1,42 @@
-// Challenge: Who ate the cookie? (8 kyu)
+// Challenge: Draw stairs (8 kyu)
 
 // Description:
 
-// For this problem you must create a program that says who ate the last cookie. If the input is a string then "Zach" ate the cookie. If the input is a float or an int then "Monica" ate the cookie. If the input is anything else "the dog" ate the cookie. The way to return the statement is: "Who ate the last cookie? It was (name)!"
+// Given a number n, draw stairs using the letter "I", n tall and n wide, with the tallest in the top left.
 
-// Ex: Input = "hi" --> Output = "Who ate the last cookie? It was Zach! (The reason you return Zach is because the input is a string)
+// For example n = 3 result in:
 
-// Note: Make sure you return the correct message with correct spaces and punctuation.
+// "I\n I\n  I"
+// or printed:
 
-// Please leave feedback for this kata. Cheers!
+// I
+//  I
+//   I
+
+// Another example, a 7-step stairs should be drawn like this:
+
+// I
+//  I
+//   I
+//    I
+//     I
+//      I
+//       I
 
 // My code below:
 
-const cookie = x => `Who ate the last cookie? It was ${({string: "Zach", number: "Monica"}[typeof x] || "the dog")}!`;
-
-// Notes on logic:
-
-// We are making use of an object with two key value pairs, and then accessing the appropriate value by using typeof x as our key.
-// If no result is returned from the object, the logical OR operator will return the truthy value, which would be "the dog".
+function drawStairs(n) {
+  let result = [];
+  
+  for (let i = 0; i < n; i++) {
+    result.push(`${' '.repeat(i)}I`);
+  }
+  
+  return result.join('\n');
+}
 
 // Tests
 
-console.log(cookie("Ryan")); // "Who ate the last cookie? It was Zach!"
-console.log(cookie(2.3)); // "Who ate the last cookie? It was Monica!"
-console.log(cookie(26)); // "Who ate the last cookie? It was Monica!"
-console.log(cookie(true)); // "Who ate the last cookie? It was the dog!"
-console.log(cookie("true")); // "Who ate the last cookie? It was Zach!"
-console.log(cookie(false)); // "Who ate the last cookie? It was the dog!"
-console.log(cookie(1.98528462)); //"Who ate the last cookie? It was Monica!"
+console.log(drawStairs(1)); // "I"
+console.log(drawStairs(3)); // "I\n I\n  I"
+console.log(drawStairs(5)); // "I\n I\n  I\n   I\n    I"
