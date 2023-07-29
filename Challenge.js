@@ -1,43 +1,36 @@
-// Challenge: Draw stairs (8 kyu)
+// Challenge: Two numbers are positive (7 kyu)
 
 // Description:
 
-// Given a number n, draw stairs using the letter "I", n tall and n wide, with the tallest in the top left.
+// Your job is to write a function, which takes three integers a, b, and c as arguments, and returns True if exactly two of of the three integers are positive numbers (greater than zero), and False - otherwise.
 
-// For example n = 3 result in:
-
-// "I\n I\n  I"
-// or printed:
-
-// I
-//  I
-//   I
-
-// Another example, a 7-step stairs should be drawn like this:
-
-// I
-//  I
-//   I
-//    I
-//     I
-//      I
-//       I
+// Examples:
+// twoArePositive(2, 4, -3) == true
+// twoArePositive(-4, 6, 8) == true
+// twoArePositive(4, -6, 9) == true
+// twoArePositive(-4, 6, 0) == false
+// twoArePositive(4, 6, 10) == false
+// twoArePositive(-14, -3, -4) == false
 
 // My code below:
 
-function drawStairs(n) {
+function twoArePositive(a, b, c) {
 
-  let result = "I";
+  let count = 0;
+  const nums = [...arguments];
   
-  for (let i = 1; i < n; i++) {
-    result += '\n' + ' '.repeat(i) + "I";
+  for(let num of nums) {
+    if(num > 0) count++;
   }
   
-  return result;
+  return count == 2;
 }
 
 // Tests
 
-console.log(drawStairs(1)); // "I"
-console.log(drawStairs(3)); // "I\n I\n  I"
-console.log(drawStairs(5)); // "I\n I\n  I\n   I\n    I"
+console.log(twoArePositive(2, 4, -3)); // == true
+console.log(twoArePositive(-4, 6, 8)); // == true
+console.log(twoArePositive(4, -6, 9)); // == true
+console.log(twoArePositive(-4, 6, 0)); // == false
+console.log(twoArePositive(4, 6, 10)); // == false
+console.log(twoArePositive(-14, -3, -4)); // == false
