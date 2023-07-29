@@ -26,13 +26,14 @@
 // My code below:
 
 function drawStairs(n) {
-  let result = [];
+
+  let result = "I";
   
-  for (let i = 0; i < n; i++) {
-    result.push(`${' '.repeat(i)}I`);
+  for (let i = 1; i < n; i++) {
+    result += '\n' + ' '.repeat(i) + "I";
   }
   
-  return result.join('\n');
+  return result;
 }
 
 // Tests
