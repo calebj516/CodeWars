@@ -15,15 +15,7 @@
 // My code below:
 
 function twoArePositive(a, b, c) {
-
-  let count = 0;
-  const nums = [...arguments];
-  
-  for(let num of nums) {
-    if(num > 0) count++;
-  }
-  
-  return count == 2;
+  return [...arguments].filter(num => num > 0).length == 2;
 }
 
 // Tests
