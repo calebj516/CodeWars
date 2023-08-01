@@ -1,28 +1,22 @@
-// Challenge: Two numbers are positive (7 kyu)
+// Challenge: Find the capitals (7 kyu)
 
 // Description:
 
-// Your job is to write a function, which takes three integers a, b, and c as arguments, and returns True if exactly two of of the three integers are positive numbers (greater than zero), and False - otherwise.
+// Write a function that takes a single string (word) as argument. The function must return an ordered list containing the indexes of all capital letters in the string.
 
-// Examples:
-// twoArePositive(2, 4, -3) == true
-// twoArePositive(-4, 6, 8) == true
-// twoArePositive(4, -6, 9) == true
-// twoArePositive(-4, 6, 0) == false
-// twoArePositive(4, 6, 10) == false
-// twoArePositive(-14, -3, -4) == false
+// Example (Input --> Output)
+// "CodEWaRs" --> [0,3,4,6]
 
 // My code below:
 
-function twoArePositive(a, b, c) {
-  return [...arguments].filter(num => num > 0).length == 2;
-}
+const capitals = (word) => {
+  const result = []; 
+  
+  word.split('').forEach((letter, i) => letter.charCodeAt(0) <= 90 ? result.push(i) : letter); 
+  return result;
+};
 
 // Tests
 
-console.log(twoArePositive(2, 4, -3)); // == true
-console.log(twoArePositive(-4, 6, 8)); // == true
-console.log(twoArePositive(4, -6, 9)); // == true
-console.log(twoArePositive(-4, 6, 0)); // == false
-console.log(twoArePositive(4, 6, 10)); // == false
-console.log(twoArePositive(-14, -3, -4)); // == false
+console.log(capitals('CodEWaRs')); // [0,3,4,6]
+console.log(capitals('cOdEwArS')); // [1,3,5,7]
