@@ -11,8 +11,12 @@
 
 const capitals = (word) => {
   const result = []; 
-  
-  word.split('').forEach((letter, i) => letter.charCodeAt(0) <= 90 ? result.push(i) : letter); 
+  word = word.split('');
+
+  for(let i = 0; i < word.length; i++) {
+    if(word[i] == word[i].toUpperCase()) result.push(i);
+  }
+
   return result;
 };
 
