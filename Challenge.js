@@ -1,26 +1,25 @@
-// Challenge: Find the capitals (7 kyu)
+// Challenge: Stringy Strings (8 kyu)
 
 // Description:
 
-// Write a function that takes a single string (word) as argument. The function must return an ordered list containing the indexes of all capital letters in the string.
+// write me a function stringy that takes a size and returns a string of alternating '1s' and '0s'.
 
-// Example (Input --> Output)
-// "CodEWaRs" --> [0,3,4,6]
+// the string should start with a 1.
+
+// a string with size 6 should return :'101010'.
+
+// with size 4 should return : '1010'.
+
+// with size 12 should return : '101010101010'.
+
+// The size will always be positive and will only use whole numbers.
 
 // My code below:
 
-const capitals = (word) => {
-  const result = []; 
-  word = word.split('');
-
-  for(let i = 0; i < word.length; i++) {
-    if(word[i] == word[i].toUpperCase()) result.push(i);
-  }
-
-  return result;
-};
+const stringy = size => '1'.repeat(size).split('').map((num, i) => i % 2 !== 0 ? '0' : '1').join('');
 
 // Tests
 
-console.log(capitals('CodEWaRs')); // [0,3,4,6]
-console.log(capitals('cOdEwArS')); // [1,3,5,7]
+console.log(stringy(6)); // '101010'
+console.log(stringy(4)); // '1010'
+console.log(stringy(12)); // '101010101010'
