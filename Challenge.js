@@ -1,25 +1,46 @@
-// Challenge: Stringy Strings (8 kyu)
+// Challenge: makeBackronym (7 kyu)
 
 // Description:
 
-// write me a function stringy that takes a size and returns a string of alternating '1s' and '0s'.
+// back·ro·nym
+// An acronym deliberately formed from a phrase whose initial letters spell out a particular word or words, either to create a memorable name or as a fanciful explanation of a word's origin.
 
-// the string should start with a 1.
+// "Biodiversity Serving Our Nation", or BISON
 
-// a string with size 6 should return :'101010'.
+// (from https://en.oxforddictionaries.com/definition/backronym)
 
-// with size 4 should return : '1010'.
+// Complete the function to create backronyms. Transform the given string (without spaces) to a backronym, using the preloaded dictionary and return a string of words, separated with a single space (but no trailing spaces).
 
-// with size 12 should return : '101010101010'.
+// The keys of the preloaded dictionary are uppercase letters A-Z and the values are predetermined words, for example:
 
-// The size will always be positive and will only use whole numbers.
+// dict["P"] == "perfect"
+// Examples
+// "dgm" ==> "disturbing gregarious mustache"
 
-// My code below:
+// "lkj" ==> "literal klingon joke"
 
-const stringy = size => '1'.repeat(size).split('').map((num, i) => i % 2 !== 0 ? '0' : '1').join('');
+// Code for 'preloaded' dict below:
+
+const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+const words = 'awesome beautiful confident disturbing eager fantastic gregarious hippy ingestable joke klingon literal mustache newtonian oscillating perfect queen rant stylish turn underlying volcano weird xylophone yogic zero'.split(' ');
+const dict = {};
+
+const createObj = (keys, values, length, obj) => {
+
+  for(let i = 0; i < length; i++) {
+    obj[keys[i]] = values[i];
+  }
+
+};
+
+createObj(alphabet, words, 26, dict);
+
+// Challenge code below:
+
+const makeBackronym = string => string.toUpperCase().split('').map(letter => dict[letter]).join(' ');
 
 // Tests
 
-console.log(stringy(6)); // '101010'
-console.log(stringy(4)); // '1010'
-console.log(stringy(12)); // '101010101010'
+console.log(makeBackronym('adh')); // 'awesome disturbing hippy'
+console.log(makeBackronym('dgm')); // 'disturbing gregarious mustache'
+console.log(makeBackronym('lmnop')); // 'literal mustache newtonian oscillating perfect'
