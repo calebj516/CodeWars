@@ -1,46 +1,21 @@
-// Challenge: makeBackronym (7 kyu)
+// Challenge: Removing Elements (8 kyu)
 
 // Description:
 
-// back·ro·nym
-// An acronym deliberately formed from a phrase whose initial letters spell out a particular word or words, either to create a memorable name or as a fanciful explanation of a word's origin.
+// Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
 
-// "Biodiversity Serving Our Nation", or BISON
+// Example:
+// ["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...]
 
-// (from https://en.oxforddictionaries.com/definition/backronym)
-
-// Complete the function to create backronyms. Transform the given string (without spaces) to a backronym, using the preloaded dictionary and return a string of words, separated with a single space (but no trailing spaces).
-
-// The keys of the preloaded dictionary are uppercase letters A-Z and the values are predetermined words, for example:
-
-// dict["P"] == "perfect"
-// Examples
-// "dgm" ==> "disturbing gregarious mustache"
-
-// "lkj" ==> "literal klingon joke"
-
-// Code for 'preloaded' dict below:
-
-const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
-const words = 'awesome beautiful confident disturbing eager fantastic gregarious hippy ingestable joke klingon literal mustache newtonian oscillating perfect queen rant stylish turn underlying volcano weird xylophone yogic zero'.split(' ');
-const dict = {};
-
-const createObj = (keys, values, length, obj) => {
-
-  for(let i = 0; i < length; i++) {
-    obj[keys[i]] = values[i];
-  }
-
-};
-
-createObj(alphabet, words, 26, dict);
+// None of the arrays will be empty, so you don't have to worry about that!
 
 // Challenge code below:
 
-const makeBackronym = string => string.toUpperCase().split('').map(letter => dict[letter]).join(' ');
+const removeEveryOther = arr => arr.filter((_, i) => i % 2 === 0);
 
 // Tests
 
-console.log(makeBackronym('adh')); // 'awesome disturbing hippy'
-console.log(makeBackronym('dgm')); // 'disturbing gregarious mustache'
-console.log(makeBackronym('lmnop')); // 'literal mustache newtonian oscillating perfect'
+console.log(removeEveryOther(['Hello', 'Goodbye', 'Hello Again'])); // ['Hello', 'Hello Again']
+console.log(removeEveryOther([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); // [1, 3, 5, 7, 9]
+console.log(removeEveryOther([[1, 2]])); //  [[1, 2]]
+console.log(removeEveryOther([['Goodbye'], {'Great': 'Job'}])); // [['Goodbye']]
