@@ -1,21 +1,26 @@
-// Challenge: Removing Elements (8 kyu)
+// Challenge: Short Long Short (8 kyu)
 
 // Description:
 
-// Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
+// Given 2 strings, a and b, return a string of the form short+long+short, with the shorter string on the outside and the longer string on the inside. The strings will not be the same length, but they may be empty ( zero length ).
 
-// Example:
-// ["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...]
+// Hint for R users:
 
-// None of the arrays will be empty, so you don't have to worry about that!
+// The length of string is not always the same as the number of characters
+// For example: (Input1, Input2) --> output
+
+// ("1", "22") --> "1221"
+// ("22", "1") --> "1221"
 
 // Challenge code below:
 
-const removeEveryOther = arr => arr.filter((_, i) => i % 2 === 0);
+const solution = (a, b) => a.length > b.length ? `${b}${a}${b}` : `${a}${b}${a}`;
 
 // Tests
 
-console.log(removeEveryOther(['Hello', 'Goodbye', 'Hello Again'])); // ['Hello', 'Hello Again']
-console.log(removeEveryOther([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); // [1, 3, 5, 7, 9]
-console.log(removeEveryOther([[1, 2]])); //  [[1, 2]]
-console.log(removeEveryOther([['Goodbye'], {'Great': 'Job'}])); // [['Goodbye']]
+console.log(solution('45', '1')); // '1451'
+console.log(solution('13', '200')); // '1320013'
+console.log(solution('Soon', 'Me')); // 'MeSoonMe'
+console.log(solution('U', 'False')); // 'UFalseU'
+console.log(solution("a", "bb")); // "abba"
+console.log(solution("aa", "b")); // "baab"
