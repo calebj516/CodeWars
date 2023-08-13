@@ -1,26 +1,25 @@
-// Challenge: Short Long Short (8 kyu)
+// Challenge: Printing Array elements with Comma delimiters (8 kyu)
 
 // Description:
 
-// Given 2 strings, a and b, return a string of the form short+long+short, with the shorter string on the outside and the longer string on the inside. The strings will not be the same length, but they may be empty ( zero length ).
+// Input: Array of elements
 
-// Hint for R users:
+// ["h","o","l","a"]
 
-// The length of string is not always the same as the number of characters
-// For example: (Input1, Input2) --> output
+// Output: String with comma delimited elements of the array in th same order.
 
-// ("1", "22") --> "1221"
-// ("22", "1") --> "1221"
+// "h,o,l,a"
+
+// Note: if this seems too simple for you try the next level
 
 // Challenge code below:
 
-const solution = (a, b) => a.length > b.length ? b + a + b : a + b + a;
+const printArray = array => array.join();
 
 // Tests
 
-console.log(solution('45', '1')); // '1451'
-console.log(solution('13', '200')); // '1320013'
-console.log(solution('Soon', 'Me')); // 'MeSoonMe'
-console.log(solution('U', 'False')); // 'UFalseU'
-console.log(solution("a", "bb")); // "abba"
-console.log(solution("aa", "b")); // "baab"
+// array1 = ["hello", "this", "is", "an", "array!"]
+// array2 = [1, 2, 3, 4, 5]
+
+console.log(printArray(["hello", "this", "is", "an", "array!"])); // hello,this,is,an,array!
+console.log(printArray([1, 2, 3, 4, 5])); // 1,2,3,4,5
