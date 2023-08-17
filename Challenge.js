@@ -14,24 +14,14 @@
 
 // Challenge code below:
 
-function explode(x){ 
-  const result = [];
-  let length;
-  
-  if(typeof x[0] == "number" && typeof x[1] == "number") {
-    length = x[0] + x[1];
-  } else if(typeof x[0] == "number" || typeof x[1] == "number")  {
-    length = (typeof x[0] == 'number' ? x[0] : x[1]);    
-  } else {
-    return "Void!";
-  }
-  
-  for(let i = 0; i < length; i++) {
-    result.push(x);
-  }
+const explode = ([x, y]) => x + 0 != x && y + 0 != y ? 'Void!' : Array((+x || 0) + (+y || 0)).fill([x, y]);
 
-  return result;
-}
+// Notes on logic:
+
+// x and y are each tested to see if they are numbers by adding a 0 to each. If they are in fact numbers, this will not change the value of the variable.
+// If neither of them are numbers, 'Void!' is returned as required by the challenge instructions.
+// Otherwise, the Array constructor is used to initialize an array of x + y length. If x or y is not a number, 0 wil be used instead.
+// The end result is that an array with the appropriate length is created, and then filled with the original array that was passed in.
 
 // Tests
 
