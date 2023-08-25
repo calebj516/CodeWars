@@ -1,44 +1,24 @@
-// Challenge: NATO Phonetic Alphabet (7 kyu)
+// Challenge: Tail Swap (7 kyu)
 
 // Description:
 
-// Complete the function word (string) and returns a string that spells the word using the NATO phonetic alphabet.
+// You'll be given a list of two strings, and each will contain exactly one colon (":") in the middle (but not at beginning or end). The length of the strings, before and after the colon, are random.
 
-// There should be a space between each word in the returned string, and the first letter of each word should be capitalized.
-
-// For those of you that don't want your fingers to bleed, this kata already has a dictionary typed out for you.
-
-// Examples
-// "hi"      -->  "Hotel India"
-// "abc"     -->  "Alpha Bravo Charlie"
-// "babble"  -->  "Bravo Alpha Bravo Bravo Lima Echo"
-// "Banana"  -->  "Bravo Alpha November Alpha November Alpha"
+// Your job is to return a list of two strings (in the same order as the original list), but with the characters after each colon swapped.
 
 // Challenge code below:
 
-const nato = (function() {
-  let letters =  {
-    "A": "Alpha",  "B": "Bravo",   "C": "Charlie",
-    "D": "Delta",  "E": "Echo",    "F": "Foxtrot",
-    "G": "Golf",   "H": "Hotel",   "I": "India",
-    "J": "Juliett","K": "Kilo",    "L": "Lima",
-    "M": "Mike",   "N": "November","O": "Oscar",
-    "P": "Papa",   "Q": "Quebec",  "R": "Romeo",
-    "S": "Sierra", "T": "Tango",   "U": "Uniform",
-    "V": "Victor", "W": "Whiskey", "X": "X-ray",
-    "Y": "Yankee", "Z": "Zulu"
-  }
-
-  return function(word) {
-    return word.split('').map(function(letter){
-      return letters[letter.toUpperCase()]
-    }).join(' ');
-  }
-})();
+function tailSwap(arr) {
+  const [a1, a2] = arr[0].split(':');
+  const [b1, b2] = arr[1].split(':');
+  
+  return [`${a1}:${b2}`, `${b1}:${a2}`];
+}
 
 // Tests
 
-console.log(nato('hi')); // 'Hotel India'
-console.log(nato('abc')); // 'Alpha Bravo Charlie'
-console.log(nato('babble')); // 'Bravo Alpha Bravo Bravo Lima Echo'
-console.log(nato('Banana')); // 'Bravo Alpha November Alpha November Alpha'
+console.log(tailSwap(['abc:123', 'cde:456'])); // ['abc:456', 'cde:123']);
+console.log(tailSwap(['a:12345', '777:xyz'])); // ['a:xyz', '777:12345']);
+console.log(tailSwap(['(:)', '[:]'])); // ['(:]', '[:)']);
+console.log(tailSwap([',:;', ',:,'])); //[',:,', ',:;']);
+console.log(tailSwap(['a:b', 'c:d'])); // ['a:d', 'c:b']);
