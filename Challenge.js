@@ -1,24 +1,31 @@
-// Challenge: Tail Swap (7 kyu)
+// Challenge: Converting 12-hour time to 24-hour time (7 kyu)
 
 // Description:
 
-// You'll be given a list of two strings, and each will contain exactly one colon (":") in the middle (but not at beginning or end). The length of the strings, before and after the colon, are random.
+// Converting a 12-hour time like "8:30 am" or "8:30 pm" to 24-hour time (like "0830" or "2030") sounds easy enough, right? Well, let's see if you can do it!
 
-// Your job is to return a list of two strings (in the same order as the original list), but with the characters after each colon swapped.
+// You will have to define a function, which will be given an hour (always in the range of 1 to 12, inclusive), a minute (always in the range of 0 to 59, inclusive), and a period (either "am" or "pm") as input.
+
+// Your task is to return a four-digit string that encodes that time in 24-hour time.
+
+// Notes
+// By convention, noon is 12:00 pm, and midnight is 12:00 am.
+// On 12-hours clock, there is no 0 hour, and time just after midnight is denoted as, for example, 12:15 am. On 24-hour clock, this translates to 0015.
 
 // Challenge code below:
 
-function tailSwap(arr) {
-  const [a1, a2] = arr[0].split(':');
-  const [b1, b2] = arr[1].split(':');
-  
-  return [`${a1}:${b2}`, `${b1}:${a2}`];
+const to24hourtime = (hour, minute, period) => {
+  if (hour == 12 && period == 'am') hour = 0;
+  if (hour != 12 && period == 'pm') hour += 12;
+
+  return hour.toString().padStart(2, 0) + minute.toString().padStart(2, 0);
 }
 
 // Tests
 
-console.log(tailSwap(['abc:123', 'cde:456'])); // ['abc:456', 'cde:123']);
-console.log(tailSwap(['a:12345', '777:xyz'])); // ['a:xyz', '777:12345']);
-console.log(tailSwap(['(:)', '[:]'])); // ['(:]', '[:)']);
-console.log(tailSwap([',:;', ',:,'])); //[',:,', ',:;']);
-console.log(tailSwap(['a:b', 'c:d'])); // ['a:d', 'c:b']);
+console.log(to24hourtime( 1,  0, "am")); // "0100"
+console.log(to24hourtime( 1,  0, "pm")); // "1300"
+console.log(to24hourtime(12,  0, "am")); // "0000"
+console.log(to24hourtime(12,  0, "pm")); // "1200"
+console.log(to24hourtime( 6, 30, "am")); // "0630"
+console.log(to24hourtime( 9, 45, "pm")); // "2145"
