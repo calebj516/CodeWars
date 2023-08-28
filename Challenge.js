@@ -18,7 +18,10 @@ const to24hourtime = (hour, minute, period) => {
   if (hour == 12 && period == 'am') hour = 0;
   if (hour != 12 && period == 'pm') hour += 12;
 
-  return hour.toString().padStart(2, 0) + minute.toString().padStart(2, 0);
+  hour = hour.toString().padStart(2, 0);
+  minute = minute.toString().padStart(2, 0);
+
+  return hour + minute;
 }
 
 // Tests
