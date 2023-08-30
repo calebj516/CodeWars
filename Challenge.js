@@ -23,6 +23,8 @@
 function validParenthesis(parenStr) {
   let counter = 0;
 
+  if(parenStr[0] == ')' || parenStr[parenStr.length - 1] == '(') return false;
+
   for(let paren of parenStr) {
     paren == '(' ? counter++ : counter--;
     if(counter < 0) return false;
