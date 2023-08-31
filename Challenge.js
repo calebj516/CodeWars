@@ -1,51 +1,24 @@
-// Challenge: Valid Parenthesis (7 kyu)
+// Challenge: Determine offspring sex based on genes XX and XY chromosomes (8 kyu)
 
 // Description:
 
-// Write a function that takes a string of parentheses, and determines if the order of the parentheses is valid. The function should return true if the string is valid, and false if it's invalid.
+// The male gametes or sperm cells in humans and other mammals are heterogametic and contain one of two types of sex chromosomes. They are either X or Y. The female gametes or eggs however, contain only the X sex chromosome and are homogametic.
 
-// Examples
-// "()"              =>  true
-// ")(()))"          =>  false
-// "("               =>  false
-// "(())((()())())"  =>  true
-// Constraints
-// 0 <= length of input <= 100
+// The sperm cell determines the sex of an individual in this case. If a sperm cell containing an X chromosome fertilizes an egg, the resulting zygote will be XX or female. If the sperm cell contains a Y chromosome, then the resulting zygote will be XY or male.
 
-// All inputs will be strings, consisting only of characters ( and ).
-// Empty strings are considered balanced (and therefore valid), and will be tested.
-// For languages with mutable strings, the inputs should not be mutated.
+// Determine if the sex of the offspring will be male or female based on the X or Y chromosome present in the male's sperm.
 
-// Protip: If you are trying to figure out why a string of parentheses is invalid, paste the parentheses into the code editor, and let the code highlighting show you!
+// If the sperm contains the X chromosome, return "Congratulations! You're going to have a daughter."; If the sperm contains the Y chromosome, return "Congratulations! You're going to have a son.";
 
 // Challenge code below:
 
-function validParenthesis(parenStr) {
-  let counter = 0;
-
-  if(parenStr[0] == ')' || parenStr[parenStr.length - 1] == '(') return false;
-
-  for(let paren of parenStr) {
-    paren == '(' ? counter++ : counter--;
-    if(counter < 0) return false;
-  }
-
-  return counter === 0;
+function chromosomeCheck(sperm) {
+  return `Congratulations! You're going to have a ${sperm.includes('Y') ? 'son' : 'daughter'}.`;
 }
 
 // Tests
 
-console.log(validParenthesis("()")); // true 
-console.log(validParenthesis("((()))")); // true
-console.log(validParenthesis("()()()")); // true
-console.log(validParenthesis("(()())()")); // true
-console.log(validParenthesis("()(())((()))(())()")); // true
-
-console.log(validParenthesis(")(")); // false
-console.log(validParenthesis("()()(")); // false
-console.log(validParenthesis("((())")); // false
-console.log(validParenthesis("())(()")); // false
-console.log(validParenthesis(")()")); // false
-console.log(validParenthesis(")")); // false
-
-console.log(validParenthesis("")); // true
+console.log(chromosomeCheck('XY')); // "Congratulations! You're going to have a son."
+console.log(chromosomeCheck('XX')); // "Congratulations! You're going to have a daughter."
+console.log(chromosomeCheck('XY')); // "Congratulations! You're going to have a son."
+console.log(chromosomeCheck('XX')); // "Congratulations! You're going to have a daughter."
