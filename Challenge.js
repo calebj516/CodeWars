@@ -12,7 +12,7 @@
 
 // Challenge code below:
 
-const chromosomeCheck = (sperm) => sperm.includes('Y') ? "Congratulations! You're going to have a son." : "Congratulations! You're going to have a daughter.";
+const chromosomeCheck = (sperm) => `Congratulations! You're going to have a ${sperm == 'XY' ? 'son' : 'daughter'}.`;
 
 // Tests
 
