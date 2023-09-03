@@ -1,22 +1,27 @@
-// Challenge: Determine offspring sex based on genes XX and XY chromosomes (8 kyu)
+// Challenge: Beginner Series #1 School Paperwork (8 kyu)
+// https://www.codewars.com/kata/55f9b48403f6b87a7c0000bd
 
 // Description:
 
-// The male gametes or sperm cells in humans and other mammals are heterogametic and contain one of two types of sex chromosomes. They are either X or Y. The female gametes or eggs however, contain only the X sex chromosome and are homogametic.
+// Your classmates asked you to copy some paperwork for them. You know that there are 'n' classmates and the paperwork has 'm' pages.
 
-// The sperm cell determines the sex of an individual in this case. If a sperm cell containing an X chromosome fertilizes an egg, the resulting zygote will be XX or female. If the sperm cell contains a Y chromosome, then the resulting zygote will be XY or male.
+// Your task is to calculate how many blank pages do you need. If n < 0 or m < 0 return 0.
 
-// Determine if the sex of the offspring will be male or female based on the X or Y chromosome present in the male's sperm.
+// Example:
 
-// If the sperm contains the X chromosome, return "Congratulations! You're going to have a daughter."; If the sperm contains the Y chromosome, return "Congratulations! You're going to have a son.";
+// n= 5, m=5: 25
+// n=-5, m=5:  0
+
+// Waiting for translations and Feedback! Thanks!
 
 // Challenge code below:
 
-const chromosomeCheck = (sperm) => `Congratulations! You're going to have a ${sperm == 'XY' ? 'son' : 'daughter'}.`;
+const paperwork = (n, m) => n < 0 || m < 0 ? 0 : m * n;
 
 // Tests
 
-console.log(chromosomeCheck('XY')); // "Congratulations! You're going to have a son."
-console.log(chromosomeCheck('XX')); // "Congratulations! You're going to have a daughter."
-console.log(chromosomeCheck('XY')); // "Congratulations! You're going to have a son."
-console.log(chromosomeCheck('XX')); // "Congratulations! You're going to have a daughter."
+console.log(paperwork(5, 5)); // 25
+console.log(paperwork(5, -5)); // 0
+console.log(paperwork(-5, -5)); // 0
+console.log(paperwork(5, 0)); // 0
+console.log(paperwork(5, 11)); // 55
