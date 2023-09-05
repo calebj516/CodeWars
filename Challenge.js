@@ -24,17 +24,7 @@
 
 // Challenge code below:
 
-function past(h, m, s){
-
-  // 1000 x 60 x 60 x h = ms to m to h
-  let hoursToMs = h > 0 ? 3600000 * h : 0;
-  // 1000 x 60 x m = ms to m
-  let minToMs = m > 0 ? 60000 * m : 0;
-  // 1000 x s = ms to s
-  let secToMs = s > 0 ? 1000 * s : 0;
-  
-  return hoursToMs + minToMs + secToMs;
-}
+const past = (h, m, s) => (3600000 * h) + (60000 * m) + (1000 * s);
 
 // Tests
 
