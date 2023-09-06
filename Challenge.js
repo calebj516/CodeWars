@@ -1,35 +1,29 @@
-// Challenge: Beginner Series #2 Clock (8 kyu)
+// Challenge: FIXME: Replace all dots (8 kyu)
 
-// https://www.codewars.com/kata/55f9bca8ecaa9eac7100004a/javascript
+// https://www.codewars.com/kata/596c6eb85b0f515834000049/javascript
 
 // Description:
 
-// Clock shows h hours, m minutes and s seconds after midnight.
+// The code provided is supposed replace all the dots . in the specified String str with dashes -
 
-// Your task is to write a function which returns the time since midnight in milliseconds.
+// But it's not working properly.
 
-// Example:
+// Task
+// Fix the bug so we can all go home early.
 
-// h = 0
-// m = 1
-// s = 1
-
-// result = 61000
-
-// Input constraints:
-
-// 0 <= h <= 23
-// 0 <= m <= 59
-// 0 <= s <= 59
+// Notes
+// String str will never be null.
 
 // Challenge code below:
 
-const past = (h, m, s) => (3600000 * h) + (60000 * m) + (1000 * s);
+var replaceDots = function(str) {
+  // added the \ to escape special characters
+  // added the g so that replace is run for all occurences in the string
+    return str.replace(/\./g, '-');
+  }
 
 // Tests
 
-console.log(past(0,1,1)); // 6100
-console.log(past(1,1,1)); // 3661000
-console.log(past(0,0,0)); // 0
-console.log(past(1,0,1)); // 3601000
-console.log(past(1,0,0)); // 3600000
+console.log(replaceDots("")); // ""
+console.log(replaceDots("no dots")); // "no dots"
+console.log(replaceDots("one-two-three")); // "one.two.three"
