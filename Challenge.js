@@ -16,7 +16,7 @@
 
 // Challenge code below:
 
-const replaceDots = str => str.replace(/\./g, '-');
+const replaceDots = str => str.split('').map(el => el == '-' ? '.' : el).join('');
 
 // added the \ to escape special characters
 // added the g so that replace is run for all occurences in the string
