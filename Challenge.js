@@ -1,32 +1,39 @@
-// Challenge: FIXME: Replace all dots (8 kyu)
+// Challenge: Counting sheep... (8 kyu)
 
-// https://www.codewars.com/kata/596c6eb85b0f515834000049/javascript
+// Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
 
-// Description:
+// For example,
 
-// The code provided is supposed replace all the dots . in the specified String str with dashes -
+// [true,  true,  true,  false,
+//   true,  true,  true,  true ,
+//   true,  false, true,  false,
+//   true,  false, false, true ,
+//   true,  true,  true,  true ,
+//   false, false, true,  true]
+// The correct answer would be 17.
 
-// But it's not working properly.
-
-// Task
-// Fix the bug so we can all go home early.
-
-// Notes
-// String str will never be null.
+// Hint: Don't forget to check for bad values like null/undefined
 
 // Challenge code below:
 
-const replaceDots = str => {
-
-  for (let char of str) {
-    char == '-' ? '.' : char;
-  }
-
-  return str;
-}
+const countSheeps = sheep => sheep.filter(el => el == true).length;
 
 // Tests
 
-console.log(replaceDots("")); // ""
-console.log(replaceDots("no dots")); // "no dots"
-console.log(replaceDots("one-two-three")); // "one.two.three"
+let sheep1 = [];
+let sheep2 = [undefined];
+let sheep3 = [null];
+let sheep4 = [false];
+let sheep5 = [true];
+let sheep6 = [undefined, null, false, true]; // 1
+let sheep7 = [undefined,null,false,true,true,false,null,undefined] // 2
+let sheep8 = [true, true, true, false, true, true, true, true, true, false, true, false, true, false, false, true, true, true, true, true, false, false, true, true]; // 17
+
+console.log(countSheeps(sheep1)); // 0
+console.log(countSheeps(sheep2)); // 0
+console.log(countSheeps(sheep3)); // 0
+console.log(countSheeps(sheep4)); // 0
+console.log(countSheeps(sheep5)); // 1
+console.log(countSheeps(sheep6)); // 1
+console.log(countSheeps(sheep7)); // 2
+console.log(countSheeps(sheep8)); // 17
