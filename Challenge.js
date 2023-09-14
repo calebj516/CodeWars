@@ -1,7 +1,5 @@
 // Challenge: We've crashed on a distance planet in our galaxy! When do leap years occur here? (7 kyu)
 
-// https://www.codewars.com/kata/596c6eb85b0f515834000049/javascript
-
 // Description:
 
 // Our spaceship has crashed on an unknown planet many light years away from earth. Thankfully we were able to send out a distress signal right before the crash. Help will be here shortly but we need to gather as much information about this planet as we can before we're rescued.
