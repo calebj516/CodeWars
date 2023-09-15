@@ -20,7 +20,7 @@
 
 // Challenge code below:
 
-const isLeapYear = (duration, year) => !(year % (1 / (duration % 1)));
+const isLeapYear = (duration, year) => !((year * duration) % 1);
 
 // Tests
 
