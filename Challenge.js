@@ -1,30 +1,23 @@
-// Challenge: We've crashed on a distance planet in our galaxy! When do leap years occur here? (7 kyu)
+// Challenge: Sort and Star (8 kyu)
 
 // Description:
 
-// Our spaceship has crashed on an unknown planet many light years away from earth. Thankfully we were able to send out a distress signal right before the crash. Help will be here shortly but we need to gather as much information about this planet as we can before we're rescued.
+// You will be given a list of strings. You must sort it alphabetically (case-sensitive, and based on the ASCII values of the chars) and then return the first value.
 
-// Before our control panels were destroyed, we were able to gather the duration of this planet's orbit around it's planetary system's star.
+// The returned value must be a string, and have "***" between each of its letters.
 
-// Among other things, we need to determine if a given year is a leap year on this planet.
-
-// Your Task:
-
-// Given the duration of the planet's orbit (in days) and a specific year on this planet, determine if the given year is a leap year here.
-
-// For example:
-
-// On Earth, a single rotation around the sun takes 365.25 days. Therefore, each year takes 365 days but every forth year is a leap year and takes 366 days. The next leap year on Earth will occur in 2020.
-
-// Notes: To make things easier, the period of the leap years will always be a power of 2. Good luck!
+// You should not remove or add elements from/to the array.
 
 // Challenge code below:
 
-const isLeapYear = (duration, year) => !((year * duration) % 1);
+function twoSort(s) {
+  return s.sort()[0].split('').join('***');
+}
 
 // Tests
 
-console.log(isLeapYear(365.25, 2018)); // false
-console.log(isLeapYear(365.25, 2020)); // true
-console.log(isLeapYear(124.5,   102)); // true
-console.log(isLeapYear(124.125, 102)); // false
+console.log(twoSort(["bitcoin", "take", "over", "the", "world", "maybe", "who", "knows", "perhaps"])); // 'b***i***t***c***o***i***n' 
+console.log(twoSort(["turns", "out", "random", "test", "cases", "are", "easier", "than", "writing", "out", "basic", "ones"])); // 'a***r***e' 
+console.log(twoSort(["lets", "talk", "about", "javascript", "the", "best", "language"])); // 'a***b***o***u***t' 
+console.log(twoSort(["i", "want", "to", "travel", "the", "world", "writing", "code", "one", "day"])); // 'c***o***d***e' 
+console.log(twoSort(["Lets", "all", "go", "on", "holiday", "somewhere", "very", "cold"])); // 'L***e***t***s' 
