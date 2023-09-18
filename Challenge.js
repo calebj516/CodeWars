@@ -1,23 +1,29 @@
-// Challenge: Sort and Star (8 kyu)
+// Challenge: Find factors of a number (7 kyu)
 
 // Description:
 
-// You will be given a list of strings. You must sort it alphabetically (case-sensitive, and based on the ASCII values of the chars) and then return the first value.
+// Create a function that takes a number and finds the factors of it, listing them in descending order in an array.
 
-// The returned value must be a string, and have "***" between each of its letters.
+// If the parameter is not an integer or less than 1, return -1. In C# return an empty array.
 
-// You should not remove or add elements from/to the array.
+// For Example: factors(54) should return [54, 27, 18, 9, 6, 3, 2, 1]
 
 // Challenge code below:
 
-function twoSort(s) {
-  return s.sort()[0].split('').join('***');
+function factors(x){
+  if(x < 1 || Number.parseInt(x) !== x) return -1;
+  
+  const factorList = [];
+  let num = x;
+  
+  for(let i = x; i >= 1; i--) {
+    if(num % i === 0) factorList.push(i);
+  }
+  
+  return factorList.sort((a, b) => b - a);
 }
 
 // Tests
 
-console.log(twoSort(["bitcoin", "take", "over", "the", "world", "maybe", "who", "knows", "perhaps"])); // 'b***i***t***c***o***i***n' 
-console.log(twoSort(["turns", "out", "random", "test", "cases", "are", "easier", "than", "writing", "out", "basic", "ones"])); // 'a***r***e' 
-console.log(twoSort(["lets", "talk", "about", "javascript", "the", "best", "language"])); // 'a***b***o***u***t' 
-console.log(twoSort(["i", "want", "to", "travel", "the", "world", "writing", "code", "one", "day"])); // 'c***o***d***e' 
-console.log(twoSort(["Lets", "all", "go", "on", "holiday", "somewhere", "very", "cold"])); // 'L***e***t***s' 
+console.log(factors(54)); // [54, 27, 18, 9, 6, 3, 2, 1]
+console.log(factors(21)); // [21, 7, 3, 1]
