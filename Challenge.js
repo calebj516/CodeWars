@@ -1,29 +1,46 @@
-// Challenge: Find factors of a number (7 kyu)
+// Challenge: Find the first non-consecutive number (8 kyu)
 
 // Description:
 
-// Create a function that takes a number and finds the factors of it, listing them in descending order in an array.
+// Your task is to find the first element of an array that is not consecutive.
 
-// If the parameter is not an integer or less than 1, return -1. In C# return an empty array.
+// By not consecutive we mean not exactly 1 larger than the previous element of the array.
 
-// For Example: factors(54) should return [54, 27, 18, 9, 6, 3, 2, 1]
+// E.g. If we have an array [1,2,3,4,6,7,8] then 1 then 2 then 3 then 4 are all consecutive but 6 is not, so that's the first non-consecutive number.
+
+// If the whole array is consecutive then return null2.
+
+// The array will always have at least 2 elements1 and all elements will be numbers. The numbers will also all be unique and in ascending order. The numbers could be positive or negative and the first non-consecutive could be either too!
+
+// If you like this Kata, maybe try this one next: https://www.codewars.com/kata/represent-array-of-numbers-as-ranges
+
+// 1 Can you write a solution that will return null2 for both [] and [ x ] though? (This is an empty array and one with a single number and is not tested for, but you can write your own example test. )
+
+// 2
+// Swift, Ruby and Crystal: nil
+// Haskell: Nothing
+// Python, Rust, Scala: None
+// Julia: nothing
+// Nim: none(int) (See options)
 
 // Challenge code below:
 
-function factors(x){
-  if(x < 1 || Number.parseInt(x) !== x) return -1;
+function firstNonConsecutive (arr) {
+  let result = null;
   
-  const factorList = [];
-  let num = x;
-  
-  for(let i = x; i >= 1; i--) {
-    if(num % i === 0) factorList.push(i);
+  for(let i = 0; i < arr.length - 1; i++) {
+    if(arr[i] !== arr[i + 1] - 1) {
+      result = arr[i + 1];
+      break;
+    }
   }
   
-  return factorList.sort((a, b) => b - a);
+  return result;
 }
 
 // Tests
 
-console.log(factors(54)); // [54, 27, 18, 9, 6, 3, 2, 1]
-console.log(factors(21)); // [21, 7, 3, 1]
+console.log(firstNonConsecutive([1,2,3,4,6,7,8])); // 6
+console.log(firstNonConsecutive([-3,-2,0,1,2])); // 0
+console.log(firstNonConsecutive([-3,-1,0,1,2])); // -1
+console.log(firstNonConsecutive([1,2,3,4])); // null
