@@ -26,16 +26,14 @@
 // Challenge code below:
 
 function firstNonConsecutive (arr) {
-  let result = null;
   
   for(let i = 0; i < arr.length - 1; i++) {
     if(arr[i] !== arr[i + 1] - 1) {
-      result = arr[i + 1];
-      break;
+      return arr[i + 1];
     }
   }
   
-  return result;
+  return null;
 }
 
 // Tests
