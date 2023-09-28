@@ -4,7 +4,15 @@
 
 // Challenge code below:
 
-const squareSum = numbers => numbers.reduce((total, current) => total + (current ** 2), 0);
+const squareSum = numbers => {
+  let sum = 0;
+
+  for (let num of numbers) {
+    sum += (num ** 2);
+  }
+
+  return sum;
+};
 
 // Tests
 
