@@ -5,10 +5,11 @@
 // Challenge code below:
 
 const squareSum = numbers => {
-  let sum = 0;
+  let sum = 0, idx = 0;
 
-  for (let num of numbers) {
-    sum += (num ** 2);
+  while(idx < numbers.length) {
+    sum += (numbers[idx] ** 2);
+    idx++;
   }
 
   return sum;
