@@ -7,10 +7,9 @@
 const squareSum = numbers => {
   let sum = 0, idx = 0;
 
-  while(idx < numbers.length) {
-    sum += (numbers[idx] ** 2);
-    idx++;
-  }
+  numbers.forEach((number) => {
+    sum += (number ** 2);
+  });
 
   return sum;
 };
