@@ -5,7 +5,7 @@
 // Challenge code below:
 
 const squareSum = numbers => {
-  let sum = 0, idx = 0;
+  let sum = 0;
 
   numbers.forEach((number) => {
     sum += (number ** 2);
