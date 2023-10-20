@@ -1,23 +1,18 @@
-// Challenge: Square(n) Sum (8 kyu)
+// Challenge: Is he gonna survive? (8 kyu)
 
-// Complete the square sum function so that it squares each number passed into it and then sums the results together.
+// A hero is on his way to the castle to complete his mission. However, he's been told that the castle is surrounded with a couple of powerful dragons! each dragon takes 2 bullets to be defeated, our hero has no idea how many bullets he should carry.. Assuming he's gonna grab a specific given number of bullets and move forward to fight another specific given number of dragons, will he survive?
+
+// Return true if yes, false otherwise :)
 
 // Challenge code below:
 
-const squareSum = numbers => {
-  let sum = 0;
-
-  numbers.forEach((number) => {
-    sum += (number ** 2);
-  });
-
-  return sum;
-};
+const hero = (bullets, dragons) => (dragons * 2) <= bullets;
 
 // Tests
 
-console.log(squareSum([1, 2])); // 5
-console.log(squareSum([0, 3, 4, 5])); // 50
-console.log(squareSum([])); // 0
-console.log(squareSum([-1, -2])); // 5
-console.log(squareSum([-1, 0, 1])); // 2
+console.log(hero(10, 5)); // true
+console.log(hero(7, 4)); // false
+console.log(hero(4, 5)); // false
+console.log(hero(100, 40)); // true
+console.log(hero(1500, 751)); // false
+console.log(hero(0, 1)); // false
