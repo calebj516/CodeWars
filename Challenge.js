@@ -14,7 +14,13 @@
 
 // Challenge code below:
 
-const strongEnough = (earthquake, age) => earthquake.map(el => el.reduce((total, current) => total + current, 0)).reduce((total, current) => total * current) > buildingStrength(age) ? "Needs Reinforcement!" : "Safe!";
+const strongEnough = (earthquake, age) => {
+  
+  let shockwaveTotals = earthquake.map(el => el.reduce((total, current) => total + current, 0));
+  let magnitude = shockwaveTotals.reduce((total, current) => total * current);
+
+  return magnitude > buildingStrength(age) ? "Needs Reinforcement!" : "Safe!";
+}
 
 const buildingStrength = (age) => 1000 * (0.99 ** age);
 
