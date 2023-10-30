@@ -1,38 +1,36 @@
-// Challenge: Katastrophe! (7 kyu)
+// Challenge: Elevator Distance (7 kyu)
 
-// You have been employed by the Japanese government to write a function that tests whether or not a building is strong enough to withstand a simulated earthquake.
+// Imagine you start on the 5th floor of a building, then travel down to the 2nd floor, then back up to the 8th floor. You have travelled a total of 3 + 6 = 9 floors of distance.
 
-// A building will fall if the magnitude of the earthquake is greater than the strength of the building.
+// Given an array representing a series of floors you must reach by elevator, return an integer representing the total distance travelled for visiting each floor in the array in order.
 
-// An earthquake takes the form of a 2D-Array. Each element within the Outer-Array represents a shockwave, and each element within the Inner-Arrays represents a tremor. The magnitude of the earthquake is determined by the product of the values of its shockwaves. A shockwave is equal to the sum of the values of its tremors.
+// simple examples
 
-// Example earthquake --> [[5,3,7],[3,3,1],[4,1,2]] ((5+3+7) * (3+3+1) * (4+1+2)) = 735
+// elevatorDistance([5,2,8]) = 9
+// elevatorDistance([1,2,3]) = 2
+// elevatorDistance([7,1,7,1]) = 18
 
-// A building begins with a strength value of 1000 when first built, but this value is subject to exponential decay of 1% per year. For more info on exponential decay, follow this link - https://en.wikipedia.org/wiki/Exponential_decay
+// if two consecutive floors are the same,
+// distance travelled between them is 0
+// elevatorDistance([3,3]) = 0
 
-// Given an earthquake and the age of a building, write a function that returns "Safe!" if the building is strong enough, or "Needs Reinforcement!" if it falls.
+// Array will always contain at least 2 floors. Random tests will contain 2-20 elements in array, and floor values between 0 and 30.
 
 // Challenge code below:
 
-const strongEnough = (earthquake, age) => {
+function elevatorDistance(array) {
+
+  let distance = 0;
   
-  let shockwaveTotals = earthquake.map(el => el.reduce((total, current) => total + current, 0));
-  let magnitude = shockwaveTotals.reduce((total, current) => total * current);
-
-  return magnitude > buildingStrength(age) ? "Needs Reinforcement!" : "Safe!";
+  for(let i = 0; i < array.length - 1; i++) {
+    distance += Math.abs(array[i] - array[i + 1]);
+  }
+  
+  return distance;
 }
-
-const buildingStrength = (age) => 1000 * (0.99 ** age);
 
 // Tests
 
-console.log(strongEnough([[2,3,1],[3,1,1],[1,1,2]], 2)); // "Safe!"
-console.log(strongEnough([[5,8,7],[3,3,1],[4,1,2]], 2)); // "Safe!"
-console.log(strongEnough([[5,8,7],[3,3,1],[4,1,2]], 3)); // "Needs Reinforcement!"
-console.log(strongEnough([[5,1,7],[1,1,1],[4,1,2]], 100)); // "Safe!"
-console.log(strongEnough([[5,1,7],[1,1,7],[4,1,2]], 50)); // "Needs Reinforcement!"
-console.log(strongEnough([[5,8,7],[1,1,1],[6,6,1]], 25)); // "Needs Reinforcement!"
-console.log(strongEnough([[5,8,7],[1,1,1],[6,6,1]], 20)); // "Safe!"
-console.log(strongEnough([[1,8,7],[1,3,1],[6,2,1]], 30)); // "Safe!"
-console.log(strongEnough([[1,1,6],[1,1,10],[6,10,1]], 2)); // "Needs Reinforcement!"
-console.log(strongEnough([[1,1,1],[1,1,1],[1,1,1]], 325)); // "Safe!"
+console.log(elevatorDistance([5,2,8])); // 9
+console.log(elevatorDistance([1,2,3])); // 2
+console.log(elevatorDistance([7,1,7,1])); // 18
