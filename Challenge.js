@@ -1,36 +1,22 @@
-// Challenge: Elevator Distance (7 kyu)
+// Challenge: To square(root) or not to square(root) (7 kyu)
 
-// Imagine you start on the 5th floor of a building, then travel down to the 2nd floor, then back up to the 8th floor. You have travelled a total of 3 + 6 = 9 floors of distance.
+// Write a method, that will get an integer array as parameter and will process every number from this array.
 
-// Given an array representing a series of floors you must reach by elevator, return an integer representing the total distance travelled for visiting each floor in the array in order.
+// Return a new array with processing every number of the input-array like this:
 
-// simple examples
+// If the number has an integer square root, take this, otherwise square the number.
 
-// elevatorDistance([5,2,8]) = 9
-// elevatorDistance([1,2,3]) = 2
-// elevatorDistance([7,1,7,1]) = 18
-
-// if two consecutive floors are the same,
-// distance travelled between them is 0
-// elevatorDistance([3,3]) = 0
-
-// Array will always contain at least 2 floors. Random tests will contain 2-20 elements in array, and floor values between 0 and 30.
+// Example
+// [4,3,9,7,2,1] -> [2,9,3,49,4,1]
+// Notes
+// The input array will always contain only positive numbers, and will never be empty or null.
 
 // Challenge code below:
 
-function elevatorDistance(array) {
-
-  let distance = 0;
-  
-  for(let i = 0; i < array.length - 1; i++) {
-    distance += Math.abs(array[i] - array[i + 1]);
-  }
-  
-  return distance;
-}
+const squareOrSquareRoot = array => array.map(num => num ** 0.5 % 1 ? num ** 2 : num ** 0.5);
 
 // Tests
 
-console.log(elevatorDistance([5,2,8])); // 9
-console.log(elevatorDistance([1,2,3])); // 2
-console.log(elevatorDistance([7,1,7,1])); // 18
+console.log(squareOrSquareRoot([ 4, 3, 9, 7, 2, 1 ])); // [ 2, 9, 3, 49, 4, 1 ]
+console.log(squareOrSquareRoot([ 100, 101, 5, 5, 1, 1 ])); // [ 10, 10201, 25, 25, 1, 1 ]
+console.log(squareOrSquareRoot([ 1, 2, 3, 4, 5, 6 ])); // [ 1, 4, 9, 2, 25, 36 ]
