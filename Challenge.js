@@ -1,22 +1,44 @@
-// Challenge: To square(root) or not to square(root) (7 kyu)
+// Challenge: Leap Years (7 kyu)
 
-// Write a method, that will get an integer array as parameter and will process every number from this array.
+// In this kata you should simply determine, whether a given year is a leap year or not. In case you don't know the rules, here they are:
 
-// Return a new array with processing every number of the input-array like this:
-
-// If the number has an integer square root, take this, otherwise square the number.
-
-// Example
-// [4,3,9,7,2,1] -> [2,9,3,49,4,1]
-// Notes
-// The input array will always contain only positive numbers, and will never be empty or null.
+// Years divisible by 4 are leap years,
+// but years divisible by 100 are not leap years,
+// but years divisible by 400 are leap years.
+// Tested years are in range 1600 ≤ year ≤ 4000.
 
 // Challenge code below:
 
-const squareOrSquareRoot = array => array.map(num => num ** 0.5 % 1 ? num ** 2 : num ** 0.5);
+function isLeapYear(year) {
+  if(divisibleBy400(year) || divisibleBy4(year) && !divisibleBy100(year)) return true;
+  return false;
+}
+
+function divisibleBy4(year) {
+  return year % 4 == 0;
+}
+
+function divisibleBy400(year) {
+  return year % 400 == 0;
+}
+
+function divisibleBy100(year) {
+  return year % 100 == 0;
+}
 
 // Tests
 
-console.log(squareOrSquareRoot([ 4, 3, 9, 7, 2, 1 ])); // [ 2, 9, 3, 49, 4, 1 ]
-console.log(squareOrSquareRoot([ 100, 101, 5, 5, 1, 1 ])); // [ 10, 10201, 25, 25, 1, 1 ]
-console.log(squareOrSquareRoot([ 1, 2, 3, 4, 5, 6 ])); // [ 1, 4, 9, 2, 25, 36 ]
+console.log(isLeapYear(2020)); //true
+console.log(isLeapYear(1824)); //true
+console.log(isLeapYear(2152)); //true
+console.log(isLeapYear(1600)); //true
+console.log(isLeapYear(2000)); //true
+console.log(isLeapYear(4000)); //true
+console.log(isLeapYear(1800)); //false
+console.log(isLeapYear(1900)); //false
+console.log(isLeapYear(2100)); //false
+console.log(isLeapYear(2200)); //false
+console.log(isLeapYear(1821)); //false
+console.log(isLeapYear(1942)); //false
+console.log(isLeapYear(2113)); //false
+console.log(isLeapYear(2254)); //false
