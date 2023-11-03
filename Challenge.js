@@ -10,8 +10,7 @@
 // Challenge code below:
 
 function isLeapYear(year) {
-  if(divisibleBy400(year) || divisibleBy4(year) && !divisibleBy100(year)) return true;
-  return false;
+  return divisibleBy400(year) || divisibleBy4(year) && !divisibleBy100(year);
 }
 
 function divisibleBy4(year) {
