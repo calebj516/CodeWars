@@ -4,7 +4,7 @@
 
 // Challenge code below:
 
-const mergeArrays = (a, b) => [...new Set([...a,...b].sort((a, b) => a - b))];
+const mergeArrays = (a, b) => Array.from(new Set([...a,...b].sort((a, b) => a - b)));
 
 // Tests
 
