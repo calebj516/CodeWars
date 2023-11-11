@@ -1,15 +1,20 @@
-// Challenge: Merging sorted integer arrays (without duplicates) (7 kyu)
+// Challenge: Geometry Basics: Distance between points in 2D (8 kyu)
 
 // Write a function that merges two sorted arrays into a single one. The arrays only contain integers. Also, the final outcome must be sorted and not have any duplicate.
 
 // Challenge code below:
 
-const mergeArrays = (a, b) => Array.from(new Set([...a,...b].sort((a, b) => a - b)));
+function distanceBetweenPoints(a, b) {  
+    return Math.sqrt((Math.abs(b.x - a.x) ** 2) + (Math.abs(a.y - b.y) ** 2));
+}
+
+const Point = {
+    x : '',
+    y: ''
+};
 
 // Tests
 
-console.log(mergeArrays([1, 3, 5], [2, 4, 6])); // [1, 2, 3, 4, 5, 6]
-console.log(mergeArrays([2, 4, 8], [2, 4, 6])); // [2, 4, 6, 8]
-console.log(mergeArrays([1, 2, 3], [])); // [1, 2, 3]
-console.log(mergeArrays([1, 1, 2], [])); // [1, 2]
-console.log(mergeArrays([], [])); // []
+console.log(distanceBetweenPoints(new Point(    3,    3), new Point(  3,    3))); // 0
+console.log(distanceBetweenPoints(new Point(    1,    6), new Point(  4,    2))); // 5
+console.log(distanceBetweenPoints(new Point(-10.2, 12.5), new Point(0.3, 14.7))); // 10.728001
