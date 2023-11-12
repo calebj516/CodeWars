@@ -1,20 +1,27 @@
-// Challenge: Geometry Basics: Distance between points in 2D (8 kyu)
+// Challenge: Array2Binary addition (7 kyu)
 
-// Write a function that merges two sorted arrays into a single one. The arrays only contain integers. Also, the final outcome must be sorted and not have any duplicate.
+// Given an array containing only integers, add all the elements and return the binary equivalent of that sum.
+
+// If the array contains any non-integer element (e.g. an object, a float, a string and so on) , return false.
+
+// Note: The sum of an empty array is zero.
+
+// arr2bin([1,2]) == '11'
+// arr2bin([1,2,'a']) == false
 
 // Challenge code below:
 
-function distanceBetweenPoints(a, b) {  
-    return Math.sqrt((Math.abs(b.x - a.x) ** 2) + (Math.abs(a.y - b.y) ** 2));
-}
-
-const Point = {
-    x : '',
-    y: ''
-};
+const arr2bin = (arr) => !arr.some(num => typeof num  != 'number') && arr.reduce((x, y) => x + y, 0).toString(2);
 
 // Tests
 
-console.log(distanceBetweenPoints(new Point(    3,    3), new Point(  3,    3))); // 0
-console.log(distanceBetweenPoints(new Point(    1,    6), new Point(  4,    2))); // 5
-console.log(distanceBetweenPoints(new Point(-10.2, 12.5), new Point(0.3, 14.7))); // 10.728001
+console.log(arr2bin([1,'a',2])); //false
+console.log(arr2bin([1,[],2])); //false
+console.log(arr2bin(['a',[],2])); //false
+console.log(arr2bin(['a', [], {}])); // false
+
+console.log(arr2bin([1,2])); // "11"
+console.log(arr2bin([1,2,3,4,5])); // "1111"
+console.log(arr2bin([1,10,100,1000])); // "10001010111"
+console.log(arr2bin([1,2,-1,-2])); // "0"
+console.log(arr2bin([1,2,-1,-2,1])); // "1"
