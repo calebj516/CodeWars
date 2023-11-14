@@ -1,27 +1,32 @@
-// Challenge: Array2Binary addition (7 kyu)
+// Challenge: Fizz Buzz (7 kyu)
 
-// Given an array containing only integers, add all the elements and return the binary equivalent of that sum.
+// Return an array containing the numbers from 1 to N, where N is the parametered value.
 
-// If the array contains any non-integer element (e.g. an object, a float, a string and so on) , return false.
+// Replace certain values however if any of the following conditions are met:
 
-// Note: The sum of an empty array is zero.
+// If the value is a multiple of 3: use the value "Fizz" instead
+// If the value is a multiple of 5: use the value "Buzz" instead
+// If the value is a multiple of 3 & 5: use the value "FizzBuzz" instead
+// N will never be less than 1.
 
-// arr2bin([1,2]) == '11'
-// arr2bin([1,2,'a']) == false
+// Method calling example:
+
+// fizzbuzz(3) -->  [1, 2, "Fizz"]
 
 // Challenge code below:
 
-const arr2bin = (arr) => arr.every(num => typeof num  == 'number') && arr.reduce((x, y) => x + y, 0).toString(2);
+function fizzbuzz(n) {
+  const results = [];
+  
+  for(let i = 1; i <= n; i++) {
+    results.push((i % 3 == 0 ? 'Fizz' : '') + (i % 5 == 0 ? 'Buzz' : '') || i);
+  }
+  
+  return results;
+}
 
 // Tests
 
-console.log(arr2bin([1,'a',2])); //false
-console.log(arr2bin([1,[],2])); //false
-console.log(arr2bin(['a',[],2])); //false
-console.log(arr2bin(['a', [], {}])); // false
-
-console.log(arr2bin([1,2])); // "11"
-console.log(arr2bin([1,2,3,4,5])); // "1111"
-console.log(arr2bin([1,10,100,1000])); // "10001010111"
-console.log(arr2bin([1,2,-1,-2])); // "0"
-console.log(arr2bin([1,2,-1,-2,1])); // "1"
+console.log(fizzbuzz(10)); // [1,2,'Fizz',4,'Buzz','Fizz',7,8,'Fizz','Buzz'];
+console.log(fizzbuzz(30)); // [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz", 16, 17, "Fizz", 19, "Buzz", "Fizz", 22, 23, "Fizz", "Buzz", 26, "Fizz", 28, 29, "FizzBuzz"];
+console.log(fizzbuzz(1)); // [1]
