@@ -11,7 +11,7 @@
 
 // Challenge code below:
 
-const arr2bin = (arr) => !arr.some(num => typeof num  != 'number') && arr.reduce((x, y) => x + y, 0).toString(2);
+const arr2bin = (arr) => arr.every(num => typeof num  == 'number') && arr.reduce((x, y) => x + y, 0).toString(2);
 
 // Tests
 
