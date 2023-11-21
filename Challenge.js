@@ -1,32 +1,49 @@
-// Challenge: Fizz Buzz (7 kyu)
+// Challenge: Sort Deck of Cards (7 kyu)
 
-// Return an array containing the numbers from 1 to N, where N is the parametered value.
+// Write a function sort_cards() that sorts a shuffled list of cards, so that any given list of cards is sorted by rank, no matter the starting collection.
 
-// Replace certain values however if any of the following conditions are met:
+// All cards in the list are represented as strings, so that sorted list of cards looks like this:
 
-// If the value is a multiple of 3: use the value "Fizz" instead
-// If the value is a multiple of 5: use the value "Buzz" instead
-// If the value is a multiple of 3 & 5: use the value "FizzBuzz" instead
-// N will never be less than 1.
+// ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
 
-// Method calling example:
+// Example:
 
-// fizzbuzz(3) -->  [1, 2, "Fizz"]
+// >>> sort_cards(['3', '9', 'A', '5', 'T', '8', '2', '4', 'Q', '7', 'J', '6', 'K'])
+// ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
+
+// Hint: Tests will have many occurrences of same rank cards, as well as vary in length. You can assume though, that input list is always going to have at least 1 element.
 
 // Challenge code below:
 
-function fizzbuzz(n) {
-  const results = [];
-  
-  for(let i = 1; i <= n; i++) {
-    results.push((i % 3 == 0 ? 'Fizz' : '') + (i % 5 == 0 ? 'Buzz' : '') || i);
+function sortCards(array){
+    const sortOrder = {
+      'A' : 1,
+      '2' : 2,
+      '3' : 3,
+      '4' : 4,
+      '5' : 5,
+      '6' : 6,
+      '7' : 7,
+      '8' : 8,
+      '9' : 9,
+      'T' : 10,
+      'J' : 11,
+      'Q' : 12,
+      'K' : 13
+    };
+    
+    return array.sort((a, b) => sortOrder[a] - sortOrder[b]);
   }
-  
-  return results;
-}
 
 // Tests
 
-console.log(fizzbuzz(10)); // [1,2,'Fizz',4,'Buzz','Fizz',7,8,'Fizz','Buzz'];
-console.log(fizzbuzz(30)); // [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz", 16, 17, "Fizz", 19, "Buzz", "Fizz", 22, 23, "Fizz", "Buzz", 26, "Fizz", 28, 29, "FizzBuzz"];
-console.log(fizzbuzz(1)); // [1]
+console.log(sortCards([3,9,"A",5,"T",8,2,4,"Q",7,"J",6,"K"])); // (["A",2,3,4,5,6,7,8,9,"T","J","Q","K"])
+console.log(sortCards(["J","J",2,"T",9,6])); // ([2,6,9,"T","J","J"])
+console.log(sortCards(["A",2,3,4,5,6,6,7,8,9,"T","J","Q","A"])); // (['A', 'A', 2, 3, 4, 5, 6, 6, 7, 8, 9, 'T', 'J', 'Q'])
+console.log(sortCards([])); // ([])
+console.log(sortCards([2,4,5,6,7,9,"A"])); // (["A",2,4,5,6,7,9])
+console.log(sortCards(["Q","K","T","A","J"])); // (["A","T","J","Q","K"])
+console.log(sortCards([3,"Q",2,"T","J","J","J",8,9,2,2,6])); // ([2,2,2,3,6,8,9,"T","J","J","J","Q"])
+console.log(sortCards([2,3,4,5,6,7,8,9])); // ([2,3,4,5,6,7,8,9])
+console.log(sortCards([2])); // ([2])
+console.log(sortCards(["T","Q",2,"K",6,6,5])); // ([2,5,6,6,"T","Q","K"])
