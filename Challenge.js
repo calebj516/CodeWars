@@ -1,41 +1,55 @@
-// Challenge: Sort Deck of Cards (7 kyu)
+// Challenge: Numbers with this digit inside (JavaScript) (7 kyu)
 
-// Write a function sort_cards() that sorts a shuffled list of cards, so that any given list of cards is sorted by rank, no matter the starting collection.
+// Description:
 
-// All cards in the list are represented as strings, so that sorted list of cards looks like this:
+// You have to search all numbers from inclusive 1 to inclusive a given number x, that have the given digit d in it.
+// The value of d will always be 0 - 9.
+// The value of x will always be greater than 0.
 
-// ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
+// You have to return as an array
 
-// Example:
+// the count of these numbers,
+// their sum
+// and their product.
 
-// >>> sort_cards(['3', '9', 'A', '5', 'T', '8', '2', '4', 'Q', '7', 'J', '6', 'K'])
-// ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
+// For example:
+// x = 11
+// d = 1
+// ->
+// Numbers: 1, 10, 11
+// Return: [3, 22, 110]
 
-// Hint: Tests will have many occurrences of same rank cards, as well as vary in length. You can assume though, that input list is always going to have at least 1 element.
+// If there are no numbers, which include the digit, return [0,0,0].
 
 // Challenge code below:
 
-function sortCards(array){
-    const sortOrder = {
-      'A' : 1,
-      'T' : 10,
-      'J' : 11,
-      'Q' : 12,
-      'K' : 13
-    };
-    
-    return array.sort((a, b) => (sortOrder[a] || a) - (sortOrder[b] || b));
+function numbersWithDigitInside(x, d) {
+  
+  const nums = [];
+  let count = 0, sum = 0, product = 0;
+  
+  for(let i = 1; i <= x; i++) {
+    if(i.toString().includes(d)) {
+      count++;
+      nums.push(i);
+    } 
   }
+  
+  if(nums.length > 0) {
+    sum = nums.reduce((x, y) => x + y, 0);
+    product = nums.reduce((x, y) => x * y);
+  }
+  
+  
+  return [count, sum, product];
+}
+
 
 // Tests
 
-console.log(sortCards([3,9,"A",5,"T",8,2,4,"Q",7,"J",6,"K"])); // (["A",2,3,4,5,6,7,8,9,"T","J","Q","K"])
-console.log(sortCards(["J","J",2,"T",9,6])); // ([2,6,9,"T","J","J"])
-console.log(sortCards(["A",2,3,4,5,6,6,7,8,9,"T","J","Q","A"])); // (['A', 'A', 2, 3, 4, 5, 6, 6, 7, 8, 9, 'T', 'J', 'Q'])
-console.log(sortCards([])); // ([])
-console.log(sortCards([2,4,5,6,7,9,"A"])); // (["A",2,4,5,6,7,9])
-console.log(sortCards(["Q","K","T","A","J"])); // (["A","T","J","Q","K"])
-console.log(sortCards([3,"Q",2,"T","J","J","J",8,9,2,2,6])); // ([2,2,2,3,6,8,9,"T","J","J","J","Q"])
-console.log(sortCards([2,3,4,5,6,7,8,9])); // ([2,3,4,5,6,7,8,9])
-console.log(sortCards([2])); // ([2])
-console.log(sortCards(["T","Q",2,"K",6,6,5])); // ([2,5,6,6,"T","Q","K"])
+console.log(numbersWithDigitInside(5,6)); // [ 0, 0, 0 ]
+console.log(numbersWithDigitInside(1,0)); // [ 0, 0, 0 ]
+console.log(numbersWithDigitInside(7,6)); // [ 1, 6, 6 ]
+console.log(numbersWithDigitInside(11,1)); // [ 3, 22, 110 ]
+console.log(numbersWithDigitInside(20,0)); // [ 2, 30, 200 ]
+console.log(numbersWithDigitInside(44,4)); // [ 9, 286, 5955146588160 ]
