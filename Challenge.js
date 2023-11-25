@@ -25,23 +25,17 @@
 
 function numbersWithDigitInside(x, d) {
   
-  const nums = [];
-  let count = 0, sum = 0, product = 0;
+  let count = 0, sum = 0, product = 1;
   
   for(let i = 1; i <= x; i++) {
     if(i.toString().includes(d)) {
       count++;
-      nums.push(i);
+      sum += i;
+      product *= i;
     } 
-  }
+  }  
   
-  if(nums.length > 0) {
-    sum = nums.reduce((x, y) => x + y, 0);
-    product = nums.reduce((x, y) => x * y);
-  }
-  
-  
-  return [count, sum, product];
+  return count > 0 ? [count, sum, product] : [0, 0, 0];
 }
 
 
