@@ -28,7 +28,7 @@ function numbersWithDigitInside(x, d) {
   let count = 0, sum = 0, product = 1;
   
   for(let i = 1; i <= x; i++) {
-    if(i.toString().includes(d)) {
+    if(strIncludes(i.toString(), d)) {
       count++;
       sum += i;
       product *= i;
@@ -36,6 +36,19 @@ function numbersWithDigitInside(x, d) {
   }  
   
   return count > 0 ? [count, sum, product] : [0, 0, 0];
+}
+
+const strIncludes = (str, char) => {
+  let flag = false;
+
+  for (let i = 0; i < str.length; i++) {
+    if (char == str[i]) {
+      flag = true;
+      break;
+    }
+  }
+
+  return flag;
 }
 
 
