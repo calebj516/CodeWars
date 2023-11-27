@@ -1,62 +1,44 @@
-// Challenge: Numbers with this digit inside (JavaScript) (7 kyu)
+// Challenge: Total amount of points (8 kyu)
 
 // Description:
 
-// You have to search all numbers from inclusive 1 to inclusive a given number x, that have the given digit d in it.
-// The value of d will always be 0 - 9.
-// The value of x will always be greater than 0.
+// Our football team has finished the championship.
 
-// You have to return as an array
+// Our team's match results are recorded in a collection of strings. Each match is represented by a string in the format "x:y", where x is our team's score and y is our opponents score.
 
-// the count of these numbers,
-// their sum
-// and their product.
+// For example: ["3:1", "2:2", "0:1", ...]
 
-// For example:
-// x = 11
-// d = 1
-// ->
-// Numbers: 1, 10, 11
-// Return: [3, 22, 110]
+// Points are awarded for each match as follows:
 
-// If there are no numbers, which include the digit, return [0,0,0].
+// if x > y: 3 points (win)
+// if x < y: 0 points (loss)
+// if x = y: 1 point (tie)
+// We need to write a function that takes this collection and returns the number of points our team (x) got in the championship by the rules given above.
+
+// Notes:
+
+// our team always plays 10 matches in the championship
+// 0 <= x <= 4
+// 0 <= y <= 4
 
 // Challenge code below:
 
-function numbersWithDigitInside(x, d) {
+function points(games) {
+  let points = 0;
   
-  let count = 0, sum = 0, product = 1;
+  games.forEach(match => {
+    let [x, y] = match.split(':');
+    x > y ? points += 3 : x == y ? points += 1 : points += 0;
+  });
   
-  for(let i = 1; i <= x; i++) {
-    if(strIncludes(i.toString(), d)) {
-      count++;
-      sum += i;
-      product *= i;
-    } 
-  }  
   
-  return count > 0 ? [count, sum, product] : [0, 0, 0];
+  return points;
 }
-
-const strIncludes = (str, char) => {
-  let flag = false;
-
-  for (let i = 0; i < str.length; i++) {
-    if (char == str[i]) {
-      flag = true;
-      break;
-    }
-  }
-
-  return flag;
-}
-
 
 // Tests
 
-console.log(numbersWithDigitInside(5,6)); // [ 0, 0, 0 ]
-console.log(numbersWithDigitInside(1,0)); // [ 0, 0, 0 ]
-console.log(numbersWithDigitInside(7,6)); // [ 1, 6, 6 ]
-console.log(numbersWithDigitInside(11,1)); // [ 3, 22, 110 ]
-console.log(numbersWithDigitInside(20,0)); // [ 2, 30, 200 ]
-console.log(numbersWithDigitInside(44,4)); // [ 9, 286, 5955146588160 ]
+console.log(points(["1:0","2:0","3:0","4:0","2:1","3:1","4:1","3:2","4:2","4:3"])); // 30
+console.log(points(["1:1","2:2","3:3","4:4","2:2","3:3","4:4","3:3","4:4","4:4"])); // 10
+console.log(points(["0:1","0:2","0:3","0:4","1:2","1:3","1:4","2:3","2:4","3:4"])); // 0
+console.log(points(["1:0","2:0","3:0","4:0","2:1","1:3","1:4","2:3","2:4","3:4"])); // 15
+console.log(points(["1:0","2:0","3:0","4:4","2:2","3:3","1:4","2:3","2:4","3:4"])); // 12
