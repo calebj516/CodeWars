@@ -28,7 +28,11 @@ function points(games) {
   
   games.forEach(match => {
     let [x, y] = match.split(':');
-    x > y ? points += 3 : x == y ? points += 1 : points += 0;
+    if (x > y) {
+      points += 3;
+    } else if (x == y) {
+      points += 1;
+    }
   });
   
   
