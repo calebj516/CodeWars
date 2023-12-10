@@ -1,48 +1,27 @@
-// Challenge: Total amount of points (8 kyu)
+// Challenge: Simple validation of a username with regex (8 kyu)
 
 // Description:
 
-// Our football team has finished the championship.
+// Write a simple regex to validate a username. Allowed characters are:
 
-// Our team's match results are recorded in a collection of strings. Each match is represented by a string in the format "x:y", where x is our team's score and y is our opponents score.
-
-// For example: ["3:1", "2:2", "0:1", ...]
-
-// Points are awarded for each match as follows:
-
-// if x > y: 3 points (win)
-// if x < y: 0 points (loss)
-// if x = y: 1 point (tie)
-// We need to write a function that takes this collection and returns the number of points our team (x) got in the championship by the rules given above.
-
-// Notes:
-
-// our team always plays 10 matches in the championship
-// 0 <= x <= 4
-// 0 <= y <= 4
+// lowercase letters,
+// numbers,
+// underscore
+// Length should be between 4 and 16 characters (both included).
 
 // Challenge code below:
 
-function points(games) {
-  let points = 0;
-  
-  games.forEach(match => {
-    let [x, y] = match.split(':');
-    if (x > y) {
-      points += 3;
-    } else if (x == y) {
-      points += 1;
-    }
-  });
-  
-  
-  return points;
-}
+const validateUsr = username => /^[a-z0-9_]{4,16}$/.test(username);
 
 // Tests
 
-console.log(points(["1:0","2:0","3:0","4:0","2:1","3:1","4:1","3:2","4:2","4:3"])); // 30
-console.log(points(["1:1","2:2","3:3","4:4","2:2","3:3","4:4","3:3","4:4","4:4"])); // 10
-console.log(points(["0:1","0:2","0:3","0:4","1:2","1:3","1:4","2:3","2:4","3:4"])); // 0
-console.log(points(["1:0","2:0","3:0","4:0","2:1","1:3","1:4","2:3","2:4","3:4"])); // 15
-console.log(points(["1:0","2:0","3:0","4:4","2:2","3:3","1:4","2:3","2:4","3:4"])); // 12
+console.log(validateUsr('asddsa')); // true
+console.log(validateUsr('a')); // false
+console.log(validateUsr('Hass')); // false
+console.log(validateUsr('Hasd_12assssssasasasasasaasasasasas')); // false
+console.log(validateUsr('')); // false
+console.log(validateUsr('____')); // true
+console.log(validateUsr('012')); // false
+console.log(validateUsr('p1pp1')); // true
+console.log(validateUsr('asd43 34')); // false
+console.log(validateUsr('asd43_34')); // true
