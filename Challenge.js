@@ -11,7 +11,7 @@
 
 // Challenge code below:
 
-const validateUsr = username => /^[a-z0-9_]{4,16}$/.test(username);
+const validateUsr = username => /^[a-z\d_]{4,16}$/.test(username);
 
 // Tests
 
