@@ -24,7 +24,7 @@
 // Challenge code below:
 
 function quicksum(packet){
-  if (packet.replace(/[A-Z ]/g, '').length > 0) return 0;
+  if ((/[^A-Z ]/g).test(packet)) return 0;
   
   return packet.split('').reduce((x, y, i) => x + (y !== ' ' ? (y.charCodeAt(0) - 64) * (i + 1) : 0), 0);
 }
