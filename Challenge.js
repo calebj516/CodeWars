@@ -12,7 +12,7 @@
 
 // Challenge code below:
 
-const replace = s => s.replace(/[aeiouAEIOU]/g, '!');
+const replace = s => s.replace(/[aeiou]/gi, '!');
 
 // Tests
 
