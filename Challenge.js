@@ -1,22 +1,36 @@
-// Challenge: Exclamation marks series #11: Replace all vowel to exclamation mark in the sentence (7 kyu)
+// Challenge: Correct the mistakes of the character recognition software (7 kyu)
 
 // Description:
 
-// Replace all vowel to exclamation mark in the sentence. aeiouAEIOU is vowel.
+// Character recognition software is widely used to digitise printed texts. Thus the texts can be edited, searched and stored on a computer.
 
-// Examples
-// replace("Hi!") === "H!!"
-// replace("!Hi! Hi!") === "!H!! H!!"
-// replace("aeiou") === "!!!!!"
-// replace("ABCDE") === "!BCD!"
+// When documents (especially pretty old ones written with a typewriter)); // are digitised character recognition softwares often make mistakes.
+
+// Your task is correct the errors in the digitised text. You only have to handle the following mistakes:
+
+// S is misinterpreted as 5
+// O is misinterpreted as 0
+// I is misinterpreted as 1
+// The test cases contain numbers only by mistake.
 
 // Challenge code below:
 
-const replace = s => s.replace(/[aeiou]/gi, '!');
+function correct(string){
+    return string.split('').map(function(char){
+        if(char == '5'){
+            return 'S';
+        } else if(char == '0'){
+            return 'O';
+        } else if(char == '1'){
+            return 'I';
+        } else {
+            return char;
+        }
+    }).join('');
+}
 
 // Tests
 
-console.log(replace("Hi!")); // "H!!"
-console.log(replace("!Hi! Hi!")); // "!H!! H!!"
-console.log(replace("aeiou")); // "!!!!!"
-console.log(replace("ABCDE")); // "!BCD!"
+console.log(correct("1F-RUDYARD K1PL1NG")); //"IF-RUDYARD KIPLING"
+console.log(correct("R0BERT MERLE - THE DAY 0F THE D0LPH1N")); //"ROBERT MERLE - THE DAY OF THE DOLPHIN"
+console.log(correct("R1CHARD P. FEYNMAN - THE FEYNMAN LECTURE5 0N PHY51C5")); //"RICHARD P. FEYNMAN - THE FEYNMAN LECTURES ON PHYSICS"
