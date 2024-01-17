@@ -16,17 +16,14 @@
 // Challenge code below:
 
 function correct(string){
-    return string.split('').map(function(char){
-        if(char == '5'){
-            return 'S';
-        } else if(char == '0'){
-            return 'O';
-        } else if(char == '1'){
-            return 'I';
-        } else {
-            return char;
-        }
-    }).join('');
+    
+    const corrections = {
+      '5':'S',
+      '0':'O',
+      '1':'I'
+    };
+    
+    return string.split('').map(char => corrections[char] || char).join('');
 }
 
 // Tests
