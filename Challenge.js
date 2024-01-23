@@ -1,24 +1,29 @@
-// Challenge: Correct the mistakes of the character recognition software (7 kyu)
+// Challenge: Basic Math (Add or Subtract) - (7 kyu)
 
 // Description:
 
-// Character recognition software is widely used to digitise printed texts. Thus the texts can be edited, searched and stored on a computer.
+// In this kata, you will do addition and subtraction on a given string. The return value must be also a string.
 
-// When documents (especially pretty old ones written with a typewriter)); // are digitised character recognition softwares often make mistakes.
+// Note: the input will not be empty.
 
-// Your task is correct the errors in the digitised text. You only have to handle the following mistakes:
+// Examples
 
-// S is misinterpreted as 5
-// O is misinterpreted as 0
-// I is misinterpreted as 1
-// The test cases contain numbers only by mistake.
+// "1plus2plus3plus4"  --> "10"
+// "1plus2plus3minus4" -->  "2"
 
 // Challenge code below:
 
-const correct = (string) => string.replace(/5/g, 'S').replace(/0/g, 'O').replace(/1/g, 'I');
+function calculate(str) {
+  
+    str = str.replace(/plus/g, '+').replace(/minus/g, '-');
+    
+    return eval(str).toString();
+}
 
 // Tests
 
-console.log(correct("1F-RUDYARD K1PL1NG")); //"IF-RUDYARD KIPLING"
-console.log(correct("R0BERT MERLE - THE DAY 0F THE D0LPH1N")); //"ROBERT MERLE - THE DAY OF THE DOLPHIN"
-console.log(correct("R1CHARD P. FEYNMAN - THE FEYNMAN LECTURE5 0N PHY51C5")); //"RICHARD P. FEYNMAN - THE FEYNMAN LECTURES ON PHYSICS"
+console.log(calculate("1plus2plus3plus4")); // '10'
+console.log(calculate('1minus2minus3minus4')); // '-8'
+console.log(calculate('1plus2plus3minus4')); // '2'
+console.log(calculate('1minus2plus3minus4')); // '-2'
+console.log(calculate('1plus2minus3plus4minus5')); // '-1'
