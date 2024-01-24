@@ -13,12 +13,7 @@
 
 // Challenge code below:
 
-function calculate(str) {
-  
-    str = str.replace(/plus/g, '+').replace(/minus/g, '-');
-    
-    return eval(str).toString();
-}
+const calculate = str => eval(str.replace(/plus/gi, '+').replace(/minus/gi, '-')).toString();
 
 // Tests
 
