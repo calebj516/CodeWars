@@ -13,7 +13,19 @@
 
 // Challenge code below:
 
-const calculate = str => eval(str.replace(/plus/gi, '+').replace(/minus/gi, '-')).toString();
+const calculate = str => {
+    const nums = str.split(/plus|minus/);
+    const ops = str.match(/plus|minus/g);
+
+    let sum = Number(nums[0]);
+
+    for(let i = 0; i < ops.length; i++) {
+        if(ops[i] == 'plus') sum += Number(nums[i + 1]);
+        if(ops[i] == 'minus') sum -= Number(nums[i + 1]);
+    }
+
+    return sum.toString();
+}
 
 // Tests
 
