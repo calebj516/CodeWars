@@ -11,12 +11,17 @@
 // Challenge code below:
 
 function michaelPays(costs) {
+
+  const MICHAEL_MINIMUM = 5;
+  const KATE_MAXIMUM = 10;
   
-    if(costs < 5) return Math.round(100 * costs) / 100;
-    if((costs / 3) > 10) return Math.round(100 * (costs - 10)) / 100;
+    if(costs < MICHAEL_MINIMUM) return rounding(costs, 100);
+    if((costs / 3) > KATE_MAXIMUM) return rounding(costs - 10, 100);
     
-    return Math.round(100 * (costs - (costs / 3))) / 100;
-  }
+    return rounding((costs - (costs / 3)), 100);
+}
+
+const rounding = (num, places) => Math.round(places * num) / places;
 
 // Tests
 
