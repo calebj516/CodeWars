@@ -1,37 +1,36 @@
-// Challenge: Pizza Payments (7 kyu)
+// Challenge: Offload your work! (7 kyu)
 
 // Description:
 
-// Kate and Michael want to buy a pizza and share it. Depending on the price of the pizza, they are going to divide the costs:
+// You are the best freelancer in the city. Everybody knows you, but what they don't know, is that you are actually offloading your work to other freelancers and and you rarely need to do any work. You're living the life!
 
-// If the pizza is less than €5,- Michael invites Kate, so Michael pays the full price.
-// Otherwise Kate will contribute 1/3 of the price, but no more than €10 (she's broke :-) and Michael pays the rest.
-// How much is Michael going to pay? Calculate the amount with two decimals, if necessary.
+// To make this process easier you need to write a method called workNeeded to figure out how much time you need to contribute to a project.
+
+// Giving the amount of time in minutes needed to complete the project and an array of pair values representing other freelancers' time in [Hours, Minutes] format ie. [[2, 33], [3, 44]] calculate how much time you will need to contribute to the project (if at all) and return a string depending on the case.
+
+// If we need to contribute time to the project then return "I need to work x hour(s) and y minute(s)"
+// If we don't have to contribute any time to the project then return "Easy Money!"
 
 // Challenge code below:
 
-function michaelPays(costs) {
-
-  const MICHAEL_MINIMUM = 5;
-  const KATE_MAXIMUM = 10;
+function workNeeded(projectMinutes, freelancers){
+  let freelanceMinutes = 0;
   
-    if(costs < MICHAEL_MINIMUM) return rounding(costs, 100);
-    if((costs / 3) > KATE_MAXIMUM) return rounding(costs - 10, 100);
-    
-    return rounding((costs - (costs / 3)), 100);
-}
+  for(let i = 0; i < freelancers.length; i++) {
+    freelanceMinutes += ((freelancers[i][0] * 60) + freelancers[i][1]);
+  } 
 
-const rounding = (num, places) => Math.round(places * num) / places;
+  const totalMinutes = projectMinutes - freelanceMinutes;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return projectMinutes > freelanceMinutes ? `I need to work ${hours} hour(s) and ${minutes} minute(s)` : "Easy Money!";
+}
 
 // Tests
 
-console.log(michaelPays(15)); // 10
-console.log(michaelPays(4)); // 4
-console.log(michaelPays(4.99)); // 4.99
-console.log(michaelPays(5)); // 3.33
-console.log(michaelPays(30)); // 20
-console.log(michaelPays(80)); // 70
-console.log(michaelPays(22)); // 14.67
-console.log(michaelPays(5.9181)); // 3.95
-console.log(michaelPays(28.789)); // 19.19
-console.log(michaelPays(4.325)); // 4.33
+console.log(workNeeded(60, [[1,0]])); // "Easy Money!"
+console.log(workNeeded(60, [[0,0]])); // "I need to work 1 hour(s) and 0 minute(s)"
+console.log(workNeeded(141, [[1,55], [0,25]])); // "I need to work 0 hour(s) and 1 minute(s)"
+console.log(workNeeded(2000, [[1,55], [0,25], [1, 10]])); // "I need to work 29 hour(s) and 50 minute(s)"
+console.log(workNeeded(2500, [[1,55], [0,25], [1, 10], [3, 14], [2, 6]])); // "I need to work 32 hour(s) and 50 minute(s)"
