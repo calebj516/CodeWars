@@ -14,17 +14,11 @@
 // Challenge code below:
 
 function workNeeded(projectMinutes, freelancers){
-  let freelanceMinutes = 0;
   
-  for(let i = 0; i < freelancers.length; i++) {
-    freelanceMinutes += ((freelancers[i][0] * 60) + freelancers[i][1]);
-  } 
-
+  const freelanceMinutes = freelancers.reduce((total, [h, m]) => total + ((h * 60) + m), 0);
   const totalMinutes = projectMinutes - freelanceMinutes;
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
 
-  return projectMinutes > freelanceMinutes ? `I need to work ${hours} hour(s) and ${minutes} minute(s)` : "Easy Money!";
+  return projectMinutes > freelanceMinutes ? `I need to work ${Math.floor(totalMinutes / 60)} hour(s) and ${totalMinutes % 60} minute(s)` : "Easy Money!";  
 }
 
 // Tests
