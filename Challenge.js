@@ -1,30 +1,35 @@
-// Challenge: Offload your work! (7 kyu)
+// Challenge: Sum without highest and lowest number (8 kyu)
 
 // Description:
 
-// You are the best freelancer in the city. Everybody knows you, but what they don't know, is that you are actually offloading your work to other freelancers and and you rarely need to do any work. You're living the life!
+// Sum all the numbers of a given array ( cq. list )); // except the highest and the lowest element ( by value, not by index! ).
 
-// To make this process easier you need to write a method called workNeeded to figure out how much time you need to contribute to a project.
+// The highest or lowest element respectively is a single element at each edge, even if there are more than one with the same value.
 
-// Giving the amount of time in minutes needed to complete the project and an array of pair values representing other freelancers' time in [Hours, Minutes] format ie. [[2, 33], [3, 44]] calculate how much time you will need to contribute to the project (if at all) and return a string depending on the case.
+// Mind the input validation.
 
-// If we need to contribute time to the project then return "I need to work x hour(s) and y minute(s)"
-// If we don't have to contribute any time to the project then return "Easy Money!"
+// Example
+
+// { 6, 2, 1, 8, 10 } => 16
+// { 1, 1, 11, 2, 3 } => 6
+
+// Input validation
+
+// If an empty value ( null, None, Nothing etc. ) is given instead of an array, or the given array is an empty list or a list with only 1 element, return 0.
 
 // Challenge code below:
 
-function workNeeded(projectMinutes, freelancers){
-  
-  const freelanceMinutes = freelancers.reduce((total, [h, m]) => total + ((h * 60) + m), 0);
-  const totalMinutes = projectMinutes - freelanceMinutes;
-
-  return projectMinutes > freelanceMinutes ? `I need to work ${Math.floor(totalMinutes / 60)} hour(s) and ${totalMinutes % 60} minute(s)` : "Easy Money!";  
+function sumArray(array) {  
+  return array && array.length > 2 ? array.sort((a, b) => a - b).slice(1, array.length - 1).reduce((total, current) => total + current, 0) : 0;
 }
 
 // Tests
 
-console.log(workNeeded(60, [[1,0]])); // "Easy Money!"
-console.log(workNeeded(60, [[0,0]])); // "I need to work 1 hour(s) and 0 minute(s)"
-console.log(workNeeded(141, [[1,55], [0,25]])); // "I need to work 0 hour(s) and 1 minute(s)"
-console.log(workNeeded(2000, [[1,55], [0,25], [1, 10]])); // "I need to work 29 hour(s) and 50 minute(s)"
-console.log(workNeeded(2500, [[1,55], [0,25], [1, 10], [3, 14], [2, 6]])); // "I need to work 32 hour(s) and 50 minute(s)"
+console.log(sumArray(null)); // 0
+console.log(sumArray([ ])); // 0
+console.log(sumArray([ 3 ])); // 0
+console.log(sumArray([ 3, 5 ])); // 0
+console.log(sumArray([ 6, 2, 1, 8, 10 ])); // 16
+console.log(sumArray([ 0, 1, 6, 10, 10 ])); // 17
+console.log(sumArray([ -6, -20, -1, -10, -12 ])); // -28
+console.log(sumArray([ -6, 20, -1, 10, -12 ])); // 3
