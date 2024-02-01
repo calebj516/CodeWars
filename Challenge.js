@@ -20,9 +20,8 @@
 // Challenge code below:
 
 function sumArray(array) {  
-  return array && array.length > 2 ? array.sort((a, b) => a - b).slice(1, array.length - 1).reduce((total, current) => total + current, 0) : 0;
+  return array && array.length > 2 ? array.reduce((total, current) => total + current, 0) - Math.max(...array) - Math.min(...array) : 0;
 }
-
 // Tests
 
 console.log(sumArray(null)); // 0
