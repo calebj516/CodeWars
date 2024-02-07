@@ -8,7 +8,7 @@
 
 // Challenge code below:
 
-const arrayPlusArray = (arr1, arr2) => [...arr1, ...arr2].reduce((total, current) => total + current, 0);
+const arrayPlusArray = (arr1, arr2) => arr1.concat(arr2).reduce((total, current) => total + current, 0);
 
 // Tests
 
