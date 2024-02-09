@@ -1,18 +1,40 @@
-// Challenge: Array plus array (8 kyu)
+// Challenge: Flick Switch (8 kyu)
 
 // Description:
 
-// I'm new to coding and now I want to get the sum of two arrays... Actually the sum of all their elements. I'll appreciate for your help.
+// Create a function that always returns True/true for every item in a given list.
+// However, if an element is the word 'flick', switch to always returning the opposite boolean value.
 
-// P.S. Each array includes only integer numbers. Output is a number too.
+// Examples
+
+// ['codewars', 'flick', 'code', 'wars'] ➞ [True, False, False, False]
+
+// ['flick', 'chocolate', 'adventure', 'sunshine'] ➞ [False, False, False, False]
+
+// ['bicycle', 'jarmony', 'flick', 'sheep', 'flick'] ➞ [True, True, False, False, True]
+
+// Notes
+
+// "flick" will always be given in lowercase.
+// A list may contain multiple flicks.
+// Switch the boolean value on the same element as the flick itself.
 
 // Challenge code below:
 
-const arrayPlusArray = (arr1, arr2) => arr1.concat(arr2).reduce((total, current) => total + current, 0);
+const flickSwitch = arr => {
+    let status = true;
+
+    return arr.map(el => el == 'flick' ? status = !status : status);
+}
 
 // Tests
 
-console.log(arrayPlusArray([1, 2, 3], [4, 5, 6])); // 21
-console.log(arrayPlusArray([-1, -2, -3], [-4, -5, -6])); // -21
-console.log(arrayPlusArray([0, 0, 0], [4, 5, 6])); // 15
-console.log(arrayPlusArray([100, 200, 300], [400, 500, 600])); // 2100
+console.log(flickSwitch(["codewars", "flick", "code", "wars"])); // [true, false, false, false]
+console.log(flickSwitch(["flick", "chocolate", "adventure", "sunshine"])); // [false, false, false, false]
+console.log(flickSwitch(["bicycle", "jarmony", "flick", "sheep", "flick"])); // [true, true, false, false, true]
+console.log(flickSwitch(["flick", "flick", "flick", "flick", "flick"])); // [false, true, false, true, false]
+console.log(flickSwitch(["codewars", "chocolate", "adventure", "sunshine"])); // [true, true, true, true]
+console.log(flickSwitch(["john, smith, susan", "flick"])); // [true, false]
+console.log(flickSwitch(["bicycle"])); // [true]
+console.log(flickSwitch(["flick"])); // [false]
+console.log(flickSwitch([])); // []
