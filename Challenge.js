@@ -16,6 +16,7 @@
 // countCorrectCharacters("dog", "cod"); //1 ("o")
 // countCorrectCharacters("dog", "bog"); //2 ("o" and "g")
 // countCorrectCharacters("dog", "dog"); //3 (Correct!)
+
 // The caller should ensure that the guessed word is always the same length as the correct word, but since it could cause problems if this were not the case, you need to check for this eventuality:
 
 // //Throw an error if the two parameters are of different lengths.
@@ -29,9 +30,9 @@ function countCorrectCharacters(correctWord, guess){
 
     let count = 0;
 
-    for(let i = 0; i < correctWord.length; i++) {
-        if(correctWord[i] == guess[i]) count++;
-    }
+    correctWord.split('').forEach((letter, i) => {
+        if(letter == guess[i]) count++;
+    });
 
     return count;
 } 
@@ -48,4 +49,3 @@ console.log(countCorrectCharacters("abcde", "abcde")); // 5, "Expected 5"
 console.log(countCorrectCharacters("same", "same")); // 4, "Expected 4"
 console.log(countCorrectCharacters("z", "z")); // 1, "Expected 1"
 console.log(countCorrectCharacters("len", "lengh")); // Error
-console.log(countCorrectCharacters("abcde", "dea")); // Error
