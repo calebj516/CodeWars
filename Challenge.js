@@ -28,14 +28,15 @@ function countCorrectCharacters(correctWord, guess){
 
     if(correctWord.length != guess.length) throw new Error();
 
-    let count = 0;
-
-    correctWord.split('').forEach((letter, i) => {
-        if(letter == guess[i]) count++;
-    });
+    let count = 0, i = 0;
+  
+    while(i < correctWord.length) {
+      if(correctWord[i] == guess[i]) count++;
+      i++;
+    }
 
     return count;
-} 
+}  
 
 // Tests
 
