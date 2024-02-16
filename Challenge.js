@@ -29,9 +29,9 @@ function countCorrectCharacters(correctWord, guess){
     if(correctWord.length != guess.length) throw new Error();
 
     let count = 0, i = 0;
-  
-    while(i < correctWord.length) {
-      if(correctWord[i] == guess[i]) count++;
+
+    for(let word of correctWord) {
+      if(word == guess[i]) count++;
       i++;
     }
 
