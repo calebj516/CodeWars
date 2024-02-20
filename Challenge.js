@@ -1,38 +1,23 @@
-// Challenge: Gravity Flip (8 kyu)
+// Challenge: Multiply the number (8 kyu)
 
 // Description:
 
-// If you've completed this kata already and want a bigger challenge, here's the 3D version
+// Jack really likes his number five: the trick here is that you have to multiply each number by 5 raised to the number of digits of each numbers, so, for example:
 
-// Bob is bored during his physics lessons so he's built himself a toy box to help pass the time. The box is special because it has the ability to change gravity.
-
-// There are some columns of toy cubes in the box arranged in a line. The i-th column contains a_i cubes. At first, the gravity in the box is pulling the cubes downwards. When Bob switches the gravity, it begins to pull all the cubes to a certain side of the box, d, which can be either 'L' or 'R' (left or right). Below is an example of what a box of cubes might look like before and after switching gravity.
-
-// +---+                                       +---+
-// |   |                                       |   |
-// +---+                                       +---+
-// +---++---+     +---+              +---++---++---+
-// |   ||   |     |   |   -->        |   ||   ||   |
-// +---++---+     +---+              +---++---++---+
-// +---++---++---++---+         +---++---++---++---+
-// |   ||   ||   ||   |         |   ||   ||   ||   |
-// +---++---++---++---+         +---++---++---++---+
-// Given the initial configuration of the cubes in the box, find out how many cubes are in each of the n columns after Bob switches the gravity.
-
-// Examples (input -> output:
-// * 'R', [3, 2, 1, 2]      ->  [1, 2, 2, 3]
-// * 'L', [1, 4, 5, 3, 5 ]  ->  [5, 5, 4, 3, 1]
+// multiply(3) == 15 # 3 * 5¹
+// multiply(10) == 250 # 10 * 5²
+// multiply(200) == 25000 # 200 * 5³
+// multiply(0) == 0 # 0 * 5¹
+// multiply(-3) == -15 # -3 * 5¹
 
 // Challenge code below:
 
-const flip=(d, a)=>{
-  return a.sort((a, b) => d == 'R' ? a - b : b - a);
-}
+const multiply = (number) => number * 5 ** Math.abs(number).toString().length;
 
 // Tests
 
-console.log(flip('R', [4, 5, 6, 7, 1])); // [1, 4, 5, 6, 7]
-console.log(flip('L', [3, 0, 9, 8, 1, 2])); // [9, 8, 3, 2, 1, 0]
-console.log(flip('L', [0, 0, 12, 0, 1])); // [12, 1, 0, 0, 0]
-console.log(flip('R', [13, 2, 4, 7, 93])); // [2, 4, 7, 13, 93]
-console.log(flip('R', [5, 4, 3, 2, 1])); // [1, 2, 3, 4, 5]
+console.log(multiply(10)); //250
+console.log(multiply(5)); //25
+console.log(multiply(200)); //25000
+console.log(multiply(0)); //0
+console.log(multiply(-2)); //-10
