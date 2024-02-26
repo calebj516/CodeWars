@@ -1,23 +1,18 @@
-// Challenge: Multiply the number (8 kyu)
+// Challenge: Easy logs (8 kyu)
 
 // Description:
 
-// Jack really likes his number five: the trick here is that you have to multiply each number by 5 raised to the number of digits of each numbers, so, for example:
-
-// multiply(3) == 15 # 3 * 5¹
-// multiply(10) == 250 # 10 * 5²
-// multiply(200) == 25000 # 200 * 5³
-// multiply(0) == 0 # 0 * 5¹
-// multiply(-3) == -15 # -3 * 5¹
+// Given a logarithm base X and two values A and B, return a sum of logratihms with the base X
 
 // Challenge code below:
 
-const multiply = (number) => number * 5 ** Math.abs(number).toString().length;
+const logs = (x, a, b) => (Math.log(a) + Math.log(b)) / Math.log(x);
 
 // Tests
 
-console.log(multiply(10)); //250
-console.log(multiply(5)); //25
-console.log(multiply(200)); //25000
-console.log(multiply(0)); //0
-console.log(multiply(-2)); //-10
+console.log(logs(10, 2, 3)); // 0.7781512503836435
+console.log(logs(5, 2, 3)); // 1.1132827525593785
+console.log(logs(1000, 2, 3)); // 0.25938375012788123
+console.log(logs(2, 1, 2)); // 1
+console.log(logs(0.00001, 0.002, 0.01)); // 0.9397940008672038
+console.log(logs(0.1, 0.002, 0.01)); // 4.69897000433602
