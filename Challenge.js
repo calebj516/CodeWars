@@ -6,7 +6,7 @@
 
 // Challenge code below:
 
-const logs = (x, a, b) => (Math.log(a) + Math.log(b)) / Math.log(x);
+const logs = (x, a, b) => Math.log(a*b) / Math.log(x);
 
 // Tests
 
