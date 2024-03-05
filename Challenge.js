@@ -1,46 +1,56 @@
-// Challenge: Days in the year (8 kyu)
+// Challenge: Fundamentals: Return (8 kyu)
 
 // Description:
 
-// A variation of determining leap years, assuming only integers are used and years can be negative and positive.
+// Make multiple functions that will return the sum, difference, modulus, product, quotient, and the exponent respectively.
 
-// Write a function which will return the days in the year and the year entered in a string. For example:
+// Please use the following function names:
 
-// yearDays(2000) returns "2000 has 366 days"
+// addition = add
 
-// There are a few assumptions we will accept the year 0, even though there is no year 0 in the Gregorian Calendar.
+// multiply = multiply
 
-// Also the basic rule for validating a leap year are as follows
+// division = divide (both integer and float divisions are accepted)
 
-// Most years that can be divided evenly by 4 are leap years.
+// modulus = mod
 
-// Exception: Century years are NOT leap years UNLESS they can be evenly divided by 400.
+// exponential = exponent
 
-// So the years 0, -64 and 2016 will return 366 days. Whilst 1974, -10 and 666 will return 365 days.
+// subtraction = subt
+
+// Note: All math operations will be: a (operation) b
 
 // Challenge code below:
 
-function yearDays(year){
- 
-    let isLeapYear = false;
-    
-    if(year % 100 === 0 && year % 400 === 0) {
-      isLeapYear = true;
-    } else if(year % 4 === 0) {
-      isLeapYear = true;
-    }
+function add(a,b){
+  return a + b;
+}
 
-    
-    
-    return `${year} has ${isLeapYear ? 366 : 365} days`;
-  }
+function divide(a,b){
+  return a / b;
+}
+
+function multiply(a,b){
+  return a * b;
+}
+
+function mod(a,b){
+  return a % b;
+}
+ 
+function exponent(a,b){
+  return a ** b;
+}
+  
+function subt(a,b){
+  return a - b;
+}
 
 // Tests
 
-console.log(yearDays(0)); // '0 has 366 days'
-console.log(yearDays(-64)); // '-64 has 366 days'
-console.log(yearDays(2016)); // '2016 has 366 days'
-console.log(yearDays(1974)); // '1974 has 365 days'
-console.log(yearDays(-10)); // '-10 has 365 days'
-console.log(yearDays(666)); // '666 has 365 days'
-console.log(yearDays(1857)); // '1857 has 365 days'
+console.log(add(1,2)); // 3
+console.log(multiply(1,2)); // 2
+console.log(divide(2,1)); // 2
+console.log(mod(1,2)); // 1
+console.log(exponent(1,2)); // 1
+console.log(subt(1,2)); // -1
