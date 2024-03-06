@@ -22,29 +22,17 @@
 
 // Challenge code below:
 
-function add(a,b){
-  return a + b;
-}
+const add = (a,b) =>  a + b;
 
-function divide(a,b){
-  return a / b;
-}
+const divide = (a,b) =>  a / b;
 
-function multiply(a,b){
-  return a * b;
-}
+const multiply = (a,b) =>  a * b;
 
-function mod(a,b){
-  return a % b;
-}
- 
-function exponent(a,b){
-  return a ** b;
-}
+const mod = (a,b) =>  a % b;
+
+const exponent = (a,b) =>  a ** b;
   
-function subt(a,b){
-  return a - b;
-}
+const subt = (a,b) =>  a - b;
 
 // Tests
 
