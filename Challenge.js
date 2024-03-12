@@ -13,7 +13,7 @@
 
 // Challenge code below:
 
-const combineNames = (str1, str2) => str1.concat(' ', str2);
+const combineNames = (str1, str2) => `${str1} ${str2}`;
 
 // Tests
 
