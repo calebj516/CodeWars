@@ -1,20 +1,17 @@
-// Challenge: Grasshopper - Combine strings (8 kyu)
+// Challenge: Running out of space (7 kyu)
 
 // Description:
 
-// Create a function named combineNames that accepts two parameters (first and last name). The function should return the full name.
-
-// Example:
-
-// combineNames('James', 'Stevens')
-// returns:
-
-// 'James Stevens'
+// Kevin is noticing his space run out! Write a function that removes the spaces from the values and returns an array showing the space decreasing.
+// For example, running this function on the array ['i', 'have','no','space'] would produce ['i','ihave','ihaveno','ihavenospace']
 
 // Challenge code below:
 
-const combineNames = (str1, str2) => str1 + ' ' + str2;
+function spacey(array) {
+    return array.map((el, i) => (array.slice(0, i) + el).replace(/\,/g, ''));
+}
 
 // Tests
 
-console.log(combineNames('James', 'Stevens')); //  'James Stevens'
+console.log(spacey(['kevin', 'has','no','space'])); // ['kevin','kevinhas','kevinhasno','kevinhasnospace']
+console.log(spacey(['this', 'cheese', 'has', 'no', 'holes'])); // ['this','thischeese','thischeesehas','thischeesehasno','thischeesehasnoholes']
