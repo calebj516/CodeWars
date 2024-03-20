@@ -8,7 +8,8 @@
 // Challenge code below:
 
 function spacey(array) {
-    return array.map((el, i) => (array.slice(0, i) + el).replace(/\,/g, ''));
+    let str = '';
+    return array.map(el => str += el);
 }
 
 // Tests
