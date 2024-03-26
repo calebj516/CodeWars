@@ -1,18 +1,17 @@
-// Challenge: Running out of space (7 kyu)
+// Challenge: Is it a letter? (7 kyu)
 
 // Description:
 
-// Kevin is noticing his space run out! Write a function that removes the spaces from the values and returns an array showing the space decreasing.
-// For example, running this function on the array ['i', 'have','no','space'] would produce ['i','ihave','ihaveno','ihavenospace']
+// Write a function, isItLetter or is_it_letter, which tells us if a given character is an, uppercase or lowercase, letter.
 
 // Challenge code below:
 
-function spacey(array) {
-    let str = '';
-    return array.map(el => str += el);
+function isItLetter(character) {
+    let code = character.charCodeAt(0);
+    return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
 
 // Tests
 
-console.log(spacey(['kevin', 'has','no','space'])); // ['kevin','kevinhas','kevinhasno','kevinhasnospace']
-console.log(spacey(['this', 'cheese', 'has', 'no', 'holes'])); // ['this','thischeese','thischeesehas','thischeesehasno','thischeesehasnoholes']
+console.log( isItLetter('a')); // true
+console.log( isItLetter('1')); // false
