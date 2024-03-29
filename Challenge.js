@@ -7,7 +7,7 @@
 // Challenge code below:
 
 function isItLetter(character) {
-    return /[A-Za-z]/.test(character);
+    return /[a-z]/i.test(character);
 }
 
 // Tests
