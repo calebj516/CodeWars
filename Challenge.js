@@ -7,10 +7,12 @@
 // Challenge code below:
 
 function isItLetter(character) {
-    return /[a-z]/i.test(character);
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    return alphabet.includes(character.toLowerCase());
 }
 
 // Tests
 
 console.log( isItLetter('a')); // true
+console.log( isItLetter('A')); // true
 console.log( isItLetter('1')); // false
