@@ -14,7 +14,7 @@
 // Challenge code below:
 
 function monkeyCount(n) {
-  return [...Array(n)].map((_, i) => i + 1);
+  return Array.from({length : n}, (_, i) => i + 1);
 }
 
 // Tests
