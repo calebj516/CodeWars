@@ -7,13 +7,7 @@
 // Challenge code below:
 
 function powersOfTwo(n){
-  const nums = [];
-  
-  for(let i = 0; i <= n; i++) {
-    nums.push(2 ** i);
-  }
-  
-  return nums;
+  return Array.from({length : n + 1}, (_, i) => 2 ** i);
 }
 
 // Tests
