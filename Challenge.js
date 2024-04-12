@@ -36,8 +36,8 @@ function rpsls(pl1,pl2){
   };
 
   
-  return match[pl1].includes(pl2) ? 'Player 1 Won!' :
-         match[pl2].includes(pl1) ? 'Player 2 Won!' : 'Draw!';  
+  return match[pl1].indexOf(pl2) != -1 ? 'Player 1 Won!' :
+         match[pl2].indexOf(pl1) != -1 ? 'Player 2 Won!' : 'Draw!';  
 }
 
 // Tests
