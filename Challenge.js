@@ -13,8 +13,15 @@
 // Challenge code below:
 
 function add(arr) {
-  let sum = 0;
-  return arr.map(n => sum += n);
+  let sum = arr[0];
+  const result = [];
+
+  for(let i = 1; i <= arr.length; i++) {
+    result.push(sum);
+    sum += arr[i];
+  }
+
+  return result;
 }
 
 // Tests
