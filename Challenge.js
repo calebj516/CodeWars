@@ -6,7 +6,7 @@
 
 // Challenge code below:
 
-const removeExclamationMarks = s => s.replace(/!/g, '');
+const removeExclamationMarks = s => s.split('!').join('');
 
 // Tests
 
