@@ -10,9 +10,14 @@
 
 // Challenge code below:
 
-function well(x){
-    let count = x.filter(el => el == 'good').length;
-    return count > 2 ? 'I smell a series!' : count > 0 ? 'Publish!' : 'Fail!';
+function well(ideas){
+    let count = 0;
+
+    for(let idea of ideas) {
+        if(idea == 'good') count++;
+    }
+
+    return count > 2 ? 'I smell a series!' : count > 0 ? 'Publish!' : 'Fail!';    
 }
 // Tests
 
