@@ -13,19 +13,8 @@
 // Challenge code below:
 
 function well(x){
-  
-    let count = 0;
-    
-    for(let i = 0; i < x.length; i++) {
-      
-      for(let j = 0; j < x[i].length; j++) {
-        let word = x[i][j].toString().toLowerCase();
-        if(word == 'good') count++;
-      }
-      
-    }
-    
-    return count > 2 ? 'I smell a series!' : count > 0 ? 'Publish!' : 'Fail!';  
+  let match = x.toString().match(/good/gi) || [];
+  return match.length > 2 ? 'I smell a series!' : match.length > 0 ? 'Publish!' : 'Fail!';
 }
 
 // Tests
