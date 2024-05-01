@@ -1,24 +1,39 @@
-// Challenge: Well of Ideas - Harder Version (7 kyu)
+// Challenge: Collinearity (8 kyu)
 
 // Description:
 
-// For every good kata idea there seem to be quite a few bad ones!
+// You are given two vectors starting from the origin (x=0, y=0) with coordinates (x1,y1) and (x2,y2). 
+// Your task is to find out if these vectors are collinear. 
+// Collinear vectors are vectors that lie on the same straight line. 
+// They can be directed in the same or opposite directions. 
+// One vector can be obtained from another by multiplying it by a certain number. 
+// In terms of coordinates, vectors (x1, y1) and (x2, y2) are collinear if (x1, y1) = (k*x2, k*y2) , where k is any number acting as a coefficient.
 
-// In this kata you need to check the provided 2 dimensional array (x) for good ideas 'good' and bad ideas 'bad'. If there are one or two good ideas, return 'Publish!', if there are more than 2 return 'I smell a series!'. If there are no good ideas, as is often the case, return 'Fail!'.
+// Write the function collinearity(x1, y1, x2, y2) which returns a Boolean type depending on whether the vectors are collinear or not.
+// all coordinates are integers
+// -1000 <= any coordinate <= 1000
 
-// The sub arrays may not be the same length.
-
-// The solution should be case insensitive (ie good, GOOD and gOOd all count as a good idea). All inputs may not be strings.
+// Notes
+// All vectors start from the origin (x=0, y=0).
+// Be careful when handling cases where x1, x2, y1, or y2 are zero to avoid division by zero errors.
+// A vector with coordinates (0, 0) is collinear to all vectors.
 
 // Challenge code below:
 
-function well(x){
-  let match = x.toString().match(/good/gi) || [];
-  return match.length > 2 ? 'I smell a series!' : match.length > 0 ? 'Publish!' : 'Fail!';
+function collinearity( x1,y1, x2,y2 ) {
+  return ((x1 == 0 && y1 == 0) || (x2 == 0 && y2 == 0)) || ((x2 == 0 && x1 == 0) || (y2 == 0 && y1 == 0)) || (x2 / x1) == (y2 / y1);
 }
 
 // Tests
-
-console.log(well([['bad', 'bAd', 'bad'], ['bad', 'bAd', 'bad'], ['bad', 'bAd', 'bad']])); // 'Fail!'
-console.log(well([['gOOd', 'bad', 'BAD', 'bad', 'bad'], ['bad', 'bAd', 'bad'], ['GOOD', 'bad', 'bad', 'bAd']])); // 'Publish!'
-console.log(well([['gOOd', 'bAd', 'BAD', 'bad', 'bad', 'GOOD'], ['bad'], ['gOOd', 'BAD']])); // 'I smell a series!'
+ 
+console.log( collinearity( 1,1, 1,1 )); // true
+console.log( collinearity( 1,2, 2,4 )); // true
+console.log( collinearity( 1,2, -1,-2 )); // true
+console.log( collinearity( 1,1, 6,1 )); // false
+console.log( collinearity( 1,2, 1,-2 )); // false
+console.log( collinearity( 4,0, 11,0 )); // true
+console.log( collinearity( 0,1, 6,0 )); // false
+console.log( collinearity( 4,4, 0,4 )); // false
+console.log( collinearity( 0,0, 0,0 )); // true
+console.log( collinearity( 0,0, 1,0 )); // true
+console.log( collinearity( 5,7, 0,0 )); // true
