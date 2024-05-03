@@ -1,39 +1,22 @@
-// Challenge: Collinearity (8 kyu)
+// Challenge: Evens times last (7 kyu)
 
 // Description:
 
-// You are given two vectors starting from the origin (x=0, y=0) with coordinates (x1,y1) and (x2,y2). 
-// Your task is to find out if these vectors are collinear. 
-// Collinear vectors are vectors that lie on the same straight line. 
-// They can be directed in the same or opposite directions. 
-// One vector can be obtained from another by multiplying it by a certain number. 
-// In terms of coordinates, vectors (x1, y1) and (x2, y2) are collinear if (x1, y1) = (k*x2, k*y2) , where k is any number acting as a coefficient.
+// Given a sequence of integers, return the sum of all the integers that have an even index (odd index in COBOL)); // multiplied by the integer at the last index.
 
-// Write the function collinearity(x1, y1, x2, y2) which returns a Boolean type depending on whether the vectors are collinear or not.
-// all coordinates are integers
-// -1000 <= any coordinate <= 1000
+// Indices in sequence start from 0.
 
-// Notes
-// All vectors start from the origin (x=0, y=0).
-// Be careful when handling cases where x1, x2, y1, or y2 are zero to avoid division by zero errors.
-// A vector with coordinates (0, 0) is collinear to all vectors.
+// If the sequence is empty, you should return 0.
 
 // Challenge code below:
 
-function collinearity( x1,y1, x2,y2 ) {
-  return x1 * y2 == x2 * y1;
+function evenLast(numbers) {
+  return (numbers[numbers.length - 1] || 0) * numbers.reduce((total, current, i) => i % 2 == 0 ? total + current : total + 0, 0);
 }
 
 // Tests
  
-console.log( collinearity( 1,1, 1,1 )); // true
-console.log( collinearity( 1,2, 2,4 )); // true
-console.log( collinearity( 1,2, -1,-2 )); // true
-console.log( collinearity( 1,1, 6,1 )); // false
-console.log( collinearity( 1,2, 1,-2 )); // false
-console.log( collinearity( 4,0, 11,0 )); // true
-console.log( collinearity( 0,1, 6,0 )); // false
-console.log( collinearity( 4,4, 0,4 )); // false
-console.log( collinearity( 0,0, 0,0 )); // true
-console.log( collinearity( 0,0, 1,0 )); // true
-console.log( collinearity( 5,7, 0,0 )); // true
+console.log(evenLast([2, 2, 2, 2])); // 8
+console.log(evenLast([])); // 0
+console.log(evenLast([1, 3, 3, 1, 10])); // 140
+console.log(evenLast([2, 3, 4, 5])); // 30
