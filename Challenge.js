@@ -1,30 +1,22 @@
-// Challenge: Evens times last (7 kyu)
+// Challenge: Lottery machine (7 kyu)
 
 // Description:
 
-// Given a sequence of integers, return the sum of all the integers that have an even index (odd index in COBOL)); // multiplied by the integer at the last index.
+// Your task is to write an update for a lottery machine. Its current version produces a sequence of random letters and integers (passed as a string to the function). Your code must filter out all letters and return unique integers as a string, in their order of first appearance. If there are no integers in the string return "One more run!"
 
-// Indices in sequence start from 0.
-
-// If the sequence is empty, you should return 0.
+// Examples
+// "hPrBKWDH8yc6Lt5NQZWQ"  -->  "865"
+// "ynMAisVpHEqpqHBqTrwH"  -->  "One more run!"
+// "555"                   -->  "5"
 
 // Challenge code below:
 
-function evenLast(numbers) {
-  if(numbers.length === 0) return 0;
-  
-  let sum = 0;
-  
-  for(let i = 0; i < numbers.length; i += 2) {
-    sum += numbers[i];
-  }
-  
-  return sum * numbers[numbers.length - 1];
+function lottery(str){
+  let numsOnly = str.replace(/\D/g, '');  
+  return numsOnly.length > 0 ? [...new Set(numsOnly)].join('') : 'One more run!';
 }
 
 // Tests
  
-console.log(evenLast([2, 2, 2, 2])); // 8
-console.log(evenLast([])); // 0
-console.log(evenLast([1, 3, 3, 1, 10])); // 140
-console.log(evenLast([2, 3, 4, 5])); // 30
+console.log(lottery("wQ8Hy0y5m5oshQPeRCkG")); // "805"
+console.log(lottery("ffaQtaRFKeGIIBIcSJtg")); // "One more run!"
