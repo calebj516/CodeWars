@@ -11,10 +11,7 @@
 
 // Challenge code below:
 
-function lottery(str){
-  let numsOnly = str.replace(/\D/g, '');  
-  return numsOnly.length > 0 ? [...new Set(numsOnly)].join('') : 'One more run!';
-}
+const lottery = str => [...new Set(str.replace(/\D/g, ''))].join('') || 'One more run!';
 
 // Tests
  
