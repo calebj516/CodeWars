@@ -1,19 +1,38 @@
-// Challenge: Lottery machine (7 kyu)
+// Challenge: Difference between two collections (7 kyu)
 
 // Description:
 
-// Your task is to write an update for a lottery machine. Its current version produces a sequence of random letters and integers (passed as a string to the function). Your code must filter out all letters and return unique integers as a string, in their order of first appearance. If there are no integers in the string return "One more run!"
+// Find the difference between two collections. The difference means that either the character is present in one collection or it is present in other, but not in both. Return a sorted list with the difference.
 
-// Examples
-// "hPrBKWDH8yc6Lt5NQZWQ"  -->  "865"
-// "ynMAisVpHEqpqHBqTrwH"  -->  "One more run!"
-// "555"                   -->  "5"
+// The collections can contain any character and can contain duplicates.
+
+// Example
+// A = [a, a, t, e, f, i, j]
+
+// B = [t, g, g, i, k, f]
+
+// difference = [a, e, g, j, k]
 
 // Challenge code below:
 
-const lottery = str => [...new Set(str.replace(/\D/g, ''))].join('') || 'One more run!';
+function diff(a, b){
+    //your code here
+    let difference = [];
+    
+    for(let i = 0; i < a.length; i++) {
+      if(!b.includes(a[i])) difference.push(a[i]);
+    }
+    
+    for(let i = 0; i < b.length; i++) {
+      if(!a.includes(b[i])) difference.push(b[i]);
+    }
+    
+    return [...new Set(difference)].sort();
+}
 
 // Tests
  
-console.log(lottery("wQ8Hy0y5m5oshQPeRCkG")); // "805"
-console.log(lottery("ffaQtaRFKeGIIBIcSJtg")); // "One more run!"
+console.log(diff(['a', 'b'], [])); // ['a', 'b']
+console.log(diff([], ['a', 'b'])); // ['a', 'b']
+console.log(diff(['a', 'b', 'z'], ['a', 'b'])); // ['z']
+console.log(diff(["a","b","z","d","e","d"], ["a","b", "j","j"])); // ["d","e","j","z"]
