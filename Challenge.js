@@ -16,18 +16,8 @@
 // Challenge code below:
 
 function diff(a, b){
-    //your code here
-    let difference = [];
-    
-    for(let i = 0; i < a.length; i++) {
-      if(!b.includes(a[i])) difference.push(a[i]);
-    }
-    
-    for(let i = 0; i < b.length; i++) {
-      if(!a.includes(b[i])) difference.push(b[i]);
-    }
-    
-    return [...new Set(difference)].sort();
+  //your code here
+  return [...new Set(a), ...new Set(b)].sort().filter((el, i, arr) => arr.indexOf(el) == arr.lastIndexOf(el));
 }
 
 // Tests
