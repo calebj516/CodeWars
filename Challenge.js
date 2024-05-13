@@ -16,8 +16,7 @@
 // Challenge code below:
 
 function diff(a, b){
-  //your code here
-  return [...new Set(a), ...new Set(b)].sort().filter((el, i, arr) => arr.indexOf(el) == arr.lastIndexOf(el));
+  return [...new Set(a), ...new Set(b)].sort().filter(el => a.includes(el) ^ b.includes(el));
 }
 
 // Tests
