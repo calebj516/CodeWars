@@ -1,27 +1,41 @@
-// Challenge: Difference between two collections (7 kyu)
+// Challenge: Check the exam (7 kyu)
 
 // Description:
 
-// Find the difference between two collections. The difference means that either the character is present in one collection or it is present in other, but not in both. Return a sorted list with the difference.
+// The first input array is the key to the correct answers to an exam, like ["a", "a", "b", "d"]. The second one contains a student's submitted answers.
 
-// The collections can contain any character and can contain duplicates.
+// The two arrays are not empty and are the same length. Return the score for this array of answers, giving +4 for each correct answer, -1 for each incorrect answer, and +0 for each blank answer, represented as an empty string (in C the space character is used).
 
-// Example
-// A = [a, a, t, e, f, i, j]
+// If the score < 0, return 0.
 
-// B = [t, g, g, i, k, f]
+// For example:
 
-// difference = [a, e, g, j, k]
+//     Correct answer    |    Student's answer   |   Result         
+//  ---------------------|-----------------------|-----------
+//  ["a", "a", "b", "b"]   ["a", "c", "b", "d"]  →     6
+//  ["a", "a", "c", "b"]   ["a", "a", "b", "" ]  →     7
+//  ["a", "a", "b", "c"]   ["a", "a", "b", "c"]  →     16
+//  ["b", "c", "b", "a"]   ["" , "a", "a", "c"]  →     0
 
 // Challenge code below:
 
-function diff(a, b){
-  return [...new Set(a), ...new Set(b)].sort().filter(el => a.includes(el) ^ b.includes(el));
+function checkExam(array1, array2) {
+
+  let score = 0;
+  
+  for(let i = 0; i < array2.length; i++) {
+    if(array2[i] == array1[i]) score += 4;
+    if(array2[i] != array1[i]) {
+      if(array2[i] != "") score -= 1;
+    }
+  }
+  
+  return score < 0 ? 0 : score;
 }
 
 // Tests
  
-console.log(diff(['a', 'b'], [])); // ['a', 'b']
-console.log(diff([], ['a', 'b'])); // ['a', 'b']
-console.log(diff(['a', 'b', 'z'], ['a', 'b'])); // ['z']
-console.log(diff(["a","b","z","d","e","d"], ["a","b", "j","j"])); // ["d","e","j","z"]
+console.log(checkExam(["a", "a", "b", "b"], ["a", "c", "b", "d"])); // 6
+console.log(checkExam(["a", "a", "c", "b"], ["a", "a", "b",  ""])); // 7
+console.log(checkExam(["a", "a", "b", "c"], ["a", "a", "b", "c"])); // 16
+console.log(checkExam(["b", "c", "b", "a"], ["",  "a", "a", "c"])); // 0
