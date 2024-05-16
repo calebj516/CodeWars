@@ -19,17 +19,7 @@
 
 // Challenge code below:
 
-function checkExam(array1, array2) {
-
-  let score = 0;
-  
-  for(let i = 0; i < array2.length; i++) {
-    if(array2[i] == array1[i]) score += 4;
-    if(array2[i] != array1[i] && array2[i]) score -= 1;
-  }
-  
-  return score < 0 ? 0 : score;
-}
+const checkExam = (array1, array2) => (array1 = array2.reduce((total, current, i) => total + (current == array1[i] ? 4 : current && current != array1[i] ? -1 : 0), 0)) < 0 ? 0 : array1;
 
 // Tests
  
