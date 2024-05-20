@@ -1,29 +1,55 @@
-// Challenge: Check the exam (7 kyu)
+// Challenge: De-Emojify (7 kyu)
 
 // Description:
 
-// The first input array is the key to the correct answers to an exam, like ["a", "a", "b", "d"]. The second one contains a student's submitted answers.
+// Inspired by the emojify custom Python module.
 
-// The two arrays are not empty and are the same length. Return the score for this array of answers, giving +4 for each correct answer, -1 for each incorrect answer, and +0 for each blank answer, represented as an empty string (in C the space character is used).
+// You are given a string made up of chains of emotes separated by 1 space each, with chains having 2 spaces in-between each.
 
-// If the score < 0, return 0.
+// Each emote represents a digit:
 
-// For example:
+// :)  | 0
+// :D  | 1
+// >(  | 2
+// >:C | 3
+// :/  | 4
+// :|  | 5
+// :O  | 6
+// ;)  | 7
+// ^.^ | 8
+// :(  | 9
+// Each emote chain represents the digits of the ASCII/Unicode code for a character, e.g. :( ;) is 97, which is the ASCII code for 'a'.
 
-//     Correct answer    |    Student's answer   |   Result         
-//  ---------------------|-----------------------|-----------
-//  ["a", "a", "b", "b"]   ["a", "c", "b", "d"]  →     6
-//  ["a", "a", "c", "b"]   ["a", "a", "b", "" ]  →     7
-//  ["a", "a", "b", "c"]   ["a", "a", "b", "c"]  →     16
-//  ["b", "c", "b", "a"]   ["" , "a", "a", "c"]  →     0
+// Given a such string of emotes, find the string it represents. Example:
+
+// ':D :) :/  :D :) :|' is 2 chains: ':D :) :/' and ':D :) :|'.
+
+// These represent ASCII codes 104 and 105 respectively, translating to 'hi'.
+
+// Input will always be valid. Chains may start with leading zeroes; these are valid and do not change the chain's value.
 
 // Challenge code below:
 
-const checkExam = (array1, array2) => (array1 = array2.reduce((total, current, i) => total + (current == array1[i] ? 4 : current && current != array1[i] ? -1 : 0), 0)) < 0 ? 0 : array1;
+function deEmojify(emojiString) {
+
+    const emotes = {
+        ':)'  : 0,
+        ':D'  : 1,
+        '>('  : 2,
+        '>:C' : 3,
+        ':/'  : 4,
+        ':|'  : 5,
+        ':O'  : 6,
+        ';)'  : 7,
+        '^.^' : 8,
+        ':('  : 9
+    };
+
+    return emojiString && String.fromCharCode(...emojiString.split('  ').map(x => x.split(' ').map(y => emotes[y]).join('')));
+}
 
 // Tests
  
-console.log(checkExam(["a", "a", "b", "b"], ["a", "c", "b", "d"])); // 6
-console.log(checkExam(["a", "a", "c", "b"], ["a", "a", "b",  ""])); // 7
-console.log(checkExam(["a", "a", "b", "c"], ["a", "a", "b", "c"])); // 16
-console.log(checkExam(["b", "c", "b", "a"], ["",  "a", "a", "c"])); // 0
+console.log(deEmojify(":D :) :/  :D :) :|")); // "hi"
+console.log(deEmojify(";) >(  :D :) :D  :D :) ^.^  :D :) ^.^  :D :D :D  >:C >(  :D :D :(  :D :D :D  :D :D :/  :D :) ^.^  :D :) :)  >:C >:C")); // "Hello world!"
+console.log(deEmojify(":)")); // "\x00"
