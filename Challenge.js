@@ -1,55 +1,23 @@
-// Challenge: De-Emojify (7 kyu)
+// Challenge: Even numbers in an array (7 kyu)
 
 // Description:
 
-// Inspired by the emojify custom Python module.
+// Given an array of numbers, return a new array of length number containing the last even numbers from the original array (in the same order). The original array will be not empty and will contain at least "number" even numbers.
 
-// You are given a string made up of chains of emotes separated by 1 space each, with chains having 2 spaces in-between each.
+// For example:
 
-// Each emote represents a digit:
-
-// :)  | 0
-// :D  | 1
-// >(  | 2
-// >:C | 3
-// :/  | 4
-// :|  | 5
-// :O  | 6
-// ;)  | 7
-// ^.^ | 8
-// :(  | 9
-// Each emote chain represents the digits of the ASCII/Unicode code for a character, e.g. :( ;) is 97, which is the ASCII code for 'a'.
-
-// Given a such string of emotes, find the string it represents. Example:
-
-// ':D :) :/  :D :) :|' is 2 chains: ':D :) :/' and ':D :) :|'.
-
-// These represent ASCII codes 104 and 105 respectively, translating to 'hi'.
-
-// Input will always be valid. Chains may start with leading zeroes; these are valid and do not change the chain's value.
+// ([1, 2, 3, 4, 5, 6, 7, 8, 9], 3) => [4, 6, 8]
+// ([-22, 5, 3, 11, 26, -6, -7, -8, -9, -8, 26], 2) => [-8, 26]
+// ([6, -25, 3, 7, 5, 5, 7, -3, 23], 1) => [6]
 
 // Challenge code below:
 
-function deEmojify(emojiString) {
-
-    const emotes = {
-        ':)'  : 0,
-        ':D'  : 1,
-        '>('  : 2,
-        '>:C' : 3,
-        ':/'  : 4,
-        ':|'  : 5,
-        ':O'  : 6,
-        ';)'  : 7,
-        '^.^' : 8,
-        ':('  : 9
-    };
-
-    return emojiString && String.fromCharCode(...emojiString.split('  ').map(x => x.split(' ').map(y => emotes[y]).join('')));
+function evenNumbers(array, number) {
+    return array.filter(num => !(num % 2)).slice(-number);
 }
 
 // Tests
  
-console.log(deEmojify(":D :) :/  :D :) :|")); // "hi"
-console.log(deEmojify(";) >(  :D :) :D  :D :) ^.^  :D :) ^.^  :D :D :D  >:C >(  :D :D :(  :D :D :D  :D :D :/  :D :) ^.^  :D :) :)  >:C >:C")); // "Hello world!"
-console.log(deEmojify(":)")); // "\x00"
+console.log(evenNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)); // [4, 6, 8]
+console.log(evenNumbers([-22, 5, 3, 11, 26, -6, -7, -8, -9, -8, 26], 2)); // [-8, 26]
+console.log(evenNumbers([6, -25, 3, 7, 5, 5, 7, -3, 23], 1)); // [6]
