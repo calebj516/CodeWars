@@ -12,9 +12,7 @@
 
 // Challenge code below:
 
-function evenNumbers(array, number) {
-    return array.filter(num => !(num % 2)).slice(-number);
-}
+const evenNumbers = (array, number) => array.filter(num => !(num % 2)).slice(-number);
 
 // Tests
  
