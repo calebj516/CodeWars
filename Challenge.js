@@ -12,7 +12,19 @@
 
 // Challenge code below:
 
-const evenNumbers = (array, number) => array.filter(num => !(num % 2)).slice(-number);
+function evenNumbers(array, number) {
+    const result = [];
+    
+    for(let i = array.length - 1; i >= 0; i--) {
+      if(array[i] % 2 === 0) {
+        result.push(array[i]);
+        number--;
+        if(number === 0) break;
+      }
+    }
+    
+    return result.reverse();
+}
 
 // Tests
  
