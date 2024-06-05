@@ -1,43 +1,26 @@
-// Challenge: Sort an array by value and index (7 kyu)
+// Challenge: Find the Difference in Age between Oldest and Youngest Family Members (8 kyu)
 
 // Description:
 
-// Your task is to sort an array of integer numbers by the product of the value and the index of the positions.
+// At the annual family gathering, the family likes to find the oldest living family member’s age and the youngest family member’s age and calculate the difference between them.
 
-// For sorting the index starts at 1, NOT at 0!
-// The sorting has to be ascending.
-// The array will never be null and will always contain numbers.
-
-// Example:
-
-// Input: 23, 2, 3, 4, 5
-// Product of value and index:
-// 23 => 23 * 1 = 23  -> Output-Pos 4
-//  2 =>  2 * 2 = 4   -> Output-Pos 1
-//  3 =>  3 * 3 = 9   -> Output-Pos 2
-//  4 =>  4 * 4 = 16  -> Output-Pos 3
-//  5 =>  5 * 5 = 25  -> Output-Pos 5
-
-// Output: 2, 3, 4, 23, 5
-
-
-
-// Have fun coding it and please don't forget to vote and rank this kata! :-)
-
-// I have also created other katas. Take a look if you enjoyed this kata!
+// You will be given an array of all the family members' ages, in any order. The ages will be given in whole numbers, so a baby of 5 months, will have an ascribed ‘age’ of 0. Return a new array (a tuple in Python) with [youngest age, oldest age, difference between the youngest and oldest age].
 
 // Challenge code below:
 
-function sortByValueAndIndex(array) {
-  return array
-		.map((x, i) => [x, x * i + x])
-		.sort((a, b) => a[1] - b[1])
-		.map((a) => a[0])
+function differenceInAges(ages){
+	return [Math.min(...ages), Math.max(...ages), Math.max(...ages) - Math.min(...ages)];
 }
 
 // Tests
  
-console.log(sortByValueAndIndex([ 1, 2, 3, 4, 5 ])); // [ 1, 2, 3, 4, 5 ]
-console.log(sortByValueAndIndex([ 23, 2, 3, 4, 5 ])); // [ 2, 3, 4, 23, 5 ]
-console.log(sortByValueAndIndex([ 26, 2, 3, 4, 5 ])); // [ 2, 3, 4, 5, 26 ]
-console.log(sortByValueAndIndex([ 9, 5, 1, 4, 3 ])); // [ 1, 9, 5, 3, 4 ] 
+console.log(differenceInAges([16, 22, 31, 44, 3, 38, 27, 41, 88])); // [3, 88, 85]
+console.log(differenceInAges([5, 8, 72, 98, 41, 16, 55])); // [5, 98, 93]
+console.log(differenceInAges([57, 99, 14, 32])); // [14, 99, 85]
+console.log(differenceInAges([62, 0, 3, 77, 88, 102, 26, 44, 55])); // [0, 102, 102]
+console.log(differenceInAges([2, 44, 34, 67, 88, 76, 31, 67])); // [2, 88, 86]
+console.log(differenceInAges([46, 86, 33, 29, 87, 47, 28, 12, 1, 4, 78, 92])); // [1, 92, 91]
+console.log(differenceInAges([66, 73, 88, 24, 36, 65, 5])); // [5, 88  , 83]
+console.log(differenceInAges([12, 76, 49, 37, 29, 17, 3, 65, 84, 38])); // [3, 84, 81]
+console.log(differenceInAges([0, 110])); // [0, 110, 110]
+console.log(differenceInAges([33, 33, 33])); // [33, 33, 0]
