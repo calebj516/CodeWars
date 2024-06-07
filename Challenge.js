@@ -1,26 +1,36 @@
-// Challenge: Find the Difference in Age between Oldest and Youngest Family Members (8 kyu)
+// Challenge: Transportation on vacation (8 kyu)
 
 // Description:
 
-// At the annual family gathering, the family likes to find the oldest living family member’s age and the youngest family member’s age and calculate the difference between them.
+// After a hard quarter in the office you decide to get some rest on a vacation. So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
 
-// You will be given an array of all the family members' ages, in any order. The ages will be given in whole numbers, so a baby of 5 months, will have an ascribed ‘age’ of 0. Return a new array (a tuple in Python) with [youngest age, oldest age, difference between the youngest and oldest age].
+// You will need a rental car in order for you to get around in your vacation. The manager of the car rental makes you some good offers.
+
+// Every day you rent the car costs $40. If you rent the car for 7 or more days, you get $50 off your total. Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+
+// Write a code that gives out the total amount for different days(d).
 
 // Challenge code below:
 
-function differenceInAges(ages){
-	return [Math.min(...ages), Math.max(...ages), Math.max(...ages) - Math.min(...ages)];
+function rentalCarCost(d) {
+	if(d >= 7) {
+	  return 40 * d - 50;
+	} else if(d >= 3) {
+	  return 40 * d - 20;
+	}
+	
+	return d * 40;
 }
 
 // Tests
- 
-console.log(differenceInAges([16, 22, 31, 44, 3, 38, 27, 41, 88])); // [3, 88, 85]
-console.log(differenceInAges([5, 8, 72, 98, 41, 16, 55])); // [5, 98, 93]
-console.log(differenceInAges([57, 99, 14, 32])); // [14, 99, 85]
-console.log(differenceInAges([62, 0, 3, 77, 88, 102, 26, 44, 55])); // [0, 102, 102]
-console.log(differenceInAges([2, 44, 34, 67, 88, 76, 31, 67])); // [2, 88, 86]
-console.log(differenceInAges([46, 86, 33, 29, 87, 47, 28, 12, 1, 4, 78, 92])); // [1, 92, 91]
-console.log(differenceInAges([66, 73, 88, 24, 36, 65, 5])); // [5, 88  , 83]
-console.log(differenceInAges([12, 76, 49, 37, 29, 17, 3, 65, 84, 38])); // [3, 84, 81]
-console.log(differenceInAges([0, 110])); // [0, 110, 110]
-console.log(differenceInAges([33, 33, 33])); // [33, 33, 0]
+
+console.log(rentalCarCost(1)); // 40
+console.log(rentalCarCost(2)); // 80
+console.log(rentalCarCost(3)); // 100
+console.log(rentalCarCost(4)); // 140
+console.log(rentalCarCost(5)); // 180
+console.log(rentalCarCost(6)); // 220
+console.log(rentalCarCost(7)); // 230
+console.log(rentalCarCost(8)); // 270
+console.log(rentalCarCost(9)); // 310
+console.log(rentalCarCost(10)); // 350    
