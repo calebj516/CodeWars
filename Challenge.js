@@ -1,33 +1,46 @@
-// Challenge: Transportation on vacation (8 kyu)
+// Challenge: Spot the Differences (7 kyu)
 
 // Description:
 
-// After a hard quarter in the office you decide to get some rest on a vacation. So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
+// This kata is part of the collection Mary's Puzzle Books.
 
-// You will need a rental car in order for you to get around in your vacation. The manager of the car rental makes you some good offers.
+// Mary brought home a "spot the differences" book. The book is full of a bunch of problems, and each problem consists of two strings that are similar. However, in each string there are a few characters that are different. An example puzzle from her book is:
 
-// Every day you rent the car costs $40. If you rent the car for 7 or more days, you get $50 off your total. Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+// String 1: "abcdefg"
+// String 2: "abcqetg"
+// Notice how the "d" from String 1 has become a "q" in String 2, and "f" from String 1 has become a "t" in String 2.
 
-// Write a code that gives out the total amount for different days(d).
+// It's your job to help Mary solve the puzzles. Write a program spot_diff/Spot that will compare the two strings and return a list with the positions where the two strings differ. In the example above, your program should return [3, 5] because String 1 is different from String 2 at positions 3 and 5.
+
+// NOTES:
+
+// If both strings are the same, return []
+
+// Both strings will always be the same length
+
+// Capitalization and punctuation matter
 
 // Challenge code below:
 
-function rentalCarCost(d) {
-	if(d >= 7) return 40 * d - 50;
-	if(d >= 3) return 40 * d - 20;
+function spot(s1,s2){
+	const result = [];
 	
-	return d * 40;
+	for(let i = 0; i < s1.length; i++) {
+	  if(s1[i] != s2[i]) result.push(i);
+	}
+	
+	return result;
 }
 
 // Tests
 
-console.log(rentalCarCost(1)); // 40
-console.log(rentalCarCost(2)); // 80
-console.log(rentalCarCost(3)); // 100
-console.log(rentalCarCost(4)); // 140
-console.log(rentalCarCost(5)); // 180
-console.log(rentalCarCost(6)); // 220
-console.log(rentalCarCost(7)); // 230
-console.log(rentalCarCost(8)); // 270
-console.log(rentalCarCost(9)); // 310
-console.log(rentalCarCost(10)); // 350    
+console.log(spot('abcdefg', 'abcqetg')); // [3, 5]
+console.log(spot('Hello World!', 'hello world.')); // [0, 6, 11]
+console.log(spot('FixedGrey', 'FixedGrey')); // []
+console.log(spot('HACKER', 'H4CK3R')); // [1, 4]
+console.log(spot('This is a really long sentence.', 'That is a_really long sentence,')); // [2, 3, 9, 30]
+console.log(spot('', '')); // []
+console.log(spot('abcdefghijklmnopqrstuvwxyz', 'zyxwvutsrqponmlkjihgfedcba')); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+console.log(spot('YOLO lol', 'ROLO mom')); // [0, 5, 7]
+console.log(spot('www.youtube.com/zedaphplays', 'www.twitter.com/zedaphplays')); // [4, 5, 6, 8, 9, 10]
+console.log(spot('Congratulations! You did it!', 'Conglaturations! U did this!')); // [4, 8, 17, 18, 19, 20, 22, 23, 24, 26]
