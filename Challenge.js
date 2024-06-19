@@ -1,21 +1,32 @@
-// Challenge: Will you make it? (8 kyu)
+// Challenge: Calculate Parity bit! (7 kyu)
 
 // Description:
 
-// You were camping with your friends far away from home, but when it's time to go back, you realize that your fuel is running out and the nearest pump is 50 miles away! You know that on average, your car runs on about 25 miles per gallon. There are 2 gallons left.
+// A parity bit, or check bit, is a bit added to a string of bits to ensure that the total number of 1-bits in the string is even or odd. Parity bits are used as the simplest form of error detecting code.
 
-// Considering these factors, write a function that tells you if it is possible to get to the pump or not.
+// You have two parameters, one being the wanted parity (always 'even' or 'odd')); // and the other being the binary representation of the number you want to check.
 
-// Function should return true if it is possible and false if not.
+// Your task is to return an integer (0 or 1)); // whose parity bit you need to add to the binary representation so that the parity of the resulting string is as expected.
+
+// Example:
+
+//   Parity: 'even'
+//   Bin: '0101010'
+//   Result: 1
+// Because there is an odd number of 1-bits (3) you need to put another 1 to it to get an even number of 1-bits.
+
+// For more information: https://en.wikipedia.org/wiki/Parity_bit
 
 // Challenge code below:
 
-const zeroFuel = (distanceToPump, mpg, fuelLeft) => distanceToPump <= (mpg * fuelLeft);
+function checkParity(parity, bin){  
+    let bitCount = bin.split('').filter(n => n == '1').length;  
+    return parity == 'odd' && bitCount % 2 == 0 || parity == 'even' && bitCount % 2 != 0 ? 1 : 0;
+  }
 
 // Tests
 
-console.log(zeroFuel(50, 25, 2)); // true
-console.log(zeroFuel(100, 50, 1)); // false
-console.log(zeroFuel(60, 30, 3)); // true
-console.log(zeroFuel(70, 25, 1)); // false
-console.log(zeroFuel(100, 25, 3)); // false
+console.log(checkParity('even','101010')); // 1
+console.log(checkParity('odd','101010')); // 0
+console.log(checkParity('even','101011')); // 0
+console.log(checkParity('odd','101011')); // 1
