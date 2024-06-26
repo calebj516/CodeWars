@@ -1,32 +1,43 @@
-// Challenge: Calculate Parity bit! (7 kyu)
+// Challenge: Simple Fun #182: Happy "g" (7 kyu)
 
 // Description:
 
-// A parity bit, or check bit, is a bit added to a string of bits to ensure that the total number of 1-bits in the string is even or odd. Parity bits are used as the simplest form of error detecting code.
+// Task
+// Let's say that "g" is happy in the given string, if there is another "g" immediately to the right or to the left of it.
 
-// You have two parameters, one being the wanted parity (always 'even' or 'odd')); // and the other being the binary representation of the number you want to check.
+// Find out if all "g"s in the given string are happy.
 
-// Your task is to return an integer (0 or 1)); // whose parity bit you need to add to the binary representation so that the parity of the resulting string is as expected.
+// Example
+// For str = "gg0gg3gg0gg", the output should be true.
+// For str = "gog", the output should be false.
 
-// Example:
+// Input/Output
+// [input] string str
+// A random string of lower case letters, numbers and spaces.
 
-//   Parity: 'even'
-//   Bin: '0101010'
-//   Result: 1
-// Because there is an odd number of 1-bits (3) you need to put another 1 to it to get an even number of 1-bits.
-
-// For more information: https://en.wikipedia.org/wiki/Parity_bit
+// [output] a boolean value
+// true if all "g"s are happy, false otherwise.
 
 // Challenge code below:
 
-function checkParity(parity, bin){  
-    let bitCount = bin.split('').filter(n => n == '1').length;  
-    return parity == 'odd' && bitCount % 2 == 0 || parity == 'even' && bitCount % 2 != 0 ? 1 : 0;
+function gHappy(str) {
+  
+  for(let i = 0; i < str.length; i++) {
+    if(str[i] == 'g') {
+      if(str[i - 1] != 'g' && str[i + 1] != 'g') return false;      
+    }
   }
+  
+  return true;
+}
 
 // Tests
 
-console.log(checkParity('even','101010')); // 1
-console.log(checkParity('odd','101010')); // 0
-console.log(checkParity('even','101011')); // 0
-console.log(checkParity('odd','101011')); // 1
+console.log(gHappy("")); // true
+console.log(gHappy("gg0gg3gg0gg")); // true
+console.log(gHappy("gog")); // false
+console.log(gHappy("ggg ggg g ggg")); // false
+console.log(gHappy("A half of a half is a quarter.")); // true
+console.log(gHappy("good grief")); // false
+console.log(gHappy("bigger is ggooder")); // true
+console.log(gHappy("gggggggggg")); // true
