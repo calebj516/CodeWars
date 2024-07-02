@@ -1,43 +1,28 @@
-// Challenge: Simple Fun #182: Happy "g" (7 kyu)
+// Challenge: Parse nice int from char problem (8 kyu)
 
 // Description:
 
-// Task
-// Let's say that "g" is happy in the given string, if there is another "g" immediately to the right or to the left of it.
+// You ask a small girl,"How old are you?" She always says, "x years old", where x is a random number between 0 and 9.
 
-// Find out if all "g"s in the given string are happy.
+// Write a program that returns the girl's age (0-9) as an integer.
 
-// Example
-// For str = "gg0gg3gg0gg", the output should be true.
-// For str = "gog", the output should be false.
-
-// Input/Output
-// [input] string str
-// A random string of lower case letters, numbers and spaces.
-
-// [output] a boolean value
-// true if all "g"s are happy, false otherwise.
+// Assume the test input string is always a valid string. For example, the test input may be "1 year old" or "5 years old". The first character in the string is always a number.
 
 // Challenge code below:
 
-function gHappy(str) {
-  
-  for(let i = 0; i < str.length; i++) {
-    if(str[i] == 'g') {
-      if(str[i - 1] != 'g' && str[i + 1] != 'g') return false;      
-    }
-  }
-  
-  return true;
+function getAge(inputString){
+  return Number(inputString[0]);
 }
 
 // Tests
 
-console.log(gHappy("")); // true
-console.log(gHappy("gg0gg3gg0gg")); // true
-console.log(gHappy("gog")); // false
-console.log(gHappy("ggg ggg g ggg")); // false
-console.log(gHappy("A half of a half is a quarter.")); // true
-console.log(gHappy("good grief")); // false
-console.log(gHappy("bigger is ggooder")); // true
-console.log(gHappy("gggggggggg")); // true
+console.log(getAge("4 years old")); // 4
+console.log(getAge("5 years old")); // 5
+console.log(getAge("7 years old")); // 7
+console.log(getAge("6 years old")); // 6
+console.log(getAge("0 years old")); // 0
+console.log(getAge("8 years old")); // 8
+console.log(getAge("9 years old")); // 9
+console.log(getAge("1 year old")); // 1
+console.log(getAge("2 years old")); // 2
+console.log(getAge("3 years old")); // 3
