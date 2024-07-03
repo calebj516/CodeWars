@@ -11,7 +11,7 @@
 // Challenge code below:
 
 function getAge(inputString){
-  return Number(inputString[0]);
+  return +inputString[0];
 }
 
 // Tests
