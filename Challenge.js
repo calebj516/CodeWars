@@ -13,23 +13,7 @@
 
 // Challenge code below:
 
-function smaller(nums) {
-  
-  const results = [];
-  let count = 0;
-  
-  for(let i = 0; i < nums.length; i++) {
-    
-    for(let j = i + 1; j < nums.length; j++) {
-      if(nums[i] > nums[j]) count++;
-    }
-    
-    results.push(count);
-    count = 0;
-  }
-  
-  return results;
-}
+function smaller = nums => nums.map((x, i) => nums.slice(i).filter(v => v < x).length);
 
 // Tests
 
