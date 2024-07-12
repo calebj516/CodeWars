@@ -1,25 +1,23 @@
-// Challenge: How many are smaller than me? (7 kyu)
+// Challenge: Nothing special (7 kyu)
 
 // Description:
 
-// Write a function that given, an array arr, returns an array containing at each index i the amount of numbers that are smaller than arr[i] to the right.
+// The notorious Captain Schneider has given you a very straightforward mission. Any data that comes through the system make sure that only non-special characters see the light of day.
 
-// For example:
-
-// * Input [5, 4, 3, 2, 1] => Output [4, 3, 2, 1, 0]
-// * Input [1, 2, 0] => Output [1, 1, 0]
-
-// If you've completed this one and you feel like testing your performance tuning of this same kata, head over to the much tougher version How many are smaller than me II?
+// Create a function that given a string, retains only the letters A-Z (upper and lowercase), 0-9 digits, and whitespace characters. Also, returns "Not a string!" if the entry type is not a string.
 
 // Challenge code below:
 
-function smaller = nums => nums.map((x, i) => nums.slice(i).filter(v => v < x).length);
+function nothingSpecial(str) {
+  if(typeof str != "string") return "Not a string!";  
+  return str.replace(/[^A-Za-z\d\s]/g, '');
+}
 
 // Tests
 
-console.log(smaller([5, 4, 3, 2, 1])); // [4, 3, 2, 1, 0]
-console.log(smaller([1, 2, 3])); // [0, 0, 0]
-console.log(smaller([1, 2, 0])); // [1, 1, 0]
-console.log(smaller([1, 2, 1])); // [0, 1, 0]
-console.log(smaller([1, 1, -1, 0, 0])); // [3, 3, 0, 0, 0]
-console.log(smaller([5, 4, 7, 9, 2, 4, 4, 5, 6])); // [4, 1, 5, 5, 0, 0, 0, 0, 0]
+console.log(nothingSpecial('St@arboard P^ort')); // 'Starboard Port'
+console.log(nothingSpecial('$A$ ***little k@$ata fo&r ^my ^trou%bl$es')); // 'A little kata for my troubles'
+console.log(nothingSpecial('Steamroller')); // 'Steamroller'
+console.log(nothingSpecial(2.55)); // 'Not a string!'
+console.log(nothingSpecial({ 2: 5 })); // 'Not a string!'
+console.log(nothingSpecial([1, 2, 3, 4])); // 'Not a string!'
