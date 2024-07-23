@@ -12,12 +12,7 @@
 
 // Challenge code below:
 
-var lengthOfSequence = function (arr, n) {  
-  let x = arr.slice(arr.indexOf(n), arr.lastIndexOf(n) + 1);  
-  if(x.filter(num => num == n).length != 2) return 0;
-  
-  return x.length; 
-};
+const lengthOfSequence = (arr, n) => arr.filter(num => num == n).length == 2 ? arr.lastIndexOf(n) - arr.indexOf(n) + 1 : 0;
 
 // Tests
 
