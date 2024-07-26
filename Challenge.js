@@ -1,29 +1,54 @@
-// Challenge: Check three and two (7 kyu)
+// Challenge: Email Address Obfuscator (7 kyu)
 
 // Description:
 
-// Given an array with exactly 5 strings "a", "b" or "c" (chars in Java, characters in Fortran), check if the array contains three and two of the same values.
+// Many people choose to obfuscate their email address when displaying it on the Web. One common way of doing this is by substituting the @ and . characters for their literal equivalents in brackets.
 
-// Examples:
+// Example 1:
 
-// ["a", "a", "a", "b", "b"] ==> true  // 3x "a" and 2x "b"
-// ["a", "b", "c", "b", "c"] ==> false // 1x "a", 2x "b" and 2x "c"
-// ["a", "a", "a", "a", "a"] ==> false // 5x "a"
+// user_name@example.com
+// => user_name [at] example [dot] com
+
+// Example 2:
+
+// af5134@borchmore.edu
+// => af5134 [at] borchmore [dot] edu
+
+// Example 3:
+
+// jim.kuback@ennerman-hatano.com
+// => jim [dot] kuback [at] ennerman-hatano [dot] com
+// Using the examples above as a guide, write a function that takes an email address string and returns the obfuscated version as a string that replaces the characters @ and . with [at] and [dot], respectively.
+
+// Notes
+
+// Input (email) will always be a string object. Your function should return a string.
+// Change only the @ and . characters.
+// Email addresses may contain more than one . character.
+// Note the additional whitespace around the bracketed literals in the examples!
 
 // Challenge code below:
 
-function checkThreeAndTwo(array) {
-    let a = array.filter(char => char == 'a').length;
-    let b = array.filter(char => char == 'b').length;
-    let c = array.filter(char => char == 'c').length;
+const obfuscate = email => {
+
+    let newEmail = email.split('').map(char => {
+      
+      if(char == '@') {
+        return ' [at] ';
+      } else if(char == '.') {
+        return ' [dot] ';
+      }
+      
+      return char;
+    });
     
-    const frequencies = [a, b, c];
-    
-    return frequencies.includes(3) && frequencies.includes(2);
+    return newEmail.join('');
 }
 
 // Tests
 
-console.log(checkThreeAndTwo(["a", "a", "a", "b", "b"])); // true
-console.log(checkThreeAndTwo(["a", "c", "a", "c", "b"])); // false
-console.log(checkThreeAndTwo(["a", "a", "a", "a", "a"])); // false
+console.log(obfuscate('user_name@example.com')); // 'user_name [at] example [dot] com'
+console.log(obfuscate('af5134@borchmore.edu')); // 'af5134 [at] borchmore [dot] edu'
+console.log(obfuscate('jim.kuback@ennerman-hatano.com')); // 'jim [dot] kuback [at] ennerman-hatano [dot] com'
+console.log(obfuscate('sir_k3v1n_wulf@blingblong.net')); // 'sir_k3v1n_wulf [at] blingblong [dot] net'
+console.log(obfuscate('Hmm, this would be better with input validation...!')); // 'Hmm, this would be better with input validation [dot]  [dot]  [dot] !'
