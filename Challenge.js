@@ -29,21 +29,7 @@
 
 // Challenge code below:
 
-const obfuscate = email => {
-
-    let newEmail = email.split('').map(char => {
-      
-      if(char == '@') {
-        return ' [at] ';
-      } else if(char == '.') {
-        return ' [dot] ';
-      }
-      
-      return char;
-    });
-    
-    return newEmail.join('');
-}
+const obfuscate = email => email.replace(/@/, ' [at] ').replace(/\./g, ' [dot] ');
 
 // Tests
 
