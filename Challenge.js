@@ -1,40 +1,34 @@
-// Challenge: Email Address Obfuscator (7 kyu)
+// Challenge: Where Are My Glasses? (7 kyu)
 
 // Description:
 
-// Many people choose to obfuscate their email address when displaying it on the Web. One common way of doing this is by substituting the @ and . characters for their literal equivalents in brackets.
+// Oh no! I've lost my glasses, but paradoxically, I need glasses to find my glasses!
 
-// Example 1:
+// Please help me out by showing me the index in the list which contains my glasses. They look like two capital Os, with at least one dash in between!
 
-// user_name@example.com
-// => user_name [at] example [dot] com
+// This means that both O--O and O------------O are valid glasses, but not O----#--O for example!
+// Search thoroughly, you might find my glasses in places such as 'dustO-Odust'
+// Examples
+// ["phone", "O-O", "coins", "keys"] ➞ 1
 
-// Example 2:
+// ["OO", "wallet", "O##O", "O----O"] ➞ 3
 
-// af5134@borchmore.edu
-// => af5134 [at] borchmore [dot] edu
-
-// Example 3:
-
-// jim.kuback@ennerman-hatano.com
-// => jim [dot] kuback [at] ennerman-hatano [dot] com
-// Using the examples above as a guide, write a function that takes an email address string and returns the obfuscated version as a string that replaces the characters @ and . with [at] and [dot], respectively.
-
+// ["O--#--O", "dustO---Odust", "more dust"] ➞ 1
 // Notes
-
-// Input (email) will always be a string object. Your function should return a string.
-// Change only the @ and . characters.
-// Email addresses may contain more than one . character.
-// Note the additional whitespace around the bracketed literals in the examples!
+// All lists will include one valid pair of glasses because I swear I dropped them around here somewhere ...
+// All elements in the list are strings.
 
 // Challenge code below:
 
-const obfuscate = email => email.replace(/@/, ' [at] ').replace(/\./g, ' [dot] ');
+function findGlasses(arr){
+    return arr.indexOf(arr.find(el => el.match(/o-+o/gi)));
+}
 
 // Tests
 
-console.log(obfuscate('user_name@example.com')); // 'user_name [at] example [dot] com'
-console.log(obfuscate('af5134@borchmore.edu')); // 'af5134 [at] borchmore [dot] edu'
-console.log(obfuscate('jim.kuback@ennerman-hatano.com')); // 'jim [dot] kuback [at] ennerman-hatano [dot] com'
-console.log(obfuscate('sir_k3v1n_wulf@blingblong.net')); // 'sir_k3v1n_wulf [at] blingblong [dot] net'
-console.log(obfuscate('Hmm, this would be better with input validation...!')); // 'Hmm, this would be better with input validation [dot]  [dot]  [dot] !'
+console.log(findGlasses(['phone', 'O-O', 'coins', 'keys'])); // 1
+console.log(findGlasses(['OO', 'wallet', 'O##O', 'O----O'])); // 3
+console.log(findGlasses(['O_O', 'O-O', 'OwO'])); // 1
+console.log(findGlasses(['O--#--O', 'dustO---Odust', 'more dust'])); // 1
+console.log(findGlasses(['floor', 'the floor again', 'pockets', 'bed', 'cabinet', 'the top of my head O-O'])); // 5
+console.log(findGlasses(['OOOO----~OOO', '-------', 'OOOOOOO', 'OO-OO-OO-O'])); // 3
