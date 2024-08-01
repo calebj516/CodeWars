@@ -21,7 +21,7 @@
 // Challenge code below:
 
 function findGlasses(arr){
-    return arr.indexOf(arr.find(el => el.match(/o-+o/gi)));
+    return arr.findIndex(el => el.match(/o-+o/gi));
 }
 
 // Tests
