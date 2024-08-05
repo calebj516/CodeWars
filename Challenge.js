@@ -1,34 +1,44 @@
-// Challenge: Where Are My Glasses? (7 kyu)
+// Challenge: Return the day (8 kyu)
 
 // Description:
 
-// Oh no! I've lost my glasses, but paradoxically, I need glasses to find my glasses!
+// Complete the function which returns the weekday according to the input number:
 
-// Please help me out by showing me the index in the list which contains my glasses. They look like two capital Os, with at least one dash in between!
-
-// This means that both O--O and O------------O are valid glasses, but not O----#--O for example!
-// Search thoroughly, you might find my glasses in places such as 'dustO-Odust'
-// Examples
-// ["phone", "O-O", "coins", "keys"] ➞ 1
-
-// ["OO", "wallet", "O##O", "O----O"] ➞ 3
-
-// ["O--#--O", "dustO---Odust", "more dust"] ➞ 1
-// Notes
-// All lists will include one valid pair of glasses because I swear I dropped them around here somewhere ...
-// All elements in the list are strings.
+// 1 returns "Sunday"
+// 2 returns "Monday"
+// 3 returns "Tuesday"
+// 4 returns "Wednesday"
+// 5 returns "Thursday"
+// 6 returns "Friday"
+// 7 returns "Saturday"
+// Otherwise returns "Wrong, please enter a number between 1 and 7"
 
 // Challenge code below:
 
-function findGlasses(arr){
-    return arr.findIndex(el => el.match(/o-+o/gi));
+function whatday(num) { 
+
+    const days = {
+      1 : 'Sunday',
+      2 : 'Monday',
+      3 : 'Tuesday',
+      4 : 'Wednesday',
+      5 : 'Thursday',
+      6 : 'Friday',
+      7 : 'Saturday'
+    };
+  
+    return days[num] || 'Wrong, please enter a number between 1 and 7';
 }
 
 // Tests
 
-console.log(findGlasses(['phone', 'O-O', 'coins', 'keys'])); // 1
-console.log(findGlasses(['OO', 'wallet', 'O##O', 'O----O'])); // 3
-console.log(findGlasses(['O_O', 'O-O', 'OwO'])); // 1
-console.log(findGlasses(['O--#--O', 'dustO---Odust', 'more dust'])); // 1
-console.log(findGlasses(['floor', 'the floor again', 'pockets', 'bed', 'cabinet', 'the top of my head O-O'])); // 5
-console.log(findGlasses(['OOOO----~OOO', '-------', 'OOOOOOO', 'OO-OO-OO-O'])); // 3
+console.log(whatday(1)); //'Sunday'
+console.log(whatday(2)); // 'Monday'
+console.log(whatday(3)); //'Tuesday'
+console.log(whatday(4)); //  'Wednesday'
+console.log(whatday(5)); //  'Thursday'
+console.log(whatday(6)); //  'Friday'
+console.log(whatday(7)); //  'Saturday'
+console.log(whatday(0)); //  'Wrong, please enter a number between 1 and 7'
+console.log(whatday(8)); //  'Wrong, please enter a number between 1 and 7'
+console.log(whatday(20)); //  'Wrong, please enter a number between 1 and 7'
