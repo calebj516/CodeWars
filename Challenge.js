@@ -1,44 +1,27 @@
-// Challenge: Return the day (8 kyu)
+// Challenge: Double Every Other (7 kyu)
 
 // Description:
 
-// Complete the function which returns the weekday according to the input number:
+// Write a function that doubles every second integer in a list, starting from the left.
 
-// 1 returns "Sunday"
-// 2 returns "Monday"
-// 3 returns "Tuesday"
-// 4 returns "Wednesday"
-// 5 returns "Thursday"
-// 6 returns "Friday"
-// 7 returns "Saturday"
-// Otherwise returns "Wrong, please enter a number between 1 and 7"
+// Example:
+
+// For input array/list :
+
+// [1,2,3,4]
+
+// the function should return :
+
+// [1,4,3,8]
 
 // Challenge code below:
 
-function whatday(num) { 
-
-    const days = {
-      1 : 'Sunday',
-      2 : 'Monday',
-      3 : 'Tuesday',
-      4 : 'Wednesday',
-      5 : 'Thursday',
-      6 : 'Friday',
-      7 : 'Saturday'
-    };
-  
-    return days[num] || 'Wrong, please enter a number between 1 and 7';
+function doubleEveryOther(a) {
+  return a.map((num, i) => i % 2 != 0 ? num * 2 : num);
 }
 
 // Tests
 
-console.log(whatday(1)); //'Sunday'
-console.log(whatday(2)); // 'Monday'
-console.log(whatday(3)); //'Tuesday'
-console.log(whatday(4)); //  'Wednesday'
-console.log(whatday(5)); //  'Thursday'
-console.log(whatday(6)); //  'Friday'
-console.log(whatday(7)); //  'Saturday'
-console.log(whatday(0)); //  'Wrong, please enter a number between 1 and 7'
-console.log(whatday(8)); //  'Wrong, please enter a number between 1 and 7'
-console.log(whatday(20)); //  'Wrong, please enter a number between 1 and 7'
+console.log(doubleEveryOther([1,2,3,4])); // [1,4,3,8]
+console.log(doubleEveryOther([1,19,6,2,12,-3])); // [1,38,6,4,12,-6]
+console.log(doubleEveryOther([-1000,1653,210,0,1])); // [-1000,3306,210,0,1]
