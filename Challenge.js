@@ -16,9 +16,7 @@
 
 // Challenge code below:
 
-function doubleEveryOther(a) {
-  return a.map((num, i) => i % 2 != 0 ? num * 2 : num);
-}
+const doubleEveryOther = a => a.map((num, i) => i % 2 == 0 ? num : num * 2);
 
 // Tests
 
