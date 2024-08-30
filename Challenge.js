@@ -1,21 +1,23 @@
-// Challenge: String cleaning (8 kyu)
+// Challenge: My Language Skills (7 kyu)
 
 // Description:
 
-// Your boss decided to save money by purchasing some cut-rate optical character recognition software for scanning in the text of old novels to your database. At first it seems to capture words okay, but you quickly notice that it throws in a lot of numbers at random places in the text.
+// Task
 
-// Examples (input -> output)
+// You are given a dictionary/hash/object containing some languages and your test results in the given languages. Return the list of languages where your test score is at least 60, in descending order of the scores.
 
-// '! !'                 -> '! !'
-// '123456789'           -> ''
-// 'This looks5 grea8t!' -> 'This looks great!'
+// Note: the scores will always be unique (so no duplicate values)
 
-// Your harried co-workers are looking to you for a solution to take this garbled text and remove all of the numbers. Your program will take in a string and clean out all numeric characters, and return a string with spacing and special characters ~#$%^&!@*():;"'.,? all intact.
+// Examples
+
+// {"Java": 10, "Ruby": 80, "Python": 65}    -->  ["Ruby", "Python"]
+// {"Hindi": 60, "Dutch" : 93, "Greek": 71}  -->  ["Dutch", "Greek", "Hindi"]
+// {"C++": 50, "ASM": 10, "Haskell": 20}     -->  []
 
 // Challenge code below:
 
-function stringClean(s){
-    return s.replace(/\d/g, '');
+function myLanguages(results) {
+    return Object.keys(results).filter(l => results[l] >= 60).sort((a, b) => results[b] - results[a]);
 }
 
 // Tests
