@@ -1,27 +1,26 @@
-// Challenge: My Language Skills (7 kyu)
+// Challenge: Reversing Words in a String (8 kyu)
 
 // Description:
 
-// Task
+// You need to write a function that reverses the words in a given string. Words are always separated by a single space.
 
-// You are given a dictionary/hash/object containing some languages and your test results in the given languages. Return the list of languages where your test score is at least 60, in descending order of the scores.
+// As the input may have trailing spaces, you will also need to ignore unneccesary whitespace.
 
-// Note: the scores will always be unique (so no duplicate values)
+// Example (Input --> Output)
 
-// Examples
-
-// {"Java": 10, "Ruby": 80, "Python": 65}    -->  ["Ruby", "Python"]
-// {"Hindi": 60, "Dutch" : 93, "Greek": 71}  -->  ["Dutch", "Greek", "Hindi"]
-// {"C++": 50, "ASM": 10, "Haskell": 20}     -->  []
+// "Hello World" --> "World Hello"
+// "Hi There." --> "There. Hi"
 
 // Challenge code below:
 
-function myLanguages(results) {
-    return Object.keys(results).filter(l => results[l] >= 60).sort((a, b) => results[b] - results[a]);
+function reverse(string){
+    return string.split(' ').reverse().join(' ');
 }
 
 // Tests
 
-console.log(myLanguages({"Java" : 10, "Ruby" : 80, "Python" : 65})); // ["Ruby", "Python"]
-console.log(myLanguages({"Hindi" : 60, "Greek" : 71, "Dutch" : 93})); // ["Dutch", "Greek", "Hindi"]
-console.log(myLanguages({"C++" : 50, "ASM" : 10, "Haskell" : 20})); // []
+console.log(reverse('I am an expert at this')); // 'this at expert an am I'
+console.log(reverse('This is so easy')); // 'easy so is This'
+console.log(reverse('no one cares')); // 'cares one no'
+console.log(reverse('')); // ''
+console.log(reverse('CodeWars')); // 'CodeWars'
