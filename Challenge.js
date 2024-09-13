@@ -16,7 +16,10 @@
 
 // Challenge code below:
 
-const someButNotAll = ([...seq], pred) => seq.some(pred) && !seq.every(pred);
+const someButNotAll = (seq, pred) => {
+    seq = Array.from(seq);
+    return seq.some(pred) && !seq.every(pred);
+}
 
 // Tests
 
