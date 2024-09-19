@@ -1,31 +1,54 @@
-// Challenge: Some (but not all) (7 kyu)
+// Challenge: Clean up after your dog (7 kyu)
 
 // Description:
 
-// Your task is to create a function that given a sequence and a predicate, returns True if only some (but not all) the elements in the sequence are True after applying the predicate
+// You have stumbled across the divine pleasure that is owning a dog and a garden. Now time to pick up all the cr@p! :D
 
-// Examples
+// Given a 2D array to represent your garden, you must find and collect all of the dog cr@p - represented by '@'.
 
-// ('abcdefg&%$', x -> isLetter(x)) == true
-// ('&%$=', x -> isLetter x) == false
-// ('abcdefg', x -> isLetter x) == false
+// You will also be given the number of bags you have access to (bags)); // and the capactity of a bag (cap). If there are no bags then you can't pick anything up, so you can ignore cap.
 
-// ([4, 1], x -> x > 3) == true
-// ([1, 1], x -> x > 3) == false
-// ([4, 4], x -> x > 3) == false
+// You need to find out if you have enough capacity to collect all the cr@p and make your garden clean again.
+
+// If you do, return 'Clean', else return 'Cr@p'.
+
+// Watch out though - if your dog is out there ('D')); // he gets very touchy about being watched. If he is there you need to return 'Dog!!'.
+
+// For example:
+
+// bags = 2
+// cap = 2
+// x (or garden) =
+// [[ _ , _ , _ , _ , _ , _ ],
+//  [ _ , _ , _ , _ , @ , _ ],
+//  [ @ , _ , _ , _ , _ , _ ]]
+// returns 'Clean'
 
 // Challenge code below:
 
-const someButNotAll = (seq, pred) => {
-    seq = Array.from(seq);
-    return seq.some(pred) && !seq.every(pred);
+function crap(x, bags, cap){
+  
+    let totalCapacity = bags * cap;
+    let dogExists = false;
+    
+    for(let i = 0; i < x.length; i++) {
+      
+      for(let j = 0; j < x[i].length; j++) {
+        if(x[i][j] == '@') totalCapacity--;
+        if(x[i][j] == 'D') {
+          dogExists = true;
+          break;
+        }
+      }
+      
+    }
+  
+    if(dogExists) return 'Dog!!';
+    return totalCapacity < 0 ? 'Cr@p' : 'Clean';
 }
 
 // Tests
 
-console.log(someButNotAll('abcdefg&%$', str => /[a-z]/i.test(str))); //true
-console.log(someButNotAll('&%$=', str => /[a-z]/i.test(str))); //false
-console.log(someButNotAll('abcdefg', str => /[a-z]/i.test(str))); // false
-console.log(someButNotAll([4, 1], x => x>3)); // true
-console.log(someButNotAll([1, 1], x => x>3)); // false
-console.log(someButNotAll([4, 4], x => x>3)); // false
+console.log(crap([['_','_','_','_'], ['_','_','_','@'], ['_','_','@', '_']], 2, 2)); // "Clean"
+console.log(crap([['_','_','_','_'], ['_','_','_','@'], ['_','_','@', '_']], 1, 1)); // "Cr@p"
+console.log(crap([['_','_'], ['_','@'], ['D','_']], 2, 2)); // "Dog!!"
