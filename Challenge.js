@@ -28,23 +28,18 @@
 
 function crap(x, bags, cap){
   
-    let totalCapacity = bags * cap;
-    let dogExists = false;
-    
-    for(let i = 0; i < x.length; i++) {
-      
-      for(let j = 0; j < x[i].length; j++) {
-        if(x[i][j] == '@') totalCapacity--;
-        if(x[i][j] == 'D') {
-          dogExists = true;
-          break;
-        }
-      }
-      
-    }
+  let totalCapacity = bags * cap;
   
-    if(dogExists) return 'Dog!!';
-    return totalCapacity < 0 ? 'Cr@p' : 'Clean';
+  for(let i = 0; i < x.length; i++) {
+    
+    for(let j = 0; j < x[i].length; j++) {
+      if(x[i][j] == 'D') return 'Dog!!';
+      if(x[i][j] == '@') totalCapacity--;
+    }
+    
+  }
+
+  return totalCapacity < 0 ? 'Cr@p' : 'Clean';
 }
 
 // Tests
