@@ -1,14 +1,10 @@
-# FizzBuzz
- 
-# Divisible by 3, return "Fizz"
-# Divisible by 5, return "Buzz"
-# Divisible by both, return "FizzBuzz"
-# Else return the input
+# Generate a Range of Integers
 
-def fizzbuzz(input):
-    return (("Fizz" if input % 3 == 0 else "") + ("Buzz" if input % 5 == 0 else "")) or input
+# Implement a function named generateRange(min, max, step), which takes three arguments and generates a range of integers from min to max, with the step. The first integer is the minimum value, the second is the maximum of the range and the third is the step. (min < max) 
 
-print(fizzbuzz(15)) # FizzBuzz
-print(fizzbuzz(5)) # Buzz
-print(fizzbuzz(3)) # Fizz
-print(fizzbuzz(4)) # 4
+def generateRange(min, max, step):
+    return list(range(min, max, step))
+
+print(generateRange(1, 10, 1))
+print(generateRange(1, 10, 2))
+print(generateRange(1, 10, 5))
